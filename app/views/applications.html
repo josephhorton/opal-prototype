@@ -1,0 +1,61 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Find a case" %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      <form method="post" novalidate>
+
+      
+        {{ govukInput({
+          id: "accountSearch[name]",
+          name: "accountSearch[name]",
+          type: 'text',
+          label: {
+            text: "Name or account number",
+            classes: "govuk-label--m"
+          },
+          hint: {
+            text: "For example, ‘John Smith’, ‘Acme Org’ or ‘ABC0123’"
+          },
+          value: data.accountSearch.name
+        }) }}
+
+        {{ govukRadios({
+          classes: "govuk-radios--inline",
+          name: "accountType",
+          fieldset: {
+            legend: {
+              text: "Type of account",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          value: data.accountType,
+          items: [
+            {
+              value: "Defendant",
+              text: "Defendant"
+            },
+            {
+              value: "Creditor",
+              text: "Creditor"
+            }
+          ]
+        }) }}
+      
+    
+        {{ govukButton({
+          text: "Search"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

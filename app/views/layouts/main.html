@@ -4,3 +4,28 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 #}
 
 {% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+<!-- {{ mojHeader({
+    navigationClasses: 'govuk-page-width',
+    organisationLabel: {
+      text: 'HMCTS',
+      href: './index.html'
+    },
+    serviceLabel: {
+      text: 'OPAL',
+      href: './index.html'
+    },
+    navigation: {
+      label: 'Account navigation',
+      items: [{
+        text: 'Sign out',
+        href: '#'
+      }]
+    }
+  }) }} -->
+
+  {{ govukHeader({
+    homepageUrl: "#"
+  }) }}
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "MoJ Design System" %}
+
+{% block beforeContent %}
+
+<a href="./index.html" class="govuk-back-link">Back</a>
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <h1 class="govuk-heading-xl">{{ pageName }}</h1>
+
+      {% set bannerHtml %}
+        <h2 class="govuk-heading-m">This service will be unavailable from 1 June 2019</h2>
+      {% endset %}
+
+      {{ mojBanner({
+        type: 'information',
+        html: bannerHtml
+      }) }}
+
+      {{ mojPageHeaderActions({
+        heading: {
+          text: 'Documents'
+        },
+        items: [{
+          text: 'Upload new',
+          classes: 'govuk-button--secondary'
+        }, {
+          text: 'Share collection',
+          classes: 'govuk-button--secondary'
+        },
+        {
+          text: 'Share collection',
+          classes: 'govuk-button--secondary'
+        },
+        {
+          text: 'Share collection',
+          classes: 'govuk-button--secondary'
+        }]
+      }) }}
+
+      {{ mojSubNavigation({
+        label: 'Sub navigation',
+        items: [{
+          text: 'Nav item 1',
+          href: '#1',
+          active: true
+        }, {
+          text: 'Nav item 2',
+          href: '#2'
+        }, {
+          text: 'Nav item 3',
+          href: '#3'
+        }]
+      }) }}
+
+      {{ mojButtonMenu({
+        items: [
+          {
+            text: "First action",
+            href: "#",
+            classes: "govuk-button--secondary"
+          },
+          {
+            text: "Second action",
+            href: "#",
+            classes: "govuk-button--secondary"
+          },
+          {
+            text: "Third action",
+            href: "#",
+            classes: "govuk-button--secondary"
+          }
+        ]
+      }) }}
+
+      <div style="float: right;">
+        <div class="moj-button-menu">
+          <div class="moj-button-menu__wrapper">
+        
+            <a href="#" role="button" draggable="false" class="govuk-button moj-button-menu__item govuk-button--secondary " data-module="govuk-button">
+              First action
+            </a>
+        
+            <a href="#" role="button" draggable="false" class="govuk-button moj-button-menu__item govuk-button--secondary " data-module="govuk-button">
+              Second action
+            </a>
+        
+            <a href="#" role="button" draggable="false" class="govuk-button moj-button-menu__item govuk-button--secondary " data-module="govuk-button">
+              Third action
+            </a>
+        
+          </div>
+        </div>
+        
+      </div>
+
+      
+    </div>
+  </div>
+
+{% endblock %}
