@@ -1,0 +1,30 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Defendant contact details" %}
+
+{% block beforeContent %}
+
+<a href="./parent-to-pay.html" class="govuk-back-link">Back</a>
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+      <form method="post" novalidate action="parent-details">
+
+        
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}

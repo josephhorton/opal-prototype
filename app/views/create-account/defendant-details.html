@@ -1,0 +1,232 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Defendant details" %}
+
+{% block beforeContent %}
+
+<a href="defendant-type.html" class="govuk-back-link">Back</a>
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ pageName }}</h1>
+      <h2 class="govuk-heading-m">Personal details</h2>
+
+
+      <form method="post" novalidate action="parent-to-pay">
+
+        <!-- TITLE -->
+        <div>
+        {{ govukSelect({
+          id: "title",
+          name: "title",
+          label: {
+            text: "Title",
+            classes: "govuk-label--s"
+          },
+          items: [
+            {
+              value: "Mr",
+              text: "Mr"
+            },
+            {
+              value: "Mrs",
+              text: "Mrs"
+            },
+            {
+              value: "Miss",
+              text: "Miss"
+            },
+            {
+              value: "Ms",
+              text: "Ms"
+            }
+          ]
+        }) }}
+        </div>
+
+        <!-- FIRST AND LATE NAME -->
+        <div>
+        {{ govukInput({
+          label: {
+            text: "First names",
+            classes: "govuk-label--s"
+          },
+          hint: {
+            text: "This can include their middle names"
+          },
+          classes: "govuk-!-width-three-quarters",
+          id: "first-names",
+          name: "defedantFirstNames"
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "Last name",
+            classes: "govuk-label--s"
+          },
+          classes: "govuk-!-width-three-quarters",
+          id: "last-name",
+          name: "defedantLastName"
+        }) }}
+
+        
+        <!-- DATE OF BIRTH -->
+
+        {{ govukDateInput({
+          id: "date-of-birth",
+          namePrefix: "defednantDateOfBirth",
+          fieldset: {
+            legend: {
+              text: "Date of birth (optional)",
+              classes: "govuk-fieldset__legend--s"
+            }
+          }
+        }) }}
+        </div>
+
+        <!-- NATIONAL INSURANCE NUMBER -->  
+        <div>
+        {{ govukInput({
+          label: {
+            text: "National Insurance number (optional)",
+            classes: "govuk-label--s"
+          },
+          classes: "govuk-input--width-10 govuk-input--extra-letter-spacing",
+          id: "national-insurance-number",
+          name: "defendantNationalInsuranceNumber",
+          spellcheck: false
+        }) }}
+        </div>
+
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+        <!-- ALIASES -->
+
+        <!-- <div data-module="moj-add-another">
+
+          <h2 class="govuk-heading-m moj-add-another__heading" tabindex="-1">Alias</h2>
+
+          {% call govukFieldset({
+            classes: 'moj-add-another__item',
+            legend: {
+              text: 'Aliase',
+              classes: 'moj-add-another__title govuk-fieldset__legend--s',
+              isPageHeading: false
+            }
+          }) %}
+      
+          {{ govukInput({
+            id: 'person[0][first_name]',
+            name: 'person[0][first_name]',
+            classes: "govuk-!-width-three-quarters",
+            label: {
+              html: 'First name',
+              classes: 'govuk-!-font-weight-bold'
+            },
+            attributes: {
+              'data-name': 'person[%index%][first_name]',
+              'data-id': 'person[%index%][first_name]'
+            }
+          }) }}
+
+          {{ govukInput({
+            id: 'person[0][last_name]',
+            name: 'person[0][last_name]',
+            classes: "govuk-!-width-three-quarters",
+            label: {
+              html: 'Last name',
+              classes: 'govuk-!-font-weight-bold'
+            },
+            attributes: {
+              'data-name': 'person[%index%][last_name]',
+              'data-id': 'person[%index%][last_name]'
+            }
+          }) }}
+          {% endcall %}
+
+          <div class="moj-button-action">
+            {{ govukButton({
+              text: 'Add another person',
+              classes: 'govuk-button--secondary moj-add-another__add-button govuk-!-margin-bottom-4'
+            }) }}
+          </div>
+
+        </div>   -->
+
+        <!-- ADDRESS -->
+        <div>
+        {% call govukFieldset({
+          legend: {
+            text: "Address",
+            classes: "govuk-fieldset__legend--m"
+          }
+        }) %}
+        
+          {{ govukInput({
+            label: {
+              text: "Address line 1",
+              classes: "govuk-label--s"
+            },
+            id: "address-line-1",
+            name: "addressLine1",
+            autocomplete: "address-line1"
+          }) }}
+        
+          {{ govukInput({
+            label: {
+              text: "Address line 2 (optional)",
+              classes: "govuk-label--s"
+            },
+            id: "address-line-2",
+            name: "addressLine2",
+            autocomplete: "address-line2"
+          }) }}
+        
+          {{ govukInput({
+            label: {
+              text: "Address line 3 (optional)",
+              classes: "govuk-label--s"
+            },
+            id: "address-line-3",
+            name: "addressLine3",
+            autocomplete: "address-level3"
+          }) }}
+      
+        
+          {{ govukInput({
+            label: {
+              text: "Postcode (optional)",
+              classes: "govuk-label--s"
+            },
+            classes: "govuk-input--width-10",
+            id: "address-postcode",
+            name: "addressPostcode",
+            autocomplete: "postal-code"
+          }) }}
+        
+        {% endcall %}
+        </div>
+
+        <!-- VEHICLE DETAILS -->
+
+
+
+
+
+
+        
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}
