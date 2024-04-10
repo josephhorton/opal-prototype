@@ -50,7 +50,10 @@
 
         <!-- FIRST AND LATE NAME -->
         <div>
+
         {{ govukInput({
+          id: "[new][firstName]",
+          name: "[new][firstName]",
           label: {
             text: "First names",
             classes: "govuk-label--s"
@@ -58,19 +61,83 @@
           hint: {
             text: "This can include their middle names"
           },
-          classes: "govuk-!-width-three-quarters",
-          id: "first-names",
-          name: "defedantFirstNames"
+          value: data.new.firstName
         }) }}
 
         {{ govukInput({
+          id: "[new][lastName]",
+          name: "[new][lastName]",
           label: {
             text: "Last name",
             classes: "govuk-label--s"
           },
-          classes: "govuk-!-width-three-quarters",
-          id: "last-name",
-          name: "defedantLastName"
+          value: data.new.lastName
+        }) }}
+
+
+        {% set aliasHTML %}
+        <div data-module="moj-add-another">
+
+          {% call govukFieldset({
+            classes: 'moj-add-another__item',
+            legend: {
+              text: 'Alias 1',
+              classes: 'moj-add-another__title govuk-fieldset__legend--s',
+              isPageHeading: false
+            }
+          }) %}
+      
+          {{ govukInput({
+            id: "[new][aliasFirstName]",
+            name: "[new][aliasFirstName]",
+            label: {
+              text: "First names"
+            },
+            value: data.new.aliasFirstName
+          }) }}
+  
+          {{ govukInput({
+            id: "[new][aliasLastName]",
+            name: "[new][aliasLastName]",
+            label: {
+              text: "Last name"
+            },
+            value: data.new.lastName
+          }) }}
+          {% endcall %}
+
+          <div class="moj-button-action govuk-!-margin-top-4">
+            {{ govukButton({
+              text: 'Add another alias',
+              classes: 'govuk-button--secondary govuk-!-margin-bottom-0',
+              type: 'button'
+            }) }}
+
+            <!-- Missing class: moj-add-another__add-button -->
+
+            
+          </div>
+        </div>
+        {% endset -%}
+
+        {{ govukCheckboxes({
+          name: "aliases",
+          values: data['aliases'],
+          fieldset: {
+            legend: {
+              text: "Other names",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "yes",
+              text: "Yes – add aliases",
+              conditional: {
+                html: aliasHTML
+              }
+            }
+          ]
         }) }}
 
         
@@ -108,12 +175,12 @@
 
         <!-- <div data-module="moj-add-another">
 
-          <h2 class="govuk-heading-m moj-add-another__heading" tabindex="-1">Alias</h2>
+          <h2 class="govuk-heading-m moj-add-another__heading" tabindex="-1">Aliases</h2>
 
           {% call govukFieldset({
             classes: 'moj-add-another__item',
             legend: {
-              text: 'Aliase',
+              text: 'Alias',
               classes: 'moj-add-another__title govuk-fieldset__legend--s',
               isPageHeading: false
             }
@@ -124,7 +191,7 @@
             name: 'person[0][first_name]',
             classes: "govuk-!-width-three-quarters",
             label: {
-              html: 'First name',
+              html: 'First names',
               classes: 'govuk-!-font-weight-bold'
             },
             attributes: {
@@ -155,7 +222,9 @@
             }) }}
           </div>
 
-        </div>   -->
+        </div> 
+        
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible"> -->
 
         <!-- ADDRESS -->
         <div>

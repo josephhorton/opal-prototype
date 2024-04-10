@@ -16,6 +16,18 @@
 
       <form method="post" novalidate action="defendant-details">
 
+        {% set companyHTML %}
+        {{ govukInput({
+          id: "company-name",
+          name: "companyName",
+          type: "text",
+          label: {
+            text: "Company name",
+            classes: "govuk-label--s"
+          }
+        }) }}
+        {% endset -%}
+
         {{ govukRadios({
           name: "defendantType",
           fieldset: {
@@ -32,7 +44,10 @@
             },
             {
               value: "defendant-company",
-              text: "Company"
+              text: "Company",
+              conditional: {
+                html: companyHTML
+              }
             }
           ]
         }) }}

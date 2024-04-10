@@ -16,6 +16,69 @@
 
       <form method="post" novalidate action="parent-details">
 
+        <!-- EMAILS -->
+        
+        {{ govukInput({
+          label: {
+            text: "Primary email address (optional)",
+            classes: "govuk-label--s"
+          },
+          id: "email-1",
+          name: "email-1",
+          type: "email",
+          autocomplete: "email",
+          spellcheck: false
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "Secondary email address (optional)",
+            classes: "govuk-label--s"
+          },
+          id: "email-2",
+          name: "email-2",
+          type: "email",
+          autocomplete: "email",
+          spellcheck: false
+        }) }}
+
+        <!-- PHONE NUMBERS -->
+
+        {{ govukInput({
+          label: {
+            text: "Mobile telephone number (optional)",
+            classes: "govuk-label--s"
+          },
+          id: "mobile-number",
+          name: "mobileNumber",
+          type: "tel",
+          autocomplete: "tel",
+          classes: "govuk-input--width-20"
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "Business telephone number (optional)",
+            classes: "govuk-label--s"
+          },
+          id: "business-number",
+          name: "businessNumber",
+          type: "tel",
+          autocomplete: "tel",
+          classes: "govuk-input--width-20"
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "Home telephone number (optional)",
+            classes: "govuk-label--s"
+          },
+          id: "home-number",
+          name: "homeNumber",
+          type: "tel",
+          autocomplete: "tel",
+          classes: "govuk-input--width-20"
+        }) }}
         
         {{ govukButton({
           text: "Continue"

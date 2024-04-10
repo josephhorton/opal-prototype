@@ -1,0 +1,50 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Parent to pay" %}
+
+{% block beforeContent %}
+
+<a href="./parent-details.html" class="govuk-back-link">Back</a>
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <!-- <h1 class="govuk-heading-l">{{ pageName }}</h1> -->
+
+      <form method="post" novalidate action="defendant-employer-details">
+
+        {{ govukRadios({
+          name: "employer",
+          fieldset: {
+            legend: {
+              text: "Do you have the defendant’s employer details?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          items: [
+            {
+              value: "employer-yes",
+              text: "Yes"
+            },
+            {
+              value: "employer-no",
+              text: "No"
+            }
+          ]
+        }) }}
+        
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}
