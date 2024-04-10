@@ -16,7 +16,7 @@
       <h2 class="govuk-heading-m">Personal details</h2>
 
 
-      <form method="post" novalidate action="parent-to-pay">
+      <form method="post" novalidate action="defendant-contact-details">
 
         <!-- TITLE -->
         <div>
@@ -102,7 +102,7 @@
             label: {
               text: "Last name"
             },
-            value: data.new.lastName
+            value: data.new.aliasLastName
           }) }}
           {% endcall %}
 
@@ -123,35 +123,48 @@
         {{ govukCheckboxes({
           name: "aliases",
           values: data['aliases'],
-          fieldset: {
-            legend: {
-              text: "Other names",
-              classes: "govuk-fieldset__legend--s"
-            }
-          },
           items: [
             {
               value: "yes",
-              text: "Yes – add aliases",
+              text: "Add aliases",
               conditional: {
                 html: aliasHTML
               }
             }
           ]
         }) }}
+      </div>
 
         
         <!-- DATE OF BIRTH -->
 
+        <div>
         {{ govukDateInput({
           id: "date-of-birth",
-          namePrefix: "defednantDateOfBirth",
+          namePrefix: "defendantDoB",
           fieldset: {
             legend: {
               text: "Date of birth (optional)",
               classes: "govuk-fieldset__legend--s"
             }
+          },
+          items: [
+          {
+            name: "day",
+            classes: "govuk-input--width-2",
+            value: data['defendantDoB-day']
+          },
+          {
+            name: "month",
+            classes: "govuk-input--width-2",
+            value: data['defendantDoB-month']
+          },
+          {
+            name: "year",
+            classes: "govuk-input--width-4",
+            value: data['defendantDoB-year']
           }
+        ]
         }) }}
         </div>
 
@@ -165,7 +178,8 @@
           classes: "govuk-input--width-10 govuk-input--extra-letter-spacing",
           id: "national-insurance-number",
           name: "defendantNationalInsuranceNumber",
-          spellcheck: false
+          spellcheck: false,
+          value: data['defendantNationalInsuranceNumber']
         }) }}
         </div>
 
@@ -242,7 +256,8 @@
             },
             id: "address-line-1",
             name: "addressLine1",
-            autocomplete: "address-line1"
+            autocomplete: "address-line1",
+            value: data['addressLine1']
           }) }}
         
           {{ govukInput({
@@ -252,7 +267,8 @@
             },
             id: "address-line-2",
             name: "addressLine2",
-            autocomplete: "address-line2"
+            autocomplete: "address-line2",
+            value: data['addressLine2']
           }) }}
         
           {{ govukInput({
@@ -262,7 +278,8 @@
             },
             id: "address-line-3",
             name: "addressLine3",
-            autocomplete: "address-level3"
+            autocomplete: "address-level3",
+            value: data['addressLine3']
           }) }}
       
         
@@ -274,7 +291,8 @@
             classes: "govuk-input--width-10",
             id: "address-postcode",
             name: "addressPostcode",
-            autocomplete: "postal-code"
+            autocomplete: "postal-code",
+            value: data['addressPostcode']
           }) }}
         
         {% endcall %}

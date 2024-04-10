@@ -21,6 +21,7 @@
           id: "company-name",
           name: "companyName",
           type: "text",
+          value: data['companyName'],
           label: {
             text: "Company name",
             classes: "govuk-label--s"
@@ -30,6 +31,7 @@
 
         {{ govukRadios({
           name: "defendantType",
+          value: data['defendantType'],
           fieldset: {
             legend: {
               text: "Defendant type",
@@ -40,7 +42,11 @@
           items: [
             {
               value: "defendant-individual",
-              text: "Individual"
+              text: "Individual only"
+            },
+            {
+              value: "defendant-individual-parent-pay",
+              text: "Individual with parent to pay"
             },
             {
               value: "defendant-company",

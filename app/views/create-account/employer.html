@@ -4,7 +4,7 @@
 
 {% block beforeContent %}
 
-<a href="./parent-details.html" class="govuk-back-link">Back</a>
+<a href="./defendant-contact-details.html" class="govuk-back-link">Back</a>
 
 {% endblock %}
 
@@ -14,10 +14,11 @@
     <div class="govuk-grid-column-two-thirds">
       <!-- <h1 class="govuk-heading-l">{{ pageName }}</h1> -->
 
-      <form method="post" novalidate action="defendant-employer-details">
+      <form method="post" novalidate action="/employer-question">
 
         {{ govukRadios({
           name: "employer",
+          value: data['employer'],
           fieldset: {
             legend: {
               text: "Do you have the defendant’s employer details?",
