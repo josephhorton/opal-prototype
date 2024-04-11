@@ -14,11 +14,137 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
-      <form method="post" novalidate action="">
+      <form method="post" novalidate action="/employer-details-question">
 
-        <!-- EMAILS -->
+        <!-- DETAILS -->
         
+        {{ govukInput({
+          label: {
+            text: "Employer name",
+            classes: "govuk-label--s"
+          },
+          id: "employerName",
+          name: "employerName",
+          value: data['employerName']
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "Employee reference",
+            classes: "govuk-label--s"
+          },
+          hint: {
+            text: "If employee reference not known, add National Insurance number"
+          },
+          id: "employeeReference",
+          name: "employeeReference",
+          value: data['employeeReference']
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "Employer email address (optional)",
+            classes: "govuk-label--s"
+          },
+          id: "employerEmail",
+          name: "employerEmail",
+          value: data['employerEmail'],
+          type: "email",
+          spellcheck: false
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "Employer telephone number (optional)",
+            classes: "govuk-label--s"
+          },
+          id: "employerTelephone",
+          name: "employerTelephone",
+          value: data['employerTelephone'],
+          type: "tel",
+          autocomplete: "tel",
+          classes: "govuk-input--width-20"
+        }) }}
         
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+        {% call govukFieldset({
+          legend: {
+            text: "Address",
+            classes: "govuk-fieldset__legend--m"
+          }
+        }) %}
+
+        
+          {{ govukInput({
+            label: {
+              text: "Address line 1",
+              classes: "govuk-label--s"
+            },
+            id: "employer-address-line-1",
+            name: "employerAddressLine1",
+            autocomplete: "address-line1",
+            value: data['employerAddressLine1']
+          }) }}
+        
+          {{ govukInput({
+            label: {
+              text: "Address line 2 (optional)",
+              classes: "govuk-label--s"
+            },
+            id: "employer-address-line-2",
+            name: "employerAddressLine2",
+            autocomplete: "address-line2",
+            value: data['employerAddressLine2']
+          }) }}
+        
+          {{ govukInput({
+            label: {
+              text: "Address line 3 (optional)",
+              classes: "govuk-label--s"
+            },
+            id: "employer-address-line-3",
+            name: "employerAddressLine3",
+            autocomplete: "address-level3",
+            value: data['employerAddressLine3']
+          }) }}
+
+          {{ govukInput({
+            label: {
+              text: "Address line 4 (optional)",
+              classes: "govuk-label--s"
+            },
+            id: "employer-address-line-4",
+            name: "employerAddressLine4",
+            autocomplete: "address-level4",
+            value: data['employerAddressLine4']
+          }) }}
+
+          {{ govukInput({
+            label: {
+              text: "Address line 5 (optional)",
+              classes: "govuk-label--s"
+            },
+            id: "employer-address-line-5",
+            name: "employerAddressLine5",
+            autocomplete: "address-level5",
+            value: data['employerAddressLine5']
+          }) }}
+      
+        
+          {{ govukInput({
+            label: {
+              text: "Postcode (optional)",
+              classes: "govuk-label--s"
+            },
+            classes: "govuk-input--width-10",
+            id: "employer-address-postcode",
+            name: "employerAddressPostcode",
+            autocomplete: "postal-code",
+            value: data['employerAddressPostcode']
+          }) }}
+        
+        {% endcall %}
         
         {{ govukButton({
           text: "Continue"

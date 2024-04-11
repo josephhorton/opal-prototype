@@ -4,7 +4,7 @@
 
 {% block beforeContent %}
 
-<a href="./parent-to-pay.html" class="govuk-back-link">Back</a>
+<a href="./defendant-details.html" class="govuk-back-link">Back</a>
 
 {% endblock %}
 
@@ -25,6 +25,7 @@
           },
           id: "email-1",
           name: "email-1",
+          value: data['email-1'],
           type: "email",
           autocomplete: "email",
           spellcheck: false
@@ -37,6 +38,7 @@
           },
           id: "email-2",
           name: "email-2",
+          value: data['email-2'],
           type: "email",
           autocomplete: "email",
           spellcheck: false
@@ -51,6 +53,7 @@
           },
           id: "mobile-number",
           name: "mobileNumber",
+          value: data['mobileNumber'],
           type: "tel",
           autocomplete: "tel",
           classes: "govuk-input--width-20"
@@ -63,6 +66,7 @@
           },
           id: "business-number",
           name: "businessNumber",
+          value: data['businessNumber'],
           type: "tel",
           autocomplete: "tel",
           classes: "govuk-input--width-20"
@@ -75,10 +79,63 @@
           },
           id: "home-number",
           name: "homeNumber",
+          value: data['homeNumber'],
           type: "tel",
           autocomplete: "tel",
           classes: "govuk-input--width-20"
         }) }}
+
+        <!-- WELSH -->
+
+        {% if (data['defendantType'] == "defendant-individual") %}
+
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+          {{ govukRadios({
+            name: "documentLanguage",
+            value: data['documentLanguage'],
+            classes: "govuk-radios--inline",
+            fieldset: {
+              legend: {
+                text: "What is the required language for documents to be sent  out?",
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            items: [
+              {
+                value: "english",
+                text: "English"
+              },
+              {
+                value: "welsh",
+                text: "Welsh"
+              }
+            ]
+          }) }}
+  
+          {{ govukRadios({
+            name: "hearingLanguage",
+            value: data['hearingLanguage'],
+            classes: "govuk-radios--inline",
+            fieldset: {
+              legend: {
+                text: "In which language should court hearings be conducted?",
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            items: [
+              {
+                value: "english",
+                text: "English"
+              },
+              {
+                value: "welsh",
+                text: "Welsh"
+              }
+            ]
+          }) }}
+
+        {% endif %}
         
         {{ govukButton({
           text: "Continue"

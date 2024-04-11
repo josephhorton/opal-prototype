@@ -4,7 +4,7 @@
 
 {% block beforeContent %}
 
-<a href="./employer.html" class="govuk-back-link">Back</a>
+<a href="javascript:window.history.back()" class="govuk-back-link">Back</a>
 
 {% endblock %}
 
@@ -14,11 +14,184 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
-      <form method="post" novalidate action="employer">
+      <form method="post" novalidate action="end">
 
-        <!-- EMAILS -->
         
+        <h2 class="govuk-heading-m">Personal details</h2>
+
+        <!-- NAME -->
+        <div>
+          {{ govukInput({
+            label: {
+              text: "Full name",
+              classes: "govuk-label--s"
+            },
+            id: "parent-full-name",
+            name: "parentFullName",
+            value: data['parentFullName'],
+            autocomplete: "name",
+            spellcheck: false
+          }) }}
+        </div>
+
+        <!-- DATE OF BIRTH -->
+
+        <div>
+          {{ govukDateInput({
+            id: "date-of-birth",
+            namePrefix: "parentDoB",
+            fieldset: {
+              legend: {
+                text: "Date of birth (optional)",
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            items: [
+            {
+              name: "day",
+              classes: "govuk-input--width-2",
+              value: data['parentDoB-day']
+            },
+            {
+              name: "month",
+              classes: "govuk-input--width-2",
+              value: data['parentDoB-month']
+            },
+            {
+              name: "year",
+              classes: "govuk-input--width-4",
+              value: data['parentDoB-year']
+            }
+          ]
+          }) }}
+        </div>
+  
+        <!-- NATIONAL INSURANCE NUMBER -->  
+        <div>
+        {{ govukInput({
+          label: {
+            text: "National Insurance number (optional)",
+            classes: "govuk-label--s"
+          },
+          classes: "govuk-input--width-10 govuk-input--extra-letter-spacing",
+          id: "parent-national-insurance-number",
+          name: "parentNationalInsuranceNumber",
+          spellcheck: false,
+          value: data['parentNationalInsuranceNumber']
+        }) }}
+        </div>
+
+        <!-- ADDRESS -->
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+        {% call govukFieldset({
+          legend: {
+            text: "Address",
+            classes: "govuk-fieldset__legend--m"
+          }
+        }) %}
+
+        <p class="govuk-body">
+          <a href="#" class="govuk-link govuk-link--no-visited-state">Use defendant's address</a>
+        </p>
         
+          {{ govukInput({
+            label: {
+              text: "Address line 1",
+              classes: "govuk-label--s"
+            },
+            id: "parent-address-line-1",
+            name: "parentAddressLine1",
+            autocomplete: "address-line1",
+            value: data['parentAddressLine1']
+          }) }}
+        
+          {{ govukInput({
+            label: {
+              text: "Address line 2 (optional)",
+              classes: "govuk-label--s"
+            },
+            id: "parent-address-line-2",
+            name: "parentAddressLine2",
+            autocomplete: "address-line2",
+            value: data['parentAddressLine2']
+          }) }}
+        
+          {{ govukInput({
+            label: {
+              text: "Address line 3 (optional)",
+              classes: "govuk-label--s"
+            },
+            id: "parent-address-line-3",
+            name: "parentAddressLine3",
+            autocomplete: "address-level3",
+            value: data['parentAddressLine3']
+          }) }}
+      
+        
+          {{ govukInput({
+            label: {
+              text: "Postcode (optional)",
+              classes: "govuk-label--s"
+            },
+            classes: "govuk-input--width-10",
+            id: "parent-address-postcode",
+            name: "parentAddressPostcode",
+            autocomplete: "postal-code",
+            value: data['parentAddressPostcode']
+          }) }}
+
+        {% endcall %}
+        
+        <!-- WELSH -->
+
+        {% if (data['defendantType'] == "defendant-individual-parent-pay") %}
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+          {{ govukRadios({
+            name: "documentLanguage",
+            value: data['documentLanguage'],
+            classes: "govuk-radios--inline",
+            fieldset: {
+              legend: {
+                text: "What is the required language for documents to be sent  out?",
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            items: [
+              {
+                value: "english",
+                text: "English"
+              },
+              {
+                value: "welsh",
+                text: "Welsh"
+              }
+            ]
+          }) }}
+  
+          {{ govukRadios({
+            name: "hearingLanguage",
+            value: data['hearingLanguage'],
+            classes: "govuk-radios--inline",
+            fieldset: {
+              legend: {
+                text: "In which language should court hearings be conducted?",
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            items: [
+              {
+                value: "english",
+                text: "English"
+              },
+              {
+                value: "welsh",
+                text: "Welsh"
+              }
+            ]
+          }) }}
+        {% endif %}
         
         {{ govukButton({
           text: "Continue"
