@@ -4,7 +4,13 @@
 
 {% block beforeContent %}
 
-<a href="./defendant-details.html" class="govuk-back-link">Back</a>
+{% if (data['defendantType'] == "defendant-individual") %}
+<a href="./individual-details.html" class="govuk-back-link">Back</a>
+{% endif %}
+
+{% if (data['defendantType'] == "defendant-company") %}
+<a href="./company-details.html" class="govuk-back-link">Back</a>
+{% endif %}
 
 {% endblock %}
 
@@ -14,7 +20,7 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
-      <form method="post" novalidate action="employer">
+      <form method="post" novalidate action="/contact-details-question">
 
         <!-- EMAILS -->
         
@@ -87,7 +93,9 @@
 
         <!-- WELSH -->
 
-        {% if (data['defendantType'] == "defendant-individual") %}
+        <!-- {% if (data['defendantType'] == "defendant-individual") %}
+
+        <div>
 
         <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
@@ -136,6 +144,58 @@
           }) }}
 
         {% endif %}
+
+        {% if (data['defendantType'] == "defendant-company") %}
+
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+          {{ govukRadios({
+            name: "documentLanguage",
+            value: data['documentLanguage'],
+            classes: "govuk-radios--inline",
+            fieldset: {
+              legend: {
+                text: "What is the required language for documents to be sent  out?",
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            items: [
+              {
+                value: "english",
+                text: "English"
+              },
+              {
+                value: "welsh",
+                text: "Welsh"
+              }
+            ]
+          }) }}
+  
+          {{ govukRadios({
+            name: "hearingLanguage",
+            value: data['hearingLanguage'],
+            classes: "govuk-radios--inline",
+            fieldset: {
+              legend: {
+                text: "In which language should court hearings be conducted?",
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            items: [
+              {
+                value: "english",
+                text: "English"
+              },
+              {
+                value: "welsh",
+                text: "Welsh"
+              }
+            ]
+          }) }}
+
+        {% endif %}
+
+        </div> -->
         
         {{ govukButton({
           text: "Continue"

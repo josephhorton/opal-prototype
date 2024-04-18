@@ -1,0 +1,68 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Local Justice Area" %}
+
+{% block beforeContent %}
+
+<a href="../index.html" class="govuk-back-link">Back</a>
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form method="post" novalidate action="/add-offence-question">
+
+        {{ xGovukAutocomplete({
+          id: "country",
+          name: "country",
+          allowEmpty: false,
+          label: {
+            classes: "govuk-label--l",
+            isPageHeading: "true",
+            text: 'Search for LJA code or name'
+          },
+          items: [
+            { text: "South Yorkshire Magistrates' Court (012345)" },
+            { text: "West Sussex Magistrates' Court (2951)" },
+            { text: "North Kent Magistrates' Court (1966)" },
+            { text: "West Yorkshire Magistrates' Court (2375)" },
+            { text: "Sussex (Eastern) Magistrates' Court (2948)" },
+            { text: "Cambridgeshire Magistrates' Court (1949)" },
+            { text: "Coventry and Warwickshire (Coventry) Magistrates' Court (2924)" },
+            { text: "Berkshire Magistrates' Court (1920)" },
+            { text: "Ceredigion and Pembrokeshire Magistrates' Court (3253)" },
+            { text: "North Essex Magistrates' Court (1970)" },
+            { text: "North and East Hertfordshire Magistrates' Court (1911)" },
+            { text: "Southern Derbyshire Magistrates' Court (1428)" },
+            { text: "Cleveland Magistrates' Court (1460)" },
+            { text: "North and West Cumbria Magistrates' Court (1752)" },
+            { text: "North Northumbria (2360)" },
+            { text: "Surrey Magistrates' Court (2875)" },
+            { text: "Staffordshire Magistrates' Court (2805)" },
+            { text: "Cheshire Magistrates' Court (1710)" },
+            { text: "West Hampshire Magistrates' Court (1304)" },
+            { text: "North East London Magistrates' Court (2573)" },
+            { text: "Northamptonshire Magistrates' Court (2330)" },
+            { text: "Gwent Magistrates' Court (3211)" },
+            { text: "Birmingham and Solihull Magistrates' Court (2922)" },
+            { text: "Merseyside Magistrates' Court (1810)" },
+            { text: "North and East Devon Magistrates' Court (1300)" },
+            { text: "Shropshire Magistrates' Court (3285)" },
+            { text: "Bedfordshire Magistrates' Court (1080)" }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}

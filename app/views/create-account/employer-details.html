@@ -4,7 +4,7 @@
 
 {% block beforeContent %}
 
-<a href="./employer.html" class="govuk-back-link">Back</a>
+<a href="./employer-question.html" class="govuk-back-link">Back</a>
 
 {% endblock %}
 
@@ -36,6 +36,7 @@
           hint: {
             text: "If employee reference not known, add National Insurance number"
           },
+          classes: "govuk-input--width-10 govuk-input--extra-letter-spacing",
           id: "employeeReference",
           name: "employeeReference",
           value: data['employeeReference']

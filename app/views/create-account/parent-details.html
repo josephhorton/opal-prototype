@@ -4,7 +4,12 @@
 
 {% block beforeContent %}
 
-<a href="javascript:window.history.back()" class="govuk-back-link">Back</a>
+{% if (data['employer'] == "employer-yes") %}
+<a href="./employer-details.html" class="govuk-back-link">Back</a>
+{% else %}
+<a href="./employer-question.html" class="govuk-back-link">Back</a>
+{% endif %}
+
 
 {% endblock %}
 
@@ -145,6 +150,8 @@
         
         <!-- WELSH -->
 
+        <!-- <div>
+
         {% if (data['defendantType'] == "defendant-individual-parent-pay") %}
         <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
@@ -192,6 +199,7 @@
             ]
           }) }}
         {% endif %}
+        </div> -->
         
         {{ govukButton({
           text: "Continue"

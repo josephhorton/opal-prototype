@@ -1,0 +1,150 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Create an account" %}
+
+{% block pageTitle %}
+{{ pageName }} – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+
+<a href="./defendant-type.html" class="govuk-back-link">Back</a>
+
+
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+      <h2 class="govuk-heading-m">Defendant's details</h2>
+
+      {% set completedStatus = {
+        text: "Completed"
+      } %}
+
+      {% set incompleteStatus = {
+        tag: {
+          text: "Incomplete",
+          classes: "govuk-tag--blue"
+        }
+      } %}
+
+      {# To switch between the completed and incomplete statues, use some inline logic within the component below, like this: "status: (completedStatus if ... else incompleteStatus)" #}
+
+      {{ govukTaskList({
+        idPrefix: "first-section",
+        items: [
+          {
+            title: {
+              text: "Personal details"
+            },
+            href: "#",
+            status: {
+              tag: {
+                text: "Not provided",
+                classes: "govuk-tag--blue"
+              }
+            }
+          },
+          {
+            title: {
+              text: "Employer details"
+            },
+            href: "#",
+            status: {
+              tag: {
+                text: "Not provided",
+                classes: "govuk-tag--blue"
+              }
+            }
+          },
+          {
+            title: {
+              text: "Vehicle details"
+            },
+            href: "#",
+            status: {
+              tag: {
+                text: "Not provided",
+                classes: "govuk-tag--blue"
+              }
+            }
+          }
+          
+        ]
+      }) }}
+
+      <!-- <h2 class="govuk-heading-m">Parent or guardian details</h2>
+
+      {{ govukTaskList({
+        idPrefix: "first-section",
+        items: [
+          {
+            title: {
+              text: "Parent details"
+            },
+            href: "#",
+            status: {
+              tag: {
+                text: "Not provided",
+                classes: "govuk-tag--blue"
+              }
+            }
+          },
+          {
+            title: {
+              text: "Employer"
+            },
+            href: "#",
+            status: {
+              tag: {
+                text: "Not provided",
+                classes: "govuk-tag--blue"
+              }
+            }
+          }
+        ]
+      }) }} -->
+
+      <h2 class="govuk-heading-m govuk-!-margin-top-5">Offences and payment terms</h2>
+
+      {{ govukTaskList({
+        idPrefix: "second-section",
+        items: [
+          {
+            title: {
+              text: "Offences"
+            },
+            href: "#",
+            status: {
+              tag: {
+                text: "Not provided",
+                classes: "govuk-tag--blue"
+              }
+            }
+          },
+          {
+            title: {
+              text: "Payment terms"
+            },
+            href: "#",
+            status: {
+              tag: {
+                text: "Not provided",
+                classes: "govuk-tag--blue"
+              }
+            }
+          }
+        ]
+      }) }}
+
+      <div class="govuk-!-margin-top-5">
+        {{ govukButton({ text: "Save as draft", href: "#" }) }}
+      </div>
+
+    </div>
+  </div>
+{% endblock %}
