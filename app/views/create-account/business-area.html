@@ -1,0 +1,55 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Business unit" %}
+
+{% block beforeContent %}
+
+<a href="../index.html" class="govuk-back-link">Back</a>
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form method="post" novalidate action="account-details">
+
+        {{ govukRadios({
+          name: "businessUnit",
+          classes: "govuk-radios ",
+          value: data['businessUnit'],
+          fieldset: {
+            legend: {
+              text: "Business unit",
+              isPageHeading: "true",
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          items: [
+            {
+              value: "Avon and Somerset",
+              text: "Avon and Somerset"
+            },
+            {
+              value: "Bedfordshire",
+              text: "Bedfordshire"
+            },
+            {
+              value: "Cambridgeshire",
+              text: "Cambridgeshire"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}

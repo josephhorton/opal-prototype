@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = "Create an account" %}
+{% set pageName = "Create fines account" %}
 
 {% block pageTitle %}
 {{ pageName }} – {{ serviceName }} – GOV.UK Prototype Kit
@@ -8,18 +8,78 @@
 
 {% block beforeContent %}
 
-<a href="./defendant-type.html" class="govuk-back-link">Back</a>
+<a href="./account-details.html" class="govuk-back-link">Back</a>
 
 
 {% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
+
     <div class="govuk-grid-column-two-thirds">
+      
+      <span class="govuk-caption-l">{{ data['businessUnit'] }}</span>
+      <h1 class="govuk-heading-l govuk-!-margin-bottom-6">{{ pageName }}</h1>
 
-      <h1 class="govuk-heading-l">{{ pageName }}</h1>
+      <h3 class="govuk-heading-s govuk-!-margin-bottom-2 govuk-visually-hidden">Account details</h3>
+      
+      <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-2">Individual only</p>
+      <p class="govuk-body-s govuk-!-margin-bottom-2">Local Justice Area (LJA): {{ data['ljaCode'] }}</p>
+      <p class="govuk-body-s govuk-!-margin-bottom-2">LJA reference: FT34567
+      </p>
 
-      <h2 class="govuk-heading-m">Defendant's details</h2>
+
+      <!-- <dl class="govuk-summary-list govuk-summary-list--no-border">
+        
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key govuk-body-s" style="width: 22%; padding-bottom: govuk-spacing(0);">
+            Business area
+          </dt>
+          <dd class="govuk-summary-list__value govuk-body-s" style="padding-bottom: govuk-spacing(0);">
+            Avon and Somerset
+          </dd>
+          <dd class="govuk-summary-list__actions govuk-body-s">
+            <a class="govuk-link govuk-link--no-visited-state" href="#">Change<span class="govuk-visually-hidden"> business area</span></a>
+          </dd>
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key govuk-body-s">
+            Local Justice Area
+          </dt>
+          <dd class="govuk-summary-list__value govuk-body-s">
+            
+            <p class="govuk-body-s">Cambridgeshire Magistrates' Court (1949)</p>
+            <p class="govuk-body-s">Reference: 1234567</p>
+          </dd>
+          <dd class="govuk-summary-list__actions govuk-body-s">
+            <a class="govuk-link govuk-link--no-visited-state" href="#">Change<span class="govuk-visually-hidden"> Local Justice Area</span></a>
+          </dd>
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key govuk-body-s">
+            Defendant type
+          </dt>
+          <dd class="govuk-summary-list__value govuk-body-s">
+            Individual only
+          </dd>
+          <dd class="govuk-summary-list__actions govuk-body-s">
+            <a class="govuk-link govuk-link--no-visited-state" href="#">Change<span class="govuk-visually-hidden"> Defendant type</span></a>
+          </dd>
+        </div>
+
+
+      </dl> -->
+
+    </div>  
+  </div>  
+
+  <div class="govuk-grid-row">
+
+    <div class="govuk-grid-column-two-thirds govuk-!-margin-top-4">
+
+      <h2 class="govuk-heading-m">Defendant details</h2>
 
       {% set completedStatus = {
         text: "Completed"
@@ -35,7 +95,7 @@
       {# To switch between the completed and incomplete statues, use some inline logic within the component below, like this: "status: (completedStatus if ... else incompleteStatus)" #}
 
       {{ govukTaskList({
-        idPrefix: "first-section",
+        idPrefix: "second-section",
         items: [
           {
             title: {
@@ -51,7 +111,19 @@
           },
           {
             title: {
-              text: "Employer details"
+              text: "Contact preferences"
+            },
+            href: "#",
+            status: {
+              tag: {
+                text: "Not provided",
+                classes: "govuk-tag--blue"
+              }
+            }
+          },
+          {
+            title: {
+              text: "Employer"
             },
             href: "#",
             status: {
@@ -77,42 +149,10 @@
         ]
       }) }}
 
-      <!-- <h2 class="govuk-heading-m">Parent or guardian details</h2>
-
-      {{ govukTaskList({
-        idPrefix: "first-section",
-        items: [
-          {
-            title: {
-              text: "Parent details"
-            },
-            href: "#",
-            status: {
-              tag: {
-                text: "Not provided",
-                classes: "govuk-tag--blue"
-              }
-            }
-          },
-          {
-            title: {
-              text: "Employer"
-            },
-            href: "#",
-            status: {
-              tag: {
-                text: "Not provided",
-                classes: "govuk-tag--blue"
-              }
-            }
-          }
-        ]
-      }) }} -->
-
       <h2 class="govuk-heading-m govuk-!-margin-top-5">Offences and payment terms</h2>
 
       {{ govukTaskList({
-        idPrefix: "second-section",
+        idPrefix: "third-section",
         items: [
           {
             title: {
@@ -141,10 +181,90 @@
         ]
       }) }}
 
-      <div class="govuk-!-margin-top-5">
+      <h2 class="govuk-heading-m govuk-!-margin-top-5">Final check</h2>
+
+      {{ govukTaskList({
+        idPrefix: "second-section",
+        items: [
+          {
+            title: {
+              text: "Save as draft account"
+            },
+            status: {
+              text: "Cannot start yet",
+              classes: "govuk-task-list__status--cannot-start-yet"
+            }
+          }
+        ]
+      }) }}
+
+      <!-- <div class="govuk-!-margin-top-5">
         {{ govukButton({ text: "Save as draft", href: "#" }) }}
-      </div>
+      </div> -->
 
     </div>
+    
+    <!-- <div  class="govuk-grid-column-one-third" >
+      <div style="background-color: #F3F2F1; padding: 15px; border-top: 3px solid #1D70B8;" >
+        <h3 class="govuk-heading-s govuk-!-margin-bottom-2">Account details</h3>
+        <dl class="govuk-summary-list govuk-summary-list--no-border">
+          
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key govuk-body-s">
+              Business area
+            </dt>
+            <dd class="govuk-summary-list__value govuk-body-s">
+              Avon and Somerset
+            </dd>
+            <dd class="govuk-summary-list__actions govuk-body-s">
+              <a class="govuk-link govuk-link--no-visited-state" href="#">Change<span class="govuk-visually-hidden"> business area</span></a>
+            </dd>
+          </div>
+  
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key govuk-body-s">
+              Local Justice Area
+            </dt>
+            <dd class="govuk-summary-list__value govuk-body-s">
+              Cambridgeshire Magistrates' Court (1949)
+            </dd>
+            <dd class="govuk-summary-list__actions govuk-body-s">
+              <a class="govuk-link govuk-link--no-visited-state" href="#">Change<span class="govuk-visually-hidden"> Local Justice Area</span></a>
+            </dd>
+          </div>
+  
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key govuk-body-s">
+              LJA reference
+            </dt>
+            <dd class="govuk-summary-list__value govuk-body-s">
+              1234567
+            </dd>
+            <dd class="govuk-summary-list__actions govuk-body-s">
+              <a class="govuk-link govuk-link--no-visited-state" href="#">Change<span class="govuk-visually-hidden"> LJA reference</span></a>
+            </dd>
+          </div>
+  
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key govuk-body-s">
+              Defendant type
+            </dt>
+            <dd class="govuk-summary-list__value govuk-body-s">
+              Individual only
+            </dd>
+            <dd class="govuk-summary-list__actions govuk-body-s">
+              <a class="govuk-link govuk-link--no-visited-state" href="#">Change<span class="govuk-visually-hidden"> Defendant type</span></a>
+            </dd>
+          </div>
+  
+  
+        </dl>
+      
+      </div>
+  
+        
+  
+    </div> -->
+    
   </div>
 {% endblock %}
