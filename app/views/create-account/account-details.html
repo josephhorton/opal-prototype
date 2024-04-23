@@ -4,7 +4,7 @@
 
 {% block beforeContent %}
 
-<a href="business-area.html" class="govuk-back-link">Back</a>
+<a href="business-unit.html" class="govuk-back-link">Back</a>
 
 {% endblock %}
 
@@ -25,10 +25,10 @@
           allowEmpty: false,
           label: {
             classes: "govuk-label--s",
-            text: 'Local Justice Area (LJA)'
+            text: 'Originating Local Justice Area (LJA)'
           },
           hint: {
-            text: 'Search using the code or court'
+            text: 'Search using the code or name'
           },
           items: [
             { text: "South Yorkshire Magistrates' Court (012345)" },
@@ -80,7 +80,7 @@
             { text: "Lincolnshire Magistrates' Court (2105)" },
             { text: "County Durham & Darlington Magistrates' Court (1585)" },
             { text: "North West London Magistrates' Court	(2571)" },
-            { text: "Leicester and Rutland Magistrates' Court	(2100)" },
+            { text: "Leicester and Rutland Magistrates' Court (2100)" },
             { text: "Nottinghamshire Magistrates' Court	(2095)" },
             { text: "Isle of Wight Magistrates' Court	(1945)" },
             { text: "Cornwall Magistrates' Court (1301)" },
@@ -113,8 +113,11 @@
 
         {{ govukInput({
           label: {
-            text: "Reference ",
+            text: "Reference number",
             classes: "govuk-label--s"
+          },
+          hint: {
+            text: "Provided by the source organisation, for example, court or other government department"
           },
           classes: "govuk-input--width-10 govuk-input--extra-letter-spacing",
           id: "ljaReferenceCode",
@@ -133,19 +136,19 @@
             }
           },
           hint: {
-            text: "If user is a sole trader, choose ‘Individual’"
+            text: "If sole trader, choose ‘Individual’’"
           },
           items: [
             {
-              value: "defendant-individual",
+              value: "Individual only",
               text: "Individual only"
             },
             {
-              value: "defendant-individual-parent-pay",
+              value: "Individual with parent to pay",
               text: "Individual with parent to pay"
             },
             {
-              value: "defendant-company",
+              value: "Company",
               text: "Company"
             }
           ]

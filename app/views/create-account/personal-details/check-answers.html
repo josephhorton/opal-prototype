@@ -1,0 +1,155 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Check personal details" %}
+
+{% block beforeContent %}
+
+<a href="address.html" class="govuk-back-link">Back</a>
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      
+      <span class="govuk-caption-l">Defendant details</span>
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      {{ govukSummaryList({
+        card: {
+          title: {
+            text: "Personal details"
+          }
+        },
+        rows: [
+          {
+            key: {
+              text: "Title"
+            },
+            value: {
+              html: data['title'] or "Not provided"
+            },
+            actions: {
+              items: [
+                {
+                  href: "personal-details",
+                  text: "Change",
+                  visuallyHiddenText: "title"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Full name"
+            },
+            value: {
+              html: data['firstName'] + " " + data['lastName'] 
+            }, 
+            actions: {
+              items: [
+                {
+                  href: "personal-details",
+                  text: "Change",
+                  visuallyHiddenText: "First names"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Aliases"
+            },
+            value: {
+              html: (data['aliasFirstName'] + ' ' + data['aliasLastName']) if (data['aliasLastName'] and data['aliasLastName']) else "Not provided"
+            }, 
+            actions: {
+              items: [
+                {
+                  href: "personal-details",
+                  text: "Change",
+                  visuallyHiddenText: "aliases"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Date of birth"
+            },
+            value: {
+              html: "10 Decemeber 2001"
+            },
+            actions: {
+              items: [
+                {
+                  href: "personal-details",
+                  text: "Change",
+                  visuallyHiddenText: "date of birth"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "National Insurance number"
+            },
+            value: {
+              html: data['defendantNationalInsuranceNumber'] or 'Not provided'
+            },
+            actions: {
+              items: [
+                {
+                  href: "personal-details",
+                  text: "Change",
+                  visuallyHiddenText: "national insurance number"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Address"
+            },
+            value: {
+              html: "Flat 1, The Street, Bedford, MK42 9AH"
+            },
+            actions: {
+              items: [
+                {
+                  href: "address",
+                  text: "Change",
+                  visuallyHiddenText: "address"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+
+      <form method="post" novalidate action="../task-list?personal-details-end=true">
+
+        {{ govukCheckboxes({
+          name: "PDstatus",
+          values: data['PDstatus'],
+          items: [
+            {
+              value: "Completed",
+              text: "I have completed this section"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,221 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Personal details" %}
+
+{% block beforeContent %}
+
+<a href="../task-list.html" class="govuk-back-link">Back</a>
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      
+      <span class="govuk-caption-l">Defendant details</span>
+      <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+      <form method="post" novalidate action="address">
+
+        <!-- TITLE -->
+        <div>
+        {{ govukSelect({
+          id: "title",
+          name: "title",
+          label: {
+            text: "Title",
+            classes: "govuk-label--s"
+          },
+          items: [
+            {
+              value: "Mr",
+              text: "Mr"
+            },
+            {
+              value: "Mrs",
+              text: "Mrs"
+            },
+            {
+              value: "Miss",
+              text: "Miss"
+            },
+            {
+              value: "Ms",
+              text: "Ms"
+            }
+          ]
+        }) }}
+        </div>
+
+        <!-- FIRST AND LATE NAME -->
+        <div>
+
+        {{ govukInput({
+          id: "firstName",
+          name: "firstName",
+          label: {
+            text: "First names",
+            classes: "govuk-label--s"
+          },
+          hint: {
+            text: "This can include their middle names"
+          },
+          value: data['firstName']
+        }) }}
+
+        {{ govukInput({
+          id: "lastName",
+          name: "lastName",
+          label: {
+            text: "Last name",
+            classes: "govuk-label--s"
+          },
+          value: data['lastName']
+        }) }}
+
+
+        {% set aliasHTML %}
+        <div data-module="moj-add-another">
+
+          {% call govukFieldset({
+            classes: 'moj-add-another__item',
+            legend: {
+              text: 'Alias 1',
+              classes: 'moj-add-another__title govuk-fieldset__legend--s',
+              isPageHeading: false
+            }
+          }) %}
+      
+          {{ govukInput({
+            id: "aliasFirstName",
+            name: "aliasFirstName",
+            label: {
+              text: "First names"
+            },
+            value: data['aliasFirstName']
+          }) }}
+  
+          {{ govukInput({
+            id: "aliasLastName",
+            name: "aliasLastName",
+            label: {
+              text: "Last name"
+            },
+            value: data['aliasLastName']
+          }) }}
+          {% endcall %}
+
+          <div class="moj-button-action govuk-!-margin-top-4">
+            {{ govukButton({
+              text: 'Add another alias',
+              classes: 'govuk-button--secondary govuk-!-margin-bottom-0',
+              type: 'button'
+            }) }}
+
+            <!-- Missing class: moj-add-another__add-button -->
+
+            
+          </div>
+        </div>
+        {% endset -%}
+
+        {{ govukCheckboxes({
+          name: "aliases",
+          values: data['aliases'],
+          items: [
+            {
+              value: "yes",
+              text: "Add aliases",
+              conditional: {
+                html: aliasHTML
+              }
+            }
+          ]
+        }) }}
+        </div>
+
+        <!-- DATE OF BIRTH -->
+        <div>
+        {{ govukDateInput({
+          id: "date-of-birth",
+          namePrefix: "defendantDoB",
+          fieldset: {
+            legend: {
+              text: "Date of birth",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+          {
+            name: "day",
+            classes: "govuk-input--width-2",
+            value: data['defendantDoB-day']
+          },
+          {
+            name: "month",
+            classes: "govuk-input--width-2",
+            value: data['defendantDoB-month']
+          },
+          {
+            name: "year",
+            classes: "govuk-input--width-4",
+            value: data['defendantDoB-year']
+          }
+        ]
+        }) }}
+        </div>
+
+        <!-- NATIONAL INSURANCE NUMBER -->  
+        <div>
+        {{ govukInput({
+          label: {
+            text: "National Insurance number",
+            classes: "govuk-label--s"
+          },
+          classes: "govuk-input--width-10 govuk-input--extra-letter-spacing",
+          id: "national-insurance-number",
+          name: "defendantNationalInsuranceNumber",
+          spellcheck: false,
+          value: data['defendantNationalInsuranceNumber']
+        }) }}
+        </div>
+
+        <!-- VEHICLE DETAILS -->
+        <!-- <div>
+        <h1 class="govuk-heading-l">Vehicle details</h1>
+
+        {{ govukInput({
+          label: {
+            text: "Make of the car (optional)",
+            classes: "govuk-label--m"
+          },
+          id: "carMake",
+          name: "carMake",
+          value: data['carMake']
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "Registration number (optional)",
+            classes: "govuk-label--m"
+          },
+          classes: "govuk-input--width-10",
+          id: "carRegistration",
+          name: "carRegistration",
+          value: data['carRegistration']
+        }) }}
+        </div> -->
+
+        
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}
