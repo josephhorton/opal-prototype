@@ -1,0 +1,91 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Check transfer details" %}
+
+{% block beforeContent %}
+
+{% if data['transfer-details-end'] == 'true'%}
+  <a href="../task-list.html" class="govuk-back-link">Back to fines account</a>
+{% else %}
+  <a href="transfer-details.html" class="govuk-back-link">Back</a>
+{% endif %}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      
+      <span class="govuk-caption-l">Transfer details</span>
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      {{ govukSummaryList({
+        card: {
+          title: {
+            text: "Transfer details"
+          }
+        },
+        rows: [
+          {
+            key: {
+              text: "Originating Local Justice Area"
+            },
+            value: {
+              html: data['ljaCode'] or "Bedfordshire Magistrates' Court (1080)"
+            },
+            actions: {
+              items: [
+                {
+                  href: "transfer-details",
+                  text: "Change",
+                  visuallyHiddenText: "Originating Local Justice Area"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Case or court reference"
+            },
+            value: {
+              html: data['ljaReferenceCode'] or "Not provided"
+            }, 
+            actions: {
+              items: [
+                {
+                  href: "transfer-details",
+                  text: "Change",
+                  visuallyHiddenText: "Case or court reference"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+
+      <form method="post" novalidate action="../task-list?transfer-details-end=true">
+
+        {{ govukCheckboxes({
+          name: "TDstatus",
+          values: data['TDstatus'],
+          items: [
+            {
+              value: "Completed",
+              text: "I have completed this section"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Finish"
+        }) }}
+
+      </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}

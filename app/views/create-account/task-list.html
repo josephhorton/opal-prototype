@@ -17,13 +17,33 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       
-      <span class="govuk-caption-l">{{ data['businessUnit'] }}</span>
       <h1 class="govuk-heading-l govuk-!-margin-bottom-6">{{ pageName }}</h1>
 
-      <p class="govuk-body govuk-!-margin-bottom-2">Originating LJA: {{ data['ljaCode'] }}</p>
-      <p class="govuk-body govuk-!-margin-bottom-2">Reference number: {{ data['ljaReferenceCode'] or 'Not provided'}}</p>
-      <p class="govuk-body govuk-!-margin-bottom-2">Defendant type: {{ data['defendantType'] or 'Individual only'}}</p>
+      <!-- <dl class="govuk-summary-list govuk-!-margin-bottom-0 govuk-summary-list--no-border">
+        
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key" style="padding-bottom: 0px; width: 25%;">
+            Business unit
+          </dt>
+          <dd class="govuk-summary-list__value" style="padding-bottom: 0px;">
+            {{ data['businessUnit'] or "Bedfordshire" }}
+          </dd>
+        </div>
+        
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Defendant type
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['defendantType'] or "Individual only" }}
+          </dd>
+        </div>
+        
+      </dl> -->
 
+
+      <p class="govuk-body govuk-!-margin-bottom-2"><strong>Business unit</strong>: {{ data['businessUnit'] or "Bedfordshire" }}</p>
+      <p class="govuk-body govuk-!-margin-bottom-2"><strong>Defendant type</strong>: {{ data['defendantType'] or 'Individual only'}}</p>
 
     </div>  
   </div>  
@@ -31,11 +51,6 @@
   <div class="govuk-grid-row">
 
     <div class="govuk-grid-column-two-thirds govuk-!-margin-top-4">
-
-      <h2 class="govuk-heading-m">Defendant details</h2>
-
-      <!-- <p class="govuk-body">Individual only.</p> -->
-
 
       {% set notStarted = {
         tag: {
@@ -52,22 +67,57 @@
       } %}
 
       {% set completedStatus = {
-        text: "Completed"
+        text: "Completed",
+        classes: "govuk-tag--green"
       } %}
 
       <!-- CONDITIONS FOR STATUS TAGS -->
-      {% if (data['PDstatus'] == 'Completed') %}
-      {% set taskComplete = {
+      
+
+      <!-- COURT DETAILS -->
+      {% if (data['TDstatus'] == 'Completed') %}
+      {% set TDtaskComplete = {
           text: "Completed"
       } %}
       {% else %}
-      {% set taskComplete = {
+      {% set TDtaskComplete = {
         tag: {
           text: "Not provided",
           classes: "govuk-tag--blue"
         }
       } %}
       {% endif %}
+
+      <!-- PERSONAL DETAILS -->
+      {% if (data['PDstatus'] == 'Completed') %}
+      {% set PDtaskComplete = {
+          text: "Completed"
+      } %}
+      {% else %}
+      {% set PDtaskComplete = {
+        tag: {
+          text: "Not provided",
+          classes: "govuk-tag--blue"
+        }
+      } %}
+      {% endif %}
+
+      <h2 class="govuk-heading-m">Transfer details</h2>
+
+      {{ govukTaskList({
+        idPrefix: "first-section",
+        items: [
+          {
+            title: {
+              text: "Transfer details"
+            },
+            href: './transfer-details/check-answers' if data['transfer-details-end'] == 'true' else './transfer-details/transfer-details',
+            status: TDtaskComplete
+          }
+        ]
+      }) }}
+
+      <h2 class="govuk-heading-m">Defendant details</h2>
 
       <!-- TASK LIST -->
       {{ govukTaskList({
@@ -78,7 +128,7 @@
               text: "Personal details"
             },
             href: './personal-details/check-answers' if data['personal-details-end'] == 'true' else './personal-details/personal-details',
-            status: taskComplete
+            status: PDtaskComplete
           },
 
           {
@@ -140,36 +190,18 @@
         ]
       }) }}
 
-      <h2 class="govuk-heading-m govuk-!-margin-top-5">Review and save</h2>
+      <h2 class="govuk-heading-m govuk-!-margin-top-5">Review and publish</h2>
 
-      <p class="govuk-body">Check that all required fields have been entered before you can save a draft.</p>
+      <p class="govuk-body">Check that all required fields have been entered before you publish.</p>
 
       <div class="govuk-!-margin-top-5">
-        {{ govukButton({ text: "Save as draft", href: "#" }) }}
+        {{ govukButton({ text: "Review account", href: "#" }) }}
       </div>
 
+      <p class="govuk-body"><a href="#" class="govuk-link app-destructive-link">Delete account</a></p>
+
     </div>
-    
-    <!-- <div  class="govuk-grid-column-one-third" >
-      {{ xGovukRelatedNavigation({
-        sections: [{
-          items: [{
-            text: "Related link",
-            href: "#"
-          }, {
-            text: "Related link",
-            href: "#"
-          }],
-          subsections: [{
-            title: "Subsection",
-            items: [{
-              text: "Related link",
-              href: "#"
-            }]
-          }]
-        }]
-      }) }}
-    </div> -->
+
     
   </div>
 {% endblock %}

@@ -30,3 +30,16 @@
 //     margin-left: 30px;
 // }
 // }
+
+.app-destructive-link {
+    &.govuk-link {
+      color: govuk-colour("red");
+    }
+    &.govuk-link:focus {
+        color: govuk-colour("black");
+      }
+}
+
+.app-font-colour-red {
+    color: govuk-colour("red");
+}

@@ -4,17 +4,41 @@
 
 {% block beforeContent %}
 
-<a href="address.html" class="govuk-back-link">Back</a>
+{% if data['personal-details-end'] == 'true'%}
+  <a href="../task-list.html" class="govuk-back-link">Back to fines account</a>
+{% else %}
+  <a href="address.html" class="govuk-back-link">Back</a>
+{% endif %}
 
 {% endblock %}
 
 {% block content %}
+
+  {% set address %}
+    {% if data['addressLine1'] %}
+    {{data['addressLine1']}}<br>
+    {% endif %}
+
+    {% if data['addressLine2'] %}
+    {{data['addressLine2']}}<br>
+    {% endif %}
+
+    {% if data['addressLine3'] %}
+    {{data['addressLine3']}}<br>
+    {% endif %}
+
+    {% if data['addressPostcode'] %}
+    {{data['addressPostcode']}}
+    {% endif %}
+  {% endset %}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
       
       <span class="govuk-caption-l">Defendant details</span>
       <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      
 
       {{ govukSummaryList({
         card: {
@@ -33,7 +57,7 @@
             actions: {
               items: [
                 {
-                  href: "personal-details",
+                  href: "personal-details?change-personal-details=true",
                   text: "Change",
                   visuallyHiddenText: "title"
                 }
@@ -45,12 +69,12 @@
               text: "Full name"
             },
             value: {
-              html: data['firstName'] + " " + data['lastName'] 
+              html: (data['firstName'] + ' ' + data['lastName']) if (data['firstName'] or data['lastName']) else "Not provided"
             }, 
             actions: {
               items: [
                 {
-                  href: "personal-details",
+                  href: "personal-details?change-personal-details=true",
                   text: "Change",
                   visuallyHiddenText: "First names"
                 }
@@ -62,12 +86,12 @@
               text: "Aliases"
             },
             value: {
-              html: (data['aliasFirstName'] + ' ' + data['aliasLastName']) if (data['aliasLastName'] and data['aliasLastName']) else "Not provided"
+              html: (data['aliasFirstName'] + ' ' + data['aliasLastName']) if (data['aliasFirstName'] or data['aliasLastName']) else "Not provided"
             }, 
             actions: {
               items: [
                 {
-                  href: "personal-details",
+                  href: "personal-details?change-personal-details=true",
                   text: "Change",
                   visuallyHiddenText: "aliases"
                 }
@@ -79,12 +103,12 @@
               text: "Date of birth"
             },
             value: {
-              html: "10 Decemeber 2001"
+              html: data['defendantDoB-day'] + ' ' + data['defendantDoB-month'] | monthName + ' ' + data['defendantDoB-year'] if data['defendantDoB-day'] and data['defendantDoB-month'] and data['defendantDoB-year'] else "Not provided"
             },
             actions: {
               items: [
                 {
-                  href: "personal-details",
+                  href: "personal-details?change-personal-details=true",
                   text: "Change",
                   visuallyHiddenText: "date of birth"
                 }
@@ -101,7 +125,7 @@
             actions: {
               items: [
                 {
-                  href: "personal-details",
+                  href: "personal-details?change-personal-details=true",
                   text: "Change",
                   visuallyHiddenText: "national insurance number"
                 }
@@ -113,7 +137,7 @@
               text: "Address"
             },
             value: {
-              html: "Flat 1, The Street, Bedford, MK42 9AH"
+              html: address
             },
             actions: {
               items: [

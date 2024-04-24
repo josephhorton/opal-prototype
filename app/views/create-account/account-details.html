@@ -1,10 +1,10 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = "Account details" %}
+{% set pageName = "Fines account details" %}
 
 {% block beforeContent %}
 
-<a href="business-unit.html" class="govuk-back-link">Back</a>
+<a href="../index.html" class="govuk-back-link">Back</a>
 
 {% endblock %}
 
@@ -12,127 +12,43 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <span class="govuk-caption-l">{{ data['businessUnit'] }}</span>
-      <h1 class="govuk-heading-l ">{{pageName}}</h1>
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
 
       <form method="post" novalidate action="task-list">
 
-        {{ xGovukAutocomplete({
-          id: "ljaCode",
-          name: "ljaCode",
-          classes: "govuk-!-margin-bottom-8",
-          value: data['ljaCode'],
-          allowEmpty: false,
-          label: {
-            classes: "govuk-label--s",
-            text: 'Originating Local Justice Area (LJA)'
+        {{ govukRadios({
+          name: "businessUnit",
+          classes: "govuk-radios",
+          value: data['businessUnit'],
+          fieldset: {
+            legend: {
+              text: "Business unit",
+              classes: "govuk-fieldset__legend--m"
+            }
           },
           hint: {
-            text: 'Search using the code or name'
+            text: "Select where the account is to be created"
           },
           items: [
-            { text: "South Yorkshire Magistrates' Court (012345)" },
-            { text: "West Sussex Magistrates' Court (2951)" },
-            { text: "North Kent Magistrates' Court (1966)" },
-            { text: "West Yorkshire Magistrates' Court (2375)" },
-            { text: "Sussex (Eastern) Magistrates' Court (2948)" },
-            { text: "Cambridgeshire Magistrates' Court (1949)" },
-            { text: "Coventry and Warwickshire (Coventry) Magistrates' Court (2924)" },
-            { text: "Berkshire Magistrates' Court (1920)" },
-            { text: "Ceredigion and Pembrokeshire Magistrates' Court (3253)" },
-            { text: "North Essex Magistrates' Court (1970)" },
-            { text: "North and East Hertfordshire Magistrates' Court (1911)" },
-            { text: "Southern Derbyshire Magistrates' Court (1428)" },
-            { text: "Cleveland Magistrates' Court (1460)" },
-            { text: "North and West Cumbria Magistrates' Court (1752)" },
-            { text: "North Northumbria (2360)" },
-            { text: "Surrey Magistrates' Court (2875)" },
-            { text: "Staffordshire Magistrates' Court (2805)" },
-            { text: "Cheshire Magistrates' Court (1710)" },
-            { text: "West Hampshire Magistrates' Court (1304)" },
-            { text: "North East London Magistrates' Court (2573)" },
-            { text: "Northamptonshire Magistrates' Court (2330)" },
-            { text: "Gwent Magistrates' Court (3211)" },
-            { text: "Birmingham and Solihull Magistrates' Court (2922)" },
-            { text: "Merseyside Magistrates' Court (1810)" },
-            { text: "North and East Devon Magistrates' Court (1300)" },
-            { text: "Shropshire Magistrates' Court (3285)" },
-            { text: "Bedfordshire Magistrates' Court (1080)" },
-            { text: "South West London Magistrates' Court	(2577)" },
-            { text: "Central Kent Magistrates' Court (1960)" },
-            { text: "Central London Magistrates' Court (2570)" },
-            { text: "West Glamorgan Magistrates' Court (3319)" },
-            { text: "East London Magistrates' Court	(2574)" },
-            { text: "West London Magistrates' Court	(2578)" },
-            { text: "County of Wiltshire Magistrates' Court	(3021)" },
-            { text: "Buckinghamshire Magistrates' Court	(1921)" },
-            { text: "South Northumbria (2365)" },
-            { text: "Black Country Magistrates' Court	(2923)" },
-            { text: "Gloucestershire Magistrates' Court	(1698)" },
-            { text: "South Cumbria Magistrates' Court	(1753)" },
-            { text: "West and Central Hertfordshire Magistrates' Court (1910)" },
-            { text: "Greater Manchester Magistrates' Court (1720)" },
-            { text: "Sussex (Central) Magistrates' Court (2950)" },
-            { text: "Cardiff Magistrates' Court	(3190)" },
-            { text: "North East Wales Magistrates' Court (3063)" },
-            { text: "Carmarthenshire Magistrates' Court	(3252)" },
-            { text: "Northern Derbyshire Magistrates' Court	(1435)" },
-            { text: "Lincolnshire Magistrates' Court (2105)" },
-            { text: "County Durham & Darlington Magistrates' Court (1585)" },
-            { text: "North West London Magistrates' Court	(2571)" },
-            { text: "Leicester and Rutland Magistrates' Court (2100)" },
-            { text: "Nottinghamshire Magistrates' Court	(2095)" },
-            { text: "Isle of Wight Magistrates' Court	(1945)" },
-            { text: "Cornwall Magistrates' Court (1301)" },
-            { text: "Suffolk Magistrates' Court	(2870)" },
-            { text: "Coventry and Warwickshire (Warwickshire) Magistrates' Court (2905)" },
-            { text: "Oxfordshire Magistrates' Court	(1922)" },
-            { text: "Worcestershire Magistrates' Court (1894)" },
-            { text: "South and West Devon Magistrates' Court (1302)" },
-            { text: "North Central Wales Magistrates' Court	(3070)" },
-            { text: "North London Magistrates' Court (2572)" },
-            { text: "Avon and Somerset Magistrates' Court	(1450)" },
-            { text: "Montgomeryshire Magistrates' Court	(3355)" },
-            { text: "South Essex Magistrates' Court (1971)" },
-            { text: "South London Magistrates' Court (2576)" },
-            { text: "Humber Magistrates' Court (1980)" },
-            { text: "South East London Magistrates' Court	(2575)" },
-            { text: "Norfolk Magistrates' Court	(1972)" },
-            { text: "North Yorkshire Magistrates' Court	(2370)" },
-            { text: "North West Wales Magistrates' Court (3240)" },
-            { text: "Dorset Magistrates' Court (1530)" },
-            { text: "Lancashire Magistrates' Court	(1790)" },
-            { text: "Mid Wales (Dyfed Powys Area) Magistrates' Court (3246)" },
-            { text: "Mid Wales (South Wales Area) Magistrates' Court (3260)" },
-            { text: "East Kent Magistrates' Court	(1965)" },
-            { text: "Herefordshire Magistrates' Court (1841)" },
-            { text: "East Hampshire Magistrates' Court (1800)" },
-            { text: "North Hampshire Magistrates' Court (1305)" }
+            {
+              value: "Avon and Somerset",
+              text: "Avon and Somerset"
+            },
+            {
+              value: "Bedfordshire",
+              text: "Bedfordshire"
+            }
           ]
-        }) }}
-
-        {{ govukInput({
-          label: {
-            text: "Reference number",
-            classes: "govuk-label--s"
-          },
-          hint: {
-            text: "Provided by the source organisation, for example, court or other government department"
-          },
-          classes: "govuk-input--width-10 govuk-input--extra-letter-spacing",
-          id: "ljaReferenceCode",
-          name: "ljaReferenceCode",
-          value: data['ljaReferenceCode']
         }) }}
 
         {{ govukRadios({
           name: "defendantType",
           value: data['defendantType'],
-          classes: "govuk-radios--small",
+          classes: "govuk-radios",
           fieldset: {
             legend: {
               text: "Defendant type",
-              classes: "govuk-fieldset__legend--s"
+              classes: "govuk-fieldset__legend--m"
             }
           },
           hint: {

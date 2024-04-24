@@ -59,3 +59,15 @@ router.post('/employer-details-question', function(request, response) {
         response.redirect("./create-account/end")
     }
 })
+
+router.post('/personal-details-question', function(request, response) {
+
+    var changeAnswer = request.session.data['change-personal-details']
+
+    if (changeAnswer == "true"){
+        response.redirect("./create-account/personal-details/check-answers")
+    } else {
+        response.redirect("./create-account/personal-details/address")
+    }
+})
+
