@@ -137,7 +137,7 @@
               text: "Address"
             },
             value: {
-              html: address
+              html: address if data['addressLine1'] or data['addressLine2'] or data['addressLine3'] or data['addressPostcode'] else 'Not provided'
             },
             actions: {
               items: [
