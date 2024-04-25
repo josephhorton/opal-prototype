@@ -16,41 +16,14 @@
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      
+
+
+      <span class="govuk-caption-l">{{ data['businessUnit'] or "Bedfordshire" }}</span>
       <h1 class="govuk-heading-l govuk-!-margin-bottom-6">{{ pageName }}</h1>
 
-      <!-- <dl class="govuk-summary-list govuk-!-margin-bottom-0 govuk-summary-list--no-border">
-        
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key" style="padding-bottom: 0px; width: 25%;">
-            Business unit
-          </dt>
-          <dd class="govuk-summary-list__value" style="padding-bottom: 0px;">
-            {{ data['businessUnit'] or "Bedfordshire" }}
-          </dd>
-        </div>
-        
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">
-            Defendant type
-          </dt>
-          <dd class="govuk-summary-list__value">
-            {{ data['defendantType'] or "Individual only" }}
-          </dd>
-        </div>
-        
-      </dl> -->
-
-
-      <p class="govuk-body govuk-!-margin-bottom-2"><strong>Business unit</strong>: {{ data['businessUnit'] or "Bedfordshire" }}</p>
-      <p class="govuk-body govuk-!-margin-bottom-2"><strong>Defendant type</strong>: {{ data['defendantType'] or 'Individual only'}}</p>
-
-    </div>  
-  </div>  
-
-  <div class="govuk-grid-row">
-
-    <div class="govuk-grid-column-two-thirds govuk-!-margin-top-4">
+      <div class="govuk-inset-text">
+        Defendant type is {{ data['defendantType'] or 'Individual only'}}.
+      </div>
 
       {% set notStarted = {
         tag: {
@@ -102,14 +75,14 @@
       } %}
       {% endif %}
 
-      <h2 class="govuk-heading-m">Transfer details</h2>
+      <h2 class="govuk-heading-m">Case, area and court code details</h2>
 
       {{ govukTaskList({
         idPrefix: "first-section",
         items: [
           {
             title: {
-              text: "Transfer details"
+              text: "Case, area and court code details"
             },
             href: './transfer-details/check-answers' if data['transfer-details-end'] == 'true' else './transfer-details/transfer-details',
             status: TDtaskComplete
@@ -165,7 +138,7 @@
         items: [
           {
             title: {
-              text: "Offences"
+              text: "Offence details "
             },
             href: "#",
             status: {
@@ -200,8 +173,6 @@
 
       <p class="govuk-body"><a href="#" class="govuk-link app-destructive-link">Delete account</a></p>
 
-    </div>
-
-    
+    </div> 
   </div>
 {% endblock %}

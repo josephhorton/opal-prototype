@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = "Transfer details" %}
+{% set pageName = "Case, area and court code details" %}
 
 {% block beforeContent %}
 
@@ -12,7 +12,7 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <span class="govuk-caption-l">Transfer details</span>
+      <span class="govuk-caption-l">{{pageName}}</span>
       <h1 class="govuk-heading-l ">{{pageName}}</h1>
 
       <form method="post" novalidate action="check-answers">
@@ -91,7 +91,7 @@
             { text: "South and West Devon Magistrates' Court (1302)" },
             { text: "North Central Wales Magistrates' Court	(3070)" },
             { text: "North London Magistrates' Court (2572)" },
-            { text: "Avon and Somerset Magistrates' Court	(1450)" },
+            { text: "Avon and Somerset Magistrates' Court (1450)" },
             { text: "Montgomeryshire Magistrates' Court	(3355)" },
             { text: "South Essex Magistrates' Court (1971)" },
             { text: "South London Magistrates' Court (2576)" },
@@ -144,7 +144,7 @@
       
 
         {{ govukButton({
-          text: "Continue"
+          text: "Save and continue"
         }) }}
 
       </form>
