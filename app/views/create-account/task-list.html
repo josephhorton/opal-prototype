@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = "Create fines account" %}
+{% set pageName = "Create account" %}
 
 {% block pageTitle %}
 {{ pageName }} – {{ serviceName }} – GOV.UK Prototype Kit
@@ -19,11 +19,11 @@
 
 
       <span class="govuk-caption-l">{{ data['businessUnit'] or "Bedfordshire" }}</span>
-      <h1 class="govuk-heading-l govuk-!-margin-bottom-6">{{ pageName }}</h1>
+      <h1 class="govuk-heading-l govuk-!-margin-bottom-8">{{ pageName }}</h1>
 
-      <div class="govuk-inset-text">
+      <!-- <div class="govuk-inset-text">
         Defendant type is {{ data['defendantType'] or 'Individual only'}}.
-      </div>
+      </div> -->
 
       {% set notStarted = {
         tag: {
@@ -75,14 +75,14 @@
       } %}
       {% endif %}
 
-      <h2 class="govuk-heading-m">Case, area and court code details</h2>
+      <h2 class="govuk-heading-m ">Sending court details</h2>
 
       {{ govukTaskList({
         idPrefix: "first-section",
         items: [
           {
             title: {
-              text: "Case, area and court code details"
+              text: "Sending court details"
             },
             href: './transfer-details/check-answers' if data['transfer-details-end'] == 'true' else './transfer-details/transfer-details',
             status: TDtaskComplete
@@ -90,7 +90,8 @@
         ]
       }) }}
 
-      <h2 class="govuk-heading-m">Defendant details</h2>
+      <h2 class="govuk-heading-m govuk-!-margin-top-7">Defendant details</h2>
+      <p class="govuk-body">Defendant type is {{ data['defendantType'] or 'Individual only'}}.</p>
 
       <!-- TASK LIST -->
       {{ govukTaskList({
@@ -131,7 +132,7 @@
         ]
       }) }}
 
-      <h2 class="govuk-heading-m govuk-!-margin-top-5">Offences and payment terms</h2>
+      <h2 class="govuk-heading-m govuk-!-margin-top-7">Offences and payment terms</h2>
 
       {{ govukTaskList({
         idPrefix: "third-section",
@@ -163,15 +164,15 @@
         ]
       }) }}
 
-      <h2 class="govuk-heading-m govuk-!-margin-top-5">Review and publish</h2>
+      <h2 class="govuk-heading-m govuk-!-margin-top-7">Review and publish</h2>
 
       <p class="govuk-body">Check that all required fields have been entered before you publish.</p>
 
-      <div class="govuk-!-margin-top-5">
+      <div class="">
         {{ govukButton({ text: "Review account", href: "#" }) }}
       </div>
 
-      <p class="govuk-body"><a href="#" class="govuk-link app-destructive-link">Delete account</a></p>
+      <p class="govuk-body govuk-!-margin-top-2"><a href="#" class="govuk-link app-destructive-link">Delete account</a></p>
 
     </div> 
   </div>

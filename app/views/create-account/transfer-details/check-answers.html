@@ -1,11 +1,11 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = "Check case, area and court code details" %}
+{% set pageName = "Check sending court details" %}
 
 {% block beforeContent %}
 
 {% if data['transfer-details-end'] == 'true'%}
-  <a href="../task-list.html" class="govuk-back-link">Back to fines account</a>
+  <a href="../task-list.html" class="govuk-back-link">Back to account</a>
 {% else %}
   <a href="transfer-details.html" class="govuk-back-link">Back</a>
 {% endif %}
@@ -17,19 +17,19 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
       
-      <span class="govuk-caption-l">Case, area and court code details</span>
-      <h1 class="govuk-heading-l">Check case, area and court code details</h1>
+      <span class="govuk-caption-l">Sending court details</span>
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
 
       {{ govukSummaryList({
         card: {
           title: {
-            text: "Case, area and court code details"
+            text: "Sending court details"
           }
         },
         rows: [
           {
             key: {
-              text: "Originating Local Justice Area"
+              text: "Local Justice Area (LJA)"
             },
             value: {
               html: data['ljaCode'] or "Bedfordshire Magistrates' Court (1080)"
@@ -39,7 +39,7 @@
                 {
                   href: "transfer-details",
                   text: "Change",
-                  visuallyHiddenText: "Originating Local Justice Area"
+                  visuallyHiddenText: "Local Justice Area"
                 }
               ]
             }

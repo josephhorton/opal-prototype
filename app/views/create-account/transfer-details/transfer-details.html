@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = "Case, area and court code details" %}
+{% set pageName = "Sending court details" %}
 
 {% block beforeContent %}
 
@@ -25,10 +25,10 @@
           allowEmpty: false,
           label: {
             classes: "govuk-label--s",
-            text: 'Originating Local Justice Area (LJA)'
+            text: 'Local Justice Area (LJA)'
           },
           hint: {
-            text: 'Search using the code or name of the court that has sent the transfer'
+            text: 'Search using the code or name of the area that sent the transfer '
           },
           items: [
             { text: "South Yorkshire Magistrates' Court (012345)" },
@@ -144,7 +144,7 @@
       
 
         {{ govukButton({
-          text: "Save and continue"
+          text: "Continue"
         }) }}
 
       </form>
