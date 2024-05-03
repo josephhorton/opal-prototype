@@ -25,67 +25,94 @@
         Defendant type is {{ data['defendantType'] or 'Individual only'}}.
       </div> -->
 
-      {% set notStarted = {
-        tag: {
-          text: "Not provided",
-          classes: "govuk-tag--blue"
-        }
-      } %}
-
-      {% set inProgress = {
-        tag: {
-          text: "Incomplete",
-          classes: "govuk-tag--light-blue"
-        }
-      } %}
-
-      {% set completedStatus = {
-        text: "Completed",
-        classes: "govuk-tag--green"
-      } %}
-
       <!-- CONDITIONS FOR STATUS TAGS -->
-      
+      <div>
 
-      <!-- COURT DETAILS -->
-      {% if (data['TDstatus'] == 'Completed') %}
-      {% set TDtaskComplete = {
-          text: "Completed"
-      } %}
-      {% else %}
-      {% set TDtaskComplete = {
-        tag: {
-          text: "Not provided",
-          classes: "govuk-tag--blue"
-        }
-      } %}
-      {% endif %}
+        <!-- GENERAL NOT STARTED -->
+        {% set notStarted = {
+          tag: {
+            text: "Not provided",
+            classes: "govuk-tag--blue"
+          }
+        } %}
 
-      <!-- PERSONAL DETAILS -->
-      {% if (data['PDstatus'] == 'Completed') %}
-      {% set PDtaskComplete = {
-          text: "Completed"
-      } %}
-      {% else %}
-      {% set PDtaskComplete = {
-        tag: {
-          text: "Not provided",
-          classes: "govuk-tag--blue"
-        }
-      } %}
-      {% endif %}
+        <!-- STATUSES FOR COURT DETAILS -->
 
-      <h2 class="govuk-heading-m ">Sending court details</h2>
+        {% if (data['cdCompleted'] == "true") %}
+
+            {% set cdStatusTag = {
+              text: "Completed"
+            } %}
+            
+          {% else %}
+
+          {% if (data['cd-status'] == "started") %}
+
+            {% set cdStatusTag = {
+              tag: {
+                text: "In progress",
+                classes: "govuk-tag--light-blue"
+              }
+            } %}
+
+          {% else %}
+
+            {% set cdStatusTag = {
+              tag: {
+                text: "Not provided",
+                classes: "govuk-tag--blue"
+              }
+            } %}
+
+          {% endif %}
+        
+        {% endif %}
+
+        <!-- PERSONAL DETAILS -->
+
+        {% if (data['pdCompleted'] == "true") %}
+
+            {% set pdStatusTag = {
+              text: "Completed"
+            } %}
+            
+          {% else %}
+
+          {% if (data['pd-status'] == "started") %}
+
+            {% set pdStatusTag = {
+              tag: {
+                text: "In progress",
+                classes: "govuk-tag--light-blue"
+              }
+            } %}
+
+          {% else %}
+
+            {% set pdStatusTag = {
+              tag: {
+                text: "Not provided",
+                classes: "govuk-tag--blue"
+              }
+            } %}
+
+          {% endif %}
+        
+        {% endif %}
+      </div>
+
+      <h2 class="govuk-heading-m ">Court details</h2>
 
       {{ govukTaskList({
         idPrefix: "first-section",
         items: [
           {
             title: {
-              text: "Sending court details"
+              text: "Court details",
+              classes: "govuk-link--no-visited-state"
             },
-            href: './transfer-details/check-answers' if data['transfer-details-end'] == 'true' else './transfer-details/transfer-details',
-            status: TDtaskComplete
+            href: './court-details/check-answers' if data['return'] == 'check-answers' else './court-details/sending-court',
+            status: cdStatusTag
           }
         ]
       }) }}
@@ -96,52 +123,52 @@
       <!-- TASK LIST -->
       {{ govukTaskList({
         idPrefix: "second-section",
-        items: [
-          {
+        items: [{
             title: {
-              text: "Personal details"
+              text: "Personal details",
+              classes: "govuk-link--no-visited-state"
             },
             href: './personal-details/check-answers' if data['personal-details-end'] == 'true' else './personal-details/personal-details',
-            status: PDtaskComplete
+            status: pdStatusTag
           },
-
           {
             title: {
-              text: "Contact preferences"
+              text: "Contact preferences",
+              classes: "govuk-link--no-visited-state"
             },
             href: "#",
             status: notStarted
           },
-
           {
             title: {
-              text: "Employer"
+              text: "Employer details",
+              classes: "govuk-link--no-visited-state"
             },
             href: "#",
             status: notStarted
           },
-
           {
             title: {
-              text: "Vehicle details"
+              text: "Vehicle details",
+              classes: "govuk-link--no-visited-state"
             },
             href: "#",
             status: notStarted
           }
-          
         ]
       }) }}
 
-      <h2 class="govuk-heading-m govuk-!-margin-top-7">Offences and payment terms</h2>
+      <h2 class="govuk-heading-m govuk-!-margin-top-7">Offence and imposition details</h2>
 
       {{ govukTaskList({
         idPrefix: "third-section",
         items: [
           {
             title: {
-              text: "Offence details "
+              text: "Offence details",
+              classes: "govuk-link--no-visited-state"
             },
-            href: "#",
+            href: "./offence-details/add-offence.html",
             status: {
               tag: {
                 text: "Not provided",
@@ -151,7 +178,8 @@
           },
           {
             title: {
-              text: "Payment terms"
+              text: "Payment terms",
+              classes: "govuk-link--no-visited-state"
             },
             href: "#",
             status: {
@@ -163,6 +191,22 @@
           }
         ]
       }) }}
+
+      <!-- <h2 class="govuk-heading-m govuk-!-margin-top-7">Additional information</h2>
+
+      {{ govukTaskList({
+        idPrefix: "fourth-section",
+        items: [
+          {
+            title: {
+              text: "Additional information",
+              classes: "govuk-link--no-visited-state"
+            },
+            href: './summary/check-answers' if data['additional-information-end'] == 'true' else './summary/summary',
+            status: AItaskComplete
+          }
+        ]
+      }) }} -->
 
       <h2 class="govuk-heading-m govuk-!-margin-top-7">Review and publish</h2>
 

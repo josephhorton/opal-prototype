@@ -1,0 +1,73 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Check additional information" %}
+
+{% block beforeContent %}
+
+{% if data['transfer-details-end'] == 'true'%}
+  <a href="../task-list.html" class="govuk-back-link">Back to account</a>
+{% else %}
+  <a href="summary.html" class="govuk-back-link">Back</a>
+{% endif %}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      {{ govukSummaryList({
+        card: {
+          title: {
+            text: "Additional information"
+          }
+        },
+        rows: [
+          {
+            key: {
+              text: "Additional information"
+            },
+            value: {
+              html: data['additionalInformation'] or "Not provided"
+            },
+            actions: {
+              items: [
+                {
+                  href: "summary",
+                  text: "Change",
+                  visuallyHiddenText: "additional information"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+
+      <form method="post" novalidate action="../task-list?additional-information-end=true">
+
+        {{ govukCheckboxes({
+          name: "AIstatus",
+          values: data['AIstatus'],
+          items: [
+            {
+              value: "Completed",
+              text: "I have completed this section"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Finish"
+        }) }}
+
+      </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}

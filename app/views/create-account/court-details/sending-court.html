@@ -12,10 +12,9 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <span class="govuk-caption-l">{{pageName}}</span>
       <h1 class="govuk-heading-l ">{{pageName}}</h1>
 
-      <form method="post" novalidate action="check-answers">
+      <form method="post" novalidate action="/sending-court-question">
 
         {{ xGovukAutocomplete({
           id: "ljaCode",
@@ -140,7 +139,7 @@
           value: data['ljaReferenceCode']
         }) }}
       
-      <p id="charCount" class="govuk-hint govuk-!-margin-bottom-6" style="margin-top: -20px">You have <span id="remainingChars">7</span> characters remaining</p>
+      <p id="charCount" class="govuk-hint govuk-body-s govuk-!-margin-bottom-6" style="margin-top: -20px">You have <span id="remainingChars">7</span> characters remaining</p>
       
 
         {{ govukButton({

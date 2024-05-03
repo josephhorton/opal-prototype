@@ -1,0 +1,89 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Enforcment court" %}
+
+{% block beforeContent %}
+
+<a href="sending-court.html" class="govuk-back-link">Back</a>
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form method="post" novalidate action="check-answers">
+
+        {{ xGovukAutocomplete({
+          id: "enforcementCourt",
+          name: "enforcementCourt",
+          classes: "govuk-!-margin-bottom-8",
+          value: data['enforcementCourt'],
+          allowEmpty: false,
+          label: {
+            classes: "govuk-label--l",
+            text: pageName,
+            isPageHeading: true
+          },
+          hint: {
+            text: "Search using enforcement court code"
+          },
+          items: [
+            { text: "Cambridge Magistrates Court (1)" },
+            { text: "Cambridge Magistrates Court (2)" },
+            { text: "Cambridge Magistrates Court (3)" },
+            { text: "Cambridge Magistrates Court (4)" },
+            { text: "Cambridge Magistrates Court (5)" },
+            { text: "Cambridge Magistrates Court (6)" },
+            { text: "Cambridge Magistrates Court (7)" },
+            { text: "Cambridge Magistrates Court (8)" },
+            { text: "Cambridge Youth Court (9)" },
+            { text: "HMCTS Cambridge Enforcement CT (10)" },
+            { text: "Cambridge Magistrates Court (11)" },
+            { text: "Cambridge Magistrates Court (12)" },
+            { text: "Cambridge Magistrates Court (13)" },
+            { text: "Cambridge Magistrates Court (14)" },
+            { text: "Cambridge Magistrates Court (15)" },
+            { text: "Cambridge Youth Arrears Court (16)" },
+            { text: "Cambridge Youth Court (17)" },
+            { text: "Cambridge Magistrate Court (18)" },
+            { text: "Cambridge Youth Court (19)" },
+            { text: "Cambridge Youth Court (20)" },
+            { text: "Cambridge Magistrate Court (21)" },
+            { text: "Cambridge Magistrate Court (22)" },
+            { text: "Cambridge Magistrate Court (23)" },
+            { text: "Cambridge Magistrate Court (24)" },
+            { text: "Cambridge Magistrate Court (25)" },
+            { text: "Cambridge Magistrate Court (26)" },
+            { text: "Cambridge Magistrate Court (27)" },
+            { text: "Cambridge Magistrate Court (28)" },
+            { text: "Cambridge Youth Court (29)" },
+            { text: "East Cambs. Magistrates Court (31)" },
+            { text: "East Cambs. Magistrates Court (32)" },
+            { text: "East Cambs. Magistrates Court (33)" },
+            { text: "HMCTS Cambridge Enforcement CT (34)" },
+            { text: "East Cambs. Youth Court (35)" },
+            { text: "East Cambs. Magistrates Court (36)" },
+            { text: "East Cambs. Magistrates Court (37)" },
+            { text: "Cambridge Magistrate Court (38)" },
+            { text: "East Cambs. Youth Court (39)" },
+            { text: "Cambridge Magistrate Court (40)" },
+            { text: "Cambridge Magistrate Court (41)" }
+
+          ]
+        }) }}
+
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+
+    </div>
+  </div>
+          
+  
+{% endblock %}

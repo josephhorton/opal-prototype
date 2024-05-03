@@ -1,0 +1,75 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Language preferences" %}
+
+{% block beforeContent %}
+
+<a href="./address.html" class="govuk-back-link">Back</a>
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+      <form method="post" novalidate action="check-answers">
+
+          {{ govukRadios({
+            name: "documentLanguage",
+            value: data['documentLanguage'],
+            classes: "govuk-radios",
+            fieldset: {
+              legend: {
+                text: "Document language",
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            items: [
+              {
+                value: "English",
+                text: "English"
+              },
+              {
+                value: "Welsh and English",
+                text: "Welsh and English",
+                checked: "true"
+              }
+            ]
+          }) }}
+  
+          {{ govukRadios({
+            name: "hearingLanguage",
+            value: data['hearingLanguage'],
+            classes: "govuk-radios",
+            fieldset: {
+              legend: {
+                text: "Court hearing language",
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            items: [
+              {
+                value: "English",
+                text: "English"
+              },
+              {
+                value: "Welsh and English",
+                text: "Welsh and English",
+                checked: "true"
+              }
+            ]
+          }) }}
+        
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}

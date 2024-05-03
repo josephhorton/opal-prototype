@@ -67,7 +67,18 @@ router.post('/personal-details-question', function(request, response) {
     if (changeAnswer == "true"){
         response.redirect("./create-account/personal-details/check-answers")
     } else {
-        response.redirect("./create-account/personal-details/address")
+        response.redirect("./create-account/personal-details/address?pd-status=started")
+    }
+})
+
+router.post('/sending-court-question', function(request, response) {
+
+    var changeAnswer = request.session.data['change-sending-court']
+
+    if (changeAnswer == "true"){
+        response.redirect("./create-account/court-details/check-answers")
+    } else {
+        response.redirect("./create-account/court-details/enforcement-court?cd-status=started")
     }
 })
 

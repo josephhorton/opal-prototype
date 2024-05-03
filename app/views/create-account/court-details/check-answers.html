@@ -1,13 +1,13 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = "Check sending court details" %}
+{% set pageName = "Check court details" %}
 
 {% block beforeContent %}
 
-{% if data['transfer-details-end'] == 'true'%}
-  <a href="../task-list.html" class="govuk-back-link">Back to account</a>
+{% if data['return'] == 'check-answers'%}
+  <a href="../task-list.html" class="govuk-back-link">Back</a>
 {% else %}
-  <a href="transfer-details.html" class="govuk-back-link">Back</a>
+  <a href="enforcement-court.html" class="govuk-back-link">Back</a>
 {% endif %}
 
 {% endblock %}
@@ -17,13 +17,12 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
       
-      <span class="govuk-caption-l">Sending court details</span>
       <h1 class="govuk-heading-l">{{pageName}}</h1>
 
       {{ govukSummaryList({
         card: {
           title: {
-            text: "Sending court details"
+            text: "Court details"
           }
         },
         rows: [
@@ -37,7 +36,7 @@
             actions: {
               items: [
                 {
-                  href: "transfer-details",
+                  href: "sending-court?change-sending-court=true",
                   text: "Change",
                   visuallyHiddenText: "Local Justice Area"
                 }
@@ -54,9 +53,26 @@
             actions: {
               items: [
                 {
-                  href: "transfer-details",
+                  href: "sending-court?change-sending-court=true",
                   text: "Change",
                   visuallyHiddenText: "Case or court reference"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Enforcement court"
+            },
+            value: {
+              html: data['enforcementCourt'] or "Avon & Somerset NCES (12)"
+            },
+            actions: {
+              items: [
+                {
+                  href: "enforcement-court",
+                  text: "Change",
+                  visuallyHiddenText: "enforcement court"
                 }
               ]
             }
@@ -65,14 +81,14 @@
       }) }}
 
 
-      <form method="post" novalidate action="../task-list?transfer-details-end=true">
+      <form method="post" novalidate action="../task-list?return=check-answers">
 
         {{ govukCheckboxes({
-          name: "TDstatus",
-          values: data['TDstatus'],
+          name: "cdCompleted",
+          values: data['cdCompleted'],
           items: [
             {
-              value: "Completed",
+              value: "true",
               text: "I have completed this section"
             }
           ]
