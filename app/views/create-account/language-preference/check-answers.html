@@ -1,0 +1,92 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Check document and hearing language" %}
+
+{% block beforeContent %}
+
+{% if data['language-preference-end'] == 'true'%}
+  <a href="../task-list.html" class="govuk-back-link">Back</a>
+{% else %}
+  <a href="language-preference.html" class="govuk-back-link">Back</a>
+{% endif %}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      
+
+      {{ govukSummaryList({
+        card: {
+          title: {
+            text: "Document and hearing language"
+          }
+        },
+        rows: [
+          {
+            key: {
+              text: "Document language"
+            },
+            value: {
+              html: data['documentLanguage']
+            },
+            actions: {
+              items: [
+                {
+                  href: "language-preference",
+                  text: "Change",
+                  visuallyHiddenText: "document language"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Court hearing language"
+            },
+            value: {
+              html: data['hearingLanguage']
+            },
+            actions: {
+              items: [
+                {
+                  href: "language-preference",
+                  text: "Change",
+                  visuallyHiddenText: "court hearing language"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+
+      <form method="post" novalidate action="../task-list?language-preference-end=true">
+
+        {{ govukCheckboxes({
+          name: "dhCompleted",
+          values: data['dhCompleted'],
+          items: [
+            {
+              value: "true",
+              text: "I have completed this section"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Finish"
+        }) }}
+
+      </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}

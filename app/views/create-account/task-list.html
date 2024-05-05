@@ -99,6 +99,70 @@
           {% endif %}
         
         {% endif %}
+
+        <!-- DOCUMENT AND HEARING LANGUAGE -->
+
+        {% if (data['dhCompleted'] == "true") %}
+
+            {% set dhStatusTag = {
+              text: "Completed"
+            } %}
+            
+          {% else %}
+
+          {% if (data['dh-status'] == "started") %}
+
+            {% set dhStatusTag = {
+              tag: {
+                text: "In progress",
+                classes: "govuk-tag--light-blue"
+              }
+            } %}
+
+          {% else %}
+
+            {% set dhStatusTag = {
+              tag: {
+                text: "Not provided",
+                classes: "govuk-tag--blue"
+              }
+            } %}
+
+          {% endif %}
+        
+        {% endif %}
+
+        <!-- OFFENCE DETAILS -->
+
+        {% if (data['ofdCompleted'] == "true") %}
+
+            {% set ofdStatusTag = {
+              text: "Completed"
+            } %}
+            
+          {% else %}
+
+          {% if (data['ofd-status'] == "started") %}
+
+            {% set ofdStatusTag = {
+              tag: {
+                text: "In progress",
+                classes: "govuk-tag--light-blue"
+              }
+            } %}
+
+          {% else %}
+
+            {% set ofdStatusTag = {
+              tag: {
+                text: "Not provided",
+                classes: "govuk-tag--blue"
+              }
+            } %}
+
+          {% endif %}
+        
+        {% endif %}
       </div>
 
       <h2 class="govuk-heading-m ">Court details</h2>
@@ -123,14 +187,23 @@
       <!-- TASK LIST -->
       {{ govukTaskList({
         idPrefix: "second-section",
-        items: [{
+        items: [
+          {
             title: {
               text: "Personal details",
               classes: "govuk-link--no-visited-state"
             },
             href: './personal-details/check-answers' if data['personal-details-end'] == 'true' else './personal-details/personal-details',
             status: pdStatusTag
-          },
+          } if data['defendantType'] == 'Individual only',
+          {
+            title: {
+              text: "Company details",
+              classes: "govuk-link--no-visited-state"
+            },
+            href: '#',
+            status: notStarted
+          } if data['defendantType'] == 'Company',
           {
             title: {
               text: "Contact preferences",
@@ -139,6 +212,14 @@
             href: "#",
             status: notStarted
           },
+          {
+            title: {
+              text: "Language preference",
+              classes: "govuk-link--no-visited-state"
+            },
+            href: './language-preference/check-answers' if data['language-preference-end'] == 'true' else './language-preference/language-preference',
+            status: dhStatusTag
+          } if data['businessUnit'] == 'North Wales',
           {
             title: {
               text: "Employer details",
@@ -155,7 +236,7 @@
             href: "#",
             status: notStarted
           }
-        ]
+        ] | removeEmpty
       }) }}
 
       <h2 class="govuk-heading-m govuk-!-margin-top-7">Offence and imposition details</h2>
@@ -169,12 +250,7 @@
               classes: "govuk-link--no-visited-state"
             },
             href: "./offence-details/add-offence.html",
-            status: {
-              tag: {
-                text: "Not provided",
-                classes: "govuk-tag--blue"
-              }
-            }
+            status: ofdStatusTag
           },
           {
             title: {
@@ -189,7 +265,7 @@
               }
             }
           }
-        ]
+        ] 
       }) }}
 
       <!-- <h2 class="govuk-heading-m govuk-!-margin-top-7">Additional information</h2>

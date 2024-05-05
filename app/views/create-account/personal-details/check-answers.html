@@ -5,9 +5,9 @@
 {% block beforeContent %}
 
 {% if data['personal-details-end'] == 'true'%}
-  <a href="../task-list.html" class="govuk-back-link">Back to account</a>
+  <a href="../task-list.html" class="govuk-back-link">Back</a>
 {% else %}
-  <a href="language-preference.html" class="govuk-back-link">Back</a>
+  <a href="address.html" class="govuk-back-link">Back</a>
 {% endif %}
 
 {% endblock %}
@@ -119,7 +119,7 @@
               text: "National Insurance number"
             },
             value: {
-              html: data['defendantNationalInsuranceNumber'] or 'Not provided' 
+              html: data['defendantNationalInsuranceNumber'] | upper or 'Not provided' 
             },
             actions: {
               items: [
@@ -144,40 +144,6 @@
                   href: "address",
                   text: "Change",
                   visuallyHiddenText: "address"
-                }
-              ]
-            }
-          },
-          {
-            key: {
-              text: "Document language"
-            },
-            value: {
-              html: data['documentLanguage']
-            },
-            actions: {
-              items: [
-                {
-                  href: "language-preference",
-                  text: "Change",
-                  visuallyHiddenText: "document language"
-                }
-              ]
-            }
-          },
-          {
-            key: {
-              text: "Court hearing language"
-            },
-            value: {
-              html: data['hearingLanguage']
-            },
-            actions: {
-              items: [
-                {
-                  href: "language-preference",
-                  text: "Change",
-                  visuallyHiddenText: "court hearing language"
                 }
               ]
             }

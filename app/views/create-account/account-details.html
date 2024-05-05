@@ -14,7 +14,7 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{pageName}}</h1>
 
-      <form method="post" novalidate action="task-list">
+      <form method="post" novalidate action="task-list?hearingLanguage=welsh-english">
 
         {{ govukRadios({
           name: "businessUnit",
@@ -41,6 +41,10 @@
             {
               value: "Cambridgeshire",
               text: "Cambridgeshire"
+            },
+            {
+              value: "North Wales",
+              text: "North Wales"
             }
           ]
         }) }}
