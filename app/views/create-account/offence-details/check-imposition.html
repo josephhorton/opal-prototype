@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = "Offence 1" %}
+{% set pageName = "Check imposition" %}
 
 {% block beforeContent %}
 
@@ -11,36 +11,17 @@
 {% block content %}
 
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
+    <div class="govuk-grid-column-three-quarters">
       
       <h1 class="govuk-heading-l">{{pageName}}</h1>
 
-      <p class="govuk-body">Riding a bicycle on a footpath ({{data['offenceCode'] | upper}})</p>
-      <p class="govuk-body">Date of sentence: {{data['sentenceDate-day'] + ' ' + data['sentenceDate-month'] | monthName + ' ' + data['sentenceDate-year'] if data['sentenceDate-day'] and data['sentenceDate-month'] and data['sentenceDate-year'] else "12 March 2024"}}</p>
+      <!-- <p class="govuk-body">Riding a bicycle on a footpath ({{data['offenceCode'] | upper}})</p>
+      <p class="govuk-body">Date of sentence: {{data['sentenceDate-day'] + ' ' + data['sentenceDate-month'] | monthName + ' ' + data['sentenceDate-year'] if data['sentenceDate-day'] and data['sentenceDate-month'] and data['sentenceDate-year'] else "12 March 2024"}}</p> -->
 
 
 
-      {{ govukButton({
-        text: "Add another imposition",
-        classes: "govuk-button--secondary",
-        href: "#"
-      }) }}
 
       {{ govukSummaryList({
-        card: {
-          title: {
-            text: 'Imposition 1'
-          },
-          actions: {
-            items: [
-              {
-                href: "#",
-                text: "Delete",
-                visuallyHiddenText: "offence"
-              }
-            ]
-          }
-        },
         rows: [
         {
           key: {
@@ -113,11 +94,37 @@
         ]
       }) }}
 
+
+      
+
       
 
 
-      <form method="post" novalidate action="check-all-offences">
+      <form method="post" novalidate action="check-offences">
 
+
+        {{ govukRadios({
+          name: "addImposition2",
+          fieldset: {
+            legend: {
+              text: "Add another imposition?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          value: data['addImposition2'],
+          items: [
+            {
+              value: "Yes",
+              text: "Yes"
+            },
+            {
+              value: "No",
+              text: "No"
+            }
+          ]
+        }) }}
+
+        
         {{ govukButton({
           text: "Continue"
         }) }}

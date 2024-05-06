@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = "Add result" %}
+{% set pageName = "Add imposition" %}
 
 {% block beforeContent %}
 
@@ -29,7 +29,57 @@
         
 
         <form method="post" novalidate action="add-creditor">
-        {{ xGovukAutocomplete({
+          
+          <!-- RESULT CODE: OPTION A -->
+          {{ govukRadios({
+            name: "resultCode",
+            classes: "govuk-radios--",
+            fieldset: {
+              legend: {
+                text: "Result code",
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            value: data['resultCode'],
+            items: [
+              {
+                value: "Fine only (FO)",
+                text: "Fine only (FO)"
+              },
+              {
+                value: "Costs (FCOST)",
+                text: "Costs (FCOST)"
+              },
+              {
+                value: "Compensation (FCOMP)",
+                text: "Compensation (FCOMP)"
+              },
+              {
+                value: "Vehicle excise back duty (FVEBD)",
+                text: "Vehicle excise back duty (FVEBD)"
+              },
+              {
+                value: "Victim surcharge (FVS)",
+                text: "Victim surcharge (FVS)"
+              },
+              {
+                value: "Criminal Courts Charge (FCC)",
+                text: "Criminal Courts Charge (FCC)"
+              },
+              {
+                value: "Crown Prosecution Costs (FCPC)",
+                text: "Crown Prosecution Costs (FCPC)"
+              },
+              {
+                value: "Forfeited recognizance (FFR)",
+                text: "Forfeited recognizance (FFR)"
+              }
+            ]
+          }) }}
+        
+        
+          <!-- RESULT CODE: OPTION B -->
+          <!-- {{ xGovukAutocomplete({
           id: "resultCode",
           name: "resultCode",
           classes: "govuk-!-margin-bottom-8",
@@ -52,7 +102,7 @@
             { text: "Crown Prosecution Costs (FCPC)" },
             { text: "Forfeited recognizance (FFR)" }
           ]
-        }) }}
+        }) }} -->
 
         {{ govukInput({
           id: "imposition",

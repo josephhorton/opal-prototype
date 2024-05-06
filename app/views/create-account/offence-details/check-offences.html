@@ -7,7 +7,7 @@
 {% if data['offences-check-answers'] == 'true'%}
   <a href="../task-list.html" class="govuk-back-link">Back</a>
 {% else %}
-  <a href="add-imposition.html" class="govuk-back-link">Back</a>
+  <a href="check-imposition.html" class="govuk-back-link">Back</a>
 {% endif %}
 
 {% endblock %}
@@ -28,10 +28,15 @@
       {{ govukSummaryList({
         card: {
           title: {
-            text: "Offence 1"
+            text: "Offence 1" 
           },
           actions: {
             items: [
+              {
+                href: "#",
+                text: "Add imposition",
+                visuallyHiddenText: "offence"
+              },
               {
                 href: "#",
                 text: "Delete",
@@ -77,7 +82,7 @@
         },
         {
             key: {
-              text: "Impositions (1)"
+              text: "Imposition 1"
             },
             value: {
               html: data['resultCode']
@@ -85,12 +90,12 @@
             actions: {
               items: [
                 {
-                  href: "check-all-impositions",
-                  text: "Add",
+                  href: "#",
+                  text: "Delete",
                   visuallyHiddenText: "imposition"
                 },
                 {
-                  href: "check-all-impositions",
+                  href: "check-imposition",
                   text: "Change",
                   visuallyHiddenText: "imposition"
                 }
