@@ -33,7 +33,7 @@
               text: "Document language"
             },
             value: {
-              html: data['documentLanguage']
+              html: 'Welsh and English' if (data['documentLanguage'] == "welsh-english") else "English"
             },
             actions: {
               items: [
@@ -50,7 +50,7 @@
               text: "Court hearing language"
             },
             value: {
-              html: data['hearingLanguage']
+              html: 'Welsh and English' if (data['hearingLanguage'] == "welsh-english") else "English"
             },
             actions: {
               items: [

@@ -48,7 +48,7 @@
               text: "Case or court reference"
             },
             value: {
-              html: data['ljaReferenceCode'] or "Not provided"
+              html: data['ljaReferenceCode'] | upper or "Not provided"
             }, 
             actions: {
               items: [

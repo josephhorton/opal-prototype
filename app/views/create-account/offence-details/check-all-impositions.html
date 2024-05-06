@@ -1,0 +1,131 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Offence 1" %}
+
+{% block beforeContent %}
+
+<a href="add-creditor.html" class="govuk-back-link">Back</a>
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      <p class="govuk-body">Riding a bicycle on a footpath ({{data['offenceCode'] | upper}})</p>
+      <p class="govuk-body">Date of sentence: {{data['sentenceDate-day'] + ' ' + data['sentenceDate-month'] | monthName + ' ' + data['sentenceDate-year'] if data['sentenceDate-day'] and data['sentenceDate-month'] and data['sentenceDate-year'] else "12 March 2024"}}</p>
+
+
+
+      {{ govukButton({
+        text: "Add another imposition",
+        classes: "govuk-button--secondary",
+        href: "#"
+      }) }}
+
+      {{ govukSummaryList({
+        card: {
+          title: {
+            text: 'Imposition 1'
+          },
+          actions: {
+            items: [
+              {
+                href: "#",
+                text: "Delete",
+                visuallyHiddenText: "offence"
+              }
+            ]
+          }
+        },
+        rows: [
+        {
+          key: {
+            text: "Result code"
+          },
+          value: {
+            html: data['resultCode']
+          },
+          actions: {
+            items: [
+              {
+                href: "add-imposition",
+                text: "Change",
+                visuallyHiddenText: "result code"
+              }
+            ]
+          }
+        },
+        {
+          key: {
+            text: "Imposition"
+          },
+          value: {
+            html: '£' + data['imposition'] if data['imposition'] else '£250.00'
+          },
+          actions: {
+            items: [
+              {
+                href: "add-imposition",
+                text: "Change",
+                visuallyHiddenText: "imposition"
+              }
+            ]
+          }
+        },
+        {
+          key: {
+            text: "Paid so far"
+          },
+          value: {
+            html: '£' + data['paidSoFar'] if data['paidSoFar'] else '£0.00'
+          },
+          actions: {
+            items: [
+              {
+                href: "add-imposition",
+                text: "Change",
+                visuallyHiddenText: "paid so far"
+              }
+            ]
+          }
+        },
+        {
+          key: {
+            text: "Creditor"
+          },
+          value: {
+            html: data['majorCreditorName'] + ' (Major creditor)' if (data['creditor'] == "Major creditor") else data['creditor']
+          },
+          actions: {
+            items: [
+              {
+                href: "add-creditor",
+                text: "Change",
+                visuallyHiddenText: "creditor"
+              }
+            ]
+          }
+        }
+        ]
+      }) }}
+
+      
+
+
+      <form method="post" novalidate action="check-all-offences">
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}
