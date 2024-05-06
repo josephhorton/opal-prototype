@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = "Check offences" %}
+{% set pageName = "Check offence details" %}
 
 {% block beforeContent %}
 
@@ -19,12 +19,6 @@
       
       <h1 class="govuk-heading-l">{{pageName}}</h1>
 
-      {{ govukButton({
-        text: "Add another offence",
-        classes: "govuk-button--secondary",
-        href: "#"
-      }) }}
-
       {{ govukSummaryList({
         card: {
           title: {
@@ -33,13 +27,13 @@
           actions: {
             items: [
               {
-                href: "#",
-                text: "Add imposition",
+                href: "check-imposition",
+                text: "Change",
                 visuallyHiddenText: "offence"
               },
               {
                 href: "#",
-                text: "Delete",
+                text: "Remove",
                 visuallyHiddenText: "offence"
               }
             ]
@@ -52,15 +46,6 @@
           },
           value: {
             html: 'Riding a bicycle on a footpath ' + '(' + data['offenceCode'] | upper + ')' or '(' + 'HY35014' + ')'
-          },
-          actions: {
-            items: [
-              {
-                href: "add-offence",
-                text: "Change",
-                visuallyHiddenText: "offence"
-              }
-            ]
           }
         },
         {
@@ -69,43 +54,24 @@
           },
           value: {
             html: data['sentenceDate-day'] + ' ' + data['sentenceDate-month'] | monthName + ' ' + data['sentenceDate-year'] if data['sentenceDate-day'] and data['sentenceDate-month'] and data['sentenceDate-year'] else "12 March 2024"
-          },
-          actions: {
-            items: [
-              {
-                href: "add-offence",
-                text: "Change",
-                visuallyHiddenText: "date of sentence"
-              }
-            ]
           }
         },
         {
-            key: {
-              text: "Imposition 1"
-            },
-            value: {
-              html: data['resultCode']
-            },
-            actions: {
-              items: [
-                {
-                  href: "#",
-                  text: "Delete",
-                  visuallyHiddenText: "imposition"
-                },
-                {
-                  href: "check-imposition",
-                  text: "Change",
-                  visuallyHiddenText: "imposition"
-                }
-              ]
-            }
+          key: {
+            text: "Impositions"
+          },
+          value: {
+            html: data['resultCode']
+          }
           }
         ]
       }) }}
 
-      
+      {{ govukButton({
+        text: "Add another offence",
+        classes: "govuk-button--secondary",
+        href: "#"
+      }) }}
 
 
       <form method="post" novalidate action="../task-list?offences-check-answers=true">
