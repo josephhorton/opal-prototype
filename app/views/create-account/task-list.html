@@ -195,7 +195,7 @@
             },
             href: './personal-details/check-answers' if data['personal-details-end'] == 'true' else './personal-details/personal-details',
             status: pdStatusTag
-          } if data['defendantType'] == 'Individual only',
+          } if data['defendantType'] == 'Individual only' or data['defendantType'] == 'Individual with parent to pay',
           {
             title: {
               text: "Company details",
