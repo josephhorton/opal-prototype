@@ -10,11 +10,18 @@
 
 {% block content %}
 
+
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-three-quarters">
+    <div class="govuk-grid-column-two-thirds">
+      <span class="govuk-caption-l" >{{data['offenceCode'] | upper or 'HY35014'}}</span>
+      <h1 class="govuk-heading-l ">{{pageName}}</h1>
+    </div>
+  </div>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       
       <!-- <span class="govuk-caption-l">{{data['offenceCode'] | upper}}</span> -->
-      <h1 class="govuk-heading-l">{{pageName}}</h1>
+      
 
       <!-- <span class="govuk-caption-l">Offence</span> -->
       <!-- <p class="govuk-body">Impostion for "Riding a bicycle on a footpath ({{data['offenceCode'] | upper}})"</p> -->
@@ -44,7 +51,7 @@
             text: "Imposition"
           },
           value: {
-            html: '£' + data['imposition'] if data['imposition'] else '£250.00'
+            html: data['imposition'] | currency if data['imposition'] else '£250.00'
           },
           actions: {
             items: [
@@ -61,7 +68,7 @@
             text: "Paid so far"
           },
           value: {
-            html: '£' + data['paidSoFar'] if data['paidSoFar'] else '£0.00'
+            html: data['paidSoFar'] | currency if data['paidSoFar'] else '£0.00'
           },
           actions: {
             items: [

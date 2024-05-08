@@ -13,8 +13,8 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <!-- <span class="govuk-caption-l">Offence 1 ({{data['offenceCode']}})</span> -->
-      <form method="post" novalidate action="check-imposition">
+      <span class="govuk-caption-l" >{{data['offenceCode'] | upper or 'HY35014'}}</span>
+      <form method="post" novalidate action="confirm-offence">
 
           {% set creditorMajor %}
             {{ govukInput({

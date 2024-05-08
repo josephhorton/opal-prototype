@@ -15,18 +15,49 @@
 
       <h1 class="govuk-heading-l">{{pageName}}</h1>
 
-      <p class="govuk-body govuk-!-margin-bottom-2">Offence code: <strong>{{data['offenceCode'] | upper or 'HY35014'}}</strong></p>
-      <p class="govuk-body"><a class="govuk-link--no-visited-state" href="./add-offence.html">Change</a></p>
+
+
+      <!-- <p class="govuk-body govuk-!-margin-bottom-2">Date of sentence: 12 March 2024</p> -->
+      <!-- <p class="govuk-body govuk-!-margin-bottom-2">Offence code: {{data['offenceCode'] | upper or 'HY35014'}}</p> -->
+      <!-- <p class="govuk-body"><a class="govuk-link--no-visited-state" href="./add-offence.html">Change</a></p> -->
       
+      <!-- <div class="govuk-inset-text">
+        <p class="govuk-body govuk-!-fon govuk-!-margin-bottom-1">
+          Offence title
+        </p>
+        <p class="govuk-body-l">
+        Riding a bicycle on a footpath  
+        </p>
+      </div> -->
+
+      <p class="govuk-hint govuk-!-margin-bottom-1">
+        Offence code: {{data['offenceCode'] | upper or 'HY35014'}}
+      </p>
+      <p class="govuk-body govuk-!-margin-bottom-6">
+        Riding a bicycle on a footpath
+      </p>
+
+      
+
 
 
       <form method="post" novalidate action="add-imposition">
 
-        {{ govukButton({
-          text: "Continue"
-        }) }}
+        <div class="govuk-button-group">
+          {{ govukButton({
+            text: "Continue"
+          }) }}
+        
+          <!-- <a class="govuk-link govuk-link--no-visited-state" href="./add-offence.html">Change offence code</a> -->
+        </div>
 
       </form>
+
+      <p class="govuk-body govuk-!-margin-bottom-6">
+        <a class="govuk-link--no-visited-state" href="./add-offence.html">
+          Change offence code
+        </a>
+      </p>
 
     </div>
   </div>

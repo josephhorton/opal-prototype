@@ -15,9 +15,9 @@
 
       <h1 class="govuk-heading-l">{{pageName}}</h1>
 
-      <p class="govuk-body">If you don’t know the offence code, you can search the offence list.</p>
+      <p class="govuk-body">If you don’t know the offence code, you can <a href="#" class="govuk-link--no-visited-state">search the offence list</a>.</p>
 
-      <form method="post" novalidate action="add-imposition?ofd-status=started">
+      <form method="post" novalidate action="confirm-offence?ofd-status=started">
 
         {{ govukDateInput({
           id: "sentenceDate",
@@ -76,6 +76,13 @@
           </p>
         </div> -->
         
+        <!-- <div class="govuk-button-group">
+          {{ govukButton({
+            text: "Continue"
+          }) }}
+        
+          <a class="govuk-link" href="./add-offence.html">Change offence code</a>
+        </div> -->
        
         {{ govukButton({
           text: "Continue"
@@ -94,29 +101,29 @@
 
   <script>
 
-    document.addEventListener('DOMContentLoaded', function() {
-        const offenceInput = document.getElementById('offenceCode');
-        const offenceTitle = document.getElementById('offenceTitle');
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     const offenceInput = document.getElementById('offenceCode');
+    //     const offenceTitle = document.getElementById('offenceTitle');
 
-        // Load saved input and update UI accordingly
-        offenceInput.value = localStorage.getItem('offenceCode') || '';
-        updateUI(offenceInput.value);
+    //     // Load saved input and update UI accordingly
+    //     offenceInput.value = localStorage.getItem('offenceCode') || '';
+    //     updateUI(offenceInput.value);
 
-        offenceInput.addEventListener('input', function() {
-            // Save input to local storage
-            localStorage.setItem('offenceCode', offenceInput.value);
-            updateUI(offenceInput.value);
-        });
+    //     offenceInput.addEventListener('input', function() {
+    //         // Save input to local storage
+    //         localStorage.setItem('offenceCode', offenceInput.value);
+    //         updateUI(offenceInput.value);
+    //     });
 
-        function updateUI(code) {
-            if (code.length === 7) {
-                offenceTitle.style.display = 'block';
-                offenceTitle.innerHTML = `<p class="govuk-body govuk-!-margin-bottom-1">Offence title</p><p class="govuk-body-l">Riding a bicycle on a footpath </p>`;
-            } else {
-                offenceTitle.style.display = 'none';
-            }
-        }
-    });
+    //     function updateUI(code) {
+    //         if (code.length === 7) {
+    //             offenceTitle.style.display = 'block';
+    //             offenceTitle.innerHTML = `<p class="govuk-body govuk-!-margin-bottom-1">Offence title</p><p class="govuk-body-l">Riding a bicycle on a footpath </p>`;
+    //         } else {
+    //             offenceTitle.style.display = 'none';
+    //         }
+    //     }
+    // });
 
     // (${code})
 
