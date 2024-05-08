@@ -1,0 +1,81 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Add creditor" %}
+
+{% block beforeContent %}
+
+<a href="add-imposition.html" class="govuk-back-link">Back</a>
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <!-- <span class="govuk-caption-l">Offence 1 ({{data['offenceCode']}})</span> -->
+      <form method="post" novalidate action="check-imposition">
+
+          {% set creditorMajor %}
+            {{ govukInput({
+              id: "majorCreditorName",
+              name: "majorCreditorName",
+              value: data['majorCreditorName'],
+              type: "text",
+              label: {
+                text: "Name or code of creditor",
+                classes: "govuk-label--s"
+              }
+            }) }}
+          {% endset -%}
+        
+          {{ govukRadios({
+            name: "creditor",
+            fieldset: {
+              legend: {
+                text: pageName,
+                isPageHeading: true,
+                classes: "govuk-fieldset__legend--l"
+              }
+            },
+            value: data['creditor'],
+            items: [
+              {
+                value: "Major creditor",
+                text: "Major creditor",
+                conditional: {
+                  html: creditorMajor
+                }
+              },
+              {
+                value: "Minor creditor",
+                text: "Minor creditor"
+              }
+            ]
+          }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+        
+        <!-- <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+        <p class="govuk-body">This is where you will be able to add impositions and creditor details.</p>
+        <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="../task-list.html">Go back to create account</a</p> -->
+
+
+
+    </div>
+
+    <!-- <div class="govuk-grid-column-one-third">
+      <div class="govuk-!-margin-bottom-6" style="border-top: 2px solid #B1B4B6; padding-top: 15px">
+        <h2 class="govuk-heading-s govuk-!-margin-bottom-3">Offence 1</h2>       
+        <p class="govuk-body-s govuk-!-margin-bottom-2">Riding a bicycle on a footpath ({{ data['offenceCode'] | upper or HY35014 }})</p>
+        <p class="govuk-body-s govuk-!-margin-bottom-2">Sentence: {{data['sentenceDate-day'] + ' ' + data['sentenceDate-month'] | monthName + ' ' + data['sentenceDate-year'] if data['sentenceDate-day'] and data['sentenceDate-month'] and data['sentenceDate-year'] else "12 January 2024"}}</p>
+        <p class="govuk-body-s govuk-!-margin-bottom-1"><a class="govuk-link--no-visited-state" href="./add-offence.html">Change</a></p>
+      </div>
+    </div> -->
+  </div>
+        
+{% endblock %}

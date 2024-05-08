@@ -1,0 +1,34 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Confirm offence" %}
+
+{% block beforeContent %}
+
+<a href="add-offence.html" class="govuk-back-link">Back</a>
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      <p class="govuk-body govuk-!-margin-bottom-2">Offence code: <strong>{{data['offenceCode'] | upper or 'HY35014'}}</strong></p>
+      <p class="govuk-body"><a class="govuk-link--no-visited-state" href="./add-offence.html">Change</a></p>
+      
+
+
+      <form method="post" novalidate action="add-imposition">
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+        
+{% endblock %}

@@ -1,0 +1,134 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Check offence" %}
+
+{% block beforeContent %}
+
+<!-- {% if data['offences-check-answers'] == 'true'%}
+  <a href="../task-list.html" class="govuk-back-link">Back</a>
+{% else %}
+  <a href="check-imposition.html" class="govuk-back-link">Back</a>
+{% endif %} -->
+
+<a href="check-imposition.html" class="govuk-back-link">Back</a>
+
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      {{ govukSummaryList({
+        card: {
+          title: {
+            text: "Offence 1" 
+          },
+          actions: {
+            items: [
+              {
+                href: "check-imposition",
+                text: "Add another imposition" 
+              },
+              {
+                href: "#",
+                text: "Remove",
+                visuallyHiddenText: "offence"
+              }
+            ]
+          }
+        },
+        rows: [
+        {
+          key: {
+            text: "Offence"
+          },
+          value: {
+            html: 'Riding a bicycle on a footpath ' + '(' + data['offenceCode'] | upper + ')' or '(' + 'HY35014' + ')'
+          },
+          actions: {
+            items: [
+              {
+                href: "add-offence",
+                text: "Change",
+                visuallyHiddenText: "offence"
+              }
+            ]
+          }
+        },
+        {
+          key: {
+            text: "Date of sentence"
+          },
+          value: {
+            html: data['sentenceDate-day'] + ' ' + data['sentenceDate-month'] | monthName + ' ' + data['sentenceDate-year'] if data['sentenceDate-day'] and data['sentenceDate-month'] and data['sentenceDate-year'] else "12 March 2024"
+          },
+          actions: {
+            items: [
+              {
+                href: "add-offence",
+                text: "Change",
+                visuallyHiddenText: "offence"
+              }
+            ]
+          }
+        },
+        {
+          key: {
+            text: "Imposition 1"
+          },
+          value: {
+            html: data['resultCode']
+          },
+          actions: {
+            items: [
+              {
+                href: "remove-imposition",
+                text: "Remove",
+                visuallyHiddenText: "imposition"
+              },
+              {
+                href: "check-imposition",
+                text: "Change",
+                visuallyHiddenText: "imposition"
+              }
+            ]
+          }
+          }
+        ]
+      }) }}
+
+      {{ govukButton({
+        text: "Add another offence",
+        classes: "govuk-button--secondary",
+        href: "#"
+      }) }}
+
+
+      <form method="post" novalidate action="../task-list?offences-check-answers=true">
+
+        {{ govukCheckboxes({
+          name: "ofdCompleted",
+          values: data['ofdCompleted'],
+          items: [
+            {
+              value: "true",
+              text: "I have completed this section"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Finish"
+        }) }}
+
+      </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}
