@@ -15,32 +15,9 @@
 
       <h1 class="govuk-heading-l">{{pageName}}</h1>
 
-      <form method="post" novalidate action="add-imposition?ofd-status=started">
+      <p class="govuk-body">If you don’t know the offence code, you can <a href="#" class="govuk-link--no-visited-state">search the offence list</a>.</p>
 
-
-        {{ govukInput({
-          label: {
-            text: "Offence code",
-            classes: "govuk-label--s"
-          },
-          hint: {
-            text: "For example, HY35014"
-          },
-          classes: "govuk-input--width-10 govuk-input--extra-letter-spacing",
-          id: "offenceCode",
-          name: "offenceCode",
-          spellcheck: false,
-          value: data['offenceCode']
-        }) }}
-
-        <!-- <div class="govuk-inset-text">
-          <p class="govuk-body govuk-!-fon govuk-!-margin-bottom-1">
-            Offence title
-          </p>
-          <p class="govuk-body">
-          Riding a bicycle on a footpath  
-          </p>
-        </div> -->
+      <form method="post" novalidate action="confirm-offence?ofd-status=started">
 
         {{ govukDateInput({
           id: "sentenceDate",
@@ -69,7 +46,43 @@
           }
         ]
         }) }}
+
+
+        {{ govukInput({
+          label: {
+            text: "Offence code",
+            classes: "govuk-label--s"
+          },
+          hint: {
+            text: "For example, HY35014"
+          },
+          classes: "govuk-input--width-10 govuk-input--extra-letter-spacing",
+          id: "offenceCode",
+          name: "offenceCode",
+          spellcheck: false,
+          value: data['offenceCode']
+        }) }}
+
+        <div class="govuk-inset-text" style="display: none;" id="offenceTitle">
+          <p class="govuk-body"></p>
+        </div>
+
+        <!-- <div class="govuk-inset-text">
+          <p class="govuk-body govuk-!-fon govuk-!-margin-bottom-1">
+            Offence title
+          </p>
+          <p class="govuk-body">
+          Riding a bicycle on a footpath  
+          </p>
+        </div> -->
         
+        <!-- <div class="govuk-button-group">
+          {{ govukButton({
+            text: "Continue"
+          }) }}
+        
+          <a class="govuk-link" href="./add-offence.html">Change offence code</a>
+        </div> -->
        
         {{ govukButton({
           text: "Continue"
@@ -77,13 +90,44 @@
 
       </form>
 
-      {{ govukDetails({
+      <!-- {{ govukDetails({
         summaryText: "I don't know the offence code",
         text: ""
-      }) }}
+      }) }} -->
 
 
     </div>
   </div>
+
+  <script>
+
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     const offenceInput = document.getElementById('offenceCode');
+    //     const offenceTitle = document.getElementById('offenceTitle');
+
+    //     // Load saved input and update UI accordingly
+    //     offenceInput.value = localStorage.getItem('offenceCode') || '';
+    //     updateUI(offenceInput.value);
+
+    //     offenceInput.addEventListener('input', function() {
+    //         // Save input to local storage
+    //         localStorage.setItem('offenceCode', offenceInput.value);
+    //         updateUI(offenceInput.value);
+    //     });
+
+    //     function updateUI(code) {
+    //         if (code.length === 7) {
+    //             offenceTitle.style.display = 'block';
+    //             offenceTitle.innerHTML = `<p class="govuk-body govuk-!-margin-bottom-1">Offence title</p><p class="govuk-body-l">Riding a bicycle on a footpath </p>`;
+    //         } else {
+    //             offenceTitle.style.display = 'none';
+    //         }
+    //     }
+    // });
+
+    // (${code})
+
+
+  </script>
         
 {% endblock %}

@@ -85,7 +85,7 @@
             text: "Creditor"
           },
           value: {
-            html: data['majorCreditorName'] + ' (Major creditor)' if (data['creditor'] == "Major creditor") else data['creditor']
+            html: data['creditor']
           },
           actions: {
             items: [
@@ -96,7 +96,24 @@
               }
             ]
           }
-        }
+        },
+        {
+          key: {
+            text: "Major creditor"
+          },
+          value: {
+            html: data['majorCreditorName'] if (data['creditor'] == "Major creditor") else data['creditor']
+          },
+          actions: {
+            items: [
+              {
+                href: "add-creditor",
+                text: "Change",
+                visuallyHiddenText: "creditor"
+              }
+            ]
+          }
+        } if (data['creditor'] == "Major creditor")
         ]
       }) }}
 

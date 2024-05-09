@@ -4,7 +4,7 @@
 
 {% block beforeContent %}
 
-<a href="add-offence.html" class="govuk-back-link">Back</a>
+<a href="confirm-offence.html" class="govuk-back-link">Back</a>
 
 {% endblock %}
 
@@ -19,7 +19,27 @@
 
       <!-- <span class="govuk-caption-l">Riding a bicycle on a footpath ({{ data['offenceCode'] | upper or HY35014 }})</span> -->
       <!-- <span class="govuk-caption-l">Offence 1 ({{data['offenceCode']}})</span> -->
+      
+      <!-- <p class="govuk-hint govuk-!-margin-bottom-1">{{data['sentenceDate-day'] + ' ' + data['sentenceDate-month'] | monthName + ' ' + data['sentenceDate-year'] if data['sentenceDate-day'] and data['sentenceDate-month'] and data['sentenceDate-year'] else "12 March 2024"}}</p> -->
+      <span class="govuk-caption-l" >{{data['offenceCode'] | upper or 'HY35014'}}</span>
       <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      <!-- <p class="govuk-body">You are adding an imposition to:</p>
+
+      <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-6">
+        <li>
+          Riding a bicycle on a footpath (TH047845)
+        </li>
+        <li>
+          Date of sentence: {{data['sentenceDate-day'] + ' ' + data['sentenceDate-month'] | monthName + ' ' + data['sentenceDate-year'] if data['sentenceDate-day'] and data['sentenceDate-month'] and data['sentenceDate-year'] else "12 March 2024"}}
+        </li>
+      </ul> -->
+
+      <!-- <p class="govuk-body govuk-!-margin-bottom-6" >You are adding an imposition to {{data[offenceCode] | upper or 'HY35014'}} (Riding a bicycle on a footpath)</p> -->
+      <!-- <p class="govuk-body">Date of sentence: {{data['sentenceDate-day'] + ' ' + data['sentenceDate-month'] | monthName + ' ' + data['sentenceDate-year'] if data['sentenceDate-day'] and data['sentenceDate-month'] and data['sentenceDate-year'] else "12 March 2024"}}</p> -->
+     
+
+
     </div>
   </div>
 
@@ -34,7 +54,7 @@
           <!-- RESULT CODE: OPTION A -->
           {{ govukRadios({
             name: "resultCode",
-            classes: "govuk-radios--",
+            classes: "govuk-radios--small",
             fieldset: {
               legend: {
                 text: "Result code",
