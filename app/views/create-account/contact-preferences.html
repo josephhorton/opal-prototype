@@ -1,16 +1,11 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = "Defendant contact details" %}
+{% set pageName = "Contact preferences" %}
 
 {% block beforeContent %}
 
-{% if (data['defendantType'] == "defendant-individual") %}
-<a href="./individual-details.html" class="govuk-back-link">Back</a>
-{% endif %}
+<a href="task-list.html" class="govuk-back-link">Back</a>
 
-{% if (data['defendantType'] == "defendant-company") %}
-<a href="./company-details.html" class="govuk-back-link">Back</a>
-{% endif %}
 
 {% endblock %}
 
@@ -20,13 +15,13 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
-      <form method="post" novalidate action="/contact-details-question">
+      <form method="post" novalidate action="task-list?cpCompleted=true">
 
         <!-- EMAILS -->
         
         {{ govukInput({
           label: {
-            text: "Primary email address (optional)",
+            text: "Primary email address",
             classes: "govuk-label--s"
           },
           id: "email-1",
@@ -39,7 +34,7 @@
 
         {{ govukInput({
           label: {
-            text: "Secondary email address (optional)",
+            text: "Secondary email address",
             classes: "govuk-label--s"
           },
           id: "email-2",
@@ -50,11 +45,14 @@
           spellcheck: false
         }) }}
 
+        {# Size modifiers: xl, l, m #}
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
         <!-- PHONE NUMBERS -->
 
         {{ govukInput({
           label: {
-            text: "Mobile telephone number (optional)",
+            text: "Mobile telephone number",
             classes: "govuk-label--s"
           },
           id: "mobile-number",
@@ -67,7 +65,7 @@
 
         {{ govukInput({
           label: {
-            text: "Business telephone number (optional)",
+            text: "Business telephone number",
             classes: "govuk-label--s"
           },
           id: "business-number",
@@ -80,7 +78,7 @@
 
         {{ govukInput({
           label: {
-            text: "Home telephone number (optional)",
+            text: "Home telephone number",
             classes: "govuk-label--s"
           },
           id: "home-number",

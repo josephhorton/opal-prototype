@@ -1,0 +1,53 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Vehicle details" %}
+
+{% block beforeContent %}
+
+<a href="task-list.html" class="govuk-back-link">Back</a>
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      
+      <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+      <form method="post" novalidate action="task-list?vdCompleted=true">
+
+
+        {{ govukInput({
+          label: {
+            text: "Make of the car",
+            classes: "govuk-label--m"
+          },
+          id: "carMake",
+          name: "carMake",
+          value: data['carMake']
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "Registration number",
+            classes: "govuk-label--m"
+          },
+          classes: "govuk-input--width-10",
+          id: "carRegistration",
+          name: "carRegistration",
+          value: data['carRegistration']
+        }) }}
+
+        
+        {{ govukButton({
+          text: "Return to task list"
+        }) }}
+
+      </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}

@@ -8,7 +8,7 @@
 
 {% block beforeContent %}
 
-<a href="./account-details.html" class="govuk-back-link">Back</a>
+<a href="account-details.html" class="govuk-back-link">Back</a>
 
 
 {% endblock %}
@@ -19,11 +19,17 @@
 
 
       <span class="govuk-caption-l">{{ data['businessUnit'] or "Bedfordshire" }}</span>
-      <h1 class="govuk-heading-l govuk-!-margin-bottom-8">{{ pageName }}</h1>
+      
+      {% if (data['businessUnit'] == "North Wales") %}
+      <h1 class="govuk-heading-l">{{ pageName }}</h1>
+      <p class="govuk-body govuk-!-margin-bottom-6">Document and court hearing language are set to <a href="#" class="govuk-link--no-visited-state">Welsh and English</a>.</p>
+      <p class="govuk-body govuk-!-margin-bottom-6">Document and court hearing language: <strong>Welsh and English</strong>. <a href="#" class="govuk-link--no-visited-state">Change</a>.</p>
 
-      <!-- <div class="govuk-inset-text">
-        Defendant type is {{ data['defendantType'] or 'Individual only'}}.
-      </div> -->
+      
+      
+      {% else %}
+      <h1 class="govuk-heading-l govuk-!-margin-bottom-8">{{ pageName }}</h1>
+      {% endif %}
 
       <!-- CONDITIONS FOR STATUS TAGS -->
       <div>
@@ -46,25 +52,12 @@
             
           {% else %}
 
-          {% if (data['cd-status'] == "started") %}
-
-            {% set cdStatusTag = {
-              tag: {
-                text: "In progress",
-                classes: "govuk-tag--light-blue"
-              }
-            } %}
-
-          {% else %}
-
             {% set cdStatusTag = {
               tag: {
                 text: "Not provided",
                 classes: "govuk-tag--blue"
               }
             } %}
-
-          {% endif %}
         
         {% endif %}
 
@@ -78,59 +71,90 @@
             
           {% else %}
 
-          {% if (data['pd-status'] == "started") %}
-
-            {% set pdStatusTag = {
-              tag: {
-                text: "In progress",
-                classes: "govuk-tag--light-blue"
-              }
-            } %}
-
-          {% else %}
-
             {% set pdStatusTag = {
               tag: {
                 text: "Not provided",
                 classes: "govuk-tag--blue"
               }
             } %}
-
-          {% endif %}
         
         {% endif %}
 
-        <!-- DOCUMENT AND HEARING LANGUAGE -->
+        <!-- COMPANY DETAILS -->
 
-        {% if (data['dhCompleted'] == "true") %}
+        {% if (data['cdCompleted'] == "true") %}
 
-            {% set dhStatusTag = {
+            {% set cdStatusTag = {
               text: "Completed"
             } %}
             
           {% else %}
 
-          {% if (data['dh-status'] == "started") %}
-
-            {% set dhStatusTag = {
-              tag: {
-                text: "In progress",
-                classes: "govuk-tag--light-blue"
-              }
-            } %}
-
-          {% else %}
-
-            {% set dhStatusTag = {
+            {% set cdStatusTag = {
               tag: {
                 text: "Not provided",
                 classes: "govuk-tag--blue"
               }
             } %}
-
-          {% endif %}
         
         {% endif %}
+
+        <!-- CONTACT PREFERENCES -->
+
+        {% if (data['cpCompleted'] == "true") %}
+
+            {% set cpStatusTag = {
+              text: "Completed"
+            } %}
+            
+          {% else %}
+
+            {% set cpStatusTag = {
+              tag: {
+                text: "Not provided",
+                classes: "govuk-tag--blue"
+              }
+            } %}
+        
+        {% endif %}
+
+         <!-- EMPLOYER DETAILS -->
+
+         {% if (data['edCompleted'] == "true") %}
+
+         {% set edStatusTag = {
+           text: "Completed"
+         } %}
+         
+        {% else %}
+
+          {% set edStatusTag = {
+            tag: {
+              text: "Not provided",
+              classes: "govuk-tag--blue"
+            }
+          } %}
+        
+          {% endif %}
+
+          <!-- VEHICLE DETAILS -->
+
+         {% if (data['vdCompleted'] == "true") %}
+
+         {% set vdStatusTag = {
+           text: "Completed"
+         } %}
+         
+        {% else %}
+
+          {% set vdStatusTag = {
+            tag: {
+              text: "Not provided",
+              classes: "govuk-tag--blue"
+            }
+          } %}
+        
+          {% endif %}
 
         <!-- OFFENCE DETAILS -->
 
@@ -142,25 +166,31 @@
             
           {% else %}
 
-          {% if (data['ofd-status'] == "started") %}
-
-            {% set ofdStatusTag = {
-              tag: {
-                text: "In progress",
-                classes: "govuk-tag--light-blue"
-              }
-            } %}
-
-          {% else %}
-
             {% set ofdStatusTag = {
               tag: {
                 text: "Not provided",
                 classes: "govuk-tag--blue"
               }
             } %}
+        
+        {% endif %}
 
-          {% endif %}
+        <!-- PAYMENT TERMS -->
+
+        {% if (data['ptCompleted'] == "true") %}
+
+            {% set ptStatusTag = {
+              text: "Completed"
+            } %}
+            
+          {% else %}
+
+            {% set ptStatusTag = {
+              tag: {
+                text: "Not provided",
+                classes: "govuk-tag--blue"
+              }
+            } %}
         
         {% endif %}
       </div>
@@ -175,14 +205,14 @@
               text: "Court details",
               classes: "govuk-link--no-visited-state"
             },
-            href: './court-details/check-answers' if data['return'] == 'check-answers' else './court-details/sending-court',
+            href: 'court-details',
             status: cdStatusTag
           }
         ]
       }) }}
 
       <h2 class="govuk-heading-m govuk-!-margin-top-7">Defendant details</h2>
-      <p class="govuk-body">Defendant type is {{ data['defendantType'] or 'Individual only'}}.</p>
+      <p class="govuk-body">Defendant type is {{ data['defendantType'] or 'Adult or youth only'}}.</p>
 
       <!-- TASK LIST -->
       {{ govukTaskList({
@@ -193,48 +223,40 @@
               text: "Personal details",
               classes: "govuk-link--no-visited-state"
             },
-            href: './personal-details/check-answers' if data['personal-details-end'] == 'true' else './personal-details/personal-details',
+            href: 'personal-details',
             status: pdStatusTag
-          } if data['defendantType'] == 'Individual only' or data['defendantType'] == 'Individual with parent to pay',
+          } if data['defendantType'] == 'Adult or youth only' or data['defendantType'] == 'Adult or youth with parent to pay',
           {
             title: {
               text: "Company details",
               classes: "govuk-link--no-visited-state"
             },
-            href: '#',
-            status: notStarted
+            href: 'company-details',
+            status: cdStatusTag
           } if data['defendantType'] == 'Company',
           {
             title: {
               text: "Contact preferences",
               classes: "govuk-link--no-visited-state"
             },
-            href: "#",
-            status: notStarted
+            href: "contact-preferences",
+            status: cpStatusTag
           },
-          {
-            title: {
-              text: "Language preference",
-              classes: "govuk-link--no-visited-state"
-            },
-            href: './language-preference/check-answers' if data['language-preference-end'] == 'true' else './language-preference/language-preference',
-            status: dhStatusTag
-          } if data['businessUnit'] == 'North Wales',
           {
             title: {
               text: "Employer details",
               classes: "govuk-link--no-visited-state"
             },
-            href: "#",
-            status: notStarted
+            href: "employer-details",
+            status: edStatusTag
           },
           {
             title: {
               text: "Vehicle details",
               classes: "govuk-link--no-visited-state"
             },
-            href: "#",
-            status: notStarted
+            href: "vehicle-details",
+            status: vdStatusTag
           }
         ] | removeEmpty
       }) }}
@@ -249,7 +271,7 @@
               text: "Offence details",
               classes: "govuk-link--no-visited-state"
             },
-            href: './offence-details/check-offences' if data['offences-check-answers'] == 'true' else './offence-details/add-offence',
+            href: '#',
             status: ofdStatusTag
           },
           {
@@ -258,12 +280,7 @@
               classes: "govuk-link--no-visited-state"
             },
             href: "#",
-            status: {
-              tag: {
-                text: "Not provided",
-                classes: "govuk-tag--blue"
-              }
-            }
+            status: ptStatusTag
           }
         ] 
       }) }}

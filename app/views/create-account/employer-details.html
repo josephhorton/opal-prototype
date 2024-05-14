@@ -4,7 +4,7 @@
 
 {% block beforeContent %}
 
-<a href="./employer-question.html" class="govuk-back-link">Back</a>
+<a href="task-list.html" class="govuk-back-link">Back</a>
 
 {% endblock %}
 
@@ -44,7 +44,7 @@
 
         {{ govukInput({
           label: {
-            text: "Employer email address (optional)",
+            text: "Employer email address",
             classes: "govuk-label--s"
           },
           id: "employerEmail",
@@ -56,7 +56,7 @@
 
         {{ govukInput({
           label: {
-            text: "Employer telephone number (optional)",
+            text: "Employer telephone number",
             classes: "govuk-label--s"
           },
           id: "employerTelephone",
@@ -75,7 +75,6 @@
             classes: "govuk-fieldset__legend--m"
           }
         }) %}
-
         
           {{ govukInput({
             label: {
@@ -101,7 +100,7 @@
         
           {{ govukInput({
             label: {
-              text: "Address line 3 (optional)",
+              text: "Address line 3",
               classes: "govuk-label--s"
             },
             id: "employer-address-line-3",
@@ -112,7 +111,7 @@
 
           {{ govukInput({
             label: {
-              text: "Address line 4 (optional)",
+              text: "Address line 4",
               classes: "govuk-label--s"
             },
             id: "employer-address-line-4",
@@ -123,7 +122,7 @@
 
           {{ govukInput({
             label: {
-              text: "Address line 5 (optional)",
+              text: "Address line 5",
               classes: "govuk-label--s"
             },
             id: "employer-address-line-5",
@@ -135,7 +134,7 @@
         
           {{ govukInput({
             label: {
-              text: "Postcode (optional)",
+              text: "Postcode",
               classes: "govuk-label--s"
             },
             classes: "govuk-input--width-10",
@@ -148,7 +147,7 @@
         {% endcall %}
         
         {{ govukButton({
-          text: "Continue"
+          text: "Return to task list"
         }) }}
 
       </form>
