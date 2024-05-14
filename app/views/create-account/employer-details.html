@@ -14,7 +14,7 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
-      <form method="post" novalidate action="/employer-details-question">
+      <form method="post" novalidate action="task-list?edCompleted=true">
 
         <!-- DETAILS -->
         
@@ -89,7 +89,7 @@
         
           {{ govukInput({
             label: {
-              text: "Address line 2 (optional)",
+              text: "Address line 2",
               classes: "govuk-label--s"
             },
             id: "employer-address-line-2",

@@ -14,303 +14,367 @@
 {% endblock %}
 
 {% block content %}
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <span class="govuk-caption-l">{{ data['businessUnit'] or "Bedfordshire" }}</span>
+    <h1 class="govuk-heading-l ">{{ pageName }}</h1>
+
+    <p class="govuk-body">Account in Gwent will default to Welsh and English unless changed.</p>
+
+    <details class="govuk-details govuk-!-margin-bottom-8">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+          Change language preference
+        </span>
+      </summary>
+      <div class="govuk-details__text">
+        {{ govukRadios({
+          name: "documentLanguage",
+          classes: "govuk-radios--small",
+          fieldset: {
+            legend: {
+              text: "Documents",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          value: data['documentLanguage'],
+          items: [
+            {
+              value: "English only",
+              text: "English only"
+            },
+            {
+              value: "Welsh and English",
+              text: "Welsh and English"
+            }
+          ]
+        }) }}
+
+        {{ govukRadios({
+          name: "hearingLanguage",
+          classes: "govuk-radios--small",
+          fieldset: {
+            legend: {
+              text: "Court hearings",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          value: data['hearingLanguage'],
+          items: [
+            {
+              value: "English only",
+              text: "English only"
+            },
+            {
+              value: "Welsh and English",
+              text: "Welsh and English"
+            }
+          ]
+        }) }}
+      </div>
+    </details>
+    
 
 
-      <span class="govuk-caption-l">{{ data['businessUnit'] or "Bedfordshire" }}</span>
-      
-      {% if (data['businessUnit'] == "North Wales") %}
-      <h1 class="govuk-heading-l">{{ pageName }}</h1>
-      <p class="govuk-body govuk-!-margin-bottom-6">Document and court hearing language are set to <a href="#" class="govuk-link--no-visited-state">Welsh and English</a>.</p>
-      <p class="govuk-body govuk-!-margin-bottom-6">Document and court hearing language: <strong>Welsh and English</strong>. <a href="#" class="govuk-link--no-visited-state">Change</a>.</p>
+  </div>
+</div>
 
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+
+
+    <!-- CONDITIONS FOR STATUS TAGS -->
+    <div>
+
+      <!-- GENERAL NOT STARTED -->
+      {% set notStarted = {
+        tag: {
+          text: "Not provided",
+          classes: "govuk-tag--blue"
+        }
+      } %}
+
+      <!-- STATUSES FOR COURT DETAILS -->
+
+      {% if (data['cdCompleted'] == "true") %}
+
+          {% set cdStatusTag = {
+            text: "Completed"
+          } %}
+          
+        {% else %}
+
+          {% set cdStatusTag = {
+            tag: {
+              text: "Not provided",
+              classes: "govuk-tag--blue"
+            }
+          } %}
       
-      
-      {% else %}
-      <h1 class="govuk-heading-l govuk-!-margin-bottom-8">{{ pageName }}</h1>
       {% endif %}
 
-      <!-- CONDITIONS FOR STATUS TAGS -->
-      <div>
+      <!-- PERSONAL DETAILS -->
 
-        <!-- GENERAL NOT STARTED -->
-        {% set notStarted = {
+      {% if (data['pdCompleted'] == "true") %}
+
+          {% set pdStatusTag = {
+            text: "Completed"
+          } %}
+          
+        {% else %}
+
+          {% set pdStatusTag = {
+            tag: {
+              text: "Not provided",
+              classes: "govuk-tag--blue"
+            }
+          } %}
+      
+      {% endif %}
+
+      <!-- COMPANY DETAILS -->
+
+      {% if (data['cdCompleted'] == "true") %}
+
+          {% set cdStatusTag = {
+            text: "Completed"
+          } %}
+          
+        {% else %}
+
+          {% set cdStatusTag = {
+            tag: {
+              text: "Not provided",
+              classes: "govuk-tag--blue"
+            }
+          } %}
+      
+      {% endif %}
+
+      <!-- CONTACT PREFERENCES -->
+
+      {% if (data['cpCompleted'] == "true") %}
+
+          {% set cpStatusTag = {
+            text: "Completed"
+          } %}
+          
+        {% else %}
+
+          {% set cpStatusTag = {
+            tag: {
+              text: "Not provided",
+              classes: "govuk-tag--blue"
+            }
+          } %}
+      
+      {% endif %}
+
+        <!-- EMPLOYER DETAILS -->
+
+        {% if (data['edCompleted'] == "true") %}
+
+        {% set edStatusTag = {
+          text: "Completed"
+        } %}
+        
+      {% else %}
+
+        {% set edStatusTag = {
           tag: {
             text: "Not provided",
             classes: "govuk-tag--blue"
           }
         } %}
-
-        <!-- STATUSES FOR COURT DETAILS -->
-
-        {% if (data['cdCompleted'] == "true") %}
-
-            {% set cdStatusTag = {
-              text: "Completed"
-            } %}
-            
-          {% else %}
-
-            {% set cdStatusTag = {
-              tag: {
-                text: "Not provided",
-                classes: "govuk-tag--blue"
-              }
-            } %}
-        
+      
         {% endif %}
 
-        <!-- PERSONAL DETAILS -->
+        <!-- VEHICLE DETAILS -->
 
-        {% if (data['pdCompleted'] == "true") %}
+        {% if (data['lpCompleted'] == "true") %}
 
-            {% set pdStatusTag = {
-              text: "Completed"
-            } %}
-            
-          {% else %}
-
-            {% set pdStatusTag = {
-              tag: {
-                text: "Not provided",
-                classes: "govuk-tag--blue"
-              }
-            } %}
+        {% set lpStatusTag = {
+          text: "Completed"
+        } %}
         
+      {% else %}
+
+        {% set lpStatusTag = {
+          tag: {
+            text: "Not provided",
+            classes: "govuk-tag--blue"
+          }
+        } %}
+      
         {% endif %}
 
-        <!-- COMPANY DETAILS -->
+      <!-- OFFENCE DETAILS -->
 
-        {% if (data['cdCompleted'] == "true") %}
+      {% if (data['ofdCompleted'] == "true") %}
 
-            {% set cdStatusTag = {
-              text: "Completed"
-            } %}
-            
-          {% else %}
-
-            {% set cdStatusTag = {
-              tag: {
-                text: "Not provided",
-                classes: "govuk-tag--blue"
-              }
-            } %}
-        
-        {% endif %}
-
-        <!-- CONTACT PREFERENCES -->
-
-        {% if (data['cpCompleted'] == "true") %}
-
-            {% set cpStatusTag = {
-              text: "Completed"
-            } %}
-            
-          {% else %}
-
-            {% set cpStatusTag = {
-              tag: {
-                text: "Not provided",
-                classes: "govuk-tag--blue"
-              }
-            } %}
-        
-        {% endif %}
-
-         <!-- EMPLOYER DETAILS -->
-
-         {% if (data['edCompleted'] == "true") %}
-
-         {% set edStatusTag = {
-           text: "Completed"
-         } %}
-         
+          {% set ofdStatusTag = {
+            text: "Completed"
+          } %}
+          
         {% else %}
 
-          {% set edStatusTag = {
+          {% set ofdStatusTag = {
             tag: {
               text: "Not provided",
               classes: "govuk-tag--blue"
             }
           } %}
-        
-          {% endif %}
+      
+      {% endif %}
 
-          <!-- VEHICLE DETAILS -->
+      <!-- PAYMENT TERMS -->
 
-         {% if (data['vdCompleted'] == "true") %}
+      {% if (data['ptCompleted'] == "true") %}
 
-         {% set vdStatusTag = {
-           text: "Completed"
-         } %}
-         
+          {% set ptStatusTag = {
+            text: "Completed"
+          } %}
+          
         {% else %}
 
-          {% set vdStatusTag = {
+          {% set ptStatusTag = {
             tag: {
               text: "Not provided",
               classes: "govuk-tag--blue"
             }
           } %}
-        
-          {% endif %}
+      
+      {% endif %}
+    </div>
 
-        <!-- OFFENCE DETAILS -->
+    <h2 class="govuk-heading-m ">Court details</h2>
 
-        {% if (data['ofdCompleted'] == "true") %}
-
-            {% set ofdStatusTag = {
-              text: "Completed"
-            } %}
-            
-          {% else %}
-
-            {% set ofdStatusTag = {
-              tag: {
-                text: "Not provided",
-                classes: "govuk-tag--blue"
-              }
-            } %}
-        
-        {% endif %}
-
-        <!-- PAYMENT TERMS -->
-
-        {% if (data['ptCompleted'] == "true") %}
-
-            {% set ptStatusTag = {
-              text: "Completed"
-            } %}
-            
-          {% else %}
-
-            {% set ptStatusTag = {
-              tag: {
-                text: "Not provided",
-                classes: "govuk-tag--blue"
-              }
-            } %}
-        
-        {% endif %}
-      </div>
-
-      <h2 class="govuk-heading-m ">Court details</h2>
-
-      {{ govukTaskList({
-        idPrefix: "first-section",
-        items: [
-          {
-            title: {
-              text: "Court details",
-              classes: "govuk-link--no-visited-state"
-            },
-            href: 'court-details',
-            status: cdStatusTag
-          }
-        ]
-      }) }}
-
-      <h2 class="govuk-heading-m govuk-!-margin-top-7">Defendant details</h2>
-      <p class="govuk-body">Defendant type is {{ data['defendantType'] or 'Adult or youth only'}}.</p>
-
-      <!-- TASK LIST -->
-      {{ govukTaskList({
-        idPrefix: "second-section",
-        items: [
-          {
-            title: {
-              text: "Personal details",
-              classes: "govuk-link--no-visited-state"
-            },
-            href: 'personal-details',
-            status: pdStatusTag
-          } if data['defendantType'] == 'Adult or youth only' or data['defendantType'] == 'Adult or youth with parent to pay',
-          {
-            title: {
-              text: "Company details",
-              classes: "govuk-link--no-visited-state"
-            },
-            href: 'company-details',
-            status: cdStatusTag
-          } if data['defendantType'] == 'Company',
-          {
-            title: {
-              text: "Contact preferences",
-              classes: "govuk-link--no-visited-state"
-            },
-            href: "contact-preferences",
-            status: cpStatusTag
+    {{ govukTaskList({
+      idPrefix: "first-section",
+      items: [
+        {
+          title: {
+            text: "Court details",
+            classes: "govuk-link--no-visited-state"
           },
-          {
-            title: {
-              text: "Employer details",
-              classes: "govuk-link--no-visited-state"
-            },
-            href: "employer-details",
-            status: edStatusTag
+          href: 'court-details',
+          status: cdStatusTag
+        }
+      ]
+    }) }}
+
+    <h2 class="govuk-heading-m govuk-!-margin-top-7">Defendant details</h2>
+    <p class="govuk-body">Defendant type is {{ data['defendantType'] or 'Adult or youth only'}}.</p>
+
+    <!-- TASK LIST -->
+    {{ govukTaskList({
+      idPrefix: "second-section",
+      items: [
+        {
+          title: {
+            text: "Personal details",
+            classes: "govuk-link--no-visited-state"
           },
-          {
-            title: {
-              text: "Vehicle details",
-              classes: "govuk-link--no-visited-state"
-            },
-            href: "vehicle-details",
-            status: vdStatusTag
-          }
-        ] | removeEmpty
-      }) }}
-
-      <h2 class="govuk-heading-m govuk-!-margin-top-7">Offence and imposition details</h2>
-
-      {{ govukTaskList({
-        idPrefix: "third-section",
-        items: [
-          {
-            title: {
-              text: "Offence details",
-              classes: "govuk-link--no-visited-state"
-            },
-            href: '#',
-            status: ofdStatusTag
+          href: 'personal-details',
+          status: pdStatusTag
+        } if data['defendantType'] == 'Adult or youth only' or data['defendantType'] == 'Adult or youth with parent to pay',
+        {
+          title: {
+            text: "Company details",
+            classes: "govuk-link--no-visited-state"
           },
-          {
-            title: {
-              text: "Payment terms",
-              classes: "govuk-link--no-visited-state"
-            },
-            href: "#",
-            status: ptStatusTag
-          }
-        ] 
-      }) }}
+          href: 'company-details',
+          status: cdStatusTag
+        } if data['defendantType'] == 'Company',
+        {
+          title: {
+            text: "Task item",
+            classes: "govuk-link--no-visited-state"
+          },
+          href: "contact-preferences",
+          status: cpStatusTag
+        },
+        {
+          title: {
+            text: "Employer details",
+            classes: "govuk-link--no-visited-state"
+          },
+          href: "employer-details",
+          status: edStatusTag
+        },
+        {
+          title: {
+            text: "Language preference",
+            classes: "govuk-link--no-visited-state"
+          },
+          href: "language-preference",
+          status: lpStatusTag
+        } if data['businessUnit'] == 'Empty'
+      ] | removeEmpty
+    }) }}
 
-      <!-- <h2 class="govuk-heading-m govuk-!-margin-top-7">Additional information</h2>
+    <h2 class="govuk-heading-m govuk-!-margin-top-7">Offence and imposition details</h2>
 
-      {{ govukTaskList({
-        idPrefix: "fourth-section",
-        items: [
-          {
-            title: {
-              text: "Additional information",
-              classes: "govuk-link--no-visited-state"
-            },
-            href: './summary/check-answers' if data['additional-information-end'] == 'true' else './summary/summary',
-            status: AItaskComplete
-          }
-        ]
-      }) }} -->
+    {{ govukTaskList({
+      idPrefix: "third-section",
+      items: [
+        {
+          title: {
+            text: "Offence details",
+            classes: "govuk-link--no-visited-state"
+          },
+          href: '#',
+          status: ofdStatusTag
+        },
+        {
+          title: {
+            text: "Payment terms",
+            classes: "govuk-link--no-visited-state"
+          },
+          href: "#",
+          status: ptStatusTag
+        }
+      ] 
+    }) }}
 
-      <h2 class="govuk-heading-m govuk-!-margin-top-7">Review and publish</h2>
+    <!-- <h2 class="govuk-heading-m govuk-!-margin-top-7">Additional information</h2>
 
-      <p class="govuk-body">Check that all required fields have been entered before you publish.</p>
+    {{ govukTaskList({
+      idPrefix: "fourth-section",
+      items: [
+        {
+          title: {
+            text: "Additional information",
+            classes: "govuk-link--no-visited-state"
+          },
+          href: './summary/check-answers' if data['additional-information-end'] == 'true' else './summary/summary',
+          status: AItaskComplete
+        }
+      ]
+    }) }} -->
 
-      <div class="">
-        {{ govukButton({ text: "Review account", href: "#" }) }}
-      </div>
+    <h2 class="govuk-heading-m govuk-!-margin-top-7">Review and publish</h2>
 
-      <p class="govuk-body govuk-!-margin-top-2"><a href="#" class="govuk-link app-destructive-link">Delete account</a></p>
+    <p class="govuk-body">Check that all required fields have been entered before you publish.</p>
 
-    </div> 
-  </div>
+    <div class="">
+      {{ govukButton({ text: "Review account", href: "#" }) }}
+    </div>
+
+    <p class="govuk-body govuk-!-margin-top-2"><a href="#" class="govuk-link app-destructive-link">Delete account</a></p>
+
+  </div> 
+  <!-- <div class="govuk-grid-column-one-third">
+    <h2 class="govuk-heading-m">Language preference</h2>
+
+    <p class="govuk-body govuk-!-margin-bottom-2">Documents: <strong>Welsh and English</strong></p>
+    <p class="govuk-body">Court hearing: <strong>Welsh and English</strong></p>
+
+    <p class="govuk-body"><a href="#" class="govuk-link--no-visited-state">Change</a></p>
+
+  </div> -->
+</div>
 {% endblock %}

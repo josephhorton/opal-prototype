@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = "Contact preferences" %}
+{% set pageName = "Heading" %}
 
 {% block beforeContent %}
 
@@ -19,6 +19,8 @@
 
         <!-- EMAILS -->
         
+        <h2 class="govuk-heading-m">Contact details</h2>
+
         {{ govukInput({
           label: {
             text: "Primary email address",
@@ -44,9 +46,6 @@
           autocomplete: "email",
           spellcheck: false
         }) }}
-
-        {# Size modifiers: xl, l, m #}
-        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
         <!-- PHONE NUMBERS -->
 
@@ -87,6 +86,31 @@
           type: "tel",
           autocomplete: "tel",
           classes: "govuk-input--width-20"
+        }) }}
+
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+        <h2 class="govuk-heading-m">Vehicle details</h2>
+
+        {{ govukInput({
+          label: {
+            text: "Make of the car",
+            classes: "govuk-label--s"
+          },
+          id: "carMake",
+          name: "carMake",
+          value: data['carMake']
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "Registration number",
+            classes: "govuk-label--s"
+          },
+          classes: "govuk-input--width-10 govuk-input--extra-letter-spacing",
+          id: "carRegistration",
+          name: "carRegistration",
+          value: data['carRegistration']
         }) }}
 
         <!-- WELSH -->
@@ -196,7 +220,7 @@
         </div> -->
         
         {{ govukButton({
-          text: "Continue"
+          text: "Return to task list"
         }) }}
 
       </form>
