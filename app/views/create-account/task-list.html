@@ -16,7 +16,7 @@
 {% block content %}
 
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
+  <div class="govuk-grid-column-one-half">
 
     <span class="govuk-caption-l">{{ data['businessUnit'] or "Bedfordshire" }}</span>
     <h1 class="govuk-heading-l ">{{ pageName }}</h1>
@@ -81,7 +81,7 @@
 </div>
 
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
+  <div class="govuk-grid-column-one-half">
 
 
 
@@ -191,6 +191,25 @@
       
         {% endif %}
 
+        <!-- PARENT OR GUARDIAN DETAILS -->
+
+        {% if (data['pgdCompleted'] == "true") %}
+
+        {% set pgdStatusTag = {
+          text: "Completed"
+        } %}
+        
+      {% else %}
+
+        {% set pgdStatusTag = {
+          tag: {
+            text: "Not provided",
+            classes: "govuk-tag--blue"
+          }
+        } %}
+      
+        {% endif %}
+
         <!-- VEHICLE DETAILS -->
 
         {% if (data['lpCompleted'] == "true") %}
@@ -265,8 +284,36 @@
       ]
     }) }}
 
+    {% if data['defendantType'] == 'Adult or youth with parent or guardian to pay' %}
+    <h2 class="govuk-heading-m govuk-!-margin-top-7">Parent or guardian details</h2>
+
+     <!-- TASK LIST -->
+     {{ govukTaskList({
+      idPrefix: "second-section",
+      items: [
+        {
+          title: {
+            text: "Parent or guardian details",
+            classes: "govuk-link--no-visited-state"
+          },
+          href: 'parent-guardian-details',
+          status: pgdStatusTag
+        },
+        {
+          title: {
+            text: "Employer details",
+            classes: "govuk-link--no-visited-state"
+          },
+          href: "employer-details",
+          status: edStatusTag
+        }
+      ] | removeEmpty
+    }) }}
+
+    {% endif %}
+
     <h2 class="govuk-heading-m govuk-!-margin-top-7">Defendant details</h2>
-    <p class="govuk-body">Defendant type is {{ data['defendantType'] or 'Adult or youth only'}}.</p>
+    <!-- <p class="govuk-body">Defendant type is {{ data['defendantType'] or 'Adult or youth only'}}.</p> -->
 
     <!-- TASK LIST -->
     {{ govukTaskList({
@@ -279,7 +326,7 @@
           },
           href: 'personal-details',
           status: pdStatusTag
-        } if data['defendantType'] == 'Adult or youth only' or data['defendantType'] == 'Adult or youth with parent to pay',
+        } if data['defendantType'] == 'Adult or youth only' or data['defendantType'] == 'Adult or youth with parent or guardian to pay',
         {
           title: {
             text: "Company details",
@@ -303,7 +350,7 @@
           },
           href: "employer-details",
           status: edStatusTag
-        }
+        } if data['defendantType'] == 'Adult or youth only'
       ] | removeEmpty
     }) }}
 

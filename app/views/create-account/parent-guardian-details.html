@@ -4,11 +4,9 @@
 
 {% block beforeContent %}
 
-{% if (data['employer'] == "employer-yes") %}
-<a href="./employer-details.html" class="govuk-back-link">Back</a>
-{% else %}
-<a href="./employer-question.html" class="govuk-back-link">Back</a>
-{% endif %}
+
+<a href="task-list.html" class="govuk-back-link">Back</a>
+
 
 
 {% endblock %}
@@ -16,14 +14,12 @@
 {% block content %}
 
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-grid-column-one-half">
       <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
-      <form method="post" novalidate action="end">
+      <form method="post" novalidate action="task-list?pgdCompleted=true">
 
-        
-        <h2 class="govuk-heading-m">Personal details</h2>
-
+  
         <!-- NAME -->
         <div>
           {{ govukInput({
@@ -47,7 +43,7 @@
             namePrefix: "parentDoB",
             fieldset: {
               legend: {
-                text: "Date of birth (optional)",
+                text: "Date of birth",
                 classes: "govuk-fieldset__legend--s"
               }
             },
@@ -75,7 +71,7 @@
         <div>
         {{ govukInput({
           label: {
-            text: "National Insurance number (optional)",
+            text: "National Insurance number ",
             classes: "govuk-label--s"
           },
           classes: "govuk-input--width-10 govuk-input--extra-letter-spacing",
@@ -95,58 +91,54 @@
             classes: "govuk-fieldset__legend--m"
           }
         }) %}
-
-        <p class="govuk-body">
-          <a href="#" class="govuk-link govuk-link--no-visited-state">Use defendant's address</a>
-        </p>
         
-          {{ govukInput({
-            label: {
-              text: "Address line 1",
-              classes: "govuk-label--s"
-            },
-            id: "parent-address-line-1",
-            name: "parentAddressLine1",
-            autocomplete: "address-line1",
-            value: data['parentAddressLine1']
-          }) }}
-        
-          {{ govukInput({
-            label: {
-              text: "Address line 2 (optional)",
-              classes: "govuk-label--s"
-            },
-            id: "parent-address-line-2",
-            name: "parentAddressLine2",
-            autocomplete: "address-line2",
-            value: data['parentAddressLine2']
-          }) }}
-        
-          {{ govukInput({
-            label: {
-              text: "Address line 3 (optional)",
-              classes: "govuk-label--s"
-            },
-            id: "parent-address-line-3",
-            name: "parentAddressLine3",
-            autocomplete: "address-level3",
-            value: data['parentAddressLine3']
-          }) }}
+        {{ govukInput({
+          label: {
+            text: "Address line 1",
+            classes: "govuk-label--s"
+          },
+          id: "parent-address-line-1",
+          name: "parentAddressLine1",
+          autocomplete: "address-line1",
+          value: data['parentAddressLine1']
+        }) }}
       
-        
-          {{ govukInput({
-            label: {
-              text: "Postcode (optional)",
-              classes: "govuk-label--s"
-            },
-            classes: "govuk-input--width-10",
-            id: "parent-address-postcode",
-            name: "parentAddressPostcode",
-            autocomplete: "postal-code",
-            value: data['parentAddressPostcode']
-          }) }}
+        {{ govukInput({
+          label: {
+            text: "Address line 2",
+            classes: "govuk-label--s"
+          },
+          id: "parent-address-line-2",
+          name: "parentAddressLine2",
+          autocomplete: "address-line2",
+          value: data['parentAddressLine2']
+        }) }}
+      
+        {{ govukInput({
+          label: {
+            text: "Address line 3",
+            classes: "govuk-label--s"
+          },
+          id: "parent-address-line-3",
+          name: "parentAddressLine3",
+          autocomplete: "address-level3",
+          value: data['parentAddressLine3']
+        }) }}
+    
+      
+        {{ govukInput({
+          label: {
+            text: "Postcode",
+            classes: "govuk-label--s"
+          },
+          classes: "govuk-input--width-10",
+          id: "parent-address-postcode",
+          name: "parentAddressPostcode",
+          autocomplete: "postal-code",
+          value: data['parentAddressPostcode']
+        }) }}
 
-        {% endcall %}
+      {% endcall %}
         
         <!-- WELSH -->
 
@@ -202,7 +194,7 @@
         </div> -->
         
         {{ govukButton({
-          text: "Continue"
+          text: "Save and return to tasks"
         }) }}
 
       </form>
