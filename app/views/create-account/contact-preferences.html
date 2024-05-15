@@ -113,6 +113,56 @@
           value: data['carRegistration']
         }) }}
 
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+        <h2 class="govuk-heading-m">Language preference</h2>
+
+        <!-- <p class="govuk-body">The default language for Gwent accounts is Welsh and English.</p> -->
+
+        {{ govukRadios({
+          name: "documentLanguage",
+          value: data['documentLanguage'],
+          classes: "govuk-radios",
+          fieldset: {
+            legend: {
+              text: "Document language",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "english",
+              text: "English only"
+            },
+            {
+              value: "welsh-english",
+              text: "Welsh and English"
+            }
+          ]
+        }) }}
+
+        {{ govukRadios({
+          name: "hearingLanguage",
+          value: data['hearingLanguage'],
+          classes: "govuk-radios",
+          fieldset: {
+            legend: {
+              text: "Court hearing language",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "english",
+              text: "English only"
+            },
+            {
+              value: "welsh-english",
+              text: "Welsh and English"
+            }
+          ]
+        }) }}
+
         <!-- WELSH -->
 
         <!-- {% if (data['defendantType'] == "defendant-individual") %}

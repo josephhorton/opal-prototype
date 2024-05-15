@@ -14,7 +14,7 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
-      <form method="post" novalidate action="task-list?dh-status=started">
+      <form method="post" novalidate action="task-list?lpCompleted=true">
 
           {{ govukRadios({
             name: "documentLanguage",
@@ -61,7 +61,7 @@
           }) }}
         
         {{ govukButton({
-          text: "Continue"
+          text: "Return to task list"
         }) }}
 
       </form>

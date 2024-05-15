@@ -43,3 +43,20 @@
 .app-font-colour-red {
     color: govuk-colour("red");
 }
+
+.search-container {
+  display: flex;
+  align-items: flex-end; /* Aligns items to the end of the container vertically */
+  gap: 10px; /* Creates space between the input and the button */
+}
+
+.search-input {
+  flex-grow: 1; /* Allows the input to grow and fill available space */
+  margin-right: 10px; /* Ensures there is space between the input and the button */
+}
+
+@media (min-width: 40.0625em) {
+  .govuk-form-group .search-input {
+      width: 100% !important;
+  }
+}

@@ -21,7 +21,7 @@
     <span class="govuk-caption-l">{{ data['businessUnit'] or "Bedfordshire" }}</span>
     <h1 class="govuk-heading-l ">{{ pageName }}</h1>
 
-    <p class="govuk-body">Account in Gwent will default to Welsh and English unless changed.</p>
+    <!-- <p class="govuk-body">Account in Gwent will default to Welsh and English unless changed.</p>
 
     <details class="govuk-details govuk-!-margin-bottom-8">
       <summary class="govuk-details__summary">
@@ -74,9 +74,8 @@
           ]
         }) }}
       </div>
-    </details>
-    
-
+    </details> -->
+  
 
   </div>
 </div>
@@ -304,15 +303,7 @@
           },
           href: "employer-details",
           status: edStatusTag
-        },
-        {
-          title: {
-            text: "Language preference",
-            classes: "govuk-link--no-visited-state"
-          },
-          href: "language-preference",
-          status: lpStatusTag
-        } if data['businessUnit'] == 'Empty'
+        }
       ] | removeEmpty
     }) }}
 
@@ -367,14 +358,61 @@
     <p class="govuk-body govuk-!-margin-top-2"><a href="#" class="govuk-link app-destructive-link">Delete account</a></p>
 
   </div> 
-  <!-- <div class="govuk-grid-column-one-third">
-    <h2 class="govuk-heading-m">Language preference</h2>
+
+  <!-- <div class="govuk-grid-column-one-third" >
+    <div style="padding: 15px 15px 5px 15px; background-color: #F3F2F1;">
+    <h2 class="govuk-heading-s">Language preference</h2>
 
     <p class="govuk-body govuk-!-margin-bottom-2">Documents: <strong>Welsh and English</strong></p>
     <p class="govuk-body">Court hearing: <strong>Welsh and English</strong></p>
 
     <p class="govuk-body"><a href="#" class="govuk-link--no-visited-state">Change</a></p>
 
+    {{ govukRadios({
+      name: "documentLanguage",
+      classes: "govuk-radios--small ",
+      fieldset: {
+        legend: {
+          text: "Documents",
+          classes: "govuk-fieldset__legend--xs"
+        }
+      },
+      value: data['documentLanguage'],
+      items: [
+        {
+          value: "English only",
+          text: "English only"
+        },
+        {
+          value: "Welsh and English",
+          text: "Welsh and English"
+        }
+      ]
+    }) }}
+
+    {{ govukRadios({
+      name: "hearingLanguage",
+      classes: "govuk-radios--small govuk-!-margin-bottom-0",
+      fieldset: {
+        legend: {
+          text: "Court hearings",
+          classes: "govuk-fieldset__legend--xs"
+        }
+      },
+      value: data['hearingLanguage'],
+      items: [
+        {
+          value: "English only",
+          text: "English only"
+        },
+        {
+          value: "Welsh and English",
+          text: "Welsh and English"
+        }
+      ]
+    }) }}
+    </div>
   </div> -->
+
 </div>
 {% endblock %}
