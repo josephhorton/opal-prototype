@@ -17,7 +17,7 @@
 
       <h2 class="govuk-heading-m">Offence</h2>
 
-      <form method="post" novalidate action="#">
+      <form method="post" novalidate action="#" onsubmit="return handleSearch(event)">
         <div class="govuk-form-group" style="width: 100% !important;">
           <label class="govuk-label govuk-label--s search-input" for="sentenceDate">
             Date of sentence
@@ -27,16 +27,15 @@
           </div>
           <input id="searchOffence" name="sentenceDate" type="text" class="govuk-input govuk-input--width-10">
         </div>
-      </form>  
 
-      <form method="post" novalidate action="#" onsubmit="return handleSearch(event)">
+      
         <!-- Offence code input and search -->
-        <div class="govuk-form-group">
+        <div class="govuk-form-group govuk-!-margin-bottom-3">
           <label class="govuk-label govuk-label--s" for="search">
             Offence code
           </label>
           <div id="event-name-hint" class="govuk-hint" data-module="edge">
-            For example, HY35014. If you don’t know the offence code, you can <a class="govuk-link--no-visited-state" href="#">search the offence list</a>.
+            For example, TP11003. If you don’t know the offence code, you can <a class="govuk-link--no-visited-state" href="#">search the offence list</a>.
           </div>
           <div class="gem-c-search__item-wrapper gem-c-search--on-white">
             <input class="govuk-input govuk-input--extra-letter-spacing" id="search" name="searchQuery" type="text">
@@ -47,13 +46,13 @@
         </div>
     
         <!-- Results -->
-        <div  id="results-container" class="govuk-!-display-none" >
+        <div  id="results-container" class="govuk-!-display-none govuk-!-margin-bottom-3 govuk-!-margin-top-5">
           <!-- <div style="padding: 10px 15px; background-color: #f3f2f1; border-color: #B1B4B6; border-width: 1px 1px 0px 1px; border-style: solid;">
             <p class="govuk-body-s govuk-!-margin-bottom-0"><strong>Offence</strong></p>
           </div> -->
-          <div style="padding: 15px; border-left: 3px solid #0c2d4a; background-color: #f3f2f1;">
+          <div style="padding: 15px; border-left: 5px solid #1d70b8; background-color: #f3f2f1;">
             <!-- <p class="govuk-body govuk-!-margin-bottom-3"><strong>Offence</strong></p> -->
-            <p class="govuk-body govuk-!-margin-bottom-1">TP11003</p>
+            <p class="govuk-body govuk-!-margin-bottom-1 govuk-input--extra-letter-spacing">TP11003</p>
             <p class="govuk-body govuk-!-margin-bottom-0">Possess potentially dangerous item on Transport for London road transport premises</p>
           </div>
         </div>
@@ -63,7 +62,6 @@
           <p class="govuk-body govuk-!-margin-bottom-1">HY35014</p>
           <p class="govuk-body govuk-!-margin-bottom-0">Theft from the person of another</p>
         </div> -->
-      </form>
 
 
         
@@ -112,8 +110,6 @@
 
 
 
-
-      </form>
 
 
 
@@ -185,12 +181,26 @@
 
   {{ govukButton({
     text: "Add another imposition",
-    classes: "govuk-button--secondary"
+    classes: "govuk-button--secondary govuk-!-margin-bottom-3"
   }) }}
 
   <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
-      
+  <div class="govuk-button-group govuk-!-margin-top-7">
+    {{ govukButton({
+      text: "Review offence"
+    }) }}
+  
+    {{ govukButton({
+      text: "Add another offence",
+      classes: "govuk-button--secondary"
+    }) }}
+
+    <a class="govuk-link" href="#">Cancel</a>
+  </div>
+
+</form>
+
 
      
 
