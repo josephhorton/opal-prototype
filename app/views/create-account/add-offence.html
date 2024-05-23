@@ -1,0 +1,233 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Add an offence" %}
+
+{% block beforeContent %}
+
+<!-- <a href="task-list.html" class="govuk-back-link">Back</a> -->
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-three-quarters">
+
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      <h2 class="govuk-heading-m">Offence</h2>
+
+      <form method="post" novalidate action="#">
+        <div class="govuk-form-group" style="width: 100% !important;">
+          <label class="govuk-label govuk-label--s search-input" for="sentenceDate">
+            Date of sentence
+          </label>
+          <div id="event-name-hint" class="govuk-hint">
+            Use dd/mm/yyyy format.
+          </div>
+          <input id="searchOffence" name="sentenceDate" type="text" class="govuk-input govuk-input--width-10">
+        </div>
+      </form>  
+
+      <form method="post" novalidate action="#" onsubmit="return handleSearch(event)">
+        <!-- Offence code input and search -->
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-label--s" for="search">
+            Offence code
+          </label>
+          <div id="event-name-hint" class="govuk-hint" data-module="edge">
+            For example, HY35014. If you don’t know the offence code, you can <a class="govuk-link--no-visited-state" href="#">search the offence list</a>.
+          </div>
+          <div class="gem-c-search__item-wrapper gem-c-search--on-white">
+            <input class="govuk-input govuk-input--extra-letter-spacing" id="search" name="searchQuery" type="text">
+            <div class="gem-c-search__item gem-c-search__submit-wrapper">
+              <button type="submit" class="gem-c-search__submit">Search</button>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Results -->
+        <div  id="results-container" class="govuk-!-display-none" >
+          <!-- <div style="padding: 10px 15px; background-color: #f3f2f1; border-color: #B1B4B6; border-width: 1px 1px 0px 1px; border-style: solid;">
+            <p class="govuk-body-s govuk-!-margin-bottom-0"><strong>Offence</strong></p>
+          </div> -->
+          <div style="padding: 15px; border-left: 3px solid #0c2d4a; background-color: #f3f2f1;">
+            <!-- <p class="govuk-body govuk-!-margin-bottom-3"><strong>Offence</strong></p> -->
+            <p class="govuk-body govuk-!-margin-bottom-1">TP11003</p>
+            <p class="govuk-body govuk-!-margin-bottom-0">Possess potentially dangerous item on Transport for London road transport premises</p>
+          </div>
+        </div>
+
+
+        <!-- <div id="results-container" class="govuk-!-display-none" style="padding: 15px; background-color: #f3f2f1;">
+          <p class="govuk-body govuk-!-margin-bottom-1">HY35014</p>
+          <p class="govuk-body govuk-!-margin-bottom-0">Theft from the person of another</p>
+        </div> -->
+      </form>
+
+
+        
+
+
+
+
+        <!-- OPTION 2 -->
+        <!-- <div class="search-container">
+          <div class="govuk-form-group" style="width: 100% !important;">
+              <label class="govuk-label govuk-label--s search-input" for="searchOffence">
+                Offence code
+              </label>
+              <div id="event-name-hint" class="govuk-hint">
+                For example, HY35014
+              </div>
+            <input id="searchOffence" name="searchOffence" type="text" class="govuk-input search-input govuk-input--width-10 govuk-input--extra-letter-spacing">
+          </div>
+
+          
+          
+
+          {{ xGovukAutocomplete ({
+            id: "offenceCode",
+            name: "offenceCode",
+            minLength: "5",
+            allowEmpty: false,
+            showNoOptionsFound: true,
+            label: {
+              classes: "govuk-label--s",
+              text: "Offence code"
+            },
+            hint: {
+              text: "For example, TH68001"
+            },
+            items: [
+              { text: "Theft from the person of another (TH68001)" },
+              { text: "Attempt theft from the person of another (TH68001A)" },
+              { text: "Conspire to steal from the person of another (TH68001C)" }
+            ]
+          }) }}
+
+        </div> -->
+
+
+
+
+
+
+      </form>
+
+
+
+
+    </div>
+  </div>
+
+
+  {# Size modifiers: xl, l, m #}
+  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+  <h2 class="govuk-heading-m">Impositions</h2>
+
+  <div class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-right-0 govuk-!-margin-bottom-6" style="padding: 20px 5px 0px 5px; background-color: #f3f2f1;">
+    <div class="govuk-grid-column-one-half">
+
+        {{ xGovukAutocomplete({
+          id: "resultCode",
+          name: "resultCode",
+          value: data['resultCode'],
+          allowEmpty: false,
+          showAllValues: true,
+          label: {
+            classes: "govuk-label--s",
+            text: "Result code"
+          },  
+          items: [
+            { text: "Compensation (FCOMP)" },
+            { text: "Victim surcharge (FVS)" },
+            { text: "Costs (FCOST)" },
+            { text: "Crown prosecution costs (FCPC)" },
+            { text: "Fine only (FO)" },
+            { text: "Criminal courts charge (FCC)" },
+            { text: "Vehicle excise duty (FVEBD)" },
+            { text: "Forfeited recognizance (FFR)" }
+          ]
+        }) }}
+
+    </div>
+    <div class="govuk-grid-column-one-quarter">
+      {{ govukInput({
+        id: "amountImposed",
+        name: "amountImposed",
+        label: {
+          text: "Amount imposed",
+          classes: "govuk-label--s"
+        },
+        prefix: {
+          text: "£"
+        },
+        value: data["amountImposed"]
+      }) }}
+    </div>
+    <div class="govuk-grid-column-one-quarter">
+      {{ govukInput({
+        id: "amountPaid",
+        name: "amountPaid",
+        label: {
+          text: "Amount paid",
+          classes: "govuk-label--s"
+        },
+        prefix: {
+          text: "£"
+        },
+        value: data["amountPaid"]
+      }) }}
+    </div>
+  </div>
+
+  {{ govukButton({
+    text: "Add another imposition",
+    classes: "govuk-button--secondary"
+  }) }}
+
+  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+      
+
+     
+
+     
+
+    
+ 
+
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      const searchInput = document.getElementById('search');
+      const resultsContainer = document.getElementById('results-container');
+
+      // Restore previous search value from local storage
+      const previousSearch = localStorage.getItem('searchQuery');
+      if (previousSearch) {
+        searchInput.value = previousSearch;
+        resultsContainer.classList.remove('govuk-!-display-none');
+      }
+
+      // Handle form submission
+      window.handleSearch = function(event) {
+        event.preventDefault();
+        const query = searchInput.value.trim();
+
+        if (query) {
+          // Save search query to local storage
+          localStorage.setItem('searchQuery', query);
+          resultsContainer.classList.remove('govuk-!-display-none');
+        } else {
+          // Clear the results if the query is empty
+          localStorage.removeItem('searchQuery');
+          resultsContainer.classList.add('govuk-!-display-none');
+        }
+      };
+    });
+  </script>
+          
+  
+{% endblock %}
