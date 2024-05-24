@@ -29,8 +29,35 @@
         </div>
 
       
-        <!-- Offence code input and search -->
-        <div class="govuk-form-group govuk-!-margin-bottom-3">
+        <!-- Offence code input -->
+        {{ govukInput({
+          id: "offenceCode",
+          name: "offenceCode",
+          classes: "govuk-input--width-10",
+          label: {
+            text: "Offence code",
+            classes: "govuk-label--s"
+          },
+          hint: {
+            html: 'For example, TP11003. If you don’t know the offence code, you can <a href="#" class="govuk-link--no-visited-state" data-module="edge">search the offence list</a>'
+          },
+          value: data['offenceCode']
+        }) }}
+
+    
+        <!-- Results -->
+        <div id="results" style="display: none;" class="govuk-!-margin-bottom-3 govuk-!-margin-top-5">
+          <div style="padding: 15px; border-left: 5px solid #1d70b8; background-color: #f3f2f1;">
+            <p id="offence-code" class="govuk-body govuk-!-margin-bottom-0 " style="text-transform: uppercase;">TP11003</p>
+            <p id="offence-title" class="govuk-body govuk-!-margin-bottom-0 govuk-!-margin-top-1">Possess potentially dangerous item on Transport for London road transport premises</p>
+          </div>
+        </div>
+
+
+
+
+        <!-- OPTION 3 -->
+        <!-- <div class="govuk-form-group govuk-!-margin-bottom-3"> 
           <label class="govuk-label govuk-label--s" for="search">
             Offence code
           </label>
@@ -44,30 +71,14 @@
             </div>
           </div>
         </div>
-    
-        <!-- Results -->
+
         <div  id="results-container" class="govuk-!-display-none govuk-!-margin-bottom-3 govuk-!-margin-top-5">
-          <!-- <div style="padding: 10px 15px; background-color: #f3f2f1; border-color: #B1B4B6; border-width: 1px 1px 0px 1px; border-style: solid;">
-            <p class="govuk-body-s govuk-!-margin-bottom-0"><strong>Offence</strong></p>
-          </div> -->
           <div style="padding: 15px; border-left: 5px solid #1d70b8; background-color: #f3f2f1;">
-            <!-- <p class="govuk-body govuk-!-margin-bottom-3"><strong>Offence</strong></p> -->
             <p class="govuk-body govuk-!-margin-bottom-1 govuk-input--extra-letter-spacing">TP11003</p>
             <p class="govuk-body govuk-!-margin-bottom-0">Possess potentially dangerous item on Transport for London road transport premises</p>
           </div>
-        </div>
-
-
-        <!-- <div id="results-container" class="govuk-!-display-none" style="padding: 15px; background-color: #f3f2f1;">
-          <p class="govuk-body govuk-!-margin-bottom-1">HY35014</p>
-          <p class="govuk-body govuk-!-margin-bottom-0">Theft from the person of another</p>
         </div> -->
-
-
         
-
-
-
 
         <!-- OPTION 2 -->
         <!-- <div class="search-container">
@@ -80,8 +91,6 @@
               </div>
             <input id="searchOffence" name="searchOffence" type="text" class="govuk-input search-input govuk-input--width-10 govuk-input--extra-letter-spacing">
           </div>
-
-          
           
 
           {{ xGovukAutocomplete ({
@@ -105,12 +114,6 @@
           }) }}
 
         </div> -->
-
-
-
-
-
-
 
 
 
@@ -210,33 +213,64 @@
  
 
   <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-      const searchInput = document.getElementById('search');
-      const resultsContainer = document.getElementById('results-container');
+    // document.addEventListener('DOMContentLoaded', (event) => {
+    //   const searchInput = document.getElementById('search');
+    //   const resultsContainer = document.getElementById('results-container');
 
-      // Restore previous search value from local storage
-      const previousSearch = localStorage.getItem('searchQuery');
-      if (previousSearch) {
-        searchInput.value = previousSearch;
-        resultsContainer.classList.remove('govuk-!-display-none');
+    //   // Restore previous search value from local storage
+    //   const previousSearch = localStorage.getItem('searchQuery');
+    //   if (previousSearch) {
+    //     searchInput.value = previousSearch;
+    //     resultsContainer.classList.remove('govuk-!-display-none');
+    //   }
+
+    //   // Handle form submission
+    //   window.handleSearch = function(event) {
+    //     event.preventDefault();
+    //     const query = searchInput.value.trim();
+
+    //     if (query) {
+    //       // Save search query to local storage
+    //       localStorage.setItem('searchQuery', query);
+    //       resultsContainer.classList.remove('govuk-!-display-none');
+    //     } else {
+    //       // Clear the results if the query is empty
+    //       localStorage.removeItem('searchQuery');
+    //       resultsContainer.classList.add('govuk-!-display-none');
+    //     }
+    //   };
+    // });
+
+    document.addEventListener('DOMContentLoaded', function() {
+    const inputElement = document.getElementById('offenceCode');
+    const resultsContainer = document.getElementById('results');
+    const offenceCodeDisplay = document.getElementById('offence-code');
+    const offenceTitleDisplay = document.getElementById('offence-title');
+
+    inputElement.addEventListener('input', function() {
+      const inputValue = inputElement.value.trim();
+
+      // Update the offence code display as the user types
+      offenceCodeDisplay.textContent = inputValue;
+
+      // Toggle the display of the results based on input presence
+      if (inputValue.length > 0) {
+        resultsContainer.style.display = 'block'; // Show results when there is input
+      } else {
+        resultsContainer.style.display = 'none'; // Hide results when input is empty
       }
 
-      // Handle form submission
-      window.handleSearch = function(event) {
-        event.preventDefault();
-        const query = searchInput.value.trim();
-
-        if (query) {
-          // Save search query to local storage
-          localStorage.setItem('searchQuery', query);
-          resultsContainer.classList.remove('govuk-!-display-none');
-        } else {
-          // Clear the results if the query is empty
-          localStorage.removeItem('searchQuery');
-          resultsContainer.classList.add('govuk-!-display-none');
-        }
-      };
+      // Determine what to display in the offence title based on input length
+      if (inputValue.length === 7) {
+        offenceTitleDisplay.textContent = "Possess potentially dangerous item on Transport for London road transport premises";
+      } else if (inputValue.length > 7) {
+        offenceTitleDisplay.textContent = "Offence not found";
+      } else {
+        offenceTitleDisplay.textContent = ""; // Optionally clear the previous text if less than 7 characters
+      }
     });
+  });
+
   </script>
           
   
