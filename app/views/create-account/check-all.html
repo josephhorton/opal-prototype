@@ -1,0 +1,156 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Adrian Smith" %}
+
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-half">
+    <h1 class="govuk-heading-l">
+      {{pageName}}
+    </h1>
+
+    {{ govukTag({
+      text: "To review",
+      classes: "govuk-!-margin-bottom-6"
+    }) }}
+
+    <!-- HISTORY -->
+
+    {%- set rejectedHTML %}
+      <div class="govuk-!-padding-2" style="background-color: #f3f2f1;">
+        <p class="govuk-body govuk-!-margin-bottom-0">Spelling mistake in defendant first name</p>
+      </div>
+    {% endset -%}
+
+
+    <h2 class="govuk-heading-m">Review history</h2>
+    {{ mojTimeline({
+      classes: "govuk-!-margin-bottom-7",
+      items: [
+        {
+          classes: "govuk-!-padding-bottom-4",
+          label: {
+            text: "Rejected"
+          },
+          html: rejectedHTML,
+          datetime: {
+            timestamp: "2024-07-02T14:01:00.000Z",
+            type: "datetime"
+          },
+          byline: {
+            text: "jane.bloggs"
+          }
+        },
+        {
+          classes: "govuk-!-padding-bottom-0",
+          label: {
+            text: "Created"
+          },
+          datetime: {
+            timestamp: "2024-07-01T16:01:00.000Z",
+            type: "datetime"
+          },
+          byline: {
+            text: "john.smith"
+          }
+        }
+      ]
+    }) }}
+
+
+    
+
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">    
+
+    <!-- ACCOUNT DETAILS -->
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Sending area or Local Justice Area (LJA)
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['ljaCode'] or "Bedfordshire Magistrates' Court (1080)"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Prosecutor Court Reference (PCR)
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['ljaReferenceCode'] or "01AT204002"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Enforcement court
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['enforcementCourt'] or "Avon and Somerset NCES (12)"}}
+            </dd>
+          </div>
+
+        </dl>
+      </div>
+    </div>
+
+    
+    <!-- PERSONAL DETAILS -->
+    {{ govukSummaryList({
+      card: {
+        title: {
+          text: "Personal details"
+        }
+      },
+      rows: [
+        {
+          key: {
+            text: "Title"
+          },
+          value: {
+            text: data['title'] or "Mr"
+          }
+        },
+        {
+          key: {
+            text: "First names"
+          },
+          value: {
+            text: data['firstName'] or "John"
+          }
+        },
+        {
+          key: {
+            text: "Last name"
+          },
+          value: {
+            text: data['lastName'] or "Smith"
+          }
+        },
+        {
+          key: {
+            text: "Date of birth"
+          },
+          value: {
+            text: "22 March 1998"
+          }
+        }
+      ]
+    }) }}
+
+
+    
+
+  </div>
+</div>
+
+{% endblock %}

@@ -4,18 +4,18 @@
 
 {% block beforeContent %}
 
-<a href="task-list.html" class="govuk-back-link">Back</a>
+<!-- <a href="task-list.html" class="govuk-back-link">Back</a> -->
 
 {% endblock %}
 
 {% block content %}
 
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-half">
+    <div class="govuk-grid-column-two-thirds">
       
       <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
-      <form method="post" novalidate action="task-list?pdCompleted=true">
+      <form method="post" novalidate action="task-list-individual?pdCompleted=true">
 
         <!-- TITLE -->
         <div>
@@ -53,6 +53,7 @@
         {{ govukInput({
           id: "firstName",
           name: "firstName",
+          classes: "govuk-input--width-20",
           label: {
             text: "First names",
             classes: "govuk-label--s"
@@ -66,6 +67,7 @@
         {{ govukInput({
           id: "lastName",
           name: "lastName",
+          classes: "govuk-input--width-20",
           label: {
             text: "Last name",
             classes: "govuk-label--s"
@@ -198,6 +200,7 @@
             id: "address-line-1",
             name: "addressLine1",
             autocomplete: "address-line1",
+            classes: "govuk-input--width-20",
             value: data['addressLine1']
           }) }}
         
@@ -209,6 +212,7 @@
             id: "address-line-2",
             name: "addressLine2",
             autocomplete: "address-line2",
+            classes: "govuk-input--width-20",
             value: data['addressLine2']
           }) }}
         
@@ -219,6 +223,7 @@
             },
             id: "address-line-3",
             name: "addressLine3",
+            classes: "govuk-input--width-20",
             autocomplete: "address-level3",
             value: data['addressLine3']
           }) }}
@@ -249,6 +254,7 @@
           },
           id: "carMake",
           name: "carMake",
+          classes: "govuk-input--width-20",
           value: data['carMake']
         }) }}
 
@@ -263,38 +269,22 @@
           value: data['carRegistration']
         }) }}
 
-        <!-- VEHICLE DETAILS -->
-        <!-- <div>
-        <h1 class="govuk-heading-l">Vehicle details</h1>
-
-        {{ govukInput({
-          label: {
-            text: "Make of the car (optional)",
-            classes: "govuk-label--m"
-          },
-          id: "carMake",
-          name: "carMake",
-          value: data['carMake']
-        }) }}
-
-        {{ govukInput({
-          label: {
-            text: "Registration number (optional)",
-            classes: "govuk-label--m"
-          },
-          classes: "govuk-input--width-10",
-          id: "carRegistration",
-          name: "carRegistration",
-          value: data['carRegistration']
-        }) }}
-        </div> -->
-
         
-        {{ govukButton({
-          text: "Save and return to tasks"
-        }) }}
+        <div class="govuk-button-group">
+          {{ govukButton({
+            text: "Return to account details"
+          }) }}
+
+          {{ govukButton({
+            text: "Add contact details",
+            classes: "govuk-button--secondary",
+            href: "/contact-details.html"
+          }) }}        
+        </div>
 
       </form>
+
+      <p class="govuk-body"><a class="govuk-link govuk-! govuk-link--no-visited-state" href="task-list-individual.html">Cancel</a></p>
 
 
     </div>

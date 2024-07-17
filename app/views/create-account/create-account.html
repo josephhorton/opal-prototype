@@ -1,0 +1,171 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Create account" %}
+
+{% block beforeContent %}
+
+<a href="./accounts-home.html" class="govuk-back-link">Back</a>
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      <!-- ?hearingLanguage=welsh-english&documentLanguage=welsh-english -->
+      <form method="post" novalidate action="/account-settings">
+
+        {{ xGovukAutocomplete({
+          id: "businessUnit",
+          name: "businessUnit",
+          classes: "govuk-!-margin-bottom-8",
+          value: data['businessUnit'],
+          allowEmpty: false,
+          showAllValues: true,
+          label: {
+            classes: "govuk-label--s",
+            text: 'Business unit'
+          },
+          hint: {
+            text: 'Enter area where the account is to be created (such as Sussex or London)'
+          },
+          items: [
+            { text: "Avon and Somerset" },
+            { text: "Bath" },
+            { text: "Poole" },
+            { text: "Port Talbot" }
+          ]
+        }) }}
+        
+        
+
+
+        <!-- DEFENDANT TYPE CONDITIONALLY REVEALED FORM -->
+        {% set defendantTypeFine %}
+
+        {{ govukRadios({
+          name: "defendantTypeF",
+          value: data['defendantTypeF'],
+          classes: "govuk-radios--small",
+          fieldset: {
+            legend: {
+              text: "Defendant type",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          hint: {
+            text: "If sole trader, choose 'Adult or youth only'"
+          },
+          items: [
+            {
+              value: "Adult or youth only",
+              text: "Adult or youth only"
+            },
+            {
+              value: "Adult or youth with parent or guardian to pay",
+              text: "Adult or youth with parent or guardian to pay"
+            },
+            {
+              value: "Company",
+              text: "Company"
+            }
+          ]
+        }) }}
+        
+        {% endset -%}
+
+        {% set defendantTypeFixedPenalty %}
+
+        {{ govukRadios({
+          name: "defendantTypeFP",
+          value: data['defendantTypeFP'],
+          classes: "govuk-radios--small",
+          fieldset: {
+            legend: {
+              text: "Defendant type",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          hint: {
+            text: "If sole trader, choose 'Adult or youth only'"
+          },
+          items: [
+            {
+              value: "Adult or youth only",
+              text: "Adult or youth only"
+            },
+            {
+              value: "Company",
+              text: "Company"
+            }
+          ]
+        }) }}
+        
+        {% endset -%}
+
+      
+        <!-- ACCOUNT TYPE - CONDITIONAL REVEAL FOR DEFENDANT TYPES -->
+        {{ govukRadios({
+          name: "accountType",
+          classes: "govuk-radios",
+          value: data['accountType'],
+          fieldset: {
+            legend: {
+              text: "Account type",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "Fine",
+              text: "Fine",
+              conditional: {
+                html: defendantTypeFine
+              }
+            },
+            {
+              value: "Fixed penalty",
+              text: "Fixed penalty",
+              conditional: {
+                html: defendantTypeFixedPenalty
+              }
+            },
+            {
+              value: "Conditional caution",
+              text: "Conditional caution"
+            }
+          ]
+        }) }}
+
+        
+
+        
+
+        <div class="govuk-button-group">
+          {{ govukButton({
+            text: "Continue"
+          }) }}
+
+          <p class="govuk-body"><a class="govuk-link" href="#">Cancel</a></p>
+        
+        </div>
+
+      </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}
+
+<script type="text/javascript">
+  element = document.querySelector('#tt-customDropdownArrow')
+  id = 'autocomplete-customDropdownArrow'
+  accessibleAutocomplete({
+    dropdownArrow: function (config) {
+      return '<svg class="' + config.className + '" style="top: 8px;" viewBox="0 0 512 512" ><path d="M256,298.3L256,298.3L256,298.3l174.2-167.2c4.3-4.2,11.4-4.1,15.8,0.2l30.6,29.9c4.4,4.3,4.5,11.3,0.2,15.5L264.1,380.9  c-2.2,2.2-5.2,3.2-8.1,3c-3,0.1-5.9-0.9-8.1-3L35.2,176.7c-4.3-4.2-4.2-11.2,0.2-15.5L66,131.3c4.4-4.3,11.5-4.4,15.8-0.2L256,298.3  z"/></svg>'
+    }
+  })
+</script>

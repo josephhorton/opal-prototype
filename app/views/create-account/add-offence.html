@@ -33,13 +33,13 @@
         {{ govukInput({
           id: "offenceCode",
           name: "offenceCode",
-          classes: "govuk-input--width-10",
+          classes: "govuk-input--width-10 govuk-input--extra-letter-spacing",
           label: {
             text: "Offence code",
             classes: "govuk-label--s"
           },
           hint: {
-            html: 'For example, TP11003. If you don’t know the offence code, you can <a href="#" class="govuk-link--no-visited-state" data-module="edge">search the offence list</a>'
+            html: 'For example, TP11003. If you don’t know the offence code, you can <a href="#" class="govuk-link--no-visited-state" data-module="edge">search the offence list</a>.'
           },
           value: data['offenceCode']
         }) }}
@@ -47,8 +47,8 @@
     
         <!-- Results -->
         <div id="results" style="display: none;" class="govuk-!-margin-bottom-3 govuk-!-margin-top-5">
-          <div style="padding: 15px; border-left: 5px solid #1d70b8; background-color: #f3f2f1;">
-            <p id="offence-code" class="govuk-body govuk-!-margin-bottom-0 " style="text-transform: uppercase;">TP11003</p>
+          <div style="padding: 18px 15px 15px 15px; border-left: 5px solid #1d70b8; background-color: #f3f2f1;">
+            <p id="offence-code" class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-0" style="text-transform: uppercase;">TP11003</p>
             <p id="offence-title" class="govuk-body govuk-!-margin-bottom-0 govuk-!-margin-top-1">Possess potentially dangerous item on Transport for London road transport premises</p>
           </div>
         </div>
@@ -263,8 +263,6 @@
       // Determine what to display in the offence title based on input length
       if (inputValue.length === 7) {
         offenceTitleDisplay.textContent = "Possess potentially dangerous item on Transport for London road transport premises";
-      } else if (inputValue.length > 7) {
-        offenceTitleDisplay.textContent = "Offence not found";
       } else {
         offenceTitleDisplay.textContent = ""; // Optionally clear the previous text if less than 7 characters
       }

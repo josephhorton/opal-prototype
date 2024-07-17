@@ -1,0 +1,51 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Opal design system" %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+      {{ govukInput({
+        label: {
+          text: "Full width"
+        },
+        classes: "govuk-!-width-full",
+        id: "full",
+        name: "full"
+      }) }}
+
+      {{ govukInput({
+        label: {
+          text: "50 character width"
+        },
+        classes: "govuk-input--width-50",
+        id: "width-50",
+        name: "width50"
+      }) }}
+      
+      {{ govukInput({
+        label: {
+          text: "40 character width"
+        },
+        classes: "govuk-input--width-40",
+        id: "width-40",
+        name: "width40"
+      }) }}
+
+      {{ govukInput({
+        label: {
+          text: "30 character width"
+        },
+        classes: "govuk-input--width-30",
+        id: "width-30",
+        name: "width30"
+      }) }}
+      
+
+    </div>
+  </div>
+
+{% endblock %}

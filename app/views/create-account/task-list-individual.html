@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = "Create account" %}
+{% set pageName = "Account details" %}
 
 {% block pageTitle %}
 {{ pageName }} – {{ serviceName }} – GOV.UK Prototype Kit
@@ -8,7 +8,7 @@
 
 {% block beforeContent %}
 
-<a href="account-details.html" class="govuk-back-link">Back</a>
+<!-- <a href="account-details.html" class="govuk-back-link">Back</a> -->
 
 
 {% endblock %}
@@ -22,7 +22,7 @@
     <!-- <p class="govuk-body govuk-!-margin-bottom-6">Document and hearing language are in <a class="govuk-link--no-visited-state" href="#">Welsh and English</a>.</p> -->
     {% if data['businessUnit'] == "Gwent" %}
 
-    <span class="govuk-caption-l">{{ data['businessUnit'] or "Bedfordshire" }}</span>
+    <!-- <span class="govuk-caption-l">{{ data['businessUnit'] or "Bedfordshire" }}</span> -->
     <h1 class="govuk-heading-l ">{{ pageName }}</h1>
 
     <!-- class="govuk-!-margin-bottom-6" style="background-color: #EEEFEF; padding: 15px;" -->
@@ -35,8 +35,58 @@
 
     {% else %}
 
-    <span class="govuk-caption-l">{{ data['businessUnit'] or "Bedfordshire" }}</span>
-    <h1 class="govuk-heading-l govuk-!-margin-bottom-7">{{ pageName }}</h1>
+    <!-- <span class="govuk-caption-l">{{ data['businessUnit'] or "Bedfordshire" }}</span> -->
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-">{{ pageName }}</h1>
+
+    {{ govukSummaryList({
+      classes: "govuk-!-margin-bottom-7",
+      rows: [
+        {
+          key: {
+            text: "Business unit"
+          },
+          value: {
+            text: data['businessUnit'] or "Avon and Somerset"
+          }
+        },
+        {
+          key: {
+            text: "Account type"
+          },
+          value: {
+            text: data['accountType'] or "Fine"
+          }
+        },
+        {
+          key: {
+            text: "Defendant type"
+          },
+          value: {
+            text: "Adult or youth only"
+          }
+        }
+      ]
+    }) }}
+
+
+    <!-- {
+      key: {
+        text: "Language preferences"
+      },
+      value: {
+        html: "<strong>Documents</strong>: Welsh and English<br><strong>Court hearing</strong>: Welsh and English"
+      },
+      actions: {
+        items: [
+          {
+            href: "#",
+            text: "Change",
+            visuallyHiddenText: "language preference",
+            classes: "govuk-link--no-visited-state"
+          }
+        ]
+      }
+    } if data['businessUnit'] == "Port Talbot"  -->
 
     {% endif %}
 
@@ -331,34 +381,6 @@
       ]
     }) }}
 
-    {% if data['defendantType'] == 'Adult or youth with parent or guardian to pay' %}
-    <h2 class="govuk-heading-m govuk-!-margin-top-7">Parent or guardian details</h2>
-
-     <!-- TASK LIST -->
-     {{ govukTaskList({
-      idPrefix: "second-section",
-      items: [
-        {
-          title: {
-            text: "Parent or guardian details",
-            classes: "govuk-link--no-visited-state"
-          },
-          href: 'parent-guardian-details',
-          status: pgdStatusTag
-        },
-        {
-          title: {
-            text: "Employer details",
-            classes: "govuk-link--no-visited-state"
-          },
-          href: "employer-details",
-          status: edStatusTag
-        }
-      ] | removeEmpty
-    }) }}
-
-    {% endif %}
-
     <h2 class="govuk-heading-m govuk-!-margin-top-7">Defendant details</h2>
     <!-- <p class="govuk-body">Defendant type is {{ data['defendantType'] or 'Adult or youth only'}}.</p> -->
 
@@ -373,15 +395,7 @@
           },
           href: 'personal-details',
           status: pdStatusTag
-        } if data['defendantType'] == 'Adult or youth only' or data['defendantType'] == 'Adult or youth with parent or guardian to pay',
-        {
-          title: {
-            text: "Company details",
-            classes: "govuk-link--no-visited-state"
-          },
-          href: 'company-details',
-          status: codStatusTag
-        } if data['defendantType'] == 'Company',
+        },
         {
           title: {
             text: "Contact details",
@@ -397,7 +411,7 @@
           },
           href: "employer-details",
           status: edStatusTag
-        } if data['defendantType'] == 'Adult or youth only'
+        }
       ] | removeEmpty
     }) }}
 
@@ -420,8 +434,27 @@
             text: "Payment terms",
             classes: "govuk-link--no-visited-state"
           },
-          href: "#",
-          status: ptStatusTag
+          status: {
+            text: "Cannot start yet",
+            classes: "govuk-task-list__status--cannot-start-yet"
+          }
+        }
+      ] 
+    }) }}
+
+    <h2 class="govuk-heading-m govuk-!-margin-top-7">Account comments and notes</h2>
+
+    {{ govukTaskList({
+      idPrefix: "third-section",
+      items: [
+        {
+          title: {
+            text: "Account comments and notes",
+            classes: "govuk-link--no-visited-state"
+          },
+          datamodule: "edge",
+          href: '#',
+          status: ofdStatusTag
         }
       ] 
     }) }}
@@ -446,63 +479,44 @@
 
     <p class="govuk-body">Check that all required fields have been entered before you publish.</p>
 
+    <!-- OPTION 1 -->
     <div class="" data-module="edge">
-      {{ govukButton({ text: "Review account", href: "#" }) }}
+      {% if data['allCompleted'] == "true" %}
+      {{ govukButton({
+        text: "Review account",
+        href: "#",
+        classes: "govuk-!-margin-bottom-0"
+      }) }}
+      {% else %}
+      
+      {% endif %}
     </div>
 
-    <p data-module="edge" class="govuk-body govuk-!-margin-top-2"><a href="#" class="govuk-link app-destructive-link">Delete account</a></p>
+    <!-- OPTION 2 -->
+    <!-- {{ govukTaskList({
+      idPrefix: "fourth-section",
+      items: [
+      {
+        title: {
+          text: "Review account"
+        },
+        status: {
+          text: "Cannot start yet",
+          classes: "govuk-task-list__status--cannot-start-yet"
+        }
+      }
+      ]
+    }) }} -->
+
+    {# Size modifiers: xl, l, m #}
+    <p data-module="edge" class="govuk-body govuk-!-margin-top-7"><a href="#" class="govuk-link app-destructive-link">Delete account</a></p>
 
   </div> 
 
 
   {% if data['businessUnit'] == "Gwent" %}
 
-  <div class="govuk-grid-column-one-third" >
-    <div class="x-govuk-related-navigation">
-      <nav class="x-govuk-related-navigation__nav-section" role="navigation" aria-labelledby="related-navigation-related-content">
-        <h2 class="x-govuk-related-navigation__main-heading" id="related-navigation-related-content">
-          Heading
-        </h2>
-        <p class="govuk-body-s govuk-!-margin-bottom-2"><strong>Documents</strong>: Welsh and English</p>
-        <p class="govuk-body-s govuk-!-margin-bottom-2"><strong>Court hearing</strong>: Welsh and English</p>
-
-        <p class="govuk-body-s" data-module="edge">
-          <a  class="govuk-link--no-visited-state" href="#">Change</a>
-        </p>
-
-
-        <!-- <ul class="x-govuk-related-navigation__link-list">
-          <li class="x-govuk-related-navigation__link">
-            <a class="govuk-link x-govuk-related-navigation__section-link x-govuk-related-navigation__section-link--other" href="/school-performance-tables">Find and compare schools in England</a>
-          </li>
-          <li class="x-govuk-related-navigation__link">
-            <a class="govuk-link x-govuk-related-navigation__section-link x-govuk-related-navigation__section-link--other" href="/types-of-school">Types of school</a>
-          </li>
-        </ul> -->
-        <!-- <nav role="navigation" class="x-govuk-related-navigation__nav-section" aria-labelledby="related-navigation-explore-the-topic">
-          <h3 class="x-govuk-related-navigation__sub-heading" id="related-navigation-explore-the-topic">
-            Explore the topic
-          </h3>
-          <ul class="x-govuk-related-navigation__link-list">
-            <li class="x-govuk-related-navigation__link">
-              <a class="govuk-link x-govuk-related-navigation__section-link" href="/browse/education/school-life">Schools and curriculum</a>
-            </li>
-          </ul>
-        </nav> -->
-      </nav>
-    </div>
-
-    <!-- <div style="border-top: 2px solid #1D70B8;">
-    <p class="govuk-body-s govuk-!-margin-top-3"><strong>Language preference</strong></p>
-
-    <p class="govuk-body-s govuk-!-margin-bottom-2">Documents: <strong>Welsh and English</strong></p>
-    <p class="govuk-body-s  govuk-!-margin-bottom-2">Court hearing: <strong>Welsh and English</strong></p>
-
-    <p class="govuk-body-s govuk-!-margin-bottom-0"><a href="#" class="govuk-link--no-visited-state">Change</a></p>
-
-    </div> -->
-  </div>
-
+  
   {% endif %}
 
 </div>

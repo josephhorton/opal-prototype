@@ -1,0 +1,63 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Account comments and notes" %}
+
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+      <h1 class="govuk-heading-l">
+        {{pageName}}
+      </h1>
+    
+
+    <form method="post" novalidate action="task-list?comnotCompleted=true">
+
+      <!-- <p class="govuk-body">You can change or update this information any time.</p> -->
+
+      {{ govukInput({
+        id: "commentField",
+        name: "commentField",
+        classes: "govuk-input",
+        label: {
+          text: "Add comment",
+          classes: "govuk-label--s"
+        },
+        hint: {
+          text: "For example, a warning, which will appear on the account summary"
+        },
+        value: data['commentField']
+      }) }}
+
+
+      {# Size modifiers: xl, l, m #}
+      <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+      {{ govukCharacterCount({
+        name: "accountNote",
+        id: "accountNote",
+        label: {
+          text: "Add account notes",
+          classes: "govuk-label--s"
+        },
+        hint: {
+          text: "You can view notes in account history after the account is published"
+        },
+        maxlength: 168,
+        value: data['accountNotes']
+      }) }}
+
+      <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Return to account details"
+        }) }}
+
+        <p class="govuk-body"><a class="govuk-link" href="#">Cancel</a></p>
+      
+      </div>
+
+    </form>
+
+
+  </div>
+{% endblock %}

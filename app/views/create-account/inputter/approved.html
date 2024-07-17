@@ -1,0 +1,54 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "My accounts" %}
+
+{% block beforeContent %}
+
+<a href="../accounts-home.html" class="govuk-back-link">Back</a>
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+
+      <nav class="moj-sub-navigation" aria-label="Sub navigation">
+
+        <ul class="moj-sub-navigation__list">
+          <li class="moj-sub-navigation__item" >
+            <a class="moj-sub-navigation__link"  href="in-review.html">
+              In review
+            </a>
+          </li>
+      
+          <li class="moj-sub-navigation__item" style="display: ruby;">
+            <a class="moj-sub-navigation__link" href="rejected.html">Rejected</a>
+            <span id="notifications" class=" govuk-!-margin-left-1 moj-notification-badge">1</span>   
+          </li>
+
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" aria-current="page" href="approved.html">Approved</a>
+          </li>
+
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="deleted.html">Deleted</a>
+          </li>
+        </ul>
+      
+      </nav>
+
+      <h2 class="govuk-heading-m ">Approved</h2>
+
+      <p class="govuk-body">No accounts have been approved in the past 7 days.</p>
+
+      
+
+    </div>
+  </div>
+
+  
+{% endblock %}

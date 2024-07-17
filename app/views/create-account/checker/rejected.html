@@ -1,0 +1,126 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Check and approve accounts" %}
+
+{% block beforeContent %}
+
+<a href="../accounts-home.html" class="govuk-back-link">Back</a>
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      <!-- STATS FOR CHECKER -->
+      <!-- <div style="display: inline-block" class="govuk-!-margin-bottom-4">
+
+        <div class="govuk-!-padding-3 in-review govuk-tag--grey">
+          <span class="govuk-body govuk-!-font-size-27 govuk-!-font-weight-bold review-stats-text" style="color: #282d30;">6</span>
+          <p class="govuk-body govuk-!-margin-bottom-0" style="color: #282d30;">In review</p>
+        </div>
+
+        <div class="govuk-!-padding-3 govuk-!-margin-left-3 in-review govuk-tag--grey">
+          <span class="govuk-body govuk-!-font-size-27 govuk-!-font-weight-bold review-stats-text" style="color: #282d30;">3</span>
+          <p class="govuk-body govuk-!-margin-bottom-0" style="color: #282d30;">Rejected</p>
+        </div>
+
+      </div> -->
+
+      <nav class="moj-sub-navigation" aria-label="Sub navigation">
+
+        <ul class="moj-sub-navigation__list">
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="in-review.html">
+              To review
+            </a>
+          </li>
+      
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" aria-current="page" href="rejected.html">
+              Rejected
+              <!-- <span id="notifications" class="govuk-!-margin-left-1 moj-notification-badge">1</span> -->
+            </a>
+          </li>
+
+          <!-- <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="approved.html">
+              Approved
+            </a>
+          </li> -->
+
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="deleted.html">
+              Deleted
+            </a>
+          </li>
+        </ul>
+      
+      </nav>
+
+      <h2 class="govuk-heading-m ">Rejected</h2>
+
+
+      <!-- <p class="govuk-body">No accounts have been rejected.</p> -->
+
+      <div class="moj-scrollable-pane">
+
+        <table class="govuk-table" data-module="moj-sortable-table">
+  
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+        
+            <th scope="col" class="govuk-table__header" aria-sort="none" style="width: 20%;">Defendant</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none" style="width: 15%;">Date of birth</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none" style="width: 15%;">Created</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none" style="width: 15%;">Account type</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none" style="width: 20%;">Business unit</th>
+            <th scope="col" class="govuk-table__header" aria-sort="none" style="width: 15%;">Submitted by</th>
+        
+            </tr>
+          </thead>
+        
+          <tbody class="govuk-table__body">
+
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell"><a href="#" class="govuk-link govuk-link--no-visited-state">LEE, Stephanie</a></td>
+        
+              <td class="govuk-table__cell">18 Nov 2005</td>
+  
+              <td class="govuk-table__cell">Today</td>
+  
+              <td class="govuk-table__cell">Fine</td>
+        
+              <td class="govuk-table__cell">Cambridgeshire</td>
+  
+              <td class="govuk-table__cell">kevin.wilson</td>
+            </tr>
+
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell"><a href="#" class="govuk-link govuk-link--no-visited-state">WALKER, Thomas</a></td>
+        
+              <td class="govuk-table__cell">23 Feb 1978</td>
+  
+              <td class="govuk-table__cell">Today</td>
+  
+              <td class="govuk-table__cell">Fine</td>
+        
+              <td class="govuk-table__cell">Avon and Somerset</td>
+  
+              <td class="govuk-table__cell">emily.davis</td>
+            </tr>
+        
+          </tbody>
+        </table>
+        </div>
+
+      
+
+    </div>
+  </div>
+
+  
+{% endblock %}

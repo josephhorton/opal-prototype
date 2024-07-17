@@ -1,0 +1,160 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "My accounts" %}
+
+{% block beforeContent %}
+
+<a href="../accounts-home.html" class="govuk-back-link">Back</a>
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+      <!-- <h1 class="govuk-heading-l">{{pageName}}</h1>
+      {{ govukButton({
+        text: "Create account"
+      }) }} -->
+
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      
+
+
+      <nav class="moj-sub-navigation" aria-label="Sub navigation">
+
+        <ul class="moj-sub-navigation__list">
+          <li class="moj-sub-navigation__item" >
+            <a class="moj-sub-navigation__link" aria-current="page" href="in-review.html">
+              In review
+            </a>
+          </li>
+      
+          <li class="moj-sub-navigation__item" style="display: ruby;">
+            <a class="moj-sub-navigation__link" href="rejected.html">Rejected</a>
+            <span id="notifications" class=" govuk-!-margin-left-1 moj-notification-badge">1</span>   
+          </li>
+
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="approved.html">Approved</a>
+          </li>
+
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="deleted.html">Deleted</a>
+          </li>
+        </ul>
+      
+      </nav>
+      
+
+      <h2 class="govuk-heading-m">In review</h2>
+
+      <table class="govuk-table" data-module="moj-sortable-table">
+
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+      
+            <th scope="col" class="govuk-table__header" style="width: 25%;" aria-sort="none">Defendant</th>
+
+            <th scope="col" class="govuk-table__header" style="width: 25%;" aria-sort="none">Date of birth</th>
+
+            <th scope="col" class="govuk-table__header" style="width: 25%;" aria-sort="none">Business unit</th>
+            <th scope="col" class="govuk-table__header" style="width: 25%;" aria-sort="none">Created</th>
+
+      
+          </tr>
+        </thead>
+      
+        <tbody class="govuk-table__body">
+
+          <tr class="govuk-table__row">
+      
+            <td class="govuk-table__cell"><a href="#" class="govuk-link govuk-link--no-visited-state">SMITH, Adrian</a></td>
+      
+            <td class="govuk-table__cell">12 Mar 1994</td>
+
+            
+      
+            <td class="govuk-table__cell">Cambridgeshire</td>
+            <td class="govuk-table__cell">
+              <span class="govuk-visually-hidden">0</span>
+              {{ govukTag({
+                text: "Today"
+              }) }}
+              <!-- <span class="govuk-visually-hidden">0</span>Today -->
+            </td>
+
+          </tr>
+
+          <tr class="govuk-table__row">
+      
+            <td class="govuk-table__cell"><a href="#" class="govuk-link govuk-link--no-visited-state">GRANT, Oliver</a></td>
+      
+            <td class="govuk-table__cell">4 Sep 1992</td>
+      
+            
+      
+            <td class="govuk-table__cell">Cambridgeshire</td>
+
+            <td class="govuk-table__cell">
+              {{ govukTag({
+                text: "1 day ago"
+              }) }}
+              <!-- 1 day ago -->
+            </td>
+
+          </tr>
+
+          <tr class="govuk-table__row">
+      
+            <td class="govuk-table__cell"><a href="#" class="govuk-link  govuk-link--no-visited-state">HAWTHORNE, Ethan</a></td>
+      
+            <td class="govuk-table__cell">5 Dec 1976</td>
+      
+            
+      
+            <td class="govuk-table__cell">Avon and Somerset</td>
+
+            <td class="govuk-table__cell">
+              {{ govukTag({
+                text: "1 day ago"
+              }) }}
+              <!-- 1 day ago -->
+            </td>
+
+          </tr>
+      
+      
+          <tr class="govuk-table__row">
+      
+            <td class="govuk-table__cell"><a href="#" class="govuk-link govuk-link--no-visited-state">BLACKWOOD, Adrian </a></td>
+      
+            <td class="govuk-table__cell">21 Aug 1984</td>
+      
+            
+      
+            <td class="govuk-table__cell">Avon and Somerset</td>
+
+            <td class="govuk-table__cell">
+              {{ govukTag({
+                text: "4 days ago",
+                classes: "govuk-tag--orange"
+              }) }}
+              <!-- 1 day ago -->
+            </td>
+
+
+          </tr>
+      
+        </tbody>
+      </table>
+      
+
+
+    </div>
+  </div>
+
+  
+{% endblock %}
