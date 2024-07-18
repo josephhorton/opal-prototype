@@ -4,7 +4,7 @@
 
 {% block beforeContent %}
 
-<a href="./accounts-home.html" class="govuk-back-link">Back</a>
+<!-- <a href="./accounts-home.html" class="govuk-back-link">Back</a> -->
 
 {% endblock %}
 
@@ -29,7 +29,7 @@
             text: 'Business unit'
           },
           hint: {
-            text: 'Enter area where the account is to be created (such as Sussex or London)'
+            text: 'Enter area where the account is to be created'
           },
           items: [
             { text: "Avon and Somerset" },
@@ -146,11 +146,11 @@
         <div class="govuk-button-group">
           {{ govukButton({
             text: "Continue"
-          }) }}
-
-          <p class="govuk-body"><a class="govuk-link" href="#">Cancel</a></p>
-        
+          }) }}        
         </div>
+
+        <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="./accounts-home.html">Cancel</a></p>
+
 
       </form>
 
