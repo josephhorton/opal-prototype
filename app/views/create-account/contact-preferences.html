@@ -4,15 +4,12 @@
 
 {% block beforeContent %}
 
-<a href="task-list.html" class="govuk-back-link">Back</a>
-
-
 {% endblock %}
 
 {% block content %}
 
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-half">
+    <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
       <form method="post" novalidate action="task-list?cpCompleted=true">
@@ -24,6 +21,7 @@
             text: "Primary email address",
             classes: "govuk-label--s"
           },
+          classes: "govuk-input--width-30",
           id: "email-1",
           name: "email-1",
           value: data['email-1'],
@@ -37,6 +35,7 @@
             text: "Secondary email address",
             classes: "govuk-label--s"
           },
+          classes: "govuk-input--width-30",
           id: "email-2",
           name: "email-2",
           value: data['email-2'],
@@ -91,58 +90,23 @@
 
         {% endif %}
 
-
-        <!-- <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-
-        {{ govukRadios({
-          name: "documentLanguage",
-          value: data['documentLanguage'],
-          classes: "govuk-radios",
-          fieldset: {
-            legend: {
-              text: "Document language",
-              classes: "govuk-fieldset__legend--m"
-            }
-          },
-          items: [
-            {
-              value: "english",
-              text: "English only"
-            },
-            {
-              value: "welsh-english",
-              text: "Welsh and English"
-            }
-          ]
-        }) }}
-
-        {{ govukRadios({
-          name: "hearingLanguage",
-          value: data['hearingLanguage'],
-          classes: "govuk-radios",
-          fieldset: {
-            legend: {
-              text: "Court hearing language",
-              classes: "govuk-fieldset__legend--m"
-            }
-          },
-          items: [
-            {
-              value: "english",
-              text: "English only"
-            },
-            {
-              value: "welsh-english",
-              text: "Welsh and English"
-            }
-          ]
-        }) }} -->
-
         
-        
-        {{ govukButton({
-          text: "Save and return to tasks"
-        }) }}
+        <div class="govuk-button-group">
+          {{ govukButton({
+            text: "Return to account details"
+          }) }}
+
+          {{ govukButton({
+            text: "Add employer details",
+            classes: "govuk-button--secondary",
+            href: "./employer-details.html"
+          }) }}        
+        </div>
+
+      </form>
+
+      <p class="govuk-body"><a class="govuk-link govuk-! govuk-link--no-visited-state" href="task-list-individual.html">Cancel</a></p>
+
 
       </form>
 

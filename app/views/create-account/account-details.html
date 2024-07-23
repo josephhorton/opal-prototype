@@ -54,7 +54,7 @@
             text: "Account type"
           },
           value: {
-            text: data['accountType'] or "Fine"
+            text: 'Fine'
           }
         },
         {
@@ -62,11 +62,106 @@
             text: "Defendant type"
           },
           value: {
-            text: "Adult or youth only"
-          }
+            text:  data['defendantTypeF']
+          }       
         }
       ]
     }) }}
+
+    <!-- WORST CASE SCENARIO – IF ALL ACCOUNT TYPES LEAD THE THE TASK LIST -->
+    <!-- <div>
+    {% if (data['accountType'] == "Fine") %}
+      {{ govukSummaryList({
+        classes: "govuk-!-margin-bottom-7",
+        rows: [
+          {
+            key: {
+              text: "Business unit"
+            },
+            value: {
+              text: data['businessUnit'] or "Avon and Somerset"
+            }
+          },
+          {
+            key: {
+              text: "Account type"
+            },
+            value: {
+              text: data['accountType'] or "Fine"
+            }
+          },
+          {
+            key: {
+              text: "Defendant type"
+            },
+            value: {
+              text:  data['defendantTypeF']
+            }       
+          }
+        ]
+      }) }}
+    {% elseif (data['accountType'] == "Fixed Penalty") %} 
+    {{ govukSummaryList({
+      classes: "govuk-!-margin-bottom-7",
+      rows: [
+        {
+          key: {
+            text: "Business unit"
+          },
+          value: {
+            text: data['businessUnit'] or "Avon and Somerset"
+          }
+        },
+        {
+          key: {
+            text: "Account type"
+          },
+          value: {
+            text: 'Fixed Penalty'
+          }
+        },
+        {
+          key: {
+            text: "Defendant type"
+          },
+          value: {
+            text:  data['defendantTypeFP']
+          }       
+        }
+      ]
+    }) }}
+    {% elseif (data['accountType'] == "Conditional Caution")  %}
+    {{ govukSummaryList({
+      classes: "govuk-!-margin-bottom-7",
+      rows: [
+        {
+          key: {
+            text: "Business unit"
+          },
+          value: {
+            text: data['businessUnit'] or "Avon and Somerset"
+          }
+        },
+        {
+          key: {
+            text: "Account type"
+          },
+          value: {
+            text: 'Conditional Caution'
+          }
+        },
+        {
+          key: {
+            text: "Defendant type"
+          },
+          value: {
+            text:  'Adult or youth only'
+          }       
+        }
+      ]
+    }) }}
+    {% endif %}
+    </div> -->
 
 
     <!-- {
@@ -381,11 +476,11 @@
       ]
     }) }}
 
-    <h2 class="govuk-heading-m govuk-!-margin-top-7">Defendant details</h2>
+    <!-- <h2 class="govuk-heading-m govuk-!-margin-top-7">Defendant details</h2> -->
     <!-- <p class="govuk-body">Defendant type is {{ data['defendantType'] or 'Adult or youth only'}}.</p> -->
 
     <!-- TASK LIST -->
-    {{ govukTaskList({
+    <!-- {{ govukTaskList({
       idPrefix: "second-section",
       items: [
         {
@@ -413,9 +508,9 @@
           status: edStatusTag
         }
       ] | removeEmpty
-    }) }}
+    }) }} -->
 
-    <h2 class="govuk-heading-m govuk-!-margin-top-7">Offence and imposition details</h2>
+    <!-- <h2 class="govuk-heading-m govuk-!-margin-top-7">Offence and imposition details</h2>
 
     {{ govukTaskList({
       idPrefix: "third-section",
@@ -457,7 +552,7 @@
           status: ofdStatusTag
         }
       ] 
-    }) }}
+    }) }} -->
 
     <!-- <h2 class="govuk-heading-m govuk-!-margin-top-7">Additional information</h2>
 
@@ -475,11 +570,10 @@
       ]
     }) }} -->
 
-    <h2 class="govuk-heading-m govuk-!-margin-top-7">Review and publish</h2>
+    <!-- <h2 class="govuk-heading-m govuk-!-margin-top-7">Review and publish</h2>
 
     <p class="govuk-body">Check that all required fields have been entered before you publish.</p>
 
-    <!-- OPTION 1 -->
     <div class="" data-module="edge">
       {% if data['allCompleted'] == "true" %}
       {{ govukButton({
@@ -490,7 +584,7 @@
       {% else %}
       
       {% endif %}
-    </div>
+    </div> -->
 
     <!-- OPTION 2 -->
     <!-- {{ govukTaskList({
@@ -509,7 +603,8 @@
     }) }} -->
 
     {# Size modifiers: xl, l, m #}
-    <p data-module="edge" class="govuk-body govuk-!-margin-top-7"><a href="#" class="govuk-link app-destructive-link">Delete account</a></p>
+    <!-- <p data-module="edge" class="govuk-body govuk-!-margin-top-7"><a href="#" class="govuk-link app-destructive-link">Delete account</a></p> -->
+
 
   </div> 
 

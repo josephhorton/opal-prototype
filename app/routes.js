@@ -11,25 +11,21 @@ const router = govukPrototypeKit.requests.setupRouter()
 require('./routes/account')(router)
 
 
-router.post('/account-settings', function(request, response) {
+router.post('/create-account-form', function(request, response) {
 
     var defendantFine = request.session.data['defendantTypeF']
     var defendantFixedPentalty = request.session.data['defendantTypeFP']
     var accountType = request.session.data['accountType']
 
 
-
-    if ((defendantFine == "Adult or youth only") || (defendantFixedPentalty == "Adult or youth only")){
-        response.redirect("./create-account/task-list-individual")
+    if (accountType == "Fine") {
+        response.redirect("./create-account/account-details")
     } 
-    else if ((defendantFine == "Adult or youth with parent or guardian to pay") || (defendantFixedPentalty == "Adult or youth with parent or guardian to pay")){
-        response.redirect("./create-account/task-list-parent-guardian")
+    else if (accountType == "Fixed Penalty") {
+        response.redirect("./create-account/end-of-prototype")
     } 
-    else if (accountType == "Conditional caution"){
-        response.redirect("./create-account/task-list-individual")
-    }
-    else {
-        response.redirect("./create-account/task-list-company")
+    else if (accountType == "Conditional Caution"){
+        response.redirect("./create-account/end-of-prototype")
     }
 })
 

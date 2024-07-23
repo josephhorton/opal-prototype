@@ -15,7 +15,7 @@
 
       <h1 class="govuk-heading-l">{{pageName}}</h1>
 
-      <form method="post" novalidate action="task-list-individual?cdCompleted=true">
+      <form method="post" novalidate action="account-details?cdCompleted=true">
 
         {{ xGovukAutocomplete({
           formGroup: {
@@ -130,7 +130,7 @@
 
         {{ govukInput({
           label: {
-              text: "Prosecutor Court Reference (PCR)",
+              text: "Prosecutor Case Reference (PCR)",
               classes: "govuk-label--s"
           },
           hint: {
@@ -163,7 +163,7 @@
             isPageHeading: true
           },
           hint: {
-            text: "Search using enforcement court code"
+            text: "Search using enforcement court or code"
           },
           items: [
             { text: "Cambridge Magistrates Court (1)" },
@@ -218,15 +218,15 @@
           }) }}
 
           {{ govukButton({
-            text: "Add defendant details",
+            text: "Add personal details",
             classes: "govuk-button--secondary",
-            href: "/personal-details.html"
+            href: "#"
           }) }}        
         </div>
 
       </form>
 
-      <p class="govuk-body"><a class="govuk-link govuk-! govuk-link--no-visited-state" href="task-list-individual.html">Cancel</a></p>
+      <p class="govuk-body"><a class="govuk-link govuk-! govuk-link--no-visited-state" href="account-details.html">Cancel</a></p>
 
 
 
