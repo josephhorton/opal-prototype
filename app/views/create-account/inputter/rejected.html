@@ -4,7 +4,7 @@
 
 {% block beforeContent %}
 
-<a href="../accounts-home.html" class="govuk-back-link">Back</a>
+<a href="../index.html" class="govuk-back-link">Back</a>
 
 {% endblock %}
 
@@ -16,6 +16,10 @@
       
       <h1 class="govuk-heading-l">{{pageName}}</h1>
 
+      {{ govukButton({
+        text: "Create account",
+        href: "../create-account.html"
+      }) }}
 
       <nav class="moj-sub-navigation" aria-label="Sub navigation">
 
@@ -42,22 +46,24 @@
       
       </nav>
 
-      <h2 class="govuk-heading-m ">Rejected</h2>
+      <h2 class="govuk-heading-m">Rejected</h2>
+
+      <p class="govuk-body">To resubmit accounts for other team members, you can <a href="#" class="govuk-link--no-visited-state">view all rejected accounts</a>.</p>
 
       <table class="govuk-table" data-module="moj-sortable-table">
 
         <thead class="govuk-table__head">
           <tr class="govuk-table__row">
       
-            <th scope="col" class="govuk-table__header" style="width: 30%;" aria-sort="none">Defendant</th>
+            <th scope="col" class="govuk-table__header" style="width: 20%;" aria-sort="none">Defendant</th>
             
             <th scope="col" class="govuk-table__header" style="width: 20%;" aria-sort="none">Date of birth</th>
 
             <th scope="col" class="govuk-table__header" style="width: 20%;" aria-sort="none">Created</th>
       
-            <th scope="col" class="govuk-table__header" style="width: 30%;" aria-sort="none">Business unit</th>
+            <th scope="col" class="govuk-table__header" style="width: 20%;" aria-sort="none">Business unit</th>
 
-            <!-- <th scope="col" class="govuk-table__header" aria-sort="none">Submitted by</th> -->
+            <th scope="col" class="govuk-table__header" style="width: 20%;" aria-sort="none">Rejected by</th>
           </tr>
         </thead>
       
@@ -65,7 +71,7 @@
 
           <tr class="govuk-table__row">
       
-            <td class="govuk-table__cell"><a href="#" class="govuk-link govuk-link--no-underlines govuk-link--no-visited-state">JONES, Michael</a></td>
+            <td class="govuk-table__cell"><a href="../check-all.html?name=JonesMichael" class="govuk-link govuk-link--no-underlines govuk-link--no-visited-state">JONES, Michael</a></td>
       
             <td class="govuk-table__cell">30 Jan 1992</td>
 
@@ -73,7 +79,7 @@
       
             <td class="govuk-table__cell">Cambridgeshire</td>
 
-            <!-- <td class="govuk-table__cell">sally.hughes</td> -->
+            <td class="govuk-table__cell">sally.hughes</td>
           </tr>
       
         </tbody>

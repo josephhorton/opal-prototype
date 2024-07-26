@@ -29,6 +29,24 @@ router.post('/create-account-form', function(request, response) {
     }
 })
 
+// COURT DETAILS FORM
+
+router.post('/court-details-form', function(request, response) {
+  
+    // Determine the next page based on the hidden input value
+    var nextPage = request.body.nextPage;
+    
+    if (nextPage === 'account-details') {
+      response.redirect('./create-account/account-details?cdCompleted=true');
+    } else if (nextPage === 'personal-details') {
+      response.redirect('./create-account/personal-details?cdCompleted=true');
+    } else {
+      // Default fallback
+      response.redirect('/');
+    }
+  });
+  
+
 
 router.post('/defendant-type-question', function(request, response) {
 

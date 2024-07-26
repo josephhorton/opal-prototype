@@ -8,8 +8,7 @@
 
 {% block beforeContent %}
 
-<!-- <a href="account-details.html" class="govuk-back-link">Back</a> -->
-
+<a href="create-account.html" class="govuk-back-link">Back</a>
 
 {% endblock %}
 
@@ -18,24 +17,6 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    
-    <!-- <p class="govuk-body govuk-!-margin-bottom-6">Document and hearing language are in <a class="govuk-link--no-visited-state" href="#">Welsh and English</a>.</p> -->
-    {% if data['businessUnit'] == "Gwent" %}
-
-    <!-- <span class="govuk-caption-l">{{ data['businessUnit'] or "Bedfordshire" }}</span> -->
-    <h1 class="govuk-heading-l ">{{ pageName }}</h1>
-
-    <!-- class="govuk-!-margin-bottom-6" style="background-color: #EEEFEF; padding: 15px;" -->
-    <!-- <div >
-      <p class="govuk-body-s govuk-!-margin-bottom-2"><strong><a class="govuk-link--no-visited-state" href="#">Language preference</strong></a></p>
-      <p class="govuk-body govuk-!-margin-bottom-2">Document language: Welsh and English<a class="govuk-link--no-visited-state" href="#"></a></p>
-      <p class="govuk-body govuk-!-margin-bottom-2">Court hearing language: Welsh and English<a class="govuk-link--no-visited-state" href="#"></a></p>
-      <p class="govuk-body govuk-!-margin-bottom-6"><a class="govuk-link--no-visited-state" href="#">Change</a></p>
-    </div> -->
-
-    {% else %}
-
-    <!-- <span class="govuk-caption-l">{{ data['businessUnit'] or "Bedfordshire" }}</span> -->
     <h1 class="govuk-heading-l govuk-!-margin-bottom-">{{ pageName }}</h1>
 
     {{ govukSummaryList({
@@ -64,191 +45,51 @@
           value: {
             text:  data['defendantTypeF']
           }       
-        }
+        },
+        {
+          key: {
+            text: "Document language"
+          },
+          value: {
+            text: data['documentLanguage']
+          },
+          actions: {
+            items: [
+              {
+                href: "language-preference",
+                text: "Change",
+                visuallyHiddenText: "document language",
+                classes: "govuk-link--no-visited-state"
+              }
+            ]
+          }   
+        } if data['businessUnit'] == "Port Talbot",
+        {
+          key: {
+            text: "Court hearing language"
+          },
+          value: {
+            html: data['courtHearingLanguage']
+          },
+          actions: {
+            items: [
+              {
+                href: "language-preference",
+                text: "Change",
+                visuallyHiddenText: "language preference",
+                classes: "govuk-link--no-visited-state"
+              }
+            ]
+          }   
+        } if data['businessUnit'] == "Port Talbot"        
       ]
     }) }}
-
-    <!-- WORST CASE SCENARIO – IF ALL ACCOUNT TYPES LEAD THE THE TASK LIST -->
-    <!-- <div>
-    {% if (data['accountType'] == "Fine") %}
-      {{ govukSummaryList({
-        classes: "govuk-!-margin-bottom-7",
-        rows: [
-          {
-            key: {
-              text: "Business unit"
-            },
-            value: {
-              text: data['businessUnit'] or "Avon and Somerset"
-            }
-          },
-          {
-            key: {
-              text: "Account type"
-            },
-            value: {
-              text: data['accountType'] or "Fine"
-            }
-          },
-          {
-            key: {
-              text: "Defendant type"
-            },
-            value: {
-              text:  data['defendantTypeF']
-            }       
-          }
-        ]
-      }) }}
-    {% elseif (data['accountType'] == "Fixed Penalty") %} 
-    {{ govukSummaryList({
-      classes: "govuk-!-margin-bottom-7",
-      rows: [
-        {
-          key: {
-            text: "Business unit"
-          },
-          value: {
-            text: data['businessUnit'] or "Avon and Somerset"
-          }
-        },
-        {
-          key: {
-            text: "Account type"
-          },
-          value: {
-            text: 'Fixed Penalty'
-          }
-        },
-        {
-          key: {
-            text: "Defendant type"
-          },
-          value: {
-            text:  data['defendantTypeFP']
-          }       
-        }
-      ]
-    }) }}
-    {% elseif (data['accountType'] == "Conditional Caution")  %}
-    {{ govukSummaryList({
-      classes: "govuk-!-margin-bottom-7",
-      rows: [
-        {
-          key: {
-            text: "Business unit"
-          },
-          value: {
-            text: data['businessUnit'] or "Avon and Somerset"
-          }
-        },
-        {
-          key: {
-            text: "Account type"
-          },
-          value: {
-            text: 'Conditional Caution'
-          }
-        },
-        {
-          key: {
-            text: "Defendant type"
-          },
-          value: {
-            text:  'Adult or youth only'
-          }       
-        }
-      ]
-    }) }}
-    {% endif %}
-    </div> -->
-
-
-    <!-- {
-      key: {
-        text: "Language preferences"
-      },
-      value: {
-        html: "<strong>Documents</strong>: Welsh and English<br><strong>Court hearing</strong>: Welsh and English"
-      },
-      actions: {
-        items: [
-          {
-            href: "#",
-            text: "Change",
-            visuallyHiddenText: "language preference",
-            classes: "govuk-link--no-visited-state"
-          }
-        ]
-      }
-    } if data['businessUnit'] == "Port Talbot"  -->
-
-    {% endif %}
-
-    
-
-
-    <!-- <details class="govuk-details govuk-!-margin-bottom-8">
-      <summary class="govuk-details__summary">
-        <span class="govuk-details__summary-text">
-          Change language preference
-        </span>
-      </summary>
-      <div class="govuk-details__text">
-        {{ govukRadios({
-          name: "documentLanguage",
-          classes: "govuk-radios--small",
-          fieldset: {
-            legend: {
-              text: "Documents",
-              classes: "govuk-fieldset__legend--s"
-            }
-          },
-          value: data['documentLanguage'],
-          items: [
-            {
-              value: "English only",
-              text: "English only"
-            },
-            {
-              value: "Welsh and English",
-              text: "Welsh and English"
-            }
-          ]
-        }) }}
-
-        {{ govukRadios({
-          name: "hearingLanguage",
-          classes: "govuk-radios--small",
-          fieldset: {
-            legend: {
-              text: "Court hearings",
-              classes: "govuk-fieldset__legend--s"
-            }
-          },
-          value: data['hearingLanguage'],
-          items: [
-            {
-              value: "English only",
-              text: "English only"
-            },
-            {
-              value: "Welsh and English",
-              text: "Welsh and English"
-            }
-          ]
-        }) }}
-      </div>
-    </details> -->
-  
 
   </div>
 </div>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-
-
 
     <!-- CONDITIONS FOR STATUS TAGS -->
     <div>
@@ -267,7 +108,7 @@
 
           {% set cdStatusTag = {
             tag: {
-              text: "Completed",
+              text: "Provided",
               classes: "govuk-tag--blue"
             }
           } %}
@@ -289,7 +130,7 @@
 
           {% set pdStatusTag = {
             tag: {
-              text: "Completed",
+              text: "Provided",
               classes: "govuk-tag--blue"
             }
           } %}
@@ -311,7 +152,7 @@
 
           {% set codStatusTag = {
             tag: {
-              text: "Completed",
+              text: "Provided",
               classes: "govuk-tag--blue"
             }
           } %}
@@ -333,7 +174,7 @@
 
           {% set cpStatusTag = {
             tag: {
-              text: "Completed",
+              text: "Provided",
               classes: "govuk-tag--blue"
             }
           } %}
@@ -355,7 +196,7 @@
 
         {% set edStatusTag = {
           tag: {
-            text: "Completed",
+            text: "Provided",
             classes: "govuk-tag--blue"
           }
         } %}
@@ -377,7 +218,7 @@
 
         {% set pgdStatusTag = {
           tag: {
-            text: "Completed",
+            text: "Provided",
             classes: "govuk-tag--blue"
           }
         } %}
@@ -393,35 +234,13 @@
       
         {% endif %}
 
-        <!-- VEHICLE DETAILS -->
-
-        {% if (data['lpCompleted'] == "true") %}
-
-        {% set lpStatusTag = {
-          tag: {
-            text: "Completed",
-            classes: "govuk-tag--blue"
-          }
-        } %}
-        
-      {% else %}
-
-        {% set lpStatusTag = {
-          tag: {
-            text: "Not provided",
-            classes: "govuk-tag--grey"
-          }
-        } %}
-      
-        {% endif %}
-
       <!-- OFFENCE DETAILS -->
 
       {% if (data['ofdCompleted'] == "true") %}
 
           {% set ofdStatusTag = {
             tag: {
-              text: "Completed",
+              text: "Provided",
               classes: "govuk-tag--blue"
             }
           } %}
@@ -443,7 +262,7 @@
 
           {% set ptStatusTag = {
             tag: {
-              text: "Completed",
+              text: "Provided",
               classes: "govuk-tag--blue"
             }
           } %}
@@ -476,11 +295,11 @@
       ]
     }) }}
 
-    <!-- <h2 class="govuk-heading-m govuk-!-margin-top-7">Defendant details</h2> -->
-    <!-- <p class="govuk-body">Defendant type is {{ data['defendantType'] or 'Adult or youth only'}}.</p> -->
+    {% if data['defendantTypeF'] == "Adult or youth only" %}
 
-    <!-- TASK LIST -->
-    <!-- {{ govukTaskList({
+    <h2 class="govuk-heading-m govuk-!-margin-top-7">Defendant details</h2>
+
+    {{ govukTaskList({
       idPrefix: "second-section",
       items: [
         {
@@ -496,7 +315,7 @@
             text: "Contact details",
             classes: "govuk-link--no-visited-state"
           },
-          href: "contact-preferences",
+          href: "contact-details",
           status: cpStatusTag
         },
         {
@@ -507,8 +326,93 @@
           href: "employer-details",
           status: edStatusTag
         }
-      ] | removeEmpty
-    }) }} -->
+      ]
+    }) }}
+
+    {% endif %}
+
+    {% if data['defendantTypeF'] == "Adult or youth with parent or guardian to pay" %}
+
+    <h2 class="govuk-heading-m govuk-!-margin-top-7">Parent or guardian details</h2>
+
+    {{ govukTaskList({
+      idPrefix: "second-section",
+      items: [
+        {
+          title: {
+            text: "Parent or guardian details",
+            classes: "govuk-link--no-visited-state"
+          },
+          href: 'paren-guardian-details',
+          status: pgdStatusTag
+        },
+        {
+          title: {
+            text: "Contact details",
+            classes: "govuk-link--no-visited-state"
+          },
+          href: "contact-details",
+          status: cpStatusTag
+        },
+        {
+          title: {
+            text: "Employer details",
+            classes: "govuk-link--no-visited-state"
+          },
+          href: "employer-details",
+          status: edStatusTag
+        }
+      ]
+    }) }}
+
+    <h2 class="govuk-heading-m govuk-!-margin-top-7">Defendant details</h2>
+
+    {{ govukTaskList({
+      idPrefix: "second-section",
+      items: [
+        {
+          title: {
+            text: "Personal details",
+            classes: "govuk-link--no-visited-state"
+          },
+          href: 'personal-details',
+          status: pdStatusTag
+        }
+      ]
+    }) }}
+
+    {% endif %}
+
+    {% if data['defendantTypeF'] == "Company" %}
+
+    <h2 class="govuk-heading-m govuk-!-margin-top-7">Company details</h2>
+
+    {{ govukTaskList({
+      idPrefix: "second-section",
+      items: [
+        {
+          title: {
+            text: "Company details",
+            classes: "govuk-link--no-visited-state"
+          },
+          href: 'company-details',
+          status: codStatusTag
+        },
+        {
+          title: {
+            text: "Contact details",
+            classes: "govuk-link--no-visited-state"
+          },
+          href: 'contact-details',
+          status: codStatusTag
+        }
+      ]
+    }) }}
+
+    {% endif %}
+
+  
+    
 
     <!-- <h2 class="govuk-heading-m govuk-!-margin-top-7">Offence and imposition details</h2>
 
@@ -586,33 +490,9 @@
       {% endif %}
     </div> -->
 
-    <!-- OPTION 2 -->
-    <!-- {{ govukTaskList({
-      idPrefix: "fourth-section",
-      items: [
-      {
-        title: {
-          text: "Review account"
-        },
-        status: {
-          text: "Cannot start yet",
-          classes: "govuk-task-list__status--cannot-start-yet"
-        }
-      }
-      ]
-    }) }} -->
-
-    {# Size modifiers: xl, l, m #}
-    <!-- <p data-module="edge" class="govuk-body govuk-!-margin-top-7"><a href="#" class="govuk-link app-destructive-link">Delete account</a></p> -->
-
 
   </div> 
 
-
-  {% if data['businessUnit'] == "Gwent" %}
-
-  
-  {% endif %}
-
 </div>
+
 {% endblock %}

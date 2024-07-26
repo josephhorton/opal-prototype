@@ -12,7 +12,7 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
-      <form method="post" novalidate action="task-list?cpCompleted=true">
+      <form method="post" novalidate action="account-details?cpCompleted=true">
 
         <!-- EMAILS -->
         
@@ -86,7 +86,7 @@
         }) }}
 
 
-        {% if data['businessUnit'] == "Gwent" %}
+        {% if data['businessUnit'] == "Port Talbot" %}
 
         {% endif %}
 
@@ -99,13 +99,13 @@
           {{ govukButton({
             text: "Add employer details",
             classes: "govuk-button--secondary",
-            href: "./employer-details.html"
+            href: "./employer-details.html?cpCompleted=true"
           }) }}        
         </div>
 
       </form>
 
-      <p class="govuk-body"><a class="govuk-link govuk-! govuk-link--no-visited-state" href="task-list-individual.html">Cancel</a></p>
+      <p class="govuk-body"><a class="govuk-link govuk-! govuk-link--no-visited-state" href="account-details">Cancel</a></p>
 
 
       </form>

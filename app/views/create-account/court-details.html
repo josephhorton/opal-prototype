@@ -210,51 +210,24 @@
         }) }}
 
 
-        
-
         <div class="govuk-button-group">
-          {{ govukButton({
-            text: "Return to account details"
-          }) }}
-
-          {{ govukButton({
-            text: "Add personal details",
-            classes: "govuk-button--secondary",
-            href: "#"
-          }) }}        
+          <button type="submit" class="govuk-button">
+            Return to account details
+          </button>
+          <button type="submit" class="govuk-button govuk-button--secondary"  formaction="./personal-details?pdCompleted=true">
+            Add personal details
+          </button>
         </div>
 
       </form>
 
       <p class="govuk-body"><a class="govuk-link govuk-! govuk-link--no-visited-state" href="account-details.html">Cancel</a></p>
 
-
-
     </div>
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        updateCharacterCount(); // Call update function on page load
-    });
-    
-    function updateCharacterCount() {
-        var input = document.getElementById('ljaReferenceCode');
-        var charCountPara = document.getElementById('charCount');
-        var remainingCharsDisplay = document.getElementById('remainingChars');
-        var maxLength = 7;
-        var currentLength = input.value.length;
-        var charsLeft = maxLength - currentLength;
-    
-        if (charsLeft < 0) {
-            charCountPara.classList.add('govuk-!-font-weight-bold', 'app-font-colour-red'); // Add classes for bold and red text
-            charCountPara.innerHTML = `You have <span id="remainingChars">${Math.abs(charsLeft)}</span> characters too many`;
-        } else {
-            charCountPara.classList.remove('govuk-!-font-weight-bold', 'app-font-colour-red'); // Remove classes when character count is within limit
-            charCountPara.innerHTML = `You have <span id="remainingChars">${charsLeft}</span> characters remaining`;
-        }
-    }
-    </script>
-          
+   
+  </script>        
   
 {% endblock %}

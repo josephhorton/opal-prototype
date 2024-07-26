@@ -9,10 +9,10 @@
 {% block content %}
 
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-half">
+    <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
-      <form method="post" novalidate action="task-list?edCompleted=true">
+      <form method="post" novalidate action="account-details?edCompleted=true">
 
         <!-- DETAILS -->
         
@@ -22,6 +22,7 @@
             classes: "govuk-label--s"
           },
           id: "employerName",
+          classes: "govuk-input--width-30",
           name: "employerName",
           value: data['employerName']
         }) }}
@@ -47,6 +48,7 @@
           },
           id: "employerEmail",
           name: "employerEmail",
+          classes: "govuk-input--width-30",
           value: data['employerEmail'],
           type: "email",
           spellcheck: false
@@ -81,6 +83,7 @@
             },
             id: "employer-address-line-1",
             name: "employerAddressLine1",
+            classes: "govuk-input--width-30",
             autocomplete: "address-line1",
             value: data['employerAddressLine1']
           }) }}
@@ -92,6 +95,7 @@
             },
             id: "employer-address-line-2",
             name: "employerAddressLine2",
+            classes: "govuk-input--width-30",
             autocomplete: "address-line2",
             value: data['employerAddressLine2']
           }) }}
@@ -103,6 +107,7 @@
             },
             id: "employer-address-line-3",
             name: "employerAddressLine3",
+            classes: "govuk-input--width-30",
             autocomplete: "address-level3",
             value: data['employerAddressLine3']
           }) }}
@@ -114,6 +119,7 @@
             },
             id: "employer-address-line-4",
             name: "employerAddressLine4",
+            classes: "govuk-input--width-30",
             autocomplete: "address-level4",
             value: data['employerAddressLine4']
           }) }}
@@ -124,6 +130,7 @@
               classes: "govuk-label--s"
             },
             id: "employer-address-line-5",
+            classes: "govuk-input--width-30",
             name: "employerAddressLine5",
             autocomplete: "address-level5",
             value: data['employerAddressLine5']
@@ -144,11 +151,21 @@
         
         {% endcall %}
         
-        {{ govukButton({
-          text: "Save and return to tasks"
-        }) }}
+        <div class="govuk-button-group">
+          {{ govukButton({
+            text: "Return to account details"
+          }) }}
+
+          {{ govukButton({
+            text: "Add offence details",
+            classes: "govuk-button--secondary",
+            href: "personal-details.html?edCompleted=true"
+          }) }}        
+        </div>
 
       </form>
+
+      <p class="govuk-body"><a class="govuk-link govuk-! govuk-link--no-visited-state" href="account-details.html">Cancel</a></p>
 
 
     </div>

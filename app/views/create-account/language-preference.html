@@ -1,0 +1,73 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Language preferences" %}
+
+{% block beforeContent %}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+      <p class="govuk-body">These language preferences are for the defendant, or a parent or guardian if they are paying on behalf of the defendant.</p>
+
+      <form method="post" novalidate action="account-details">
+
+        {{ govukRadios({
+          name: "documentLanguage",
+          fieldset: {
+            legend: {
+              text: "Documents",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          value: data['documentLanguage'],
+          items: [
+            {
+              value: "Welsh and English",
+              text: "Welsh and English"
+            },
+            {
+              value: "English only",
+              text: "English only"
+            }
+          ]
+        }) }}
+
+        {{ govukRadios({
+          name: "courtHearingLanguage",
+          fieldset: {
+            legend: {
+              text: "Court hearings",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          value: data['courtHearingLanguage'],
+          items: [
+            {
+              value: "Welsh and English",
+              text: "Welsh and English"
+            },
+            {
+              value: "English only",
+              text: "English only"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Save changes"
+        }) }}
+
+      </form>
+
+      <p class="govuk-body"><a class="govuk-link govuk-! govuk-link--no-visited-state" href="account-details.html">Cancel</a></p>
+
+
+    </div>
+  </div>
+
+{% endblock %}

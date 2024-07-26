@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = "Defendant details" %}
+{% set pageName = "Company details" %}
 
 {% block beforeContent %}
 
@@ -11,16 +11,17 @@
 {% block content %}
 
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-half">
+    <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
-      <form method="post" novalidate action="task-list?codCompleted=true">
+      <form method="post" novalidate action="account-details?codCompleted=true">
 
         <!-- COMPANY NAME -->
         <div>
           {{ govukInput({
             id: "company-name",
             name: "companyName",
+            classes: "govuk-input--width-30",
             type: "text",
             value: data['companyName'],
             label: {
@@ -44,6 +45,7 @@
           {{ govukInput({
             id: "[new][aliasCompanyName]",
             name: "[new][aliasCompanyName]",
+            classes: "govuk-input--width-30",
             label: {
               text: "Company name"
             },
@@ -97,6 +99,7 @@
               classes: "govuk-label--s"
             },
             id: "address-line-1",
+            classes: "govuk-input--width-30",
             name: "addressLine1",
             autocomplete: "address-line1",
             value: data['addressLine1']
@@ -108,6 +111,7 @@
               classes: "govuk-label--s"
             },
             id: "address-line-2",
+            classes: "govuk-input--width-30",
             name: "addressLine2",
             autocomplete: "address-line2",
             value: data['addressLine2']
@@ -120,6 +124,7 @@
             },
             id: "address-line-3",
             name: "addressLine3",
+            classes: "govuk-input--width-20",
             autocomplete: "address-level3",
             value: data['addressLine3']
           }) }}
@@ -139,14 +144,47 @@
         
         {% endcall %}
 
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
+        <h2 class="govuk-heading-m">Vehicle details</h2>
 
-        
-        {{ govukButton({
-          text: "Save and return to tasks"
+        {{ govukInput({
+          label: {
+            text: "Make of the car",
+            classes: "govuk-label--s"
+          },
+          id: "carMake",
+          name: "carMake",
+          classes: "govuk-input--width-20",
+          value: data['carMake']
         }) }}
 
+        {{ govukInput({
+          label: {
+            text: "Registration number",
+            classes: "govuk-label--s"
+          },
+          classes: "govuk-input--width-10 govuk-input--extra-letter-spacing",
+          id: "carRegistration",
+          name: "carRegistration",
+          value: data['carRegistration']
+        }) }}
+
+        <div class="govuk-button-group">
+          {{ govukButton({
+            text: "Return to account details"
+          }) }}
+
+          {{ govukButton({
+            text: "Add contact details",
+            classes: "govuk-button--secondary",
+            href: "./contact-details.html?codCompleted=true"
+          }) }}        
+        </div>
+
       </form>
+
+      <p class="govuk-body"><a class="govuk-link govuk-! govuk-link--no-visited-state" href="account-details">Cancel</a></p>
 
 
     </div>

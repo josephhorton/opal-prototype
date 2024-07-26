@@ -1,0 +1,178 @@
+{% extends "layouts/global.html" %}
+
+{% set pageName = "Search for an account" %}
+
+{% block beforeContent %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+    <form method="post" novalidate action="results">
+
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: {
+            text: "Filter by business unit"
+          },
+          value: {
+            text: "All business units"
+          },
+          actions: {
+            items: [
+              {
+                href: "#",
+                text: "Change",
+                classes: "govuk-link--no-visited-state",
+                visuallyHiddenText: "business unit"
+              }
+            ]
+          }
+        }
+      ]
+    }) }}
+    
+
+    {{ govukInput({
+      id: "uniqueID",
+      name: "uniqueID",
+      classes: "govuk-input--width-10",
+      label: {
+        text: "Unique ID",
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "Account number, case number or National Insurance number"
+      },
+      value: data['uniqueID']
+    }) }}
+
+    {{ govukInput({
+      id: "PCR",
+      name: "PCR",
+      classes: "govuk-input--width-10",
+      label: {
+        text: "Prosecutor Case Reference (PCR)",
+        classes: "govuk-label--s"
+      },
+      value: data['PCR']
+    }) }}
+
+
+    <!-- DEFENDANT SEARCH -->
+    {% set Defendants %}
+    <h2 class="govuk-heading-m">Defendant</h2>
+
+    {{ govukRadios({
+      name: "selectDefendantType",
+      fieldset: {
+        legend: {
+          text: "Select defendant type",
+          classes: "govuk-fieldset__legend--s"
+        }
+      },
+      value: data['selectDefendantType'],
+      items: [
+        {
+          value: "Individual",
+          text: "Individual"
+        },
+        {
+          value: "Company",
+          text: "Company"
+        }
+      ]
+    }) }}
+
+    {{ govukInput({
+      id: "addressLine1",
+      name: "addressLine1",
+      classes: "govuk-input--width-30",
+      label: {
+        text: "Address line 1",
+        classes: "govuk-label--s"
+      },
+      value: data['addressLine1']
+    }) }}
+
+    {{ govukInput({
+      id: "postcode",
+      name: "postcode",
+      classes: "govuk-input--width-10",
+      label: {
+        text: "Postcode",
+        classes: "govuk-label--s"
+      },
+      value: data['postcode']
+    }) }}
+
+    {% endset -%}
+
+    <!-- MINOR CREDITOR SEARCH -->
+    {% set minorCreditors %}
+    <h2 class="govuk-heading-m">Minor creditors</h2>
+    {% endset -%}
+
+    <!-- MAJOR CREDITOR SEARCH -->
+    {% set majorCreditors %}
+    <h2 class="govuk-heading-m">Major creditors</h2>
+    {% endset -%}
+
+    {{ govukTabs({
+      items: [
+        {
+          label: "Defendant",
+          id: "defendant",
+          panel: {
+            html: Defendants
+          }
+        },
+        {
+          label: "Minor creditors",
+          id: "minor-creditor",
+          panel: {
+            html: minorCreditors
+          }
+        },
+        {
+          label: "Major creditors",
+          id: "major-creditor",
+          panel: {
+            html: majorCreditors
+          }
+        }
+      ]
+    }) }}
+
+    {{ govukCheckboxes({
+      name: "activeAccounts",
+      classes: "govuk-checkboxes--small",
+      values: data['activeAccounts'],
+      items: [
+        {
+          value: data['yes'],
+          text: "Active accounts only"
+        }
+      ]
+    }) }}
+
+    {{ govukButton({
+      text: "Search"
+    }) }}
+    </form>
+
+    
+
+   
+
+  </div>
+</div>
+
+
+{% endblock %}
+
