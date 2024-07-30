@@ -12,7 +12,7 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
-      <form method="post" novalidate action="account-details?edCompleted=true">
+      <form id="employer-details-form" method="post" novalidate action="account-details">
 
         <!-- DETAILS -->
         
@@ -157,12 +157,12 @@
             Return to account details
           </button>
           {% if data['defendantTypeF'] == "Adult or youth only" %}
-          <button type="submit" class="govuk-button govuk-button--secondary"  formaction="./add-offence?pdCompleted=true">
+          <button type="submit" class="govuk-button govuk-button--secondary"  formaction="./add-offence">
             Add offence details
           </button>
           {% endif %}
           {% if data['defendantTypeF'] == "Adult or youth with parent or guardian to pay" %}
-          <button type="submit" class="govuk-button govuk-button--secondary"  formaction="./personal-details?pdCompleted=true">
+          <button type="submit" class="govuk-button govuk-button--secondary"  formaction="./personal-details">
             Add defendant details
           </button>
           {% endif %}
@@ -177,5 +177,37 @@
 
     </div>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('employer-details-form');
+      const formFields = form.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea');
+  
+      // Function to check if any form field is filled out
+      function isFormFilled() {
+        for (let field of formFields) {
+          if (field.value.trim() !== '') {
+            return true;
+          }
+        }
+        return false;
+      }
+      
+      // Update status based on form input
+      function updateStatus() {
+        if (isFormFilled()) {
+          localStorage.setItem('employerDetailsProvided', 'true');
+        } else {
+          localStorage.setItem('employerDetailsProvided', 'false');
+        }
+      }
+      
+      // Add event listeners to form buttons
+      form.addEventListener('submit', function(event) {
+        updateStatus();
+      });
+    });
+  </script>
+  
 
 {% endblock %}

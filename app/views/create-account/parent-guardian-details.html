@@ -4,8 +4,6 @@
 
 {% block beforeContent %}
 
-<!-- <a href="task-list.html" class="govuk-back-link">Back</a> -->
-
 {% endblock %}
 
 {% block content %}
@@ -14,7 +12,7 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
-      <form method="post" novalidate action="account-details?pgdCompleted=true">
+      <form id="parent-guardian-details-form" method="post" novalidate action="account-details">
 
   
         <!-- FIRST AND LATE NAME -->
@@ -320,7 +318,7 @@
         <button type="submit" class="govuk-button">
           Return to account details
         </button>
-        <button type="submit" class="govuk-button govuk-button--secondary"  formaction="./contact-details?pgdCompleted=true">
+        <button type="submit" class="govuk-button govuk-button--secondary"  formaction="./contact-details">
           Add contact details
         </button>
       </div>
@@ -331,5 +329,36 @@
 
     </div>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('parent-guardian-details-form');
+      const formFields = form.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea');
+  
+      // Function to check if any form field is filled out
+      function isFormFilled() {
+        for (let field of formFields) {
+          if (field.value.trim() !== '') {
+            return true;
+          }
+        }
+        return false;
+      }
+  
+      // Update status based on form input
+      function updateStatus() {
+        if (isFormFilled()) {
+          localStorage.setItem('parentGuardianDetailsProvided', 'true');
+        } else {
+          localStorage.setItem('parentGuardianDetailsProvided', 'false');
+        }
+      }
+  
+      // Add event listeners to form buttons
+      form.addEventListener('submit', function(event) {
+        updateStatus();
+      });
+    });
+  </script>
 
 {% endblock %}

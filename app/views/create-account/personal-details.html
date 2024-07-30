@@ -15,7 +15,7 @@
       
       <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
-      <form id="personal-details-form" method="post" novalidate action="account-details?pdCompleted=true">
+      <form id="personal-details-form" method="post" novalidate action="account-details">
 
         <!-- TITLE -->
         <div>
@@ -294,36 +294,35 @@
   </div>
 
   <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('personal-details-form');
-    const formFields = form.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea');
-
-    // Function to check if any form field is filled out
-    function isFormFilled() {
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('personal-details-form');
+      const formFields = form.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea');
+  
+      // Function to check if any form field is filled out
+      function isFormFilled() {
         for (let field of formFields) {
-            if (field.value.trim() !== '') {
-                return true;
-            }
+          if (field.value.trim() !== '') {
+            return true;
+          }
         }
         return false;
-    }
-
-    // Update status based on form input
-    function updateStatus() {
+      }
+  
+      // Update status based on form input
+      function updateStatus() {
         if (isFormFilled()) {
-            localStorage.setItem('personalDetailsProvided', 'true');
+          localStorage.setItem('personalDetailsProvided', 'true');
         } else {
-            localStorage.setItem('personalDetailsProvided', 'false');
+          localStorage.setItem('personalDetailsProvided', 'false');
         }
-    }
-
-    // Add event listeners to form buttons
-    form.addEventListener('submit', function() {
+      }
+  
+      // Add event listeners to form buttons
+      form.addEventListener('submit', function(event) {
         updateStatus();
+      });
     });
-});
-
-
   </script>
+  
 
 {% endblock %}

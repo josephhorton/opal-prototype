@@ -19,6 +19,7 @@
 
     <h1 class="govuk-heading-l govuk-!-margin-bottom-">{{ pageName }}</h1>
 
+    <div id="account-details-summary">
     {{ govukSummaryList({
       classes: "govuk-!-margin-bottom-7",
       rows: [
@@ -84,199 +85,6 @@
         } if data['businessUnit'] == "Port Talbot"        
       ]
     }) }}
-
-  </div>
-</div>
-
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-
-    <!-- CONDITIONS FOR STATUS TAGS -->
-    <div>
-
-      <!-- GENERAL NOT STARTED -->
-      {% set notStarted = {
-        tag: {
-          text: "Not provided",
-          classes: "govuk-tag--blue"
-        }
-      } %}
-
-      <!-- COURT DETAILS -->
-
-      {% if (data['cdCompleted'] == "true") %}
-
-          {% set cdStatusTag = {
-            tag: {
-              text: "Provided",
-              classes: "govuk-tag--blue"
-            }
-          } %}
-          
-        {% else %}
-
-          {% set cdStatusTag = {
-            tag: {
-              text: "Not provided",
-              classes: "govuk-tag--grey"
-            }
-          } %}
-      
-      {% endif %}
-
-      <!-- PERSONAL DETAILS -->
-
-      {% if (data['pdCompleted'] == "true") %}
-
-          {% set pdStatusTag = {
-            tag: {
-              text: "Provided",
-              classes: "govuk-tag--blue"
-            }
-          } %}
-          
-        {% else %}
-
-          {% set pdStatusTag = {
-            tag: {
-              text: "Not provided",
-              classes: "govuk-tag--grey"
-            }
-          } %}
-      
-      {% endif %}
-
-      <!-- COMPANY DETAILS -->
-
-      {% if (data['codCompleted'] == "true") %}
-
-          {% set codStatusTag = {
-            tag: {
-              text: "Provided",
-              classes: "govuk-tag--blue"
-            }
-          } %}
-          
-        {% else %}
-
-          {% set codStatusTag = {
-            tag: {
-              text: "Not provided",
-              classes: "govuk-tag--grey"
-            }
-          } %}
-      
-      {% endif %}
-
-      <!-- CONTACT PREFERENCES -->
-
-      {% if (data['cpCompleted'] == "true") %}
-
-          {% set cpStatusTag = {
-            tag: {
-              text: "Provided",
-              classes: "govuk-tag--blue"
-            }
-          } %}
-          
-        {% else %}
-
-          {% set cpStatusTag = {
-            tag: {
-              text: "Not provided",
-              classes: "govuk-tag--grey"
-            }
-          } %}
-      
-      {% endif %}
-
-        <!-- EMPLOYER DETAILS -->
-
-        {% if (data['edCompleted'] == "true") %}
-
-        {% set edStatusTag = {
-          tag: {
-            text: "Provided",
-            classes: "govuk-tag--blue"
-          }
-        } %}
-        
-      {% else %}
-
-        {% set edStatusTag = {
-          tag: {
-            text: "Not provided",
-            classes: "govuk-tag--grey"
-          }
-        } %}
-      
-        {% endif %}
-
-        <!-- PARENT OR GUARDIAN DETAILS -->
-
-        {% if (data['pgdCompleted'] == "true") %}
-
-        {% set pgdStatusTag = {
-          tag: {
-            text: "Provided",
-            classes: "govuk-tag--blue"
-          }
-        } %}
-        
-      {% else %}
-
-        {% set pgdStatusTag = {
-          tag: {
-            text: "Not provided",
-            classes: "govuk-tag--grey"
-          }
-        } %}
-      
-        {% endif %}
-
-      <!-- OFFENCE DETAILS -->
-
-      {% if (data['ofdCompleted'] == "true") %}
-
-          {% set ofdStatusTag = {
-            tag: {
-              text: "Provided",
-              classes: "govuk-tag--blue"
-            }
-          } %}
-          
-        {% else %}
-
-          {% set ofdStatusTag = {
-            tag: {
-              text: "Not provided",
-              classes: "govuk-tag--grey"
-            }
-          } %}
-      
-      {% endif %}
-
-      <!-- PAYMENT TERMS -->
-
-      {% if (data['ptCompleted'] == "true") %}
-
-          {% set ptStatusTag = {
-            tag: {
-              text: "Provided",
-              classes: "govuk-tag--blue"
-            }
-          } %}
-          
-        {% else %}
-
-          {% set ptStatusTag = {
-            tag: {
-              text: "Not provided",
-              classes: "govuk-tag--grey"
-            }
-          } %}
-      
-      {% endif %}
     </div>
 
     <h2 class="govuk-heading-m ">Court details</h2>
@@ -345,51 +153,63 @@
 
     <h2 class="govuk-heading-m govuk-!-margin-top-7">Parent or guardian details</h2>
 
-    {{ govukTaskList({
-      idPrefix: "second-section",
-      items: [
-        {
-          title: {
-            text: "Parent or guardian details",
-            classes: "govuk-link--no-visited-state"
-          },
-          href: 'parent-guardian-details',
-          status: pgdStatusTag
-        },
-        {
-          title: {
-            text: "Contact details",
-            classes: "govuk-link--no-visited-state"
-          },
-          href: "contact-details",
-          status: cpStatusTag
-        },
-        {
-          title: {
-            text: "Employer details",
-            classes: "govuk-link--no-visited-state"
-          },
-          href: "employer-details",
-          status: edStatusTag
-        }
-      ]
-    }) }}
+    <ul class="govuk-task-list">
+      
+      <!-- PARENT OR GUARDIAN DETAILS -->
+      <li class="govuk-task-list__item govuk-task-list__item--with-link">
+        <div class="govuk-task-list__name-and-hint">
+          <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./parent-guardian-details.html" aria-describedby="parent-guardian-details-status">
+            Parent or guardian details
+          </a>
+        </div>
+        <div class="govuk-task-list__status" id="parent-guardian-details-status">
+          <strong class="govuk-tag govuk-tag--grey">Not provided</strong>
+        </div>
+      </li>
+
+      <!-- CONTACT DETAILS -->
+      <li class="govuk-task-list__item govuk-task-list__item--with-link">
+        <div class="govuk-task-list__name-and-hint">
+          <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./contact-details.html" aria-describedby="contact-details-status">
+            Contact details
+          </a>
+        </div>
+        <div class="govuk-task-list__status" id="contact-details-status">
+          <strong class="govuk-tag govuk-tag--grey">Not provided</strong>
+        </div>
+      </li>
+
+      <!-- EMPLOYER DETAILS -->
+      <li class="govuk-task-list__item govuk-task-list__item--with-link">
+        <div class="govuk-task-list__name-and-hint">
+          <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./employer-details.html" aria-describedby="employer-details-status">
+            Employer details
+          </a>
+        </div>
+        <div class="govuk-task-list__status" id="employer-details-status">
+          <strong class="govuk-tag govuk-tag--grey">Not provided</strong>
+        </div>
+      </li>
+
+    </ul>
 
     <h2 class="govuk-heading-m govuk-!-margin-top-7">Defendant details</h2>
 
-    {{ govukTaskList({
-      idPrefix: "second-section",
-      items: [
-        {
-          title: {
-            text: "Personal details",
-            classes: "govuk-link--no-visited-state"
-          },
-          href: 'personal-details',
-          status: pdStatusTag
-        }
-      ]
-    }) }}
+    <ul class="govuk-task-list">
+
+      <!-- PERSONAL DETAILS -->
+      <li class="govuk-task-list__item govuk-task-list__item--with-link">
+        <div class="govuk-task-list__name-and-hint">
+          <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./personal-details.html" aria-describedby="personal-details-status">
+            Personal details
+          </a>
+        </div>
+        <div class="govuk-task-list__status" id="personal-details-status">
+          <strong class="govuk-tag govuk-tag--grey">Not provided</strong>
+        </div>
+      </li>
+
+    </ul>
 
     {% endif %}
 
@@ -397,98 +217,46 @@
 
     <h2 class="govuk-heading-m govuk-!-margin-top-7">Company details</h2>
 
-    {{ govukTaskList({
-      idPrefix: "second-section",
-      items: [
-        {
-          title: {
-            text: "Company details",
-            classes: "govuk-link--no-visited-state"
-          },
-          href: 'company-details',
-          status: codStatusTag
-        },
-        {
-          title: {
-            text: "Contact details",
-            classes: "govuk-link--no-visited-state"
-          },
-          href: 'contact-details',
-          status: codStatusTag
-        }
-      ]
-    }) }}
+    <ul class="govuk-task-list">
+
+      <!-- PERSONAL DETAILS -->
+      <li class="govuk-task-list__item govuk-task-list__item--with-link">
+        <div class="govuk-task-list__name-and-hint">
+          <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./company-details.html" aria-describedby="company-details-status">
+            Company details
+          </a>
+        </div>
+        <div class="govuk-task-list__status" id="company-details-status">
+          <strong class="govuk-tag govuk-tag--grey">Not provided</strong>
+        </div>
+      </li>
+
+      <li class="govuk-task-list__item govuk-task-list__item--with-link">
+        <div class="govuk-task-list__name-and-hint">
+          <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./contact-details.html" aria-describedby="contact-details-status">
+            Contact details
+          </a>
+        </div>
+        <div class="govuk-task-list__status" id="contact-details-status">
+          <strong class="govuk-tag govuk-tag--grey">Not provided</strong>
+        </div>
+      </li>
+
+    </ul>
 
     {% endif %}
-
-    <!-- <h2 class="govuk-heading-m govuk-!-margin-top-7">Offence and imposition details</h2>
-
-    {{ govukTaskList({
-      idPrefix: "third-section",
-      items: [
-        {
-          title: {
-            text: "Offence details",
-            classes: "govuk-link--no-visited-state"
-          },
-          datamodule: "edge",
-          href: '#',
-          status: ofdStatusTag
-        },
-        {
-          title: {
-            text: "Payment terms",
-            classes: "govuk-link--no-visited-state"
-          },
-          status: {
-            text: "Cannot start yet",
-            classes: "govuk-task-list__status--cannot-start-yet"
-          }
-        }
-      ] 
-    }) }}
-
-    <h2 class="govuk-heading-m govuk-!-margin-top-7">Account comments and notes</h2>
-
-    {{ govukTaskList({
-      idPrefix: "third-section",
-      items: [
-        {
-          title: {
-            text: "Account comments and notes",
-            classes: "govuk-link--no-visited-state"
-          },
-          datamodule: "edge",
-          href: '#',
-          status: ofdStatusTag
-        }
-      ] 
-    }) }} -->
-
-    <!-- <h2 class="govuk-heading-m govuk-!-margin-top-7">Additional information</h2>
-
-    {{ govukTaskList({
-      idPrefix: "fourth-section",
-      items: [
-        {
-          title: {
-            text: "Additional information",
-            classes: "govuk-link--no-visited-state"
-          },
-          href: './summary/check-answers' if data['additional-information-end'] == 'true' else './summary/summary',
-          status: AItaskComplete
-        }
-      ]
-    }) }} -->
 
     <h2 class="govuk-heading-m govuk-!-margin-top-7">Check and submit for review</h2>
+    
+    <!-- Review button, initially hidden -->
+    <button id="review-button" class="govuk-button govuk-!-margin-bottom-8" style="display: none;">
+      Review account
+    </button>
 
-
-    {% if data['courtDetailsProvided'] and data['personalDetailsProvided'] %}
-      <button class="govuk-button" href="check-account-details">Review account</button>
-    {% else %}
-      <p class="govuk-body">Check that all required fields have been entered before you submit for review.</p>
-    {% endif %}
+    <!-- Check message, initially visible -->
+    <p id="check-message" class="govuk-body govuk-!-margin-bottom-8">
+      Check that all required fields have been entered before you submit for review.
+    </p>
 
 
     <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
@@ -501,41 +269,98 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function() {
     const contactStatusTag = document.getElementById('contact-details-status');
     const courtStatusTag = document.getElementById('court-details-status');
     const personalStatusTag = document.getElementById('personal-details-status');
+    const employerStatusTag = document.getElementById('employer-details-status');
+    const parentGuardianStatusTag = document.getElementById('parent-guardian-details-status');
+    const companyStatusTag = document.getElementById('company-details-status');
+    const reviewButton = document.getElementById('review-button');
+    const checkMessage = document.getElementById('check-message');
 
-    // Set the court status on page load
-    if (localStorage.getItem('courtDetailsProvided') === 'true') {
+    // Get the defendant type from the page data
+    const defendantTypeF = "{{ data.defendantTypeF }}";
+
+    // Function to update status tags
+    function updateStatusTags() {
+      // Set the court status on page load
+      if (localStorage.getItem('courtDetailsProvided') === 'true') {
         courtStatusTag.innerHTML = '<strong class="govuk-tag govuk-tag--blue">Provided</strong>';
-    } else {
+      } else {
         courtStatusTag.innerHTML = '<strong class="govuk-tag govuk-tag--grey">Not provided</strong>';
-    }
+      }
 
-    // Set the personal details status on page load
-    if (localStorage.getItem('personalDetailsProvided') === 'true') {
-        personalStatusTag.innerHTML = '<strong class="govuk-tag govuk-tag--blue">Provided</strong>';
-    } else {
-        personalStatusTag.innerHTML = '<strong class="govuk-tag govuk-tag--grey">Not provided</strong>';
-    }
-
-    // Set the contact details status on page load
-    if (localStorage.getItem('contactDetailsProvided') === 'true') {
+      // Set the contact details status on page load
+      if (contactStatusTag && localStorage.getItem('contactDetailsProvided') === 'true') {
         contactStatusTag.innerHTML = '<strong class="govuk-tag govuk-tag--blue">Provided</strong>';
-    } else {
+      } else if (contactStatusTag) {
         contactStatusTag.innerHTML = '<strong class="govuk-tag govuk-tag--grey">Not provided</strong>';
+      }
+
+      // Set the personal details status on page load
+      if (personalStatusTag && localStorage.getItem('personalDetailsProvided') === 'true') {
+        personalStatusTag.innerHTML = '<strong class="govuk-tag govuk-tag--blue">Provided</strong>';
+      } else if (personalStatusTag) {
+        personalStatusTag.innerHTML = '<strong class="govuk-tag govuk-tag--grey">Not provided</strong>';
+      }
+
+      // Set the employer details status on page load
+      if (employerStatusTag && localStorage.getItem('employerDetailsProvided') === 'true') {
+        employerStatusTag.innerHTML = '<strong class="govuk-tag govuk-tag--blue">Provided</strong>';
+      } else if (employerStatusTag) {
+        employerStatusTag.innerHTML = '<strong class="govuk-tag govuk-tag--grey">Not provided</strong>';
+      }
+
+      // Set the parent guardian details status on page load
+      if (parentGuardianStatusTag && localStorage.getItem('parentGuardianDetailsProvided') === 'true') {
+        parentGuardianStatusTag.innerHTML = '<strong class="govuk-tag govuk-tag--blue">Provided</strong>';
+      } else if (parentGuardianStatusTag) {
+        parentGuardianStatusTag.innerHTML = '<strong class="govuk-tag govuk-tag--grey">Not provided</strong>';
+      }
+
+      // Set the company details status on page load
+      if (companyStatusTag && localStorage.getItem('companyDetailsProvided') === 'true') {
+        companyStatusTag.innerHTML = '<strong class="govuk-tag govuk-tag--blue">Provided</strong>';
+      } else if (companyStatusTag) {
+        companyStatusTag.innerHTML = '<strong class="govuk-tag govuk-tag--grey">Not provided</strong>';
+      }
+
+      // Check if both required statuses are "Provided" for each defendant type
+      if (defendantTypeF === 'Adult or youth only') {
+        if (localStorage.getItem('courtDetailsProvided') === 'true' && localStorage.getItem('personalDetailsProvided') === 'true') {
+          reviewButton.style.display = 'block';
+          checkMessage.style.display = 'none';
+        } else {
+          reviewButton.style.display = 'none';
+          checkMessage.style.display = 'block';
+        }
+      } else if (defendantTypeF === 'Adult or youth with parent or guardian to pay') {
+        if (localStorage.getItem('courtDetailsProvided') === 'true' && localStorage.getItem('parentGuardianDetailsProvided') === 'true' && localStorage.getItem('personalDetailsProvided') === 'true') {
+          reviewButton.style.display = 'block';
+          checkMessage.style.display = 'none';
+        } else {
+          reviewButton.style.display = 'none';
+          checkMessage.style.display = 'block';
+        }
+      } else if (defendantTypeF === 'Company') {
+        if (localStorage.getItem('courtDetailsProvided') === 'true' && localStorage.getItem('companyDetailsProvided') === 'true') {
+          reviewButton.style.display = 'block';
+          checkMessage.style.display = 'none';
+        } else {
+          reviewButton.style.display = 'none';
+          checkMessage.style.display = 'block';
+        }
+      }
     }
 
-    // Show or hide the "Review account" button based on the status
-    const reviewButton = document.querySelector('.govuk-button[href="check-account-details"]');
-    if (localStorage.getItem('courtDetailsProvided') === 'true' && localStorage.getItem('personalDetailsProvided') === 'true') {
-        reviewButton.style.display = 'block';
-    } else {
-        reviewButton.style.display = 'none';
-    }
-});
+    // Update status tags on page load
+    updateStatusTags();
+  });
 </script>
+
+
+
 
 
 
