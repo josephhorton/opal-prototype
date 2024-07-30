@@ -79,7 +79,7 @@
           {{ govukInput({
             label: {
               text: "Address line 1",
-              classes: "govuk-label--s"
+              classes: "govuk-label"
             },
             id: "employer-address-line-1",
             name: "employerAddressLine1",
@@ -91,7 +91,7 @@
           {{ govukInput({
             label: {
               text: "Address line 2",
-              classes: "govuk-label--s"
+              classes: "govuk-label"
             },
             id: "employer-address-line-2",
             name: "employerAddressLine2",
@@ -103,7 +103,7 @@
           {{ govukInput({
             label: {
               text: "Address line 3",
-              classes: "govuk-label--s"
+              classes: "govuk-label"
             },
             id: "employer-address-line-3",
             name: "employerAddressLine3",
@@ -115,7 +115,7 @@
           {{ govukInput({
             label: {
               text: "Address line 4",
-              classes: "govuk-label--s"
+              classes: "govuk-label"
             },
             id: "employer-address-line-4",
             name: "employerAddressLine4",
@@ -127,7 +127,7 @@
           {{ govukInput({
             label: {
               text: "Address line 5",
-              classes: "govuk-label--s"
+              classes: "govuk-label"
             },
             id: "employer-address-line-5",
             classes: "govuk-input--width-30",
@@ -140,7 +140,7 @@
           {{ govukInput({
             label: {
               text: "Postcode",
-              classes: "govuk-label--s"
+              classes: "govuk-label"
             },
             classes: "govuk-input--width-10",
             id: "employer-address-postcode",
@@ -150,18 +150,25 @@
           }) }}
         
         {% endcall %}
-        
-        <div class="govuk-button-group">
-          {{ govukButton({
-            text: "Return to account details"
-          }) }}
+      
 
-          {{ govukButton({
-            text: "Add offence details",
-            classes: "govuk-button--secondary",
-            href: "personal-details.html?edCompleted=true"
-          }) }}        
+        <div class="govuk-button-group">
+          <button type="submit" class="govuk-button">
+            Return to account details
+          </button>
+          {% if data['defendantTypeF'] == "Adult or youth only" %}
+          <button type="submit" class="govuk-button govuk-button--secondary"  formaction="./add-offence?pdCompleted=true">
+            Add offence details
+          </button>
+          {% endif %}
+          {% if data['defendantTypeF'] == "Adult or youth with parent or guardian to pay" %}
+          <button type="submit" class="govuk-button govuk-button--secondary"  formaction="./personal-details?pdCompleted=true">
+            Add defendant details
+          </button>
+          {% endif %}
         </div>
+        
+        
 
       </form>
 

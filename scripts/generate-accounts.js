@@ -2,11 +2,20 @@ const fs = require('fs')
 const path = require('path')
 const faker = require('@faker-js/faker').faker
 
+
+const generateAccount = () => {
+    let account = {}
+
+    
+
+    return account
+}
+
 const generateAccounts = () => {
     const accounts = []
 
     for(let i = 0; i < 100; i++) {
-        accounts.push({})
+        accounts.push(generateAccount())
     }
 
     return accounts

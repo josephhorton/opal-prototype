@@ -96,7 +96,7 @@
           {{ govukInput({
             label: {
               text: "Address line 1",
-              classes: "govuk-label--s"
+              classes: "govuk-label"
             },
             id: "address-line-1",
             classes: "govuk-input--width-30",
@@ -108,7 +108,7 @@
           {{ govukInput({
             label: {
               text: "Address line 2",
-              classes: "govuk-label--s"
+              classes: "govuk-label"
             },
             id: "address-line-2",
             classes: "govuk-input--width-30",
@@ -120,7 +120,7 @@
           {{ govukInput({
             label: {
               text: "Address line 3",
-              classes: "govuk-label--s"
+              classes: "govuk-label"
             },
             id: "address-line-3",
             name: "addressLine3",
@@ -133,7 +133,7 @@
           {{ govukInput({
             label: {
               text: "Postcode",
-              classes: "govuk-label--s"
+              classes: "govuk-label"
             },
             classes: "govuk-input--width-10",
             id: "address-postcode",
@@ -171,15 +171,12 @@
         }) }}
 
         <div class="govuk-button-group">
-          {{ govukButton({
-            text: "Return to account details"
-          }) }}
-
-          {{ govukButton({
-            text: "Add contact details",
-            classes: "govuk-button--secondary",
-            href: "./contact-details.html?codCompleted=true"
-          }) }}        
+          <button type="submit" class="govuk-button">
+            Return to account details
+          </button>
+          <button type="submit" class="govuk-button govuk-button--secondary"  formaction="./contact-details?codCompleted=true">
+            Add contact details
+          </button>
         </div>
 
       </form>

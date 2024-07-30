@@ -10,6 +10,11 @@ const router = govukPrototypeKit.requests.setupRouter()
 
 require('./routes/account')(router)
 
+router.get('/clear-session', function (req, res) {
+    req.session.destroy(function (err) {
+      res.redirect('/index.html'); // Redirect to index.html after clearing session
+    });
+  });
 
 router.post('/create-account-form', function(request, response) {
 
@@ -19,7 +24,7 @@ router.post('/create-account-form', function(request, response) {
 
 
     if (accountType == "Fine") {
-        response.redirect("./create-account/account-details")
+        response.redirect("./create-account/account-details?courtHearingLanguage=English&documentLanguage=English")
     } 
     else if (accountType == "Fixed Penalty") {
         response.redirect("./create-account/end-of-prototype")
@@ -28,25 +33,6 @@ router.post('/create-account-form', function(request, response) {
         response.redirect("./create-account/end-of-prototype")
     }
 })
-
-// COURT DETAILS FORM
-
-router.post('/court-details-form', function(request, response) {
-  
-    // Determine the next page based on the hidden input value
-    var nextPage = request.body.nextPage;
-    
-    if (nextPage === 'account-details') {
-      response.redirect('./create-account/account-details?cdCompleted=true');
-    } else if (nextPage === 'personal-details') {
-      response.redirect('./create-account/personal-details?cdCompleted=true');
-    } else {
-      // Default fallback
-      response.redirect('/');
-    }
-  });
-  
-
 
 router.post('/defendant-type-question', function(request, response) {
 

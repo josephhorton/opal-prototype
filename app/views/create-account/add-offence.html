@@ -218,7 +218,7 @@
     //   const resultsContainer = document.getElementById('results-container');
 
     //   // Restore previous search value from local storage
-    //   const previousSearch = localStorage.getItem('searchQuery');
+    //   const previousSearch = sessionStorage.getItem('searchQuery');
     //   if (previousSearch) {
     //     searchInput.value = previousSearch;
     //     resultsContainer.classList.remove('govuk-!-display-none');
@@ -231,11 +231,11 @@
 
     //     if (query) {
     //       // Save search query to local storage
-    //       localStorage.setItem('searchQuery', query);
+    //       sessionStorage.setItem('searchQuery', query);
     //       resultsContainer.classList.remove('govuk-!-display-none');
     //     } else {
     //       // Clear the results if the query is empty
-    //       localStorage.removeItem('searchQuery');
+    //       sessionStorage.removeItem('searchQuery');
     //       resultsContainer.classList.add('govuk-!-display-none');
     //     }
     //   };

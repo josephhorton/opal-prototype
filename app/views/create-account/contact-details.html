@@ -10,9 +10,17 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+      {% if data['defendantTypeF'] == "Adult or youth only" %}
+      <h1 class="govuk-heading-l">Defendant contact details</h1>
+      {% endif %}
+      {% if data['defendantTypeF'] == "Adult or youth with parent or guardian to pay" %}
+      <h1 class="govuk-heading-l">Parent or guardian contact details</h1>
+      {% endif %}
+      {% if data['defendantTypeF'] == "Company" %}
       <h1 class="govuk-heading-l">{{ pageName }}</h1>
+      {% endif %}
 
-      <form method="post" novalidate action="account-details?cpCompleted=true">
+      <form id="contact-details-form" method="post" novalidate action="account-details?cpCompleted=true">
 
         <!-- EMAILS -->
         
@@ -90,28 +98,68 @@
 
         {% endif %}
 
-        
-        <div class="govuk-button-group">
-          {{ govukButton({
-            text: "Return to account details"
-          }) }}
-
-          {{ govukButton({
-            text: "Add employer details",
-            classes: "govuk-button--secondary",
-            href: "./employer-details.html?cpCompleted=true"
-          }) }}        
+         <div class="govuk-button-group">
+          <button type="submit" class="govuk-button" id="return-to-account-details">
+            Return to account details
+          </button>
+          {% if data['defendantTypeF'] == "Adult or youth only" %}
+            <button type="submit" class="govuk-button govuk-button--secondary" formaction="./employer-details?cpCompleted=true" >
+              Add employer details
+            </button>
+          {% endif %}
+          {% if data['defendantTypeF'] == "Adult or youth with parent or guardian to pay" %}
+            <button type="submit" class="govuk-button govuk-button--secondary" formaction="./employer-details?cpCompleted=true" >
+              Add employer details
+            </button>
+          {% endif %}
+          {% if data['defendantTypeF'] == "Company" %}
+            <button type="submit" class="govuk-button govuk-button--secondary" formaction="./add-offence?cpCompleted=true" >
+              Add offence details
+            </button>
+          {% endif %}
         </div>
 
       </form>
 
       <p class="govuk-body"><a class="govuk-link govuk-! govuk-link--no-visited-state" href="account-details">Cancel</a></p>
 
-
       </form>
-
 
     </div>
   </div>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('contact-details-form');
+      const formFields = form.querySelectorAll('input[type="email"], input[type="tel"]');
+  
+      // Function to check if any form field is filled out
+      function isFormFilled() {
+        for (let field of formFields) {
+          if (field.value.trim() !== '') {
+            return true;
+          }
+        }
+        return false;
+      }
+      
+      // Update status based on form input
+      function updateStatus() {
+        if (isFormFilled()) {
+          localStorage.setItem('contactDetailsProvided', 'true');
+        } else {
+          localStorage.setItem('contactDetailsProvided', 'false');
+        }
+      }
+      
+      // Add event listeners to form buttons
+      form.addEventListener('submit', function(event) {
+        updateStatus();
+      });
+    });
+  </script>
+
+
 
 {% endblock %}

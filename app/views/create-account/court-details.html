@@ -15,7 +15,7 @@
 
       <h1 class="govuk-heading-l">{{pageName}}</h1>
 
-      <form method="post" novalidate action="account-details?cdCompleted=true">
+      <form id="court-details-form" method="post" novalidate action="account-details?cdCompleted=true">
 
         {{ xGovukAutocomplete({
           formGroup: {
@@ -25,7 +25,7 @@
           name: "ljaCode",
           classes: "govuk-!-margin-bottom-8",
           value: data['ljaCode'],
-          allowEmpty: false,
+          allowEmpty: true,
           label: {
             classes: "govuk-label--s",
             text: 'Sending area or Local Justice Area (LJA)'
@@ -156,7 +156,7 @@
           id: "enforcementCourt",
           name: "enforcementCourt",
           value: data['enforcementCourt'],
-          allowEmpty: false,
+          allowEmpty: true,
           label: {
             classes: "govuk-label--s",
             text: "Enforcement court",
@@ -214,9 +214,21 @@
           <button type="submit" class="govuk-button">
             Return to account details
           </button>
+          {% if data['defendantTypeF'] == "Adult or youth only" %}
           <button type="submit" class="govuk-button govuk-button--secondary"  formaction="./personal-details?pdCompleted=true">
             Add personal details
           </button>
+          {% endif %}
+          {% if data['defendantTypeF'] == "Adult or youth with parent or guardian to pay" %}
+          <button type="submit" class="govuk-button govuk-button--secondary"  formaction="./parent-guardian-details?pdCompleted=true">
+            Add parent or guardian details
+          </button>
+          {% endif %}
+          {% if data['defendantTypeF'] == "Company" %}
+          <button type="submit" class="govuk-button govuk-button--secondary"  formaction="./company-details?pdCompleted=true">
+            Add company details
+          </button>
+          {% endif %}
         </div>
 
       </form>
@@ -228,6 +240,39 @@
 
   <script>
    
-  </script>        
+  </script>
+  
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('court-details-form');
+    const formFields = form.querySelectorAll('input, select, textarea');
+
+    // Function to check if any form field is filled out
+    function isFormFilled() {
+        for (let field of formFields) {
+            if (field.value.trim() !== '') {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Update status based on form input
+    function updateStatus() {
+        if (isFormFilled()) {
+            localStorage.setItem('courtDetailsProvided', 'true');
+        } else {
+            localStorage.setItem('courtDetailsProvided', 'false');
+        }
+    }
+
+    // Add event listeners to form buttons
+    form.addEventListener('submit', function() {
+        updateStatus();
+    });
+});
+
+
+  </script>
   
 {% endblock %}
