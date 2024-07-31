@@ -139,23 +139,22 @@
         </div>
 
         <!-- DATE OF BIRTH -->
-        <div>
-
-          {{ govukInput({
-            label: {
-              text: "Date of birth",
-              classes: "govuk-label--s"
-            },
-            classes: "govuk-input--width-10",
-            id: "defendantDateOfBirth",
-            name: "defendantDateOfBirth",
-            spellcheck: false,
-            value: data['defendantDateOfBirth'],
-            hint: {
-              text: "For example, 31/01/2023"
-            }
-          }) }}
-          
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-label--s" for="date">Date of birth</label>
+          <div id="date-hint" class="govuk-hint">
+            For example, 31/01/2023
+          </div>
+          <div class="govuk-input__wrapper">
+            <input class="govuk-input moj-js-datepicker-input govuk-input--width-10" id="date-of-birth" name="DDOB" type="text" autocomplete="off" value="{{data['DDOB']}}">
+            <button class="moj-datepicker-toggle moj-js-datepicker-toggle" type="button" aria-haspopup="dialog" aria-controls="datepicker-date" aria-expanded="false">
+              <span class="govuk-visually-hidden">Choose date</span>
+              <svg width="32" height="24" focusable="false" class="moj-datepicker-icon" aria-hidden="true" role="img" viewBox="0 0 22 22">
+                <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M16.1333 2.93333H5.86668V4.4C5.86668 5.21002 5.21003 5.86667 4.40002 5.86667C3.59 5.86667 2.93335 5.21002 2.93335 4.4V2.93333H2C0.895431 2.93333 0 3.82877 0 4.93334V19.2667C0 20.3712 0.89543 21.2667 2 21.2667H20C21.1046 21.2667 22 20.3712 22 19.2667V4.93333C22 3.82876 21.1046 2.93333 20 2.93333H19.0667V4.4C19.0667 5.21002 18.41 5.86667 17.6 5.86667C16.79 5.86667 16.1333 5.21002 16.1333 4.4V2.93333ZM20.5333 8.06667H1.46665V18.8C1.46665 19.3523 1.91436 19.8 2.46665 19.8H19.5333C20.0856 19.8 20.5333 19.3523 20.5333 18.8V8.06667Z"></path>
+                <rect x="3.66669" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                <rect x="16.8667" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+              </svg>
+            </button>
+          </div>
         </div>
 
         <!-- NATIONAL INSURANCE NUMBER -->  
@@ -296,33 +295,36 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const form = document.getElementById('personal-details-form');
-      const formFields = form.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea');
-  
-      // Function to check if any form field is filled out
-      function isFormFilled() {
-        for (let field of formFields) {
-          if (field.value.trim() !== '') {
-            return true;
-          }
+      const dobInput = document.getElementById('date-of-birth');
+    
+      // Function to validate date in DD/MM/YYYY format
+      function isValidDate(date) {
+        const regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+        if (!regex.test(date)) {
+          return false;
         }
-        return false;
+        const [ , day, month, year ] = date.match(regex);
+        const dateObj = new Date(`${year}-${month}-${day}`);
+        return dateObj.getFullYear() == year && (dateObj.getMonth() + 1) == month && dateObj.getDate() == day;
       }
-  
-      // Update status based on form input
+    
+      // Function to update status based on date input
       function updateStatus() {
-        if (isFormFilled()) {
+        if (isValidDate(dobInput.value)) {
           localStorage.setItem('personalDetailsProvided', 'true');
         } else {
           localStorage.setItem('personalDetailsProvided', 'false');
         }
       }
-  
-      // Add event listeners to form buttons
+    
+      // Add event listener to form submission
       form.addEventListener('submit', function(event) {
         updateStatus();
       });
     });
   </script>
+  
+  
   
 
 {% endblock %}

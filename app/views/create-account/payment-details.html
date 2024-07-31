@@ -1,0 +1,92 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Payment terms" %}
+
+{% block beforeContent %}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      <form id="payment-details-form" method="post" novalidate action="account-details">
+
+        {% if data['defendantTypeF'] == "Adult or youth only" %}
+
+        <p class="govuk-body">Collection order</p>
+        <p class="govuk-body">Payment terms</p>
+        <p class="govuk-body">Payment card</p>
+        <p class="govuk-body">Days in default</p>
+        <p class="govuk-body">Enforcement action</p>
+
+        {% endif %}
+
+        {% if data['defendantTypeF'] == "Adult or youth with parent or guardian to pay" %}
+
+        <p class="govuk-body">Payment terms</p>
+        <p class="govuk-body">Payment card</p>
+        <p class="govuk-body">Days in default</p>
+        <p class="govuk-body">Enforcement action</p>
+
+        {% endif %}
+
+        {% if data['defendantTypeF'] == "Company" %}
+
+        <p class="govuk-body">Payment terms</p>
+        <p class="govuk-body">Enforcement action</p>
+
+        {% endif %}
+
+        <div class="govuk-button-group">
+          <button type="submit" class="govuk-button">
+            Return to account details
+          </button>
+          <button type="submit" class="govuk-button govuk-button--secondary"  formaction="./account-notes">
+            Add account comments and notes
+          </button>
+        </div>
+
+      </form>
+
+      <p class="govuk-body"><a class="govuk-link govuk-! govuk-link--no-visited-state" href="account-details.html">Cancel</a></p>
+
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('payment-details-form');
+      const formFields = form.querySelectorAll('input, select, textarea');
+  
+      // Function to check if any form field is filled out
+      function isFormFilled() {
+        for (let field of formFields) {
+          if (field.value.trim() !== '') {
+            return true;
+          }
+        }
+        return false;
+      }
+  
+      // Update status based on form input
+      function updateStatus() {
+        if (isFormFilled()) {
+          localStorage.setItem('paymentDetailsProvided', 'true');
+        } else {
+          localStorage.setItem('paymentDetailsProvided', 'false');
+        }
+      }
+  
+      // Add event listeners to form buttons
+      form.addEventListener('submit', function(event) {
+        updateStatus();
+      });
+    });
+  </script>
+  
+  
+{% endblock %}
