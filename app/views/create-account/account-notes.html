@@ -5,28 +5,27 @@
 
 {% block content %}
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-half">
+    <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">
         {{pageName}}
       </h1>
     
 
-    <form method="post" novalidate action="task-list?comnotCompleted=true">
+    <form id="account-comment-details-form" method="post" novalidate action="account-details">
 
-      <!-- <p class="govuk-body">You can change or update this information any time.</p> -->
-
-      {{ govukInput({
-        id: "commentField",
-        name: "commentField",
-        classes: "govuk-input",
+      {{ govukCharacterCount({
+        name: "accountComment",
+        id: "accountComment",
+        classes: "govuk-input--width-30",
         label: {
           text: "Add comment",
-          classes: "govuk-label--s"
+          classes: "govuk-label--m"
         },
         hint: {
           text: "For example, a warning, which will appear on the account summary"
         },
-        value: data['commentField']
+        maxlength: 200,
+        value: data['accountComment']
       }) }}
 
 
@@ -36,28 +35,59 @@
       {{ govukCharacterCount({
         name: "accountNote",
         id: "accountNote",
+        classes: "govuk-input--width-30",
         label: {
-          text: "Add account notes",
-          classes: "govuk-label--s"
+          text: "Add account note",
+          classes: "govuk-label--m"
         },
         hint: {
           text: "You can view notes in account history after the account is published"
         },
-        maxlength: 168,
-        value: data['accountNotes']
+        maxlength: 200,
+        value: data['accountNote']
       }) }}
 
       <div class="govuk-button-group">
-        {{ govukButton({
-          text: "Return to account details"
-        }) }}
-
-        <p class="govuk-body"><a class="govuk-link" href="#">Cancel</a></p>
-      
+        <button type="submit" class="govuk-button">
+          Return to account details
+        </button>
       </div>
+      
 
     </form>
 
+    <p class="govuk-body"><a class="govuk-link govuk-! govuk-link--no-visited-state" href="account-details.html">Cancel</a></p>
 
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('account-comment-details-form');
+      const formFields = form.querySelectorAll('textarea');
+  
+      // Function to check if any form field is filled out
+      function isFormFilled() {
+        for (let field of formFields) {
+          if (field.value.trim() !== '') {
+            return true;
+          }
+        }
+        return false;
+      }
+  
+      // Update status based on form input
+      function updateStatus() {
+        if (isFormFilled()) {
+          localStorage.setItem('commentNotesDetailsProvided', 'true');
+        } else {
+          localStorage.setItem('commentNotesDetailsProvided', 'false');
+        }
+      }
+  
+      // Add event listeners to form buttons
+      form.addEventListener('submit', function(event) {
+        updateStatus();
+      });
+    });
+  </script>
 {% endblock %}

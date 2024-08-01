@@ -367,6 +367,25 @@
 
     {% endif %}
 
+    <h2 class="govuk-heading-m govuk-!-margin-top-7">Account comments and notes</h2>
+
+    <ul class="govuk-task-list">
+      
+      <!-- ACCOUNT COMMENTS AND NOTES -->
+
+      <li class="govuk-task-list__item govuk-task-list__item--with-link">
+        <div class="govuk-task-list__name-and-hint">
+          <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./account-notes.html">
+            Account comments and notes
+          </a>
+        </div>
+        <div class="govuk-task-list__status" id="account-comment-details-status">
+          <strong class="govuk-tag govuk-tag--grey">Not provided</strong>
+        </div>
+      </li>
+
+    </ul>
+
     
 
     <h2 class="govuk-heading-m govuk-!-margin-top-7">Check and submit for review</h2>
@@ -400,6 +419,7 @@
     const parentGuardianStatusTag = document.getElementById('parent-guardian-details-status');
     const companyStatusTag = document.getElementById('company-details-status');
     const paymentStatusTag = document.getElementById('payment-details-status');
+    const commentNoteStatusTag = document.getElementById('account-comment-details-status');
     const reviewButton = document.getElementById('review-button');
     const checkMessage = document.getElementById('check-message');
     const paymentTermsProvided = document.getElementById('payment-terms-provided');
@@ -457,6 +477,13 @@
         paymentStatusTag.innerHTML = '<strong class="govuk-tag govuk-tag--blue">Provided</strong>';
       } else if (paymentStatusTag) {
         paymentStatusTag.innerHTML = '<strong class="govuk-tag govuk-tag--grey">Not provided</strong>';
+      }
+
+      // Set the account comment details status on page load
+      if (commentNoteStatusTag && localStorage.getItem('commentNotesDetailsProvided') === 'true') {
+        commentNoteStatusTag.innerHTML = '<strong class="govuk-tag govuk-tag--blue">Provided</strong>';
+      } else if (commentNoteStatusTag) {
+        commentNoteStatusTag.innerHTML = '<strong class="govuk-tag govuk-tag--grey">Not provided</strong>';
       }
 
       // Update payment terms visibility
