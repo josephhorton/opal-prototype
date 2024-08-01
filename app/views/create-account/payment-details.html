@@ -12,16 +12,302 @@
     <div class="govuk-grid-column-two-thirds">
 
       <h1 class="govuk-heading-l">{{pageName}}</h1>
-
+      
       <form id="payment-details-form" method="post" novalidate action="account-details">
 
         {% if data['defendantTypeF'] == "Adult or youth only" %}
 
-        <p class="govuk-body">Collection order</p>
-        <p class="govuk-body">Payment terms</p>
-        <p class="govuk-body">Payment card</p>
-        <p class="govuk-body">Days in default</p>
-        <p class="govuk-body">Enforcement action</p>
+        <!-- COLLECTION ORDER -->
+        <div id="conditional-collo">
+          {% set collectionOrderDate %}
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-label--s" for="collection-order-date">Date of collection order</label>
+            <div class="govuk-input__wrapper">
+              <input class="govuk-input moj-js-datepicker-input govuk-input--width-10" id="collection-order-date" name="collection-order-date" type="text" autocomplete="off" value="{{data['collection-order-date']}}">
+              <button class="moj-datepicker-toggle moj-js-datepicker-toggle" type="button" aria-haspopup="dialog" aria-controls="datepicker-date" aria-expanded="false">
+                <span class="govuk-visually-hidden">Choose date</span>
+                <svg width="32" height="24" focusable="false" class="moj-datepicker-icon" aria-hidden="true" role="img" viewBox="0 0 22 22">
+                  <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M16.1333 2.93333H5.86668V4.4C5.86668 5.21002 5.21003 5.86667 4.40002 5.86667C3.59 5.86667 2.93335 5.21002 2.93335 4.4V2.93333H2C0.895431 2.93333 0 3.82877 0 4.93334V19.2667C0 20.3712 0.89543 21.2667 2 21.2667H20C21.1046 21.2667 22 20.3712 22 19.2667V4.93333C22 3.82876 21.1046 2.93333 20 2.93333H19.0667V4.4C19.0667 5.21002 18.41 5.86667 17.6 5.86667C16.79 5.86667 16.1333 5.21002 16.1333 4.4V2.93333ZM20.5333 8.06667H1.46665V18.8C1.46665 19.3523 1.91436 19.8 2.46665 19.8H19.5333C20.0856 19.8 20.5333 19.3523 20.5333 18.8V8.06667Z"></path>
+                  <rect x="3.66669" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                  <rect x="16.8667" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                </svg>
+              </button>
+            </div>
+          </div>
+      
+          {% endset -%}
+
+          {{ govukRadios({
+            name: "collectionOrder",
+            fieldset: {
+              legend: {
+                text: "Has a collection order been made?",
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            value: data['collectionOrder'],
+            items: [
+              {
+                value: "Yes",
+                text: "Yes",
+                conditional: {
+                  html: collectionOrderDate
+                }
+              },
+              {
+                value: "No",
+                text: "No"
+              }
+            ]
+          }) }}
+        </div>
+
+        <!-- PAYMENT TERMS -->
+        {% set payInFullHTML %}
+
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-label--s" for="payby-date">Enter pay by date</label>
+          <div class="govuk-hint">
+            For example, 31/01/2023
+          </div>
+          <div class="govuk-input__wrapper">
+            <input class="govuk-input moj-js-datepicker-input govuk-input--width-10" id="payby-date" name="payby-date" type="text" autocomplete="off" value="{{data['payby-date']}}">
+            <button class="moj-datepicker-toggle moj-js-datepicker-toggle" type="button" aria-haspopup="dialog" aria-controls="datepicker-date" aria-expanded="false">
+              <span class="govuk-visually-hidden">Choose date</span>
+              <svg width="32" height="24" focusable="false" class="moj-datepicker-icon" aria-hidden="true" role="img" viewBox="0 0 22 22">
+                <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M16.1333 2.93333H5.86668V4.4C5.86668 5.21002 5.21003 5.86667 4.40002 5.86667C3.59 5.86667 2.93335 5.21002 2.93335 4.4V2.93333H2C0.895431 2.93333 0 3.82877 0 4.93334V19.2667C0 20.3712 0.89543 21.2667 2 21.2667H20C21.1046 21.2667 22 20.3712 22 19.2667V4.93333C22 3.82876 21.1046 2.93333 20 2.93333H19.0667V4.4C19.0667 5.21002 18.41 5.86667 17.6 5.86667C16.79 5.86667 16.1333 5.21002 16.1333 4.4V2.93333ZM20.5333 8.06667H1.46665V18.8C1.46665 19.3523 1.91436 19.8 2.46665 19.8H19.5333C20.0856 19.8 20.5333 19.3523 20.5333 18.8V8.06667Z"></path>
+                <rect x="3.66669" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                <rect x="16.8667" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+              </svg>
+            </button>
+          </div>
+        </div>  
+          
+        {% endset -%}
+
+        {% set instalmentsOnlyHTML %}
+
+        {{ govukInput({
+          id: "instalmentOnlyPounds",
+          name: "instalmentOnlyPounds",
+          value: data['instalmentOnlyPounds'],
+          label: {
+            text: "Instalment",
+            classes: "govuk-label--s"
+          },
+          prefix: {
+            text: "£"
+          },
+          classes: "govuk-input--width-5",
+          spellcheck: false
+        }) }}
+
+        {{ govukRadios({
+          classes: "govuk-radios--small",
+          name: "instalmentOnlyFrequency",
+          value: data['instalmentOnlyFrequency'],
+          fieldset: {
+            legend: {
+              text: "Frequency",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "Weekly",
+              text: "Weekly"
+            },
+            {
+              value: "Fortnightly",
+              text: "Fortnightly"
+            },
+            {
+              value: "Monthly",
+              text: "Monthly"
+            }
+          ]
+        }) }}
+
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-label--s" for="instalment-only-start-date">Start date</label>
+          <div class="govuk-hint">
+            For example, 31/01/2023
+          </div>
+          <div class="govuk-input__wrapper">
+            <input class="govuk-input moj-js-datepicker-input govuk-input--width-10" id="instalment-only-start-date" name="instalment-only-start-date" type="text" autocomplete="off" value="{{data['instalment-only-start-date']}}">
+            <button class="moj-datepicker-toggle moj-js-datepicker-toggle" type="button" aria-haspopup="dialog" aria-controls="datepicker-date" aria-expanded="false">
+              <span class="govuk-visually-hidden">Choose date</span>
+              <svg width="32" height="24" focusable="false" class="moj-datepicker-icon" aria-hidden="true" role="img" viewBox="0 0 22 22">
+                <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M16.1333 2.93333H5.86668V4.4C5.86668 5.21002 5.21003 5.86667 4.40002 5.86667C3.59 5.86667 2.93335 5.21002 2.93335 4.4V2.93333H2C0.895431 2.93333 0 3.82877 0 4.93334V19.2667C0 20.3712 0.89543 21.2667 2 21.2667H20C21.1046 21.2667 22 20.3712 22 19.2667V4.93333C22 3.82876 21.1046 2.93333 20 2.93333H19.0667V4.4C19.0667 5.21002 18.41 5.86667 17.6 5.86667C16.79 5.86667 16.1333 5.21002 16.1333 4.4V2.93333ZM20.5333 8.06667H1.46665V18.8C1.46665 19.3523 1.91436 19.8 2.46665 19.8H19.5333C20.0856 19.8 20.5333 19.3523 20.5333 18.8V8.06667Z"></path>
+                <rect x="3.66669" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                <rect x="16.8667" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+              </svg>
+            </button>
+          </div>
+        </div>  
+        {% endset -%}
+
+        
+        {% set lumpSumHTML %}
+
+        {{ govukInput({
+          id: "lumpSum",
+          name: "lumpSum",
+          value: data['lumpSum'],
+          label: {
+            text: "Lump sum",
+            classes: "govuk-label--s"
+          },
+          prefix: {
+            text: "£"
+          },
+          classes: "govuk-input--width-5",
+          spellcheck: false
+        }) }}
+
+         {{ govukInput({
+          id: "instalmentLumpSumPounds",
+          name: "instalmentLumpSumPounds",
+          value: data['instalmentLumpSumPounds'],
+          label: {
+            text: "Instalment",
+            classes: "govuk-label--s"
+          },
+          prefix: {
+            text: "£"
+          },
+          classes: "govuk-input--width-5",
+          spellcheck: false
+        }) }}
+
+        {{ govukRadios({
+          classes: "govuk-radios--small",
+          name: "instalmentLumpSumFrequency",
+          value: data['instalmentLumpSumFrequency'],
+          fieldset: {
+            legend: {
+              text: "Frequency",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "Weekly",
+              text: "Weekly"
+            },
+            {
+              value: "Fortnightly",
+              text: "Fortnightly"
+            },
+            {
+              value: "Monthly",
+              text: "Monthly"
+            }
+          ]
+        }) }}
+
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-label--s" for="instalment-lump-sum-start-date">Start date</label>
+          <div class="govuk-hint">
+            For example, 31/01/2023
+          </div>
+          <div class="govuk-input__wrapper">
+            <input class="govuk-input moj-js-datepicker-input govuk-input--width-10" id="instalment-lump-sum-start-date" name="instalment-lump-sum-start-date" type="text" autocomplete="off" value="{{data['instalment-lump-sum-start-date']}}">
+            <button class="moj-datepicker-toggle moj-js-datepicker-toggle" type="button" aria-haspopup="dialog" aria-controls="datepicker-date" aria-expanded="false">
+              <span class="govuk-visually-hidden">Choose date</span>
+              <svg width="32" height="24" focusable="false" class="moj-datepicker-icon" aria-hidden="true" role="img" viewBox="0 0 22 22">
+                <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M16.1333 2.93333H5.86668V4.4C5.86668 5.21002 5.21003 5.86667 4.40002 5.86667C3.59 5.86667 2.93335 5.21002 2.93335 4.4V2.93333H2C0.895431 2.93333 0 3.82877 0 4.93334V19.2667C0 20.3712 0.89543 21.2667 2 21.2667H20C21.1046 21.2667 22 20.3712 22 19.2667V4.93333C22 3.82876 21.1046 2.93333 20 2.93333H19.0667V4.4C19.0667 5.21002 18.41 5.86667 17.6 5.86667C16.79 5.86667 16.1333 5.21002 16.1333 4.4V2.93333ZM20.5333 8.06667H1.46665V18.8C1.46665 19.3523 1.91436 19.8 2.46665 19.8H19.5333C20.0856 19.8 20.5333 19.3523 20.5333 18.8V8.06667Z"></path>
+                <rect x="3.66669" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                <rect x="16.8667" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+              </svg>
+            </button>
+          </div>
+        </div>           
+        {% endset -%}
+
+        {{ govukRadios({
+            name: "paymentTerms",
+            fieldset: {
+              legend: {
+                text: "Select payment terms",
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            value: data['paymentTerms'],
+            items: [
+              {
+                value: "Pay in full",
+                text: "Pay in full",
+                conditional: {
+                  html: payInFullHTML
+                }
+              },
+              {
+                value: "Instalments only",
+                text: "Instalments only",
+                conditional: {
+                  html: instalmentsOnlyHTML
+                }
+              },
+              {
+                value: "Lump sum plus instalments",
+                text: "Lump sum plus instalments",
+                conditional: {
+                  html: lumpSumHTML
+                }
+              }
+            ]
+        }) }}
+
+        <!-- PAYMENT CARD -->
+        {{ govukCheckboxes({
+          name: "paymentCard",
+          values: data['paymentCard'],
+          items: [
+            {
+              value: "Yes",
+              text: "Request payment card"
+            }
+          ]
+        }) }}
+
+        <!-- DAYS IN DEFAULT -->
+
+        <div id="conditional-days-in-default">
+          <h2 class="govuk-heading-s">Days in default</h2>
+
+          {{ govukCheckboxes({
+            name: "daysInDefault",
+            values: data['daysInDefault'],
+            items: [
+              {
+                value: "Yes",
+                text: "There are days in default",
+                conditional: {
+                  html: daysInDefaultHTML
+                }
+              }
+            ]
+          }) }}
+        </div>
+
+        <!-- ENFORCEMENT ACTION -->
+
+        <h2 class="govuk-heading-s">Enforcement action</h2>
+
+        {{ govukCheckboxes({
+          name: "enforcementAction",
+          values: data['enforcementAction'],
+          items: [
+            {
+              value: "Yes",
+              text: "Add enforcement action",
+              conditional: {
+                html: daysInDefaultHTML
+              }
+            }
+          ]
+        }) }}
 
         {% endif %}
 
@@ -59,19 +345,61 @@
   
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      const dob = localStorage.getItem('dateOfBirth');
+      const age = localStorage.getItem('age');
+      const conditionalQuestionDaysInDefault = document.getElementById('conditional-days-in-default');
+      const conditionalQuestionCollo = document.getElementById('conditional-collo');
       const form = document.getElementById('payment-details-form');
-      const formFields = form.querySelectorAll('input, select, textarea');
-  
-      // Function to check if any form field is filled out
+      const textInputs = form.querySelectorAll('input[type="text"]');
+    
+      // Function to calculate age
+      function calculateAge(dob) {
+        const [day, month, year] = dob.split('/');
+        const birthDate = new Date(year, month - 1, day);
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+        }
+        return age;
+      }
+    
+      // Calculate the age if dob is available
+      if (dob) {
+        const calculatedAge = calculateAge(dob);
+        if (age !== calculatedAge.toString()) {
+          localStorage.setItem('age', calculatedAge);
+        }
+    
+        // Conditionally hide the questions if under 18
+        if (calculatedAge < 18) {
+          if (conditionalQuestionCollo) {
+            conditionalQuestionCollo.style.display = 'none';
+          }
+          if (conditionalQuestionDaysInDefault) {
+            conditionalQuestionDaysInDefault.style.display = 'none';
+          }
+        } else {
+          if (conditionalQuestionCollo) {
+            conditionalQuestionCollo.style.display = 'block';
+          }
+          if (conditionalQuestionDaysInDefault) {
+            conditionalQuestionDaysInDefault.style.display = 'block';
+          }
+        }
+      }
+    
+      // Function to check if any text input field is filled out
       function isFormFilled() {
-        for (let field of formFields) {
-          if (field.value.trim() !== '') {
+        for (let input of textInputs) {
+          if (input.value.trim() !== '') {
             return true;
           }
         }
         return false;
       }
-  
+    
       // Update status based on form input
       function updateStatus() {
         if (isFormFilled()) {
@@ -80,13 +408,22 @@
           localStorage.setItem('paymentDetailsProvided', 'false');
         }
       }
-  
-      // Add event listeners to form buttons
+    
+      // Add event listeners to form submission
       form.addEventListener('submit', function(event) {
         updateStatus();
       });
+    
+      // Add event listeners to each text input to update status on change
+      textInputs.forEach(input => {
+        input.addEventListener('input', updateStatus);
+      });
     });
-  </script>
+    </script>
+    
+  
+
+  
   
   
 {% endblock %}

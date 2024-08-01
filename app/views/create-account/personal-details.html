@@ -292,12 +292,11 @@
     </div>
   </div>
 
-  <script>
+  <!-- <script>
     document.addEventListener('DOMContentLoaded', function() {
       const form = document.getElementById('personal-details-form');
       const dobInput = document.getElementById('date-of-birth');
     
-      // Function to validate date in DD/MM/YYYY format
       function isValidDate(date) {
         const regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
         if (!regex.test(date)) {
@@ -308,7 +307,6 @@
         return dateObj.getFullYear() == year && (dateObj.getMonth() + 1) == month && dateObj.getDate() == day;
       }
     
-      // Function to update status based on date input
       function updateStatus() {
         if (isValidDate(dobInput.value)) {
           localStorage.setItem('personalDetailsProvided', 'true');
@@ -317,12 +315,66 @@
         }
       }
     
-      // Add event listener to form submission
       form.addEventListener('submit', function(event) {
         updateStatus();
       });
     });
-  </script>
+  </script> -->
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('personal-details-form');
+      const textInputs = form.querySelectorAll('input[type="text"]');
+      const dobInput = document.getElementById('date-of-birth');
+    
+      // Function to calculate age
+      function calculateAge(dob) {
+        const [day, month, year] = dob.split('/');
+        const birthDate = new Date(year, month - 1, day);
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+        }
+        return age;
+      }
+    
+      // Function to update the status and age in localStorage
+      function updateStatus() {
+        let personalDetailsProvided = false;
+        textInputs.forEach(input => {
+          if (input.value.trim() !== '') {
+            personalDetailsProvided = true;
+          }
+        });
+    
+        if (dobInput.value.trim() !== '') {
+          const dob = dobInput.value.trim();
+          const age = calculateAge(dob);
+          localStorage.setItem('dateOfBirth', dob);
+          localStorage.setItem('age', age);
+        } else {
+          localStorage.removeItem('dateOfBirth');
+          localStorage.removeItem('age');
+        }
+    
+        localStorage.setItem('personalDetailsProvided', personalDetailsProvided ? 'true' : 'false');
+      }
+    
+      // Add event listener to form submission
+      form.addEventListener('submit', function(event) {
+        updateStatus();
+      });
+    
+      // Add event listeners to each text input to update status on change
+      textInputs.forEach(input => {
+        input.addEventListener('input', updateStatus);
+      });
+    });
+    </script>
+    
+    
   
   
   

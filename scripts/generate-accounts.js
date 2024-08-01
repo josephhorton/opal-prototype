@@ -6,7 +6,13 @@ const faker = require('@faker-js/faker').faker
 const generateAccount = () => {
     let account = {}
 
-    
+    // Account number
+
+    // Name
+
+    // Aliases
+
+    // 
 
     return account
 }
