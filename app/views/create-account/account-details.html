@@ -147,6 +147,51 @@
 
     </ul>
 
+    <h2 class="govuk-heading-m govuk-!-margin-top-7">Offence and imposition details</h2>
+
+    <ul class="govuk-task-list">
+
+      <!-- OFFENCE DETAILS -->
+      <li class="govuk-task-list__item govuk-task-list__item--with-link">
+        <div class="govuk-task-list__name-and-hint" data-module="edge">
+          <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="#" data-message="Not started yet" aria-describedby="offence-details-status">
+            Offence details
+          </a>
+        </div>
+        <div class="govuk-task-list__status" id="offence-details-status">
+          <strong class="govuk-tag govuk-tag--grey">Not provided</strong>
+        </div>
+      </li>
+      
+      <!-- PAYMENT TERMS -->
+
+      <!-- Payment terms when personal details are provided -->
+      <li class="govuk-task-list__item govuk-task-list__item--with-link" id="payment-terms-provided" style="display: none;">
+        <div class="govuk-task-list__name-and-hint">
+          <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./payment-details.html">
+            Payment terms
+          </a>
+        </div>
+        <div class="govuk-task-list__status" id="payment-details-status">
+          <strong class="govuk-tag govuk-tag--grey">Not provided</strong>
+        </div>
+      </li>
+
+      <!-- Payment terms when personal details are not provided -->
+      <li class="govuk-task-list__item" id="payment-terms-not-provided">
+        <div class="govuk-task-list__name-and-hint">
+          <div>
+            Payment terms
+          </div>
+        </div>
+        <div class="govuk-task-list__status govuk-task-list__status--cannot-start-yet">
+          Cannot start yet
+        </div>
+      </li>
+
+
+    </ul>
+
     {% endif %}
 
     {% if data['defendantTypeF'] == "Adult or youth with parent or guardian to pay" %}
@@ -210,42 +255,7 @@
       </li>
 
     </ul>
-
-    {% endif %}
-
-    {% if data['defendantTypeF'] == "Company" %}
-
-    <h2 class="govuk-heading-m govuk-!-margin-top-7">Company details</h2>
-
-    <ul class="govuk-task-list">
-
-      <!-- PERSONAL DETAILS -->
-      <li class="govuk-task-list__item govuk-task-list__item--with-link">
-        <div class="govuk-task-list__name-and-hint">
-          <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./company-details.html" aria-describedby="company-details-status">
-            Company details
-          </a>
-        </div>
-        <div class="govuk-task-list__status" id="company-details-status">
-          <strong class="govuk-tag govuk-tag--grey">Not provided</strong>
-        </div>
-      </li>
-
-      <li class="govuk-task-list__item govuk-task-list__item--with-link">
-        <div class="govuk-task-list__name-and-hint">
-          <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./contact-details.html" aria-describedby="contact-details-status">
-            Contact details
-          </a>
-        </div>
-        <div class="govuk-task-list__status" id="contact-details-status">
-          <strong class="govuk-tag govuk-tag--grey">Not provided</strong>
-        </div>
-      </li>
-
-    </ul>
-
-    {% endif %}
-
+    
     <h2 class="govuk-heading-m govuk-!-margin-top-7">Offence and imposition details</h2>
 
     <ul class="govuk-task-list">
@@ -290,6 +300,74 @@
 
 
     </ul>
+
+    {% endif %}
+
+    {% if data['defendantTypeF'] == "Company" %}
+
+    <h2 class="govuk-heading-m govuk-!-margin-top-7">Company details</h2>
+
+    <ul class="govuk-task-list">
+
+      <!-- PERSONAL DETAILS -->
+      <li class="govuk-task-list__item govuk-task-list__item--with-link">
+        <div class="govuk-task-list__name-and-hint">
+          <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./company-details.html" aria-describedby="company-details-status">
+            Company details
+          </a>
+        </div>
+        <div class="govuk-task-list__status" id="company-details-status">
+          <strong class="govuk-tag govuk-tag--grey">Not provided</strong>
+        </div>
+      </li>
+
+      <li class="govuk-task-list__item govuk-task-list__item--with-link">
+        <div class="govuk-task-list__name-and-hint">
+          <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./contact-details.html" aria-describedby="contact-details-status">
+            Contact details
+          </a>
+        </div>
+        <div class="govuk-task-list__status" id="contact-details-status">
+          <strong class="govuk-tag govuk-tag--grey">Not provided</strong>
+        </div>
+      </li>
+
+    </ul>
+
+    <h2 class="govuk-heading-m govuk-!-margin-top-7">Offence and imposition details</h2>
+
+    <ul class="govuk-task-list">
+
+      <!-- OFFENCE DETAILS -->
+      <li class="govuk-task-list__item govuk-task-list__item--with-link">
+        <div class="govuk-task-list__name-and-hint" data-module="edge">
+          <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="#" data-message="Not started yet" aria-describedby="offence-details-status">
+            Offence details
+          </a>
+        </div>
+        <div class="govuk-task-list__status" id="offence-details-status">
+          <strong class="govuk-tag govuk-tag--grey">Not provided</strong>
+        </div>
+      </li>
+      
+      <!-- PAYMENT TERMS -->
+
+      <li class="govuk-task-list__item govuk-task-list__item--with-link">
+        <div class="govuk-task-list__name-and-hint">
+          <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./payment-details.html">
+            Payment terms
+          </a>
+        </div>
+        <div class="govuk-task-list__status" id="payment-details-status">
+          <strong class="govuk-tag govuk-tag--grey">Not provided</strong>
+        </div>
+      </li>
+
+    </ul>
+
+    {% endif %}
+
+    
 
     <h2 class="govuk-heading-m govuk-!-margin-top-7">Check and submit for review</h2>
     
@@ -374,7 +452,7 @@
         companyStatusTag.innerHTML = '<strong class="govuk-tag govuk-tag--grey">Not provided</strong>';
       }
 
-      // Set the company details status on page load
+      // Set the payment details status on page load
       if (paymentStatusTag && localStorage.getItem('paymentDetailsProvided') === 'true') {
         paymentStatusTag.innerHTML = '<strong class="govuk-tag govuk-tag--blue">Provided</strong>';
       } else if (paymentStatusTag) {
@@ -392,7 +470,7 @@
 
       // Check if both required statuses are "Provided" for each defendant type
       if (defendantTypeF === 'Adult or youth only') {
-        if (localStorage.getItem('courtDetailsProvided') === 'true' && localStorage.getItem('personalDetailsProvided') === 'true') {
+        if (localStorage.getItem('courtDetailsProvided') === 'true' && localStorage.getItem('personalDetailsProvided') === 'true' && localStorage.getItem('paymentDetailsProvided') === 'true') {
           reviewButton.style.display = 'block';
           checkMessage.style.display = 'none';
         } else {
@@ -400,7 +478,7 @@
           checkMessage.style.display = 'block';
         }
       } else if (defendantTypeF === 'Adult or youth with parent or guardian to pay') {
-        if (localStorage.getItem('courtDetailsProvided') === 'true' && localStorage.getItem('parentGuardianDetailsProvided') === 'true' && localStorage.getItem('personalDetailsProvided') === 'true') {
+        if (localStorage.getItem('courtDetailsProvided') === 'true' && localStorage.getItem('parentGuardianDetailsProvided') === 'true' && localStorage.getItem('personalDetailsProvided') === 'true' && localStorage.getItem('paymentDetailsProvided') === 'true') {
           reviewButton.style.display = 'block';
           checkMessage.style.display = 'none';
         } else {
@@ -408,7 +486,7 @@
           checkMessage.style.display = 'block';
         }
       } else if (defendantTypeF === 'Company') {
-        if (localStorage.getItem('courtDetailsProvided') === 'true' && localStorage.getItem('companyDetailsProvided') === 'true') {
+        if (localStorage.getItem('courtDetailsProvided') === 'true' && localStorage.getItem('companyDetailsProvided') === 'true' && localStorage.getItem('paymentDetailsProvided') === 'true') {
           reviewButton.style.display = 'block';
           checkMessage.style.display = 'none';
         } else {

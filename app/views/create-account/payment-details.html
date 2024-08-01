@@ -63,6 +63,7 @@
         </div>
 
         <!-- PAYMENT TERMS -->
+        <div>
         {% set payInFullHTML %}
 
         <div class="govuk-form-group">
@@ -258,6 +259,7 @@
               }
             ]
         }) }}
+        </div>
 
         <!-- PAYMENT CARD -->
         {{ govukCheckboxes({
@@ -272,58 +274,779 @@
         }) }}
 
         <!-- DAYS IN DEFAULT -->
+        <div>
+          {% set daysInDefaultHTML %}
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-label--s" for="days-in-default-start-date">Date days in default were imposed</label>
+            <div class="govuk-hint">
+              This should be whichever date is most recent - the sentencing date or the date of the suspended committal order.
+            </div>
+            <div class="govuk-input__wrapper">
+              <input class="govuk-input moj-js-datepicker-input govuk-input--width-10" id="days-in-default-start-date" name="days-in-default-start-date" type="text" autocomplete="off" value="{{data['days-in-default-start-date']}}">
+              <button class="moj-datepicker-toggle moj-js-datepicker-toggle" type="button" aria-haspopup="dialog" aria-controls="datepicker-date" aria-expanded="false">
+                <span class="govuk-visually-hidden">Choose date</span>
+                <svg width="32" height="24" focusable="false" class="moj-datepicker-icon" aria-hidden="true" role="img" viewBox="0 0 22 22">
+                  <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M16.1333 2.93333H5.86668V4.4C5.86668 5.21002 5.21003 5.86667 4.40002 5.86667C3.59 5.86667 2.93335 5.21002 2.93335 4.4V2.93333H2C0.895431 2.93333 0 3.82877 0 4.93334V19.2667C0 20.3712 0.89543 21.2667 2 21.2667H20C21.1046 21.2667 22 20.3712 22 19.2667V4.93333C22 3.82876 21.1046 2.93333 20 2.93333H19.0667V4.4C19.0667 5.21002 18.41 5.86667 17.6 5.86667C16.79 5.86667 16.1333 5.21002 16.1333 4.4V2.93333ZM20.5333 8.06667H1.46665V18.8C1.46665 19.3523 1.91436 19.8 2.46665 19.8H19.5333C20.0856 19.8 20.5333 19.3523 20.5333 18.8V8.06667Z"></path>
+                  <rect x="3.66669" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                  <rect x="16.8667" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                </svg>
+              </button>
+            </div>
+          </div> 
+          
+          {{ govukInput({
+            id: "numberOfDaysInDefault",
+            name: "numberOfDaysInDefault",
+            value: data['numberOfDaysInDefault'],
+            label: {
+              text: "Enter days in default",
+              classes: "govuk-label--s"
+            },
+            suffix: {
+              text: "days"
+            },
+            classes: "govuk-input--width-5 govuk-!-margin-bottom-6",
+            spellcheck: false
+          }) }}
 
-        <div id="conditional-days-in-default">
-          <h2 class="govuk-heading-s">Days in default</h2>
+          {{ govukDetails({
+            summaryText: "Help calculate days in default",
+            text: "To be added"
+          }) }}
 
-          {{ govukCheckboxes({
-            name: "daysInDefault",
-            values: data['daysInDefault'],
+          {% endset -%}
+
+          <div id="conditional-days-in-default">
+            <h2 class="govuk-heading-s">Days in default</h2>
+
+            {{ govukCheckboxes({
+              name: "daysInDefault",
+              values: data['daysInDefault'],
+              items: [
+                {
+                  value: "Yes",
+                  text: "There are days in default",
+                  conditional: {
+                    html: daysInDefaultHTML
+                  }
+                }
+              ]
+            }) }}
+          </div>
+        </div>
+
+        <!-- ENFORCEMENT ACTION -->
+        <div>
+          {% set prisHTML %}
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-label--s" for="pris-release-date">Estimated release date</label>
+            <div class="govuk-input__wrapper">
+              <input class="govuk-input moj-js-datepicker-input govuk-input--width-10" id="pris-release-date" name="pris-release-date" type="text" autocomplete="off" value="{{data['pris-release-date']}}">
+              <button class="moj-datepicker-toggle moj-js-datepicker-toggle" type="button" aria-haspopup="dialog" aria-controls="datepicker-date" aria-expanded="false">
+                <span class="govuk-visually-hidden">Choose date</span>
+                <svg width="32" height="24" focusable="false" class="moj-datepicker-icon" aria-hidden="true" role="img" viewBox="0 0 22 22">
+                  <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M16.1333 2.93333H5.86668V4.4C5.86668 5.21002 5.21003 5.86667 4.40002 5.86667C3.59 5.86667 2.93335 5.21002 2.93335 4.4V2.93333H2C0.895431 2.93333 0 3.82877 0 4.93334V19.2667C0 20.3712 0.89543 21.2667 2 21.2667H20C21.1046 21.2667 22 20.3712 22 19.2667V4.93333C22 3.82876 21.1046 2.93333 20 2.93333H19.0667V4.4C19.0667 5.21002 18.41 5.86667 17.6 5.86667C16.79 5.86667 16.1333 5.21002 16.1333 4.4V2.93333ZM20.5333 8.06667H1.46665V18.8C1.46665 19.3523 1.91436 19.8 2.46665 19.8H19.5333C20.0856 19.8 20.5333 19.3523 20.5333 18.8V8.06667Z"></path>
+                  <rect x="3.66669" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                  <rect x="16.8667" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          {{ govukInput({
+            id: "prisonNumber",
+            name: "prisonNumber",
+            value: data['prisonNumber'],
+            label: {
+              text: "Prison and prison number",
+              classes: "govuk-label--s"
+            },
+            hint: {
+              text: "Held as enforcement comment"
+            },
+            classes: "govuk-input--width-30"
+          }) }}
+          
+        
+          {% endset -%}
+
+          {% set noenfHTML %}
+
+          {{ govukInput({
+            id: "noenfReason",
+            name: "noenfReason",
+            value: data['noenfReason'],
+            label: {
+              text: "Reason account is on NOENF",
+              classes: "govuk-label--s"
+            },
+            classes: "govuk-input--width-30"
+          }) }}
+
+          {% endset -%}
+
+          {% set enforcementActionHTML %}
+
+          {{ govukRadios({
+            name: "enforcementActionType",
+            fieldset: {
+              legend: {
+                text: "Select enforcement action",
+                classes: "govuk-visually-hidden"
+              }
+            },
+            value: data['enforcementActionType'],
             items: [
               {
-                value: "Yes",
-                text: "There are days in default",
+                value: "Defendant is in custody (PRIS)",
+                text: "Defendant is in custody (PRIS)",
                 conditional: {
-                  html: daysInDefaultHTML
+                  html: prisHTML
+                }
+              },
+              {
+                value: "Hold enforcement on account (NOENF)",
+                text: "Hold enforcement on account (NOENF)",
+                conditional: {
+                  html: noenfHTML
                 }
               }
             ]
           }) }}
-        </div>
 
-        <!-- ENFORCEMENT ACTION -->
+          {% endset -%}
 
-        <h2 class="govuk-heading-s">Enforcement action</h2>
+          <h2 class="govuk-heading-s">Enforcement action</h2>
 
-        {{ govukCheckboxes({
-          name: "enforcementAction",
-          values: data['enforcementAction'],
-          items: [
-            {
-              value: "Yes",
-              text: "Add enforcement action",
-              conditional: {
-                html: daysInDefaultHTML
+          {{ govukCheckboxes({
+            name: "enforcementAction",
+            values: data['enforcementAction'],
+            items: [
+              {
+                value: "Yes",
+                text: "Add enforcement action",
+                conditional: {
+                  html: enforcementActionHTML
+                }
               }
-            }
-          ]
-        }) }}
+            ]
+          }) }}
+
+        </div>
 
         {% endif %}
 
         {% if data['defendantTypeF'] == "Adult or youth with parent or guardian to pay" %}
 
-        <p class="govuk-body">Payment terms</p>
-        <p class="govuk-body">Payment card</p>
-        <p class="govuk-body">Days in default</p>
-        <p class="govuk-body">Enforcement action</p>
+        <!-- PAYMENT TERMS -->
+        <div>
+        {% set payInFullHTML %}
+
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-label--s" for="payby-date">Enter pay by date</label>
+          <div class="govuk-hint">
+            For example, 31/01/2023
+          </div>
+          <div class="govuk-input__wrapper">
+            <input class="govuk-input moj-js-datepicker-input govuk-input--width-10" id="payby-date" name="payby-date" type="text" autocomplete="off" value="{{data['payby-date']}}">
+            <button class="moj-datepicker-toggle moj-js-datepicker-toggle" type="button" aria-haspopup="dialog" aria-controls="datepicker-date" aria-expanded="false">
+              <span class="govuk-visually-hidden">Choose date</span>
+              <svg width="32" height="24" focusable="false" class="moj-datepicker-icon" aria-hidden="true" role="img" viewBox="0 0 22 22">
+                <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M16.1333 2.93333H5.86668V4.4C5.86668 5.21002 5.21003 5.86667 4.40002 5.86667C3.59 5.86667 2.93335 5.21002 2.93335 4.4V2.93333H2C0.895431 2.93333 0 3.82877 0 4.93334V19.2667C0 20.3712 0.89543 21.2667 2 21.2667H20C21.1046 21.2667 22 20.3712 22 19.2667V4.93333C22 3.82876 21.1046 2.93333 20 2.93333H19.0667V4.4C19.0667 5.21002 18.41 5.86667 17.6 5.86667C16.79 5.86667 16.1333 5.21002 16.1333 4.4V2.93333ZM20.5333 8.06667H1.46665V18.8C1.46665 19.3523 1.91436 19.8 2.46665 19.8H19.5333C20.0856 19.8 20.5333 19.3523 20.5333 18.8V8.06667Z"></path>
+                <rect x="3.66669" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                <rect x="16.8667" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+              </svg>
+            </button>
+          </div>
+        </div>  
+          
+        {% endset -%}
+
+        {% set instalmentsOnlyHTML %}
+
+        {{ govukInput({
+          id: "instalmentOnlyPounds",
+          name: "instalmentOnlyPounds",
+          value: data['instalmentOnlyPounds'],
+          label: {
+            text: "Instalment",
+            classes: "govuk-label--s"
+          },
+          prefix: {
+            text: "£"
+          },
+          classes: "govuk-input--width-5",
+          spellcheck: false
+        }) }}
+
+        {{ govukRadios({
+          classes: "govuk-radios--small",
+          name: "instalmentOnlyFrequency",
+          value: data['instalmentOnlyFrequency'],
+          fieldset: {
+            legend: {
+              text: "Frequency",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "Weekly",
+              text: "Weekly"
+            },
+            {
+              value: "Fortnightly",
+              text: "Fortnightly"
+            },
+            {
+              value: "Monthly",
+              text: "Monthly"
+            }
+          ]
+        }) }}
+
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-label--s" for="instalment-only-start-date">Start date</label>
+          <div class="govuk-hint">
+            For example, 31/01/2023
+          </div>
+          <div class="govuk-input__wrapper">
+            <input class="govuk-input moj-js-datepicker-input govuk-input--width-10" id="instalment-only-start-date" name="instalment-only-start-date" type="text" autocomplete="off" value="{{data['instalment-only-start-date']}}">
+            <button class="moj-datepicker-toggle moj-js-datepicker-toggle" type="button" aria-haspopup="dialog" aria-controls="datepicker-date" aria-expanded="false">
+              <span class="govuk-visually-hidden">Choose date</span>
+              <svg width="32" height="24" focusable="false" class="moj-datepicker-icon" aria-hidden="true" role="img" viewBox="0 0 22 22">
+                <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M16.1333 2.93333H5.86668V4.4C5.86668 5.21002 5.21003 5.86667 4.40002 5.86667C3.59 5.86667 2.93335 5.21002 2.93335 4.4V2.93333H2C0.895431 2.93333 0 3.82877 0 4.93334V19.2667C0 20.3712 0.89543 21.2667 2 21.2667H20C21.1046 21.2667 22 20.3712 22 19.2667V4.93333C22 3.82876 21.1046 2.93333 20 2.93333H19.0667V4.4C19.0667 5.21002 18.41 5.86667 17.6 5.86667C16.79 5.86667 16.1333 5.21002 16.1333 4.4V2.93333ZM20.5333 8.06667H1.46665V18.8C1.46665 19.3523 1.91436 19.8 2.46665 19.8H19.5333C20.0856 19.8 20.5333 19.3523 20.5333 18.8V8.06667Z"></path>
+                <rect x="3.66669" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                <rect x="16.8667" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+              </svg>
+            </button>
+          </div>
+        </div>  
+        {% endset -%}
+
+        
+        {% set lumpSumHTML %}
+
+        {{ govukInput({
+          id: "lumpSum",
+          name: "lumpSum",
+          value: data['lumpSum'],
+          label: {
+            text: "Lump sum",
+            classes: "govuk-label--s"
+          },
+          prefix: {
+            text: "£"
+          },
+          classes: "govuk-input--width-5",
+          spellcheck: false
+        }) }}
+
+         {{ govukInput({
+          id: "instalmentLumpSumPounds",
+          name: "instalmentLumpSumPounds",
+          value: data['instalmentLumpSumPounds'],
+          label: {
+            text: "Instalment",
+            classes: "govuk-label--s"
+          },
+          prefix: {
+            text: "£"
+          },
+          classes: "govuk-input--width-5",
+          spellcheck: false
+        }) }}
+
+        {{ govukRadios({
+          classes: "govuk-radios--small",
+          name: "instalmentLumpSumFrequency",
+          value: data['instalmentLumpSumFrequency'],
+          fieldset: {
+            legend: {
+              text: "Frequency",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "Weekly",
+              text: "Weekly"
+            },
+            {
+              value: "Fortnightly",
+              text: "Fortnightly"
+            },
+            {
+              value: "Monthly",
+              text: "Monthly"
+            }
+          ]
+        }) }}
+
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-label--s" for="instalment-lump-sum-start-date">Start date</label>
+          <div class="govuk-hint">
+            For example, 31/01/2023
+          </div>
+          <div class="govuk-input__wrapper">
+            <input class="govuk-input moj-js-datepicker-input govuk-input--width-10" id="instalment-lump-sum-start-date" name="instalment-lump-sum-start-date" type="text" autocomplete="off" value="{{data['instalment-lump-sum-start-date']}}">
+            <button class="moj-datepicker-toggle moj-js-datepicker-toggle" type="button" aria-haspopup="dialog" aria-controls="datepicker-date" aria-expanded="false">
+              <span class="govuk-visually-hidden">Choose date</span>
+              <svg width="32" height="24" focusable="false" class="moj-datepicker-icon" aria-hidden="true" role="img" viewBox="0 0 22 22">
+                <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M16.1333 2.93333H5.86668V4.4C5.86668 5.21002 5.21003 5.86667 4.40002 5.86667C3.59 5.86667 2.93335 5.21002 2.93335 4.4V2.93333H2C0.895431 2.93333 0 3.82877 0 4.93334V19.2667C0 20.3712 0.89543 21.2667 2 21.2667H20C21.1046 21.2667 22 20.3712 22 19.2667V4.93333C22 3.82876 21.1046 2.93333 20 2.93333H19.0667V4.4C19.0667 5.21002 18.41 5.86667 17.6 5.86667C16.79 5.86667 16.1333 5.21002 16.1333 4.4V2.93333ZM20.5333 8.06667H1.46665V18.8C1.46665 19.3523 1.91436 19.8 2.46665 19.8H19.5333C20.0856 19.8 20.5333 19.3523 20.5333 18.8V8.06667Z"></path>
+                <rect x="3.66669" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                <rect x="16.8667" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+              </svg>
+            </button>
+          </div>
+        </div>           
+        {% endset -%}
+
+        {{ govukRadios({
+            name: "paymentTerms",
+            fieldset: {
+              legend: {
+                text: "Select payment terms",
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            value: data['paymentTerms'],
+            items: [
+              {
+                value: "Pay in full",
+                text: "Pay in full",
+                conditional: {
+                  html: payInFullHTML
+                }
+              },
+              {
+                value: "Instalments only",
+                text: "Instalments only",
+                conditional: {
+                  html: instalmentsOnlyHTML
+                }
+              },
+              {
+                value: "Lump sum plus instalments",
+                text: "Lump sum plus instalments",
+                conditional: {
+                  html: lumpSumHTML
+                }
+              }
+            ]
+        }) }}
+        </div>
+
+        <!-- PAYMENT CARD -->
+        {{ govukCheckboxes({
+          name: "paymentCard",
+          values: data['paymentCard'],
+          items: [
+            {
+              value: "Yes",
+              text: "Request payment card"
+            }
+          ]
+        }) }}
+
+        <!-- DAYS IN DEFAULT -->
+        <div>
+          {% set daysInDefaultHTML %}
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-label--s" for="days-in-default-start-date">Date days in default were imposed</label>
+            <div class="govuk-hint">
+              This should be whichever date is most recent - the sentencing date or the date of the suspended committal order.
+            </div>
+            <div class="govuk-input__wrapper">
+              <input class="govuk-input moj-js-datepicker-input govuk-input--width-10" id="days-in-default-start-date" name="days-in-default-start-date" type="text" autocomplete="off" value="{{data['days-in-default-start-date']}}">
+              <button class="moj-datepicker-toggle moj-js-datepicker-toggle" type="button" aria-haspopup="dialog" aria-controls="datepicker-date" aria-expanded="false">
+                <span class="govuk-visually-hidden">Choose date</span>
+                <svg width="32" height="24" focusable="false" class="moj-datepicker-icon" aria-hidden="true" role="img" viewBox="0 0 22 22">
+                  <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M16.1333 2.93333H5.86668V4.4C5.86668 5.21002 5.21003 5.86667 4.40002 5.86667C3.59 5.86667 2.93335 5.21002 2.93335 4.4V2.93333H2C0.895431 2.93333 0 3.82877 0 4.93334V19.2667C0 20.3712 0.89543 21.2667 2 21.2667H20C21.1046 21.2667 22 20.3712 22 19.2667V4.93333C22 3.82876 21.1046 2.93333 20 2.93333H19.0667V4.4C19.0667 5.21002 18.41 5.86667 17.6 5.86667C16.79 5.86667 16.1333 5.21002 16.1333 4.4V2.93333ZM20.5333 8.06667H1.46665V18.8C1.46665 19.3523 1.91436 19.8 2.46665 19.8H19.5333C20.0856 19.8 20.5333 19.3523 20.5333 18.8V8.06667Z"></path>
+                  <rect x="3.66669" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                  <rect x="16.8667" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                </svg>
+              </button>
+            </div>
+          </div> 
+          
+          {{ govukInput({
+            id: "numberOfDaysInDefault",
+            name: "numberOfDaysInDefault",
+            value: data['numberOfDaysInDefault'],
+            label: {
+              text: "Enter days in default",
+              classes: "govuk-label--s"
+            },
+            suffix: {
+              text: "days"
+            },
+            classes: "govuk-input--width-5 govuk-!-margin-bottom-6",
+            spellcheck: false
+          }) }}
+
+          {{ govukDetails({
+            summaryText: "Help calculate days in default",
+            text: "To be added"
+          }) }}
+
+          {% endset -%}
+
+          <div id="conditional-days-in-default">
+            <h2 class="govuk-heading-s">Days in default</h2>
+
+            {{ govukCheckboxes({
+              name: "daysInDefault",
+              values: data['daysInDefault'],
+              items: [
+                {
+                  value: "Yes",
+                  text: "There are days in default",
+                  conditional: {
+                    html: daysInDefaultHTML
+                  }
+                }
+              ]
+            }) }}
+          </div>
+        </div>
+
+        <!-- ENFORCEMENT ACTION -->
+        <div>
+          {% set prisHTML %}
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-label--s" for="pris-release-date">Estimated release date</label>
+            <div class="govuk-input__wrapper">
+              <input class="govuk-input moj-js-datepicker-input govuk-input--width-10" id="pris-release-date" name="pris-release-date" type="text" autocomplete="off" value="{{data['pris-release-date']}}">
+              <button class="moj-datepicker-toggle moj-js-datepicker-toggle" type="button" aria-haspopup="dialog" aria-controls="datepicker-date" aria-expanded="false">
+                <span class="govuk-visually-hidden">Choose date</span>
+                <svg width="32" height="24" focusable="false" class="moj-datepicker-icon" aria-hidden="true" role="img" viewBox="0 0 22 22">
+                  <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M16.1333 2.93333H5.86668V4.4C5.86668 5.21002 5.21003 5.86667 4.40002 5.86667C3.59 5.86667 2.93335 5.21002 2.93335 4.4V2.93333H2C0.895431 2.93333 0 3.82877 0 4.93334V19.2667C0 20.3712 0.89543 21.2667 2 21.2667H20C21.1046 21.2667 22 20.3712 22 19.2667V4.93333C22 3.82876 21.1046 2.93333 20 2.93333H19.0667V4.4C19.0667 5.21002 18.41 5.86667 17.6 5.86667C16.79 5.86667 16.1333 5.21002 16.1333 4.4V2.93333ZM20.5333 8.06667H1.46665V18.8C1.46665 19.3523 1.91436 19.8 2.46665 19.8H19.5333C20.0856 19.8 20.5333 19.3523 20.5333 18.8V8.06667Z"></path>
+                  <rect x="3.66669" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                  <rect x="16.8667" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          {{ govukInput({
+            id: "prisonNumber",
+            name: "prisonNumber",
+            value: data['prisonNumber'],
+            label: {
+              text: "Prison and prison number",
+              classes: "govuk-label--s"
+            },
+            hint: {
+              text: "Held as enforcement comment"
+            },
+            classes: "govuk-input--width-30"
+          }) }}
+          
+        
+          {% endset -%}
+
+          {% set noenfHTML %}
+
+          {{ govukInput({
+            id: "noenfReason",
+            name: "noenfReason",
+            value: data['noenfReason'],
+            label: {
+              text: "Reason account is on NOENF",
+              classes: "govuk-label--s"
+            },
+            classes: "govuk-input--width-30"
+          }) }}
+
+          {% endset -%}
+
+          {% set enforcementActionHTML %}
+
+          {{ govukRadios({
+            name: "enforcementActionType",
+            fieldset: {
+              legend: {
+                text: "Select enforcement action",
+                classes: "govuk-visually-hidden"
+              }
+            },
+            value: data['enforcementActionType'],
+            items: [
+              {
+                value: "Defendant is in custody (PRIS)",
+                text: "Defendant is in custody (PRIS)",
+                conditional: {
+                  html: prisHTML
+                }
+              },
+              {
+                value: "Hold enforcement on account (NOENF)",
+                text: "Hold enforcement on account (NOENF)",
+                conditional: {
+                  html: noenfHTML
+                }
+              }
+            ]
+          }) }}
+
+          {% endset -%}
+
+          <h2 class="govuk-heading-s">Enforcement action</h2>
+
+          {{ govukCheckboxes({
+            name: "enforcementAction",
+            values: data['enforcementAction'],
+            items: [
+              {
+                value: "Yes",
+                text: "Add enforcement action",
+                conditional: {
+                  html: enforcementActionHTML
+                }
+              }
+            ]
+          }) }}
+
+        </div>
 
         {% endif %}
 
         {% if data['defendantTypeF'] == "Company" %}
 
-        <p class="govuk-body">Payment terms</p>
-        <p class="govuk-body">Enforcement action</p>
+        <!-- PAYMENT TERMS -->
+        <div>
+          {% set payInFullHTML %}
+  
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-label--s" for="payby-date">Enter pay by date</label>
+            <div class="govuk-hint">
+              For example, 31/01/2023
+            </div>
+            <div class="govuk-input__wrapper">
+              <input class="govuk-input moj-js-datepicker-input govuk-input--width-10" id="payby-date" name="payby-date" type="text" autocomplete="off" value="{{data['payby-date']}}">
+              <button class="moj-datepicker-toggle moj-js-datepicker-toggle" type="button" aria-haspopup="dialog" aria-controls="datepicker-date" aria-expanded="false">
+                <span class="govuk-visually-hidden">Choose date</span>
+                <svg width="32" height="24" focusable="false" class="moj-datepicker-icon" aria-hidden="true" role="img" viewBox="0 0 22 22">
+                  <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M16.1333 2.93333H5.86668V4.4C5.86668 5.21002 5.21003 5.86667 4.40002 5.86667C3.59 5.86667 2.93335 5.21002 2.93335 4.4V2.93333H2C0.895431 2.93333 0 3.82877 0 4.93334V19.2667C0 20.3712 0.89543 21.2667 2 21.2667H20C21.1046 21.2667 22 20.3712 22 19.2667V4.93333C22 3.82876 21.1046 2.93333 20 2.93333H19.0667V4.4C19.0667 5.21002 18.41 5.86667 17.6 5.86667C16.79 5.86667 16.1333 5.21002 16.1333 4.4V2.93333ZM20.5333 8.06667H1.46665V18.8C1.46665 19.3523 1.91436 19.8 2.46665 19.8H19.5333C20.0856 19.8 20.5333 19.3523 20.5333 18.8V8.06667Z"></path>
+                  <rect x="3.66669" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                  <rect x="16.8667" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                </svg>
+              </button>
+            </div>
+          </div>  
+            
+          {% endset -%}
+  
+          {% set instalmentsOnlyHTML %}
+  
+          {{ govukInput({
+            id: "instalmentOnlyPounds",
+            name: "instalmentOnlyPounds",
+            value: data['instalmentOnlyPounds'],
+            label: {
+              text: "Instalment",
+              classes: "govuk-label--s"
+            },
+            prefix: {
+              text: "£"
+            },
+            classes: "govuk-input--width-5",
+            spellcheck: false
+          }) }}
+  
+          {{ govukRadios({
+            classes: "govuk-radios--small",
+            name: "instalmentOnlyFrequency",
+            value: data['instalmentOnlyFrequency'],
+            fieldset: {
+              legend: {
+                text: "Frequency",
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            items: [
+              {
+                value: "Weekly",
+                text: "Weekly"
+              },
+              {
+                value: "Fortnightly",
+                text: "Fortnightly"
+              },
+              {
+                value: "Monthly",
+                text: "Monthly"
+              }
+            ]
+          }) }}
+  
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-label--s" for="instalment-only-start-date">Start date</label>
+            <div class="govuk-hint">
+              For example, 31/01/2023
+            </div>
+            <div class="govuk-input__wrapper">
+              <input class="govuk-input moj-js-datepicker-input govuk-input--width-10" id="instalment-only-start-date" name="instalment-only-start-date" type="text" autocomplete="off" value="{{data['instalment-only-start-date']}}">
+              <button class="moj-datepicker-toggle moj-js-datepicker-toggle" type="button" aria-haspopup="dialog" aria-controls="datepicker-date" aria-expanded="false">
+                <span class="govuk-visually-hidden">Choose date</span>
+                <svg width="32" height="24" focusable="false" class="moj-datepicker-icon" aria-hidden="true" role="img" viewBox="0 0 22 22">
+                  <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M16.1333 2.93333H5.86668V4.4C5.86668 5.21002 5.21003 5.86667 4.40002 5.86667C3.59 5.86667 2.93335 5.21002 2.93335 4.4V2.93333H2C0.895431 2.93333 0 3.82877 0 4.93334V19.2667C0 20.3712 0.89543 21.2667 2 21.2667H20C21.1046 21.2667 22 20.3712 22 19.2667V4.93333C22 3.82876 21.1046 2.93333 20 2.93333H19.0667V4.4C19.0667 5.21002 18.41 5.86667 17.6 5.86667C16.79 5.86667 16.1333 5.21002 16.1333 4.4V2.93333ZM20.5333 8.06667H1.46665V18.8C1.46665 19.3523 1.91436 19.8 2.46665 19.8H19.5333C20.0856 19.8 20.5333 19.3523 20.5333 18.8V8.06667Z"></path>
+                  <rect x="3.66669" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                  <rect x="16.8667" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                </svg>
+              </button>
+            </div>
+          </div>  
+          {% endset -%}
+  
+          
+          {% set lumpSumHTML %}
+  
+          {{ govukInput({
+            id: "lumpSum",
+            name: "lumpSum",
+            value: data['lumpSum'],
+            label: {
+              text: "Lump sum",
+              classes: "govuk-label--s"
+            },
+            prefix: {
+              text: "£"
+            },
+            classes: "govuk-input--width-5",
+            spellcheck: false
+          }) }}
+  
+           {{ govukInput({
+            id: "instalmentLumpSumPounds",
+            name: "instalmentLumpSumPounds",
+            value: data['instalmentLumpSumPounds'],
+            label: {
+              text: "Instalment",
+              classes: "govuk-label--s"
+            },
+            prefix: {
+              text: "£"
+            },
+            classes: "govuk-input--width-5",
+            spellcheck: false
+          }) }}
+  
+          {{ govukRadios({
+            classes: "govuk-radios--small",
+            name: "instalmentLumpSumFrequency",
+            value: data['instalmentLumpSumFrequency'],
+            fieldset: {
+              legend: {
+                text: "Frequency",
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            items: [
+              {
+                value: "Weekly",
+                text: "Weekly"
+              },
+              {
+                value: "Fortnightly",
+                text: "Fortnightly"
+              },
+              {
+                value: "Monthly",
+                text: "Monthly"
+              }
+            ]
+          }) }}
+  
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-label--s" for="instalment-lump-sum-start-date">Start date</label>
+            <div class="govuk-hint">
+              For example, 31/01/2023
+            </div>
+            <div class="govuk-input__wrapper">
+              <input class="govuk-input moj-js-datepicker-input govuk-input--width-10" id="instalment-lump-sum-start-date" name="instalment-lump-sum-start-date" type="text" autocomplete="off" value="{{data['instalment-lump-sum-start-date']}}">
+              <button class="moj-datepicker-toggle moj-js-datepicker-toggle" type="button" aria-haspopup="dialog" aria-controls="datepicker-date" aria-expanded="false">
+                <span class="govuk-visually-hidden">Choose date</span>
+                <svg width="32" height="24" focusable="false" class="moj-datepicker-icon" aria-hidden="true" role="img" viewBox="0 0 22 22">
+                  <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M16.1333 2.93333H5.86668V4.4C5.86668 5.21002 5.21003 5.86667 4.40002 5.86667C3.59 5.86667 2.93335 5.21002 2.93335 4.4V2.93333H2C0.895431 2.93333 0 3.82877 0 4.93334V19.2667C0 20.3712 0.89543 21.2667 2 21.2667H20C21.1046 21.2667 22 20.3712 22 19.2667V4.93333C22 3.82876 21.1046 2.93333 20 2.93333H19.0667V4.4C19.0667 5.21002 18.41 5.86667 17.6 5.86667C16.79 5.86667 16.1333 5.21002 16.1333 4.4V2.93333ZM20.5333 8.06667H1.46665V18.8C1.46665 19.3523 1.91436 19.8 2.46665 19.8H19.5333C20.0856 19.8 20.5333 19.3523 20.5333 18.8V8.06667Z"></path>
+                  <rect x="3.66669" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                  <rect x="16.8667" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                </svg>
+              </button>
+            </div>
+          </div>           
+          {% endset -%}
+  
+          {{ govukRadios({
+              name: "paymentTerms",
+              fieldset: {
+                legend: {
+                  text: "Select payment terms",
+                  classes: "govuk-fieldset__legend--s"
+                }
+              },
+              value: data['paymentTerms'],
+              items: [
+                {
+                  value: "Pay in full",
+                  text: "Pay in full",
+                  conditional: {
+                    html: payInFullHTML
+                  }
+                },
+                {
+                  value: "Instalments only",
+                  text: "Instalments only",
+                  conditional: {
+                    html: instalmentsOnlyHTML
+                  }
+                },
+                {
+                  value: "Lump sum plus instalments",
+                  text: "Lump sum plus instalments",
+                  conditional: {
+                    html: lumpSumHTML
+                  }
+                }
+              ]
+          }) }}
+        </div>
+        
+        <!-- ENFORCEMENT ACTION -->
+        <div>
+          {% set enforcementActionHTML %}
+
+          {{ govukInput({
+            id: "noenfReason",
+            name: "noenfReason",
+            value: data['noenfReason'],
+            label: {
+              text: "Reason account is on NOENF",
+              classes: "govuk-label--s"
+            },
+            classes: "govuk-input--width-30"
+          }) }}
+
+          {% endset -%}
+
+          <h2 class="govuk-heading-s">Enforcement action</h2>
+
+          {{ govukCheckboxes({
+            name: "enforcementAction",
+            values: data['enforcementAction'],
+            items: [
+              {
+                value: "Yes",
+                text: "Hold enforcement on account (NOENF)",
+                conditional: {
+                  html: enforcementActionHTML
+                }
+              }
+            ]
+          }) }}
+
+        </div>
 
         {% endif %}
 
