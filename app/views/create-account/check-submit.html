@@ -1,0 +1,27 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Check account details" %}
+
+{% block beforeContent %}
+
+<a href="account-details.html" class="govuk-back-link">Back</a>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+    {{ govukButton({
+      text: "Submit for review",
+      href: "./confirmation.html"
+    }) }}
+
+  </div>
+</div>
+
+
+{% endblock %}
+

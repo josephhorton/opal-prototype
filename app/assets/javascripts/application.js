@@ -54,7 +54,7 @@ window.GOVUKPrototypeKit.documentReady(() => {
     return months[monthNumber - 1]; // Arrays are zero-indexed so subtract 1
   }
 
-  // MOJ DATE PICKER
+// MOJ DATE PICKER
 
 /**
  * Datepicker config

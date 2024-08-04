@@ -1,0 +1,45 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Minor creditor details" %}
+
+{% block pageTitle %}
+{{ pageName }} – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+    <form id="minor-creditor-details-1-form" method="post" novalidate action="test-offence">
+
+    <!-- Select creditor type -->
+
+    <!-- Address -->
+
+    <!-- Payment details -->
+
+    <div class="govuk-button-group">
+      <button type="submit" class="govuk-button">
+        Save
+      </button>
+    </div>
+
+  </form>
+
+  <p class="govuk-body"><a class="govuk-link govuk-! govuk-link--no-visited-state" href="test-offence.html">Cancel</a></p>
+
+  </div>
+</div>
+
+<script>
+  document.getElementById('minor-creditor-details-1-form').addEventListener('submit', function() {
+    localStorage.setItem('minorCreditor1Added', 'true');
+  });
+</script>
+
+{% endblock %}

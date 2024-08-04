@@ -1,0 +1,82 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Offences and impositions" %}
+
+{% block pageTitle %}
+{{ pageName }} – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+    <div style="background-color: #1d70b8;" class="govuk-!-padding-2 govuk-!-margin-bottom-4">
+      <span class="govuk-body-s govuk-!-margin-right-2 govuk-!-font-weight-bold" style="color: white;">Date of sentence</span><span class="govuk-body-s" style="color: white;">7 July 2019</span>
+    </div>
+
+    <div class="govuk-!-margin-bottom-4" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid black;">
+      <div style="width: fit-content;">
+        <span class="govuk-caption-m govuk-!-font-weight-regular">ABCDEFG</span>
+        <h2 class="govuk-heading-m govuk-!-padding-bottom-2 govuk-!-margin-bottom-0">Offence title</h2>
+      </div>
+      <ul class="govuk-summary-list__actions-list govuk-body" style="width: inherit;">
+        <li class="govuk-summary-list__actions-list-item">
+          <a class="govuk-link govuk-link--no-visited-state" href="#"><strong>Change</strong><span class="govuk-visually-hidden"> offence</span></a>
+        </li>
+        <li class="govuk-summary-list__actions-list-item">
+          <a class="govuk-link govuk-link--no-visited-state" href="#"><strong>Remove</strong><span class="govuk-visually-hidden"> offence</span></a>
+        </li>
+      </ul>
+    </div>
+
+    <table class="govuk-table govuk-!-font-size-16">
+      <caption class="govuk-table__caption govuk-table__caption--m govuk-visually-hidden" style="border-bottom: 2px solid black;">Offence title</caption>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header" style="width: 20%;">Imposition</th>
+          <th scope="col" class="govuk-table__header" style="width: 35%;">Creditor</th>
+          <th scope="col" class="govuk-table__header" style="width: 15%;">Amount imposed</th>
+          <th scope="col" class="govuk-table__header" style="width: 15%;">Amount paid</th>
+          <th scope="col" class="govuk-table__header" style="width: 15%;">Balance remaining</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header govuk-!-font-weight-regular">{{data['impositionResultCode-1']}}</th>
+          <td class="govuk-table__cell">
+            {% if (data['impositionResultCode-1'] == "Compensation (FCOMP)" or data['impositionResultCode-1'] == "Costs (FCOST)") %}
+                {% if (data['add-creditor-1'] == "Major creditor") %}
+                  {{data['majorCreditor1']}}
+                {% elseif (data['add-creditor-1'] == "Minor creditor") %}
+                  Terrence Lovejoy
+                {% endif %}
+              {% elseif data['impositionResultCode-1'] == "Victim surcharge (FVS)" %}
+                FVS MC
+              {% elseif data['impositionResultCode-1'] == "Crown prosecution costs (FCPC)" %}
+                FCPC MC
+              {% elseif data['impositionResultCode-1'] == "Fine only (FO)" %}
+                FO MC
+              {% elseif data['impositionResultCode-1'] == "Criminal courts charge (FCC)" %}
+                FCC MC
+              {% elseif data['impositionResultCode-1'] == "Vehicle excise duty (FVEBD)" %}
+                FVEBD MC
+              {% elseif data['impositionResultCode-1'] == "Forfeited recognizance (FFR)" %}
+                FFR MC
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">{{data['impositionImposed-1'] | currency}} </td>
+          <td class="govuk-table__cell">{{data['impositionPaid-1'] | currency}} </td>
+          <td class="govuk-table__cell">£0.00</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+{% endblock %}

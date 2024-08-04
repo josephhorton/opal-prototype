@@ -12,7 +12,7 @@ require('./routes/account')(router)
 
 router.get('/clear-session', function (req, res) {
     req.session.destroy(function (err) {
-      res.redirect('/index.html'); // Redirect to index.html after clearing session
+      res.redirect('/create-account/create-account.html'); // Redirect to index.html after clearing session
     });
 });
 
