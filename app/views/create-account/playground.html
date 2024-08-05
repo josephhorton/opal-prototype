@@ -1,0 +1,44 @@
+<tr class="govuk-table__row">
+    <th scope="row" class="govuk-table__header govuk-!-font-weight-regular">{{data['Offence1_imposition2_Result_Code']}}</th>
+    <td class="govuk-table__cell">
+      
+      {% if data['Offence1_imposition2_Result_Code'] == "Costs (FCOST)" %}
+      {% if data['Offence1_imposition2_Creditor_Type'] == "Offence1_imposition2_Minor_Creditor" %}
+        {% if data['Offence1_imposition2_Minor_Creditor_Type'] == "Individual" %}
+          {{data['Offence1_imposition2_Minor_Creditor_First_Name']}} {{data['Offence1_imposition2_Minor_Creditor_Last_Name']}}
+        {% elseif data['Offence1_imposition2_Minor_Creditor_Type'] == "Company" %}
+          {{data['Offence1_imposition2_Minor_Creditor_Company_Name']}}
+        {% endif %}
+      {% elseif data['Offence1_imposition2_Creditor_Type'] == "Offence1_imposition2_Major_Creditor" %}  
+        {{data['Offence1_imposition2_Major_Creditor_Name']}}
+      {% endif%}  
+      
+      {% elseif data['Offence1_imposition2_Result_Code'] == "Compensation (FCOMP)" %}
+      {% if data['Offence1_imposition2_Creditor_Type'] == "Offence1_imposition2_Minor_Creditor" %}
+      {% if data['Offence1_imposition2_Minor_Creditor_Type'] == "Individual" %}
+        {{data['Offence1_imposition2_Minor_Creditor_First_Name']}} {{data['Offence1_imposition2_Minor_Creditor_Last_Name']}}
+      {% elseif data['Offence1_imposition2_Minor_Creditor_Type'] == "Company" %}
+        {{data['Offence1_imposition2_Minor_Creditor_Company_Name']}}
+      {% endif %}
+      {% elseif data['Offence1_imposition2_Creditor_Type'] == "Offence1_imposition2_Major_Creditor" %}  
+        {{data['Offence1_imposition2_Major_Creditor_Name']}}
+      {% endif%}   
+      
+      {% elseif data['Offence1_imposition2_Result_Code'] == "Victim surcharge (FVS)" %}
+        FVS Major Creditor
+      {% elseif data['Offence1_imposition2_Result_Code'] == "Crown prosecution costs (FCPC)" %}
+        FCPC Major Creditor
+      {% elseif data['Offence1_imposition2_Result_Code'] == "Fine only (FO)" %}
+        FO Major Creditor
+      {% elseif data['Offence1_imposition2_Result_Code'] == "Criminal courts charge (FCC)" %}
+        FCC Major Creditor
+      {% elseif data['Offence1_imposition2_Result_Code'] == "Vehicle excise duty (FVEBD)" %}
+        FVEBD Major Creditor
+      {% elseif data['Offence1_imposition2_Result_Code'] == "Forfeited recognizance (FFR)" %}
+        FFR Major Creditor
+      {% endif %}
+    </td>
+    <td class="govuk-table__cell">{{ Offence1_imposition2_Imposed_Money | currency }} </td>
+    <td class="govuk-table__cell">{{ Offence1_imposition2_Paid_Money | currency }} </td>
+    <td class="govuk-table__cell">{{ Offence1_imposition2_Balance | currency }}</td>
+  </tr>
