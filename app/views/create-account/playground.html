@@ -1,44 +1,244 @@
-<tr class="govuk-table__row">
-    <th scope="row" class="govuk-table__header govuk-!-font-weight-regular">{{data['Offence1_imposition2_Result_Code']}}</th>
-    <td class="govuk-table__cell">
+<!-- IMPOSITION 2 -->
+<div class="impositionWrapper govuk-!-margin-bottom-6" id="Offence1_Imposition3_Container" style="display: none;">
+  
+  <!-- IMPOSITION DETAILS -->
+  <div class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-right-0 imposition">
+    <div class="govuk-grid-column-one-half">
+      <div class="govuk-form-group govuk-!-margin-bottom-4">
+          <label class="govuk-label govuk-label--s" for="Offence1_Imposition3_Result_Code">
+            Result code
+          </label>
+        <select class="govuk-select" id="Offence1_Imposition3_Result_Code" name="Offence1_Imposition3_Result_Code" style="width: 100%;">
+          <option value="" selected disabled>Select result code</option>
+          <option value="Compensation (FCOMP)">Compensation (FCOMP)</option>
+          <option value="Victim surcharge (FVS)">Victim surcharge (FVS)</option>
+          <option value="Costs (FCOST)">Costs (FCOST)</option>
+          <option value="Crown prosecution costs (FCPC)">Crown prosecution costs (FCPC)</option>
+          <option value="Fine only (FO)">Fine only (FO)</option>
+          <option value="Criminal courts charge (FCC)">Criminal courts charge (FCC)</option>
+          <option value="FVVehicle excise duty (FVEBD)EBD">Vehicle excise duty (FVEBD)</option>
+          <option value="Forfeited recognizance (FFR)">Forfeited recognizance (FFR)</option>
+        </select>
+      </div>
+    </div>
+    <div class="govuk-grid-column-one-quarter">
+      {{ govukInput({
+        id: 'Offence1_Imposition3_Imposed',
+        name: 'Offence1_Imposition3_Imposed',
+        value: data['Offence1_Imposition3_Imposed'],
+        formGroup: {
+          classes: "govuk-!-margin-bottom-4"
+        },
+        label: {
+          html: 'Amount imposed',
+          classes: 'govuk-!-font-weight-bold'
+        },
+        prefix: {
+          text: "£"
+        }
+      }) }}
+    </div>
+    <div class="govuk-grid-column-one-quarter">
+      {{ govukInput({
+        id: 'Offence1_Imposition3_Paid',
+        name: 'Offence1_Imposition3_Paid',
+        value: data['Offence1_Imposition3_Paid'],
+        formGroup: {
+          classes: "govuk-!-margin-bottom-4"
+        },
+        label: {
+          html: 'Amount paid',
+          classes: 'govuk-!-font-weight-bold'
+        },
+        prefix: {
+          text: "£"
+        }
+      }) }}
+    </div>
+  </div>
+
+  <!-- CREDITOR DETAILS -->
+  <div class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-right-0 creditors" id="Offence1_Imposition3_Creditor_Add" style="display: none;">
+    <div class="govuk-grid-column-full">
       
-      {% if data['Offence1_imposition2_Result_Code'] == "Costs (FCOST)" %}
-      {% if data['Offence1_imposition2_Creditor_Type'] == "Offence1_imposition2_Minor_Creditor" %}
-        {% if data['Offence1_imposition2_Minor_Creditor_Type'] == "Individual" %}
-          {{data['Offence1_imposition2_Minor_Creditor_First_Name']}} {{data['Offence1_imposition2_Minor_Creditor_Last_Name']}}
-        {% elseif data['Offence1_imposition2_Minor_Creditor_Type'] == "Company" %}
-          {{data['Offence1_imposition2_Minor_Creditor_Company_Name']}}
-        {% endif %}
-      {% elseif data['Offence1_imposition2_Creditor_Type'] == "Offence1_imposition2_Major_Creditor" %}  
-        {{data['Offence1_imposition2_Major_Creditor_Name']}}
-      {% endif%}  
+      <!-- SHOW THE MINOR CREDITOR IF FCOST OR FCOMP -->
+      <div id="Offence1_Imposition3_Creditor_Show_Minor_Creditor" style="display: none;">
+        <div class="govuk-summary-card govuk-!-margin-bottom-4">
+          <div class="govuk-summary-card__title-wrapper">
+            <dl class="govuk-summary-list govuk-!-margin-bottom-0" >
+              <div class="govuk-summary-list__row" style="border: none;">
+                <dt class="govuk-summary-list__key">
+                  Minor creditor
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {% if data['Offence1_Imposition3_Minor_Creditor_Type'] == "Individual" %}
+                    {{data['Offence1_Imposition3_Minor_Creditor_First_Name']}} {{data['Offence1_Imposition3_Minor_Creditor_Last_Name']}}
+                  {% elseif data['Offence1_Imposition3_Minor_Creditor_Type'] == "Company" %}
+                    {{data['Offence1_Imposition3_Minor_Creditor_Company_Name']}}
+                  {% endif %}
+                </dd>
+                <dd class="govuk-summary-list__actions" style="width: 40%;">
+                  <ul class="govuk-summary-list__actions-list">
+                    <li class="govuk-summary-list__actions-list-item" data-module="edge">
+                      <a class="govuk-link govuk-link--no-visited-state" href="#" data-message="This has not been prototyped. It would show a summary of the details you entered for this minor creditor"><strong>Show details</strong><span class="govuk-visually-hidden"></span></a>
+                    </li>
+                    <li class="govuk-summary-list__actions-list-item">
+                      <a class="govuk-link govuk-link--no-visited-state" href="./add-offence-1-minor-creditor-3.html"><strong>Change</strong><span class="govuk-visually-hidden"> minor creditor</span></a>
+                    </li>
+                    <li class="govuk-summary-list__actions-list-item">
+                      <a class="govuk-link govuk-link--no-visited-state" id="Offence1_Imposition3_Creditor_Remove" href="#"><strong>Remove</strong><span class="govuk-visually-hidden"> minor creditor</span></a>
+                    </li>
+                  </ul>
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
       
-      {% elseif data['Offence1_imposition2_Result_Code'] == "Compensation (FCOMP)" %}
-      {% if data['Offence1_imposition2_Creditor_Type'] == "Offence1_imposition2_Minor_Creditor" %}
-      {% if data['Offence1_imposition2_Minor_Creditor_Type'] == "Individual" %}
-        {{data['Offence1_imposition2_Minor_Creditor_First_Name']}} {{data['Offence1_imposition2_Minor_Creditor_Last_Name']}}
-      {% elseif data['Offence1_imposition2_Minor_Creditor_Type'] == "Company" %}
-        {{data['Offence1_imposition2_Minor_Creditor_Company_Name']}}
-      {% endif %}
-      {% elseif data['Offence1_imposition2_Creditor_Type'] == "Offence1_imposition2_Major_Creditor" %}  
-        {{data['Offence1_imposition2_Major_Creditor_Name']}}
-      {% endif%}   
-      
-      {% elseif data['Offence1_imposition2_Result_Code'] == "Victim surcharge (FVS)" %}
-        FVS Major Creditor
-      {% elseif data['Offence1_imposition2_Result_Code'] == "Crown prosecution costs (FCPC)" %}
-        FCPC Major Creditor
-      {% elseif data['Offence1_imposition2_Result_Code'] == "Fine only (FO)" %}
-        FO Major Creditor
-      {% elseif data['Offence1_imposition2_Result_Code'] == "Criminal courts charge (FCC)" %}
-        FCC Major Creditor
-      {% elseif data['Offence1_imposition2_Result_Code'] == "Vehicle excise duty (FVEBD)" %}
-        FVEBD Major Creditor
-      {% elseif data['Offence1_imposition2_Result_Code'] == "Forfeited recognizance (FFR)" %}
-        FFR Major Creditor
-      {% endif %}
-    </td>
-    <td class="govuk-table__cell">{{ Offence1_imposition2_Imposed_Money | currency }} </td>
-    <td class="govuk-table__cell">{{ Offence1_imposition2_Paid_Money | currency }} </td>
-    <td class="govuk-table__cell">{{ Offence1_imposition2_Balance | currency }}</td>
-  </tr>
+      <!-- SHOW THE FORM IS NOTHING MINOR CREDITOR NOT ADDED -->
+      <div id="Offence1_Imposition3_Creditor_Show_Form">
+        {% set Offence1_Imposition3_Major_Creditor_HTML %}
+
+        {{ xGovukAutocomplete({
+          formGroup: {
+            classes: "govuk-input--width-30"
+          },
+          id: "Offence1_Imposition3_Major_Creditor_Name",
+          name: "Offence1_Imposition3_Major_Creditor_Name",
+          value: data['Offence1_Imposition3_Major_Creditor_Name'],
+          allowEmpty: false,
+          displayMenu: "overlay",
+          label: {
+            classes: "govuk-label--s",
+            text: "Search using name or code"
+          },  
+          items: [
+          { text: "Abellio Greater Anglia Ltd (AGAL)" },
+          { text: "Aldi (ALDI)" },
+          { text: "Anglia Trains (ANGL)" },
+          { text: "Asda (ASDA)" },
+          { text: "Bedford Borough Council (BEDB)" },
+          { text: "B & Q Stores (BNQL)" },
+          { text: "Boots (BOOT)" },
+          { text: "British Transport Police (BTPO)" },
+          { text: "Cambridge City Council (CAMC)" },
+          { text: "Charles & Ashby Revenue Ltd (CARV)" },
+          { text: "Cambs County Council Education (CBC1)" },
+          { text: "Cambridgeshire County Council. (CBCC)" },
+          { text: "Central Trains (CENT)" },
+          { text: "City of London Police (COLP)" },
+          { text: "Co-Operative Group (COP2)" },
+          { text: "Crown Prosecution Service (CPS)" },
+          { text: "DVLA (DVL2)" },
+          { text: "DVSA (DVSA)" },
+          { text: "DWP DM (DWP1)" },
+          { text: "East Cambs. District Council (ECDC)" },
+          { text: "Abellio East Midlands Ltd (EMT1)" },
+          { text: "Fenland District Council (FDC)" },
+          { text: "Govia Thameslink Railway Ltd (GTLR)" },
+          { text: "HMCTS (HMCS)" },
+          { text: "HM Revenue and Customs (HMRC)" },
+          { text: "Huntingdon District Council (HUDC)" },
+          { text: "Iceland Stores (ICE1)" },
+          { text: "Insolvency Service (INSS)" },
+          { text: "John Lewis Stores (JLEW)" },
+          { text: "Lidl Stores (LIDL)" },
+          { text: "London North Eastern Railway (LNER)" },
+          { text: "Merseyrail Electrics 2002 Ltd (METV)" },
+          { text: "Morrisons (MORR)" },
+          { text: "Marks and Spencer (MSP)" },
+          { text: "Next (NEXT)" },
+          { text: "NOMS (NOMS)" },
+          { text: "Environment Agency (NRA1)" },
+          { text: "Peterborough City Council (PCTC)" },
+          { text: "Poundland (PLD)" },
+          { text: "Metropolitan Police (PO01)" },
+          { text: "PCC for Merseyside (PO05)" },
+          { text: "PCC for North Yorkshire (PO12)" },
+          { text: "PCC for West Midlands (PO20)" },
+          { text: "PCC for Staffordshire (PO21)" },
+          { text: "PCC for Derbyshire (PO30)" },
+          { text: "PCC for Lincolnshire (PO32)" },
+          { text: "PCC for Leicestershire (PO33)" },
+          { text: "PCC for Northamptonshire (PO34)" },
+          { text: "PCC for Cambridgeshire (PO35)" },
+          { text: "PCC for Norfolk (PO36)" },
+          { text: "PCC for Suffolk (PO37)" },
+          { text: "PCC for Bedfordshire (PO40)" },
+          { text: "PCC for Hertfordshire (PO41)" },
+          { text: "PCC for Essex (PO42)" },
+          { text: "PCC for Thames Valley (PO43)" },
+          { text: "PCC for Hampshire (PO44)" },
+          { text: "PCC for Surrey (PO45)" },
+          { text: "PCC for Kent (PO46)" },
+          { text: "Sussex Police (PO47)" },
+          { text: "PCC for Avon & Somerset (PO52)" },
+          { text: "PCC for Wiltshire (PO54)" },
+          { text: "PCC for North Wales (PO60)" },
+          { text: "PCC for South Wales (PO62)" },
+          { text: "PCC for Dyfed Powys (PO63)" },
+          { text: "RSPCA (RSPC)" },
+          { text: "Sainsbury's (SAIN)" },
+          { text: "South Cambridge D C (SCDC)" },
+          { text: "Superdrug (SDRG)" },
+          { text: "Tesco (TESC)" },
+          { text: "Transport for London (TFL2)" },
+          { text: "TK Maxx (TKMX)" },
+          { text: "Transport Investigations Ltd (TRAN)" },
+          { text: "Capital Business Services Ltd (TVL3)" },
+          { text: "National Express Trains LTD (WAGN)" },
+          { text: "Wilkinson Stores (WILK)" },
+          { text: "Waitrose (WTRO)" }
+          ]
+        }) }}
+
+        {% endset -%}
+
+        {% set Offence1_Imposition3_Minor_Creditor_HTML %}
+          <p class="govuk-body"><a href="./add-offence-1-minor-creditor-3.html" class="govuk-link govuk-link--no-visited-state">Add minor creditor details</a></p>
+        {% endset -%}
+
+        {{ govukRadios({
+          formGroup: {
+            classes: "govuk-!-margin-bottom-2"
+          },
+          name: "Offence1_Imposition3_Creditor_Type",
+          value: data['Offence1_Imposition3_Creditor_Type'],
+          id: "Offence1_Imposition3_Creditor_Type",
+          fieldset: {
+            legend: {
+              text: "Add creditor",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "Offence1_Imposition3_Major_Creditor",
+              text: "Major creditor",
+              conditional: {
+                html: Offence1_Imposition3_Major_Creditor_HTML 
+              }
+            },
+            {
+              value: "Offence1_Imposition3_Minor_Creditor",
+              text: "Minor creditor",
+              conditional: {
+                html: Offence1_Imposition3_Minor_Creditor_HTML
+              }
+            }
+          ]
+        }) }}
+      </div>
+
+    </div>
+  </div>
+
+  <!-- REMOVE LINK -->
+  <div class="govuk-grid-row  govuk-!-margin-left-0 govuk-!-margin-right-0 creditors">
+    <div class="govuk-grid-column-one-half">
+      <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="#">Remove imposition</a></p>
+    </div>
+  </div>
+
+</div>
