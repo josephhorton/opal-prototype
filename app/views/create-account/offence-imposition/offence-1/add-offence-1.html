@@ -11,14 +11,67 @@
 
 {% block content %}
 
+<form id="employer-details-form" method="post" novalidate action="../check-offences">
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
+
+
     <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+    <h2 class="govuk-heading-m">Offence details</h2>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s" for="date">Date of sentence</label>
+      <div id="date-hint" class="govuk-hint">
+        For example, 31/01/2023
+      </div>
+      <div class="govuk-input__wrapper">
+        <input class="govuk-input moj-js-datepicker-input govuk-input--width-10" id="Offence1_Date_Of_Sentence" name="Offence1_Date_Of_Sentence" type="text" autocomplete="off" value="{{data['Offence1_Date_Of_Sentence']}}">
+        <button class="moj-datepicker-toggle moj-js-datepicker-toggle" type="button" aria-haspopup="dialog" aria-controls="datepicker-date" aria-expanded="false">
+          <span class="govuk-visually-hidden">Choose date</span>
+          <svg width="32" height="24" focusable="false" class="moj-datepicker-icon" aria-hidden="true" role="img" viewBox="0 0 22 22">
+            <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M16.1333 2.93333H5.86668V4.4C5.86668 5.21002 5.21003 5.86667 4.40002 5.86667C3.59 5.86667 2.93335 5.21002 2.93335 4.4V2.93333H2C0.895431 2.93333 0 3.82877 0 4.93334V19.2667C0 20.3712 0.89543 21.2667 2 21.2667H20C21.1046 21.2667 22 20.3712 22 19.2667V4.93333C22 3.82876 21.1046 2.93333 20 2.93333H19.0667V4.4C19.0667 5.21002 18.41 5.86667 17.6 5.86667C16.79 5.86667 16.1333 5.21002 16.1333 4.4V2.93333ZM20.5333 8.06667H1.46665V18.8C1.46665 19.3523 1.91436 19.8 2.46665 19.8H19.5333C20.0856 19.8 20.5333 19.3523 20.5333 18.8V8.06667Z"></path>
+            <rect x="3.66669" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+            <rect x="16.8667" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+          </svg>
+        </button>
+        <input type="hidden" id="Offence1_Date_Of_Sentence_Converted" name="Offence1_Date_Of_Sentence_Converted" value="{{ data['Offence1_Date_Of_Sentence_Converted'] }}">
+      </div>
+    </div>
+
+    <!-- Offence code input -->
+    {{ govukInput({
+      formGroup: {
+        classes: "govuk-!-margin-bottom-2"
+      },
+      id: "Offence1_Code",
+      name: "Offence1_Code",
+      classes: "govuk-input--width-10 govuk-input--extra-letter-spacing",
+      label: {
+        text: "Offence code",
+        classes: "govuk-label--s"
+      },
+      hint: {
+        html: 'For example, TP11003. If you don’t know the offence code, you can <a href="#" class="govuk-link--no-visited-state" data-module="edge">search the offence list</a>.'
+      },
+      value: data['Offence1_Code']
+    }) }}
+
+    <!-- Results -->
+    <div id="results" style="display: none;" class="govuk-!-margin-bottom-3 govuk-!-margin-top-5">
+      <div style="padding: 18px 15px 15px 15px; border-left: 5px solid #1d70b8; background-color: #f3f2f1;">
+        <p id="offence-code" class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-0" style="text-transform: uppercase;">TP11003</p>
+        <p id="offence-title" class="govuk-body govuk-!-margin-bottom-0 govuk-!-margin-top-1">Possess potentially dangerous item on Transport for London road transport premises</p>
+      </div>
+    </div>
+    
     
   </div>
 </div>
 
-<form id="employer-details-form" method="post" novalidate action="../check-offences">
+
+<hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">   
 
 <h2 class="govuk-heading-m">Impositions</h2>
 
@@ -260,7 +313,7 @@
 </div>
 
 <!-- IMPOSITION 2 -->
-<div class="impositionWrapper govuk-!-margin-bottom-6" id="Offence1_Imposition2_Container">
+<div class="impositionWrapper govuk-!-margin-bottom-6" id="Offence1_Imposition2_Container" style="display: none;">
   
   <!-- IMPOSITION DETAILS -->
   <div class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-right-0 imposition">
@@ -324,7 +377,7 @@
       
       <!-- SHOW THE MINOR CREDITOR IF FCOST OR FCOMP -->
       <div id="Offence1_Imposition2_Creditor_Show_Minor_Creditor" style="display: none;">
-        <div class="govuk-summary-card">
+        <div class="govuk-summary-card govuk-!-margin-bottom-4">
           <div class="govuk-summary-card__title-wrapper">
             <dl class="govuk-summary-list govuk-!-margin-bottom-0" >
               <div class="govuk-summary-list__row" style="border: none;">
@@ -462,7 +515,7 @@
 
         {{ govukRadios({
           formGroup: {
-            classes: "govuk-!-margin-bottom-4"
+            classes: "govuk-!-margin-bottom-2"
           },
           name: "Offence1_Imposition2_Creditor_Type",
           value: data['Offence1_Imposition2_Creditor_Type'],
@@ -485,7 +538,7 @@
               value: "Offence1_Imposition2_Minor_Creditor",
               text: "Minor creditor",
               conditional: {
-                html: Offence1_Imposition2_Minor_Creditor_HTML 
+                html: Offence1_Imposition2_Minor_Creditor_HTML
               }
             }
           ]
@@ -494,13 +547,21 @@
 
     </div>
   </div>
+
+  <!-- REMOVE LINK -->
+  <div class="govuk-grid-row  govuk-!-margin-left-0 govuk-!-margin-right-0 creditors">
+    <div class="govuk-grid-column-one-half">
+      <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="#">Remove imposition</a></p>
+    </div>
+  </div>
+
 </div>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    <button type="submit" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-1" formaction="#">
+    <button type="button" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-1" id="add-another-imposition">
       Add another imposition
-    </button>
+    </button>    
 
     <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
@@ -542,6 +603,22 @@
     const Offence1Imposition2addCreditorForm = document.getElementById('Offence1_Imposition2_Creditor_Show_Form');
     const Offence1Imposition2minorCreditorDetails = document.getElementById('Offence1_Imposition2_Creditor_Show_Minor_Creditor');
 
+    // Add Another Imposition
+    const addAnotherImpositionButton = document.getElementById('add-another-imposition');
+    const imposition2Container = document.getElementById('Offence1_Imposition2_Container');
+
+    // Show Imposition 2 if it was previously added
+    if (localStorage.getItem('Imposition2_Added') === 'true') {
+        imposition2Container.style.display = 'block';
+    }
+
+    // Show Imposition 2 and store the state when the button is clicked
+    addAnotherImpositionButton.addEventListener('click', function() {
+        imposition2Container.style.display = 'block';
+        localStorage.setItem('Imposition2_Added', 'true');
+    });
+
+    // To mark if Imposition 2 has been added
     Offence1Imposition2imposedInput.addEventListener('input', function() {
         if (Offence1Imposition2imposedInput.value.trim() !== '') {
             localStorage.setItem('Offence1_Imposition2_Entered', 'true');

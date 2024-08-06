@@ -17,13 +17,15 @@
     <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
     <div style="background-color: #1d70b8;" class="govuk-!-padding-2 govuk-!-margin-bottom-4">
-      <span class="govuk-body-s govuk-!-margin-right-2 govuk-!-font-weight-bold" style="color: white;">Date of sentence</span><span class="govuk-body-s" style="color: white;">7 July 2019</span>
+      <span class="govuk-body-s govuk-!-margin-right-2 govuk-!-font-weight-bold" style="color: white;">Date of sentence</span><span class="govuk-body-s" style="color: white;">{{ data['Offence1_Date_Of_Sentence'] }}</span>
     </div>
 
     <div class="govuk-!-margin-bottom-4" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid black;">
       <div style="width: fit-content;">
-        <span class="govuk-caption-m govuk-!-font-weight-regular">ABCDEFG</span>
-        <h2 class="govuk-heading-m govuk-!-padding-bottom-2 govuk-!-margin-bottom-0">Offence title</h2>
+        <span class="govuk-caption-m govuk-!-font-weight-regular">{{ (data['Offence1_Code'] or "TP11003") | upper }}</span>
+        <h2 class="govuk-heading-m govuk-!-padding-bottom-2 govuk-!-margin-bottom-0">
+          Offence title
+        </h2>
       </div>
       <ul class="govuk-summary-list__actions-list govuk-body" style="width: inherit;">
         <li class="govuk-summary-list__actions-list-item">
