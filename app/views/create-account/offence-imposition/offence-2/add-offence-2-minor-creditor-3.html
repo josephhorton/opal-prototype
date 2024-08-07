@@ -1,0 +1,269 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Minor creditor details" %}
+
+{% block pageTitle %}
+{{ pageName }} – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+    <form id="Offence2_Imposition3_Minor_Creditor_Form" method="post" novalidate action="add-offence-2?Offence2_Imposition3_Creditor_Type=Offence2_Imposition3_Minor_Creditor">
+
+    <!-- Select creditor type -->
+
+    {% set Offence2_Imposition3_Minor_Creditor_Individual_HTML %}
+    {{ govukSelect({
+      id: "Offence2_Imposition3_Minor_Creditor_Title",
+      name: "Offence2_Imposition3_Minor_Creditor_Title",
+      value: data['Offence2_Imposition3_Minor_Creditor_Title'],
+      label: {
+        text: "Title",
+        classes: "govuk-label"
+      },
+      items: [
+        {
+          value: "select",
+          text: "Select title",
+          selected: true,
+          disabled: true
+        },
+        {
+          value: "Mr",
+          text: "Mr"
+        },
+        {
+          value: "Mrs",
+          text: "Mrs"
+        },
+        {
+          value: "Miss",
+          text: "Miss"
+        },
+        {
+          value: "Ms",
+          text: "Ms"
+        }
+      ]
+    }) }}
+
+    {{ govukInput({
+      id: "Offence2_Imposition3_Minor_Creditor_First_Name",
+      name: "Offence2_Imposition3_Minor_Creditor_First_Name",
+      classes: "govuk-input--width-20",
+      label: {
+        text: "First names",
+        classes: "govuk-label"
+      },
+      value: data['Offence2_Imposition3_Minor_Creditor_First_Name']
+    }) }}
+
+    {{ govukInput({
+      id: "Offence2_Imposition3_Minor_Creditor_Last_Name",
+      name: "Offence2_Imposition3_Minor_Creditor_Last_Name",
+      classes: "govuk-input--width-20",
+      label: {
+        text: "Last name",
+        classes: "govuk-label"
+      },
+      value: data['Offence2_Imposition3_Minor_Creditor_Last_Name']
+    }) }}
+
+
+    {% endset -%}
+
+    {% set Offence2_Imposition3_Minor_Creditor_Company_HTML %}
+    {{ govukInput({
+      id: "Offence2_Imposition3_Minor_Creditor_Company_Name",
+      name: "Offence2_Imposition3_Minor_Creditor_Company_Name",
+      classes: "govuk-input--width-30",
+      type: "text",
+      value: data['Offence2_Imposition3_Minor_Creditor_Company_Name'],
+      label: {
+        text: "Company name",
+        classes: "govuk-label"
+      }
+    }) }}
+
+    {% endset -%}
+
+    {{ govukRadios({
+      name: "Offence2_Imposition3_Minor_Creditor_Type",
+      id: "Offence2_Imposition3_Minor_Creditor_Type",
+      fieldset: {
+        legend: {
+          text: "Select creditor type",
+          classes: "govuk-fieldset__legend--m"
+        }
+      },
+      value: data['Offence2_Imposition3_Minor_Creditor_Type'],
+      items: [
+        {
+          value: "Individual",
+          text: "Individual",
+          conditional: {
+            html: Offence2_Imposition3_Minor_Creditor_Individual_HTML
+          } 
+        },
+        {
+          value: "Company",
+          text: "Company",
+          conditional: {
+            html: Offence2_Imposition3_Minor_Creditor_Company_HTML
+          } 
+        }
+      ]
+    }) }}
+
+    <!-- Address -->
+
+    {% call govukFieldset({
+      legend: {
+        text: "Address",
+        classes: "govuk-fieldset__legend--m"
+      }
+    }) %}
+    
+      {{ govukInput({
+        label: {
+          text: "Address line 1",
+          classes: "govuk-label"
+        },
+        id: "Offence2_Imposition3_Minor_Creditor_Address1",
+        name: "Offence2_Imposition3_Minor_Creditor_Address1",
+        classes: "govuk-input--width-30",
+        value: data['Offence2_Imposition3_Minor_Creditor_Address1']
+      }) }}
+    
+      {{ govukInput({
+        label: {
+          text: "Address line 2",
+          classes: "govuk-label"
+        },
+        id: "Offence2_Imposition3_Minor_Creditor_Address2",
+        name: "Offence2_Imposition3_Minor_Creditor_Address2",
+        classes: "govuk-input--width-20",
+        value: data['Offence2_Imposition3_Minor_Creditor_Address2']
+      }) }}
+    
+      {{ govukInput({
+        label: {
+          text: "Address line 3",
+          classes: "govuk-label"
+        },
+        classes: "govuk-input--width-20",
+        id: "Offence2_Imposition3_Minor_Creditor_Address3",
+        name: "Offence2_Imposition3_Minor_Creditor_Address3",
+        value: data['Offence2_Imposition3_Minor_Creditor_Address3']
+      }) }}
+  
+    
+      {{ govukInput({
+        label: {
+          text: "Postcode",
+          classes: "govuk-label"
+        },
+        classes: "govuk-input--width-10",
+        id: "Offence2_Imposition3_Minor_Creditor_Postcode",
+        name: "Offence2_Imposition3_Minor_Creditor_Postcode",
+        value: data['Offence2_Imposition3_Minor_Creditor_Postcode']
+      }) }}
+    
+    {% endcall %}
+
+    <!-- Payment details -->
+
+    {% set Offence2_Imposition3_Minor_Creditor_PayByBACS_HTML %}
+
+    {{ govukInput({
+      id: "Offence2_Imposition3_Minor_Creditor_Account_Name",
+      name: "Offence2_Imposition3_Minor_Creditor_Account_Name",
+      value: data['Offence2_Imposition3_Minor_Creditor_Account_Name'],
+      label: {
+        text: "Name on the account",
+        classes: "govuk-label"
+      },
+      classes: "govuk-input--width-30"
+    }) }}
+
+    {{ govukInput({
+      id: "Offence2_Imposition3_Minor_Creditor_Sort_Code",
+      name: "Offence2_Imposition3_Minor_Creditor_Sort_Code",
+      value: data['Offence2_Imposition3_Minor_Creditor_Sort_Code'],
+      label: {
+        text: "Sort code",
+        classes: "govuk-label"
+      },
+      classes: "govuk-input--width-5"
+    }) }}
+
+    {{ govukInput({
+      id: "Offence2_Imposition3_Minor_Creditor_Account_Number",
+      name: "Offence2_Imposition3_Minor_Creditor_Account_Number",
+      value: data['Offence2_Imposition3_Minor_Creditor_Account_Number'],
+      label: {
+        text: "Account number",
+        classes: "govuk-label"
+      },
+      classes: "govuk-input--width-10"
+    }) }}
+
+    {{ govukInput({
+      id: "Offence2_Imposition3_Minor_Creditor_Payment_Reference",
+      name: "Offence2_Imposition3_Minor_Creditor_Payment_Reference",
+      value: data['Offence2_Imposition3_Minor_Creditor_Payment_Reference'],
+      label: {
+        text: "Payment reference",
+        classes: "govuk-label"
+      },
+      classes: "govuk-input--width-10"
+    }) }}
+
+    {% endset -%}
+
+    <h2 class="govuk-heading-s">Payment details</h2>
+
+    {{ govukCheckboxes({
+      name: "Offence2_Imposition3_Minor_Creditor_PayByBACS",
+      id: "Offence2_Imposition3_Minor_Creditor_PayByBACS",
+      values: data['Offence2_Imposition3_Minor_Creditor_PayByBACS'],
+      items: [
+        {
+          value: "Yes",
+          text: "I have BACS payment details",
+          conditional: {
+            html: Offence2_Imposition3_Minor_Creditor_PayByBACS_HTML
+          }
+        }
+      ]
+    }) }}
+
+
+
+    <div class="govuk-button-group">
+      <button type="submit" class="govuk-button">
+        Save
+      </button>
+    </div>
+
+  </form>
+
+  <p class="govuk-body"><a class="govuk-link govuk-! govuk-link--no-visited-state" href="add-offence-2.html">Cancel</a></p>
+
+  </div>
+</div>
+
+<script>
+  document.getElementById('Offence2_Imposition3_Minor_Creditor_Form').addEventListener('submit', function() {
+    localStorage.setItem('Offence2_Imposition3_Minor_Creditor_Added', 'true');
+  });
+</script>
+
+{% endblock %}

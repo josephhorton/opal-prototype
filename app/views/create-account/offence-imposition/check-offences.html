@@ -16,17 +16,44 @@
   <div class="govuk-grid-column-full">
     <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
-    <form id="offence-details-form" method="post" novalidate action="../account-details?offences-complete=true">
+    <form id="offence-details-form" method="post" novalidate action="../account-details?Offences-Complete=true">
+    <input type="hidden" name="offenceDetailsProvided" value="true">
 
+    <!-- OFFENCE 1 -->
+
+    <!-- DATE OF SENTENCE -->
     <div style="background-color: #1d70b8;" class="govuk-!-padding-2 govuk-!-margin-bottom-4">
-      <span class="govuk-body-s govuk-!-margin-right-2 govuk-!-font-weight-bold" style="color: white;">Date of sentence</span><span class="govuk-body-s" style="color: white;">{{ data['Offence1_Date_Of_Sentence'] }}</span>
+      <span class="govuk-body-s govuk-!-margin-right-2 govuk-!-font-weight-bold" style="color: white;">Date of sentence</span><span class="govuk-body-s" style="color: white;">{{ data['Offence1_Date_Of_Sentence'] or "23 June 2024"}}</span>
     </div>
 
-    <div class="govuk-!-margin-bottom-4" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid black;">
+    <!-- OFFENCE HEADING -->
+    <div class="govuk-!-margin-bottom-4 govuk-!-padding-bottom-2" style="display: flex; justify-content: space-between; align-items: end; border-bottom: 2px solid black;">
       <div style="width: fit-content;">
         <span class="govuk-caption-m govuk-!-font-weight-regular">{{ (data['Offence1_Code'] or "TP11003") | upper }}</span>
-        <h2 class="govuk-heading-m govuk-!-padding-bottom-2 govuk-!-margin-bottom-0">
-          Offence title
+        <h2 class="govuk-heading-m govuk-!-margin-bottom-0">
+          {% if data['Offence1_Code'] == "RR84205" %}
+            Speeding – exceed limit for type of vehicle (not goods/passenger vehicle) – manned equipment
+          {% elseif data['Offence1_Code'] == "PH97003" %}
+            Harassment – breach of a restraining order on conviction
+          {% elseif data['Offence1_Code'] == "CD71039" %}
+            Criminal Damage to property valued under £5000.00
+          {% elseif data['Offence1_Code'] == "TH68010" %}
+            Theft from a shop
+          {% elseif data['Offence1_Code'] == "RT88567" %}
+            Fail to give information relating to the identification of the driver/rider of a vehicle when required
+          {% elseif data['Offence1_Code'] == "CJ88116" %}
+            Assault by beating of an emergency worker
+          {% elseif data['Offence1_Code'] == "TH68050" %}
+            Take a motor vehicle without the owners consent
+          {% elseif data['Offence1_Code'] == "TH68036" %}
+            Burglary dwelling and theft – no violence
+          {% elseif data['Offence1_Code'] == "TH68045" %}
+            Aggravated Burglary – dwelling
+          {% elseif data['Offence1_Code'] == "OF61017" %}
+            Section 18 - Grievous Bodily Harm with Intent
+          {% else %}
+            Do an act to scare / deter trout / salmon
+          {% endif %}
         </h2>
       </div>
       <ul class="govuk-summary-list__actions-list govuk-body" style="width: inherit;">
@@ -39,19 +66,25 @@
       </ul>
     </div>
 
-    <!-- Data for tables -->
+    <!-- TABLE DATA -->
     {% set Offence1_Imposition1_Imposed_Money = ((data['Offence1_Imposition1_Imposed'] or "0") | float) %}
     {% set Offence1_Imposition2_Imposed_Money = ((data['Offence1_Imposition2_Imposed'] or "0") | float) %}
     {% set Offence1_Imposition3_Imposed_Money = ((data['Offence1_Imposition3_Imposed'] or "0") | float) %}
+    {% set Offence1_Imposition_Imposed_Total_Money = (Offence1_Imposition1_Imposed_Money + Offence1_Imposition2_Imposed_Money + Offence1_Imposition3_Imposed_Money) or "0" | float %}
 
     {% set Offence1_Imposition1_Paid_Money = ((data['Offence1_Imposition1_Paid'] or "0") | float) %}
     {% set Offence1_Imposition2_Paid_Money = ((data['Offence1_Imposition2_Paid'] or "0") | float) %}
     {% set Offence1_Imposition3_Paid_Money = ((data['Offence1_Imposition3_Paid'] or "0") | float) %}
+    {% set Offence1_Imposition_Paid_Total_Money = (Offence1_Imposition1_Paid_Money + Offence1_Imposition2_Paid_Money + Offence1_Imposition3_Paid_Money) or "0" | float %}
 
     {% set Offence1_Imposition1_Balance = (Offence1_Imposition1_Imposed_Money - Offence1_Imposition1_Paid_Money) %}
     {% set Offence1_Imposition2_Balance = (Offence1_Imposition2_Imposed_Money - Offence1_Imposition2_Paid_Money) %}
     {% set Offence1_Imposition3_Balance = (Offence1_Imposition3_Imposed_Money - Offence1_Imposition3_Paid_Money) %}
+    {% set Offence1_Imposition_Balance_Total_Money = (Offence1_Imposition1_Balance + Offence1_Imposition2_Balance + Offence1_Imposition3_Balance) or "0" | float %}
 
+
+    <!-- TABLE -->
+    <div class="moj-scrollable-pane">
     <table class="govuk-table govuk-!-font-size-16">
       <caption class="govuk-table__caption govuk-table__caption--m govuk-visually-hidden" style="border-bottom: 2px solid black;">Offence title</caption>
       <thead class="govuk-table__head">
@@ -92,17 +125,17 @@
             {% endif%}   
             
             {% elseif data['Offence1_Imposition1_Result_Code'] == "Victim surcharge (FVS)" %}
-              FVS Major Creditor
+              HM Courts and Tribunals Service (HMCTS)
             {% elseif data['Offence1_Imposition1_Result_Code'] == "Crown prosecution costs (FCPC)" %}
-              FCPC Major Creditor
+              Crown Prosecution Service (CPS)
             {% elseif data['Offence1_Imposition1_Result_Code'] == "Fine only (FO)" %}
-              FO Major Creditor
+              HM Courts and Tribunals Service (HMCTS)
             {% elseif data['Offence1_Imposition1_Result_Code'] == "Criminal courts charge (FCC)" %}
-              FCC Major Creditor
+              HM Courts and Tribunals Service (HMCTS)
             {% elseif data['Offence1_Imposition1_Result_Code'] == "Vehicle excise duty (FVEBD)" %}
-              FVEBD Major Creditor
+              HM Courts and Tribunals Service (HMCTS)
             {% elseif data['Offence1_Imposition1_Result_Code'] == "Forfeited recognizance (FFR)" %}
-              FFR Major Creditor
+              HM Courts and Tribunals Service (HMCTS)
             {% endif %}
           </td>
           <td class="govuk-table__cell">{{ Offence1_Imposition1_Imposed_Money | currency }} </td>
@@ -111,7 +144,7 @@
         </tr>
         
         <!-- IMPOSITION 2 -->
-        {% if (data['Offence1_Imposition2_Result_Code'] == "Compensation (FCOMP)" or data['Offence1_Imposition2_Result_Code'] == "Victim surcharge (FVS)" or data['Offence1_Imposition2_Result_Code'] == "Costs (FCOST)" or data['Offence1_Imposition2_Result_Code'] == "Fine only (FO)" or data['Offence1_Imposition2_Result_Code'] == "Criminal courts charge (FCC)" or data['Offence1_Imposition2_Result_Code'] == "Vehicle excise duty (FVEBD)" or data['Offence1_Imposition2_Result_Code'] == "Forfeited recognizance (FFR)") %}
+        {% if (data['Offence1_Imposition2_Result_Code'] == "Compensation (FCOMP)" or data['Offence1_Imposition2_Result_Code'] == "Victim surcharge (FVS)" or data['Offence1_Imposition2_Result_Code'] == "Costs (FCOST)" or data['Offence1_Imposition2_Result_Code'] == "Crown prosecution costs (FCPC)" or data['Offence1_Imposition2_Result_Code'] == "Fine only (FO)" or data['Offence1_Imposition2_Result_Code'] == "Criminal courts charge (FCC)" or data['Offence1_Imposition2_Result_Code'] == "Vehicle excise duty (FVEBD)" or data['Offence1_Imposition2_Result_Code'] == "Forfeited recognizance (FFR)") %}
         <tr class="govuk-table__row" id="Offence1_Imposition2_Row">
           <th scope="row" class="govuk-table__header govuk-!-font-weight-regular">{{data['Offence1_Imposition2_Result_Code']}}</th>
           <td class="govuk-table__cell">
@@ -139,17 +172,19 @@
             {% endif%}   
             
             {% elseif data['Offence1_Imposition2_Result_Code'] == "Victim surcharge (FVS)" %}
-              FVS Major Creditor
+              HM Courts and Tribunals Service (HMCTS)
+
             {% elseif data['Offence1_Imposition2_Result_Code'] == "Crown prosecution costs (FCPC)" %}
-              FCPC Major Creditor
+              Crown Prosecution Service (CPS)
+
             {% elseif data['Offence1_Imposition2_Result_Code'] == "Fine only (FO)" %}
-              FO Major Creditor
+              HM Courts and Tribunals Service (HMCTS)
             {% elseif data['Offence1_Imposition2_Result_Code'] == "Criminal courts charge (FCC)" %}
-              FCC Major Creditor
+              HM Courts and Tribunals Service (HMCTS)
             {% elseif data['Offence1_Imposition2_Result_Code'] == "Vehicle excise duty (FVEBD)" %}
-              FVEBD Major Creditor
+              HM Courts and Tribunals Service (HMCTS)
             {% elseif data['Offence1_Imposition2_Result_Code'] == "Forfeited recognizance (FFR)" %}
-              FFR Major Creditor
+              HM Courts and Tribunals Service (HMCTS)
             {% endif %}
           </td>
           <td class="govuk-table__cell">{{ Offence1_Imposition2_Imposed_Money | currency }} </td>
@@ -159,7 +194,7 @@
         {% endif %}
 
         <!-- IMPOSITION 3 -->
-        {% if (data['Offence1_Imposition2_Result_Code'] == "Compensation (FCOMP)" or data['Offence1_Imposition2_Result_Code'] == "Victim surcharge (FVS)" or data['Offence1_Imposition2_Result_Code'] == "Costs (FCOST)" or data['Offence1_Imposition2_Result_Code'] == "Fine only (FO)" or data['Offence1_Imposition2_Result_Code'] == "Criminal courts charge (FCC)" or data['Offence1_Imposition2_Result_Code'] == "Vehicle excise duty (FVEBD)" or data['Offence1_Imposition2_Result_Code'] == "Forfeited recognizance (FFR)") %}
+        {% if (data['Offence1_Imposition3_Result_Code'] == "Compensation (FCOMP)" or data['Offence1_Imposition3_Result_Code'] == "Victim surcharge (FVS)" or data['Offence1_Imposition3_Result_Code'] == "Costs (FCOST)" or data['Offence1_Imposition3_Result_Code'] == "Crown prosecution costs (FCPC)" or data['Offence1_Imposition3_Result_Code'] == "Fine only (FO)" or data['Offence1_Imposition3_Result_Code'] == "Criminal courts charge (FCC)" or data['Offence1_Imposition3_Result_Code'] == "Vehicle excise duty (FVEBD)" or data['Offence1_Imposition3_Result_Code'] == "Forfeited recognizance (FFR)") %}
         <tr class="govuk-table__row" id="Offence1_Imposition3_Row">
           <th scope="row" class="govuk-table__header govuk-!-font-weight-regular">{{data['Offence1_Imposition3_Result_Code']}}</th>
           <td class="govuk-table__cell">
@@ -187,17 +222,17 @@
             {% endif%}   
             
             {% elseif data['Offence1_Imposition3_Result_Code'] == "Victim surcharge (FVS)" %}
-              FVS Major Creditor
+              HM Courts and Tribunals Service (HMCTS)
             {% elseif data['Offence1_Imposition3_Result_Code'] == "Crown prosecution costs (FCPC)" %}
-              FCPC Major Creditor
+              Crown Prosecution Service (CPS)
             {% elseif data['Offence1_Imposition3_Result_Code'] == "Fine only (FO)" %}
-              FO Major Creditor
+              HM Courts and Tribunals Service (HMCTS)
             {% elseif data['Offence1_Imposition3_Result_Code'] == "Criminal courts charge (FCC)" %}
-              FCC Major Creditor
+              HM Courts and Tribunals Service (HMCTS)
             {% elseif data['Offence1_Imposition3_Result_Code'] == "Vehicle excise duty (FVEBD)" %}
-              FVEBD Major Creditor
+              HM Courts and Tribunals Service (HMCTS)
             {% elseif data['Offence1_Imposition3_Result_Code'] == "Forfeited recognizance (FFR)" %}
-              FFR Major Creditor
+              HM Courts and Tribunals Service (HMCTS)
             {% endif %}
           </td>
           <td class="govuk-table__cell">{{ Offence1_Imposition3_Imposed_Money | currency }} </td>
@@ -210,33 +245,633 @@
         <tr class="govuk-table__row" style="background-color: #F3F2F1;">
           <th scope="row" class="govuk-table__header">Totals</th>
           <td class="govuk-table__cell"></td>
-          <td class="govuk-table__cell">{{ (Offence1_Imposition1_Imposed_Money + Offence1_Imposition2_Imposed_Money + Offence1_Imposition3_Imposed_Money) | currency }}</td>
-          <td class="govuk-table__cell">{{ (Offence1_Imposition1_Paid_Money + Offence1_Imposition2_Paid_Money + Offence1_Imposition3_Paid_Money) | currency }}</td>
-          <td class="govuk-table__cell">{{ (Offence1_Imposition1_Balance + Offence1_Imposition2_Balance + Offence1_Imposition3_Balance) | currency}}</td>
+          <td class="govuk-table__cell govuk-!-font-weight-bold">{{ (Offence1_Imposition1_Imposed_Money + Offence1_Imposition2_Imposed_Money + Offence1_Imposition3_Imposed_Money) | currency }}</td>
+          <td class="govuk-table__cell govuk-!-font-weight-bold">{{ (Offence1_Imposition1_Paid_Money + Offence1_Imposition2_Paid_Money + Offence1_Imposition3_Paid_Money) | currency }}</td>
+          <td class="govuk-table__cell govuk-!-font-weight-bold">{{ (Offence1_Imposition1_Balance + Offence1_Imposition2_Balance + Offence1_Imposition3_Balance) | currency}}</td>
         </tr>
       </tbody>
     </table>
+    </div>
+
+    {% if data['Offence2-Added'] == "True" %}
+    <!-- OFFENCE 2 -->
+     
+    <!-- DATE OF SENTENCE -->
+    <div style="background-color: #1d70b8;" class="govuk-!-padding-2 govuk-!-margin-bottom-4">
+      <span class="govuk-body-s govuk-!-margin-right-2 govuk-!-font-weight-bold" style="color: white;">Date of sentence</span><span class="govuk-body-s" style="color: white;">{{ data['Offence2_Date_Of_Sentence'] or "7 April 2024" }}</span>
+    </div>
+
+    <!-- OFFENCE HEADING -->
+    <div class="govuk-!-margin-bottom-4 govuk-!-padding-bottom-2" style="display: flex; justify-content: space-between; align-items: end; border-bottom: 2px solid black;">
+      <div style="width: fit-content;">
+        <span class="govuk-caption-m govuk-!-font-weight-regular">{{ (data['Offence2_Code'] or "TP11003") | upper }}</span>
+        <h2 class="govuk-heading-m govuk-!-margin-bottom-0">
+          {% if data['Offence2_Code'] == "RR84205" %}
+            Speeding – exceed limit for type of vehicle (not goods/passenger vehicle) – manned equipment
+          {% elseif data['Offence2_Code'] == "PH97003" %}
+            Harassment – breach of a restraining order on conviction
+          {% elseif data['Offence2_Code'] == "CD71039" %}
+            Criminal Damage to property valued under £5000.00
+          {% elseif data['Offence2_Code'] == "TH68010" %}
+            Theft from a shop
+          {% elseif data['Offence2_Code'] == "RT88567" %}
+            Fail to give information relating to the identification of the driver/rider of a vehicle when required
+          {% elseif data['Offence2_Code'] == "CJ88116" %}
+            Assault by beating of an emergency worker
+          {% elseif data['Offence2_Code'] == "TH68050" %}
+            Take a motor vehicle without the owners consent
+          {% elseif data['Offence2_Code'] == "TH68036" %}
+            Burglary dwelling and theft – no violence
+          {% elseif data['Offence2_Code'] == "TH68045" %}
+            Aggravated Burglary – dwelling
+          {% elseif data['Offence2_Code'] == "OF61017" %}
+            Section 18 - Grievous Bodily Harm with Intent
+          {% else %}
+            Do an act to scare / deter trout / salmon
+          {% endif %}
+        </h2>
+      </div>
+      <ul class="govuk-summary-list__actions-list govuk-body" style="width: inherit;">
+        <li class="govuk-summary-list__actions-list-item">
+          <a class="govuk-link govuk-link--no-visited-state" href="./Offence-2/add-Offence-2.html"><strong>Change</strong><span class="govuk-visually-hidden"> offence</span></a>
+        </li>
+        <li class="govuk-summary-list__actions-list-item">
+          <a class="govuk-link govuk-link--no-visited-state" href="#"><strong>Remove</strong><span class="govuk-visually-hidden"> offence</span></a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- TABLE DATA -->
+    {% set Offence2_Imposition1_Imposed_Money = ((data['Offence2_Imposition1_Imposed'] or "0") | float) %}
+    {% set Offence2_Imposition2_Imposed_Money = ((data['Offence2_Imposition2_Imposed'] or "0") | float) %}
+    {% set Offence2_Imposition3_Imposed_Money = ((data['Offence2_Imposition3_Imposed'] or "0") | float) %}
+    {% set Offence2_Imposition_Imposed_Total_Money = (Offence2_Imposition1_Imposed_Money + Offence2_Imposition2_Imposed_Money + Offence2_Imposition3_Imposed_Money) or "0" | float %}
+
+    {% set Offence2_Imposition1_Paid_Money = ((data['Offence2_Imposition1_Paid'] or "0") | float) %}
+    {% set Offence2_Imposition2_Paid_Money = ((data['Offence2_Imposition2_Paid'] or "0") | float) %}
+    {% set Offence2_Imposition3_Paid_Money = ((data['Offence2_Imposition3_Paid'] or "0") | float) %}
+    {% set Offence2_Imposition_Paid_Total_Money = (Offence2_Imposition1_Paid_Money + Offence2_Imposition2_Paid_Money + Offence2_Imposition3_Paid_Money) or "0" | float %}
+
+    {% set Offence2_Imposition1_Balance = (Offence2_Imposition1_Imposed_Money - Offence2_Imposition1_Paid_Money) %}
+    {% set Offence2_Imposition2_Balance = (Offence2_Imposition2_Imposed_Money - Offence2_Imposition2_Paid_Money) %}
+    {% set Offence2_Imposition3_Balance = (Offence2_Imposition3_Imposed_Money - Offence2_Imposition3_Paid_Money) %}
+    {% set Offence2_Imposition_Balance_Total_Money = (Offence2_Imposition1_Balance + Offence2_Imposition2_Balance + Offence2_Imposition3_Balance) or "0" | float %}
+
+    <!-- TABLE -->
+    <div class="moj-scrollable-pane">
+    <table class="govuk-table govuk-!-font-size-16">
+      <caption class="govuk-table__caption govuk-table__caption--m govuk-visually-hidden" style="border-bottom: 2px solid black;">Offence title</caption>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header" style="width: 20%;">Imposition</th>
+          <th scope="col" class="govuk-table__header" style="width: 35%;">Creditor</th>
+          <th scope="col" class="govuk-table__header" style="width: 15%;">Amount imposed</th>
+          <th scope="col" class="govuk-table__header" style="width: 15%;">Amount paid</th>
+          <th scope="col" class="govuk-table__header" style="width: 15%;">Balance remaining</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <!-- IMPOSITION 1 -->
+        <tr class="govuk-table__row" id="Offence2_Imposition1_Row">
+          <th scope="row" class="govuk-table__header govuk-!-font-weight-regular">{{data['Offence2_Imposition1_Result_Code']}}</th>
+          <td class="govuk-table__cell">
+            
+            {% if data['Offence2_Imposition1_Result_Code'] == "Costs (FCOST)" %}
+            {% if data['Offence2_Imposition1_Creditor_Type'] == "Offence2_Imposition1_Minor_Creditor" %}
+              {% if data['Offence2_Imposition1_Minor_Creditor_Type'] == "Individual" %}
+                {{data['Offence2_Imposition1_Minor_Creditor_First_Name']}} {{data['Offence2_Imposition1_Minor_Creditor_Last_Name']}}
+              {% elseif data['Offence2_Imposition1_Minor_Creditor_Type'] == "Company" %}
+                {{data['Offence2_Imposition1_Minor_Creditor_Company_Name']}}
+              {% endif %}
+            {% elseif data['Offence2_Imposition1_Creditor_Type'] == "Offence2_Imposition1_Major_Creditor" %}  
+              {{data['Offence2_Imposition1_Major_Creditor_Name']}}
+            {% endif%}  
+            
+            {% elseif data['Offence2_Imposition1_Result_Code'] == "Compensation (FCOMP)" %}
+            {% if data['Offence2_Imposition1_Creditor_Type'] == "Offence2_Imposition1_Minor_Creditor" %}
+            {% if data['Offence2_Imposition1_Minor_Creditor_Type'] == "Individual" %}
+              {{data['Offence2_Imposition1_Minor_Creditor_First_Name']}} {{data['Offence2_Imposition1_Minor_Creditor_Last_Name']}}
+            {% elseif data['Offence2_Imposition1_Minor_Creditor_Type'] == "Company" %}
+              {{data['Offence2_Imposition1_Minor_Creditor_Company_Name']}}
+            {% endif %}
+            {% elseif data['Offence2_Imposition1_Creditor_Type'] == "Offence2_Imposition1_Major_Creditor" %}  
+              {{data['Offence2_Imposition1_Major_Creditor_Name']}}
+            {% endif%}   
+            {% elseif data['Offence2_Imposition1_Result_Code'] == "Victim surcharge (FVS)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% elseif data['Offence2_Imposition1_Result_Code'] == "Crown prosecution costs (FCPC)" %}
+              Crown Prosecution Service (CPS)
+            {% elseif data['Offence2_Imposition1_Result_Code'] == "Fine only (FO)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% elseif data['Offence2_Imposition1_Result_Code'] == "Criminal courts charge (FCC)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% elseif data['Offence2_Imposition1_Result_Code'] == "Vehicle excise duty (FVEBD)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% elseif data['Offence2_Imposition1_Result_Code'] == "Forfeited recognizance (FFR)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">{{ Offence2_Imposition1_Imposed_Money | currency }} </td>
+          <td class="govuk-table__cell">{{ Offence2_Imposition1_Paid_Money | currency }} </td>
+          <td class="govuk-table__cell">{{ Offence2_Imposition1_Balance | currency }}</td>
+        </tr>
+        
+        <!-- IMPOSITION 2 -->
+        {% if (data['Offence2_Imposition2_Result_Code'] == "Compensation (FCOMP)" or data['Offence2_Imposition2_Result_Code'] == "Victim surcharge (FVS)" or data['Offence2_Imposition2_Result_Code'] == "Costs (FCOST)" or data['Offence2_Imposition2_Result_Code'] == "Crown prosecution costs (FCPC)" or data['Offence2_Imposition2_Result_Code'] == "Fine only (FO)" or data['Offence2_Imposition2_Result_Code'] == "Criminal courts charge (FCC)" or data['Offence2_Imposition2_Result_Code'] == "Vehicle excise duty (FVEBD)" or data['Offence2_Imposition2_Result_Code'] == "Forfeited recognizance (FFR)") %}
+        <tr class="govuk-table__row" id="Offence2_Imposition2_Row">
+          <th scope="row" class="govuk-table__header govuk-!-font-weight-regular">{{data['Offence2_Imposition2_Result_Code']}}</th>
+          <td class="govuk-table__cell">
+            
+            {% if data['Offence2_Imposition2_Result_Code'] == "Costs (FCOST)" %}
+            {% if data['Offence2_Imposition2_Creditor_Type'] == "Offence2_Imposition2_Minor_Creditor" %}
+              {% if data['Offence2_Imposition2_Minor_Creditor_Type'] == "Individual" %}
+                {{data['Offence2_Imposition2_Minor_Creditor_First_Name']}} {{data['Offence2_Imposition2_Minor_Creditor_Last_Name']}}
+              {% elseif data['Offence2_Imposition2_Minor_Creditor_Type'] == "Company" %}
+                {{data['Offence2_Imposition2_Minor_Creditor_Company_Name']}}
+              {% endif %}
+            {% elseif data['Offence2_Imposition2_Creditor_Type'] == "Offence2_Imposition2_Major_Creditor" %}  
+              {{data['Offence2_Imposition2_Major_Creditor_Name']}}
+            {% endif%}  
+            
+            {% elseif data['Offence2_Imposition2_Result_Code'] == "Compensation (FCOMP)" %}
+            {% if data['Offence2_Imposition2_Creditor_Type'] == "Offence2_Imposition2_Minor_Creditor" %}
+            {% if data['Offence2_Imposition2_Minor_Creditor_Type'] == "Individual" %}
+              {{data['Offence2_Imposition2_Minor_Creditor_First_Name']}} {{data['Offence2_Imposition2_Minor_Creditor_Last_Name']}}
+            {% elseif data['Offence2_Imposition2_Minor_Creditor_Type'] == "Company" %}
+              {{data['Offence2_Imposition2_Minor_Creditor_Company_Name']}}
+            {% endif %}
+            {% elseif data['Offence2_Imposition2_Creditor_Type'] == "Offence2_Imposition2_Major_Creditor" %}  
+              {{data['Offence2_Imposition2_Major_Creditor_Name']}}
+            {% endif%}   
+            
+            {% elseif data['Offence2_Imposition2_Result_Code'] == "Victim surcharge (FVS)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% elseif data['Offence2_Imposition2_Result_Code'] == "Crown prosecution costs (FCPC)" %}
+              Crown Prosecution Service (CPS)
+            {% elseif data['Offence2_Imposition2_Result_Code'] == "Fine only (FO)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% elseif data['Offence2_Imposition2_Result_Code'] == "Criminal courts charge (FCC)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% elseif data['Offence2_Imposition2_Result_Code'] == "Vehicle excise duty (FVEBD)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% elseif data['Offence2_Imposition2_Result_Code'] == "Forfeited recognizance (FFR)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">{{ Offence2_Imposition2_Imposed_Money | currency }} </td>
+          <td class="govuk-table__cell">{{ Offence2_Imposition2_Paid_Money | currency }} </td>
+          <td class="govuk-table__cell">{{ Offence2_Imposition2_Balance | currency }}</td>
+        </tr>
+        {% endif %}
+
+        <!-- IMPOSITION 3 -->
+        {% if (data['Offence2_Imposition3_Result_Code'] == "Compensation (FCOMP)" or data['Offence2_Imposition3_Result_Code'] == "Victim surcharge (FVS)" or data['Offence2_Imposition3_Result_Code'] == "Costs (FCOST)" or data['Offence2_Imposition3_Result_Code'] == "Crown prosecution costs (FCPC)" or data['Offence2_Imposition3_Result_Code'] == "Fine only (FO)" or data['Offence2_Imposition3_Result_Code'] == "Criminal courts charge (FCC)" or data['Offence2_Imposition3_Result_Code'] == "Vehicle excise duty (FVEBD)" or data['Offence2_Imposition3_Result_Code'] == "Forfeited recognizance (FFR)") %}
+        <tr class="govuk-table__row" id="Offence2_Imposition3_Row">
+          <th scope="row" class="govuk-table__header govuk-!-font-weight-regular">{{data['Offence2_Imposition3_Result_Code']}}</th>
+          <td class="govuk-table__cell">
+            
+            {% if data['Offence2_Imposition3_Result_Code'] == "Costs (FCOST)" %}
+            {% if data['Offence2_Imposition3_Creditor_Type'] == "Offence2_Imposition3_Minor_Creditor" %}
+              {% if data['Offence2_Imposition3_Minor_Creditor_Type'] == "Individual" %}
+                {{data['Offence2_Imposition3_Minor_Creditor_First_Name']}} {{data['Offence2_Imposition3_Minor_Creditor_Last_Name']}}
+              {% elseif data['Offence2_Imposition3_Minor_Creditor_Type'] == "Company" %}
+                {{data['Offence2_Imposition3_Minor_Creditor_Company_Name']}}
+              {% endif %}
+            {% elseif data['Offence2_Imposition3_Creditor_Type'] == "Offence2_Imposition3_Major_Creditor" %}  
+              {{data['Offence2_Imposition3_Major_Creditor_Name']}}
+            {% endif%}  
+            
+            {% elseif data['Offence2_Imposition3_Result_Code'] == "Compensation (FCOMP)" %}
+            {% if data['Offence2_Imposition3_Creditor_Type'] == "Offence2_Imposition3_Minor_Creditor" %}
+            {% if data['Offence2_Imposition3_Minor_Creditor_Type'] == "Individual" %}
+              {{data['Offence2_Imposition3_Minor_Creditor_First_Name']}} {{data['Offence2_Imposition3_Minor_Creditor_Last_Name']}}
+            {% elseif data['Offence2_Imposition3_Minor_Creditor_Type'] == "Company" %}
+              {{data['Offence2_Imposition3_Minor_Creditor_Company_Name']}}
+            {% endif %}
+            {% elseif data['Offence2_Imposition3_Creditor_Type'] == "Offence2_Imposition3_Major_Creditor" %}  
+              {{data['Offence2_Imposition3_Major_Creditor_Name']}}
+            {% endif%}   
+            
+            {% elseif data['Offence2_Imposition3_Result_Code'] == "Victim surcharge (FVS)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% elseif data['Offence2_Imposition3_Result_Code'] == "Crown prosecution costs (FCPC)" %}
+              Crown Prosecution Service (CPS)
+            {% elseif data['Offence2_Imposition3_Result_Code'] == "Fine only (FO)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% elseif data['Offence2_Imposition3_Result_Code'] == "Criminal courts charge (FCC)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% elseif data['Offence2_Imposition3_Result_Code'] == "Vehicle excise duty (FVEBD)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% elseif data['Offence2_Imposition3_Result_Code'] == "Forfeited recognizance (FFR)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">{{ Offence2_Imposition3_Imposed_Money | currency }} </td>
+          <td class="govuk-table__cell">{{ Offence2_Imposition3_Paid_Money | currency }} </td>
+          <td class="govuk-table__cell">{{ Offence2_Imposition3_Balance | currency }}</td>
+        </tr>
+        {% endif %}
+
+
+        <tr class="govuk-table__row" style="background-color: #F3F2F1;">
+          <th scope="row" class="govuk-table__header">Totals</th>
+          <td class="govuk-table__cell"></td>
+          <td class="govuk-table__cell govuk-!-font-weight-bold">{{ (Offence2_Imposition1_Imposed_Money + Offence2_Imposition2_Imposed_Money + Offence2_Imposition3_Imposed_Money) | currency }}</td>
+          <td class="govuk-table__cell govuk-!-font-weight-bold">{{ (Offence2_Imposition1_Paid_Money + Offence2_Imposition2_Paid_Money + Offence2_Imposition3_Paid_Money) | currency }}</td>
+          <td class="govuk-table__cell govuk-!-font-weight-bold">{{ (Offence2_Imposition1_Balance + Offence2_Imposition2_Balance + Offence2_Imposition3_Balance) | currency}}</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    {% endif %}
+
+    {% if data['Offence3-Added'] == "True" %}
+    <!-- OFFENCE 3 -->
+     
+    <!-- DATE OF SENTENCE -->
+    <div style="background-color: #1d70b8;" class="govuk-!-padding-2 govuk-!-margin-bottom-4">
+      <span class="govuk-body-s govuk-!-margin-right-2 govuk-!-font-weight-bold" style="color: white;">Date of sentence</span><span class="govuk-body-s" style="color: white;">{{ data['Offence3_Date_Of_Sentence'] or "24 March 2024" }}</span>
+    </div>
+
+    <!-- OFFENCE HEADING -->
+    <div class="govuk-!-margin-bottom-4 govuk-!-padding-bottom-2" style="display: flex; justify-content: space-between; align-items: end; border-bottom: 2px solid black;">
+      <div style="width: fit-content;">
+        <span class="govuk-caption-m govuk-!-font-weight-regular">{{ (data['Offence3_Code'] or "TP11003") | upper }}</span>
+        <h2 class="govuk-heading-m govuk-!-margin-bottom-0">
+          {% if data['Offence3_Code'] == "RR84205" %}
+            Speeding – exceed limit for type of vehicle (not goods/passenger vehicle) – manned equipment
+          {% elseif data['Offence3_Code'] == "PH97003" %}
+            Harassment – breach of a restraining order on conviction
+          {% elseif data['Offence3_Code'] == "CD71039" %}
+            Criminal Damage to property valued under £5000.00
+          {% elseif data['Offence3_Code'] == "TH68010" %}
+            Theft from a shop
+          {% elseif data['Offence3_Code'] == "RT88567" %}
+            Fail to give information relating to the identification of the driver/rider of a vehicle when required
+          {% elseif data['Offence3_Code'] == "CJ88116" %}
+            Assault by beating of an emergency worker
+          {% elseif data['Offence3_Code'] == "TH68050" %}
+            Take a motor vehicle without the owners consent
+          {% elseif data['Offence3_Code'] == "TH68036" %}
+            Burglary dwelling and theft – no violence
+          {% elseif data['Offence3_Code'] == "TH68045" %}
+            Aggravated Burglary – dwelling
+          {% elseif data['Offence3_Code'] == "OF61017" %}
+            Section 18 - Grievous Bodily Harm with Intent
+          {% else %}
+            Do an act to scare / deter trout / salmon
+          {% endif %}
+        </h2>
+      </div>
+      <ul class="govuk-summary-list__actions-list govuk-body" style="width: inherit;">
+        <li class="govuk-summary-list__actions-list-item">
+          <a class="govuk-link govuk-link--no-visited-state" href="./offence-3/add-offence-3.html"><strong>Change</strong><span class="govuk-visually-hidden"> offence</span></a>
+        </li>
+        <li class="govuk-summary-list__actions-list-item">
+          <a class="govuk-link govuk-link--no-visited-state" href="#"><strong>Remove</strong><span class="govuk-visually-hidden"> offence</span></a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- TABLE DATA -->
+    {% set Offence3_Imposition1_Imposed_Money = ((data['Offence3_Imposition1_Imposed'] or "0") | float) %}
+    {% set Offence3_Imposition2_Imposed_Money = ((data['Offence3_Imposition2_Imposed'] or "0") | float) %}
+    {% set Offence3_Imposition3_Imposed_Money = ((data['Offence3_Imposition3_Imposed'] or "0") | float) %}
+    {% set Offence3_Imposition_Imposed_Total_Money = (Offence3_Imposition1_Imposed_Money + Offence3_Imposition2_Imposed_Money + Offence3_Imposition3_Imposed_Money) or "0" | float %}
+
+    {% set Offence3_Imposition1_Paid_Money = ((data['Offence3_Imposition1_Paid'] or "0") | float) %}
+    {% set Offence3_Imposition2_Paid_Money = ((data['Offence3_Imposition2_Paid'] or "0") | float) %}
+    {% set Offence3_Imposition3_Paid_Money = ((data['Offence3_Imposition3_Paid'] or "0") | float) %}
+    {% set Offence3_Imposition_Paid_Total_Money = (Offence3_Imposition1_Paid_Money + Offence3_Imposition2_Paid_Money + Offence3_Imposition3_Paid_Money) or "0" | float %}
+
+    {% set Offence3_Imposition1_Balance = (Offence3_Imposition1_Imposed_Money - Offence3_Imposition1_Paid_Money) %}
+    {% set Offence3_Imposition2_Balance = (Offence3_Imposition2_Imposed_Money - Offence3_Imposition2_Paid_Money) %}
+    {% set Offence3_Imposition3_Balance = (Offence3_Imposition3_Imposed_Money - Offence3_Imposition3_Paid_Money) %}
+    {% set Offence3_Imposition_Balance_Total_Money = (Offence3_Imposition1_Balance + Offence3_Imposition2_Balance + Offence3_Imposition3_Balance) or "0" | float %}
+
+
+    <!-- TABLE -->
+    <div class="moj-scrollable-pane">
+    <table class="govuk-table govuk-!-font-size-16">
+      <caption class="govuk-table__caption govuk-table__caption--m govuk-visually-hidden" style="border-bottom: 2px solid black;">Offence title</caption>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header" style="width: 20%;">Imposition</th>
+          <th scope="col" class="govuk-table__header" style="width: 35%;">Creditor</th>
+          <th scope="col" class="govuk-table__header" style="width: 15%;">Amount imposed</th>
+          <th scope="col" class="govuk-table__header" style="width: 15%;">Amount paid</th>
+          <th scope="col" class="govuk-table__header" style="width: 15%;">Balance remaining</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <!-- IMPOSITION 1 -->
+        <tr class="govuk-table__row" id="Offence3_Imposition1_Row">
+          <th scope="row" class="govuk-table__header govuk-!-font-weight-regular">{{data['Offence3_Imposition1_Result_Code']}}</th>
+          <td class="govuk-table__cell">
+            
+            {% if data['Offence3_Imposition1_Result_Code'] == "Costs (FCOST)" %}
+            {% if data['Offence3_Imposition1_Creditor_Type'] == "Offence3_Imposition1_Minor_Creditor" %}
+              {% if data['Offence3_Imposition1_Minor_Creditor_Type'] == "Individual" %}
+                {{data['Offence3_Imposition1_Minor_Creditor_First_Name']}} {{data['Offence3_Imposition1_Minor_Creditor_Last_Name']}}
+              {% elseif data['Offence3_Imposition1_Minor_Creditor_Type'] == "Company" %}
+                {{data['Offence3_Imposition1_Minor_Creditor_Company_Name']}}
+              {% endif %}
+            {% elseif data['Offence3_Imposition1_Creditor_Type'] == "Offence3_Imposition1_Major_Creditor" %}  
+              {{data['Offence3_Imposition1_Major_Creditor_Name']}}
+            {% endif%}  
+            
+            {% elseif data['Offence3_Imposition1_Result_Code'] == "Compensation (FCOMP)" %}
+            {% if data['Offence3_Imposition1_Creditor_Type'] == "Offence3_Imposition1_Minor_Creditor" %}
+            {% if data['Offence3_Imposition1_Minor_Creditor_Type'] == "Individual" %}
+              {{data['Offence3_Imposition1_Minor_Creditor_First_Name']}} {{data['Offence3_Imposition1_Minor_Creditor_Last_Name']}}
+            {% elseif data['Offence3_Imposition1_Minor_Creditor_Type'] == "Company" %}
+              {{data['Offence3_Imposition1_Minor_Creditor_Company_Name']}}
+            {% endif %}
+            {% elseif data['Offence3_Imposition1_Creditor_Type'] == "Offence3_Imposition1_Major_Creditor" %}  
+              {{data['Offence3_Imposition1_Major_Creditor_Name']}}
+            {% endif%}   
+            
+            {% elseif data['Offence3_Imposition1_Result_Code'] == "Victim surcharge (FVS)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% elseif data['Offence3_Imposition1_Result_Code'] == "Crown prosecution costs (FCPC)" %}
+              Crown Prosecution Service (CPS)
+            {% elseif data['Offence3_Imposition1_Result_Code'] == "Fine only (FO)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% elseif data['Offence3_Imposition1_Result_Code'] == "Criminal courts charge (FCC)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% elseif data['Offence3_Imposition1_Result_Code'] == "Vehicle excise duty (FVEBD)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% elseif data['Offence3_Imposition1_Result_Code'] == "Forfeited recognizance (FFR)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">{{ Offence3_Imposition1_Imposed_Money | currency }} </td>
+          <td class="govuk-table__cell">{{ Offence3_Imposition1_Paid_Money | currency }} </td>
+          <td class="govuk-table__cell">{{ Offence3_Imposition1_Balance | currency }}</td>
+        </tr>
+        
+        <!-- IMPOSITION 2 -->
+        {% if (data['Offence3_Imposition2_Result_Code'] == "Compensation (FCOMP)" or data['Offence3_Imposition2_Result_Code'] == "Victim surcharge (FVS)" or data['Offence3_Imposition2_Result_Code'] == "Costs (FCOST)" or data['Offence3_Imposition2_Result_Code'] == "Crown prosecution costs (FCPC)" or data['Offence3_Imposition2_Result_Code'] == "Fine only (FO)" or data['Offence3_Imposition2_Result_Code'] == "Criminal courts charge (FCC)" or data['Offence3_Imposition2_Result_Code'] == "Vehicle excise duty (FVEBD)" or data['Offence3_Imposition2_Result_Code'] == "Forfeited recognizance (FFR)") %}
+        <tr class="govuk-table__row" id="Offence3_Imposition2_Row">
+          <th scope="row" class="govuk-table__header govuk-!-font-weight-regular">{{data['Offence3_Imposition2_Result_Code']}}</th>
+          <td class="govuk-table__cell">
+            
+            {% if data['Offence3_Imposition2_Result_Code'] == "Costs (FCOST)" %}
+            {% if data['Offence3_Imposition2_Creditor_Type'] == "Offence3_Imposition2_Minor_Creditor" %}
+              {% if data['Offence3_Imposition2_Minor_Creditor_Type'] == "Individual" %}
+                {{data['Offence3_Imposition2_Minor_Creditor_First_Name']}} {{data['Offence3_Imposition2_Minor_Creditor_Last_Name']}}
+              {% elseif data['Offence3_Imposition2_Minor_Creditor_Type'] == "Company" %}
+                {{data['Offence3_Imposition2_Minor_Creditor_Company_Name']}}
+              {% endif %}
+            {% elseif data['Offence3_Imposition2_Creditor_Type'] == "Offence3_Imposition2_Major_Creditor" %}  
+              {{data['Offence3_Imposition2_Major_Creditor_Name']}}
+            {% endif%}  
+            
+            {% elseif data['Offence3_Imposition2_Result_Code'] == "Compensation (FCOMP)" %}
+            {% if data['Offence3_Imposition2_Creditor_Type'] == "Offence3_Imposition2_Minor_Creditor" %}
+            {% if data['Offence3_Imposition2_Minor_Creditor_Type'] == "Individual" %}
+              {{data['Offence3_Imposition2_Minor_Creditor_First_Name']}} {{data['Offence3_Imposition2_Minor_Creditor_Last_Name']}}
+            {% elseif data['Offence3_Imposition2_Minor_Creditor_Type'] == "Company" %}
+              {{data['Offence3_Imposition2_Minor_Creditor_Company_Name']}}
+            {% endif %}
+            {% elseif data['Offence3_Imposition2_Creditor_Type'] == "Offence3_Imposition2_Major_Creditor" %}  
+              {{data['Offence3_Imposition2_Major_Creditor_Name']}}
+            {% endif%}   
+            
+            {% elseif data['Offence3_Imposition2_Result_Code'] == "Victim surcharge (FVS)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% elseif data['Offence3_Imposition2_Result_Code'] == "Crown prosecution costs (FCPC)" %}
+              Crown Prosecution Service (CPS)
+            {% elseif data['Offence3_Imposition2_Result_Code'] == "Fine only (FO)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% elseif data['Offence3_Imposition2_Result_Code'] == "Criminal courts charge (FCC)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% elseif data['Offence3_Imposition2_Result_Code'] == "Vehicle excise duty (FVEBD)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% elseif data['Offence3_Imposition2_Result_Code'] == "Forfeited recognizance (FFR)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">{{ Offence3_Imposition2_Imposed_Money | currency }} </td>
+          <td class="govuk-table__cell">{{ Offence3_Imposition2_Paid_Money | currency }} </td>
+          <td class="govuk-table__cell">{{ Offence3_Imposition2_Balance | currency }}</td>
+        </tr>
+        {% endif %}
+
+        <!-- IMPOSITION 3 -->
+        {% if (data['Offence3_Imposition3_Result_Code'] == "Compensation (FCOMP)" or data['Offence3_Imposition3_Result_Code'] == "Victim surcharge (FVS)" or data['Offence3_Imposition3_Result_Code'] == "Costs (FCOST)" or data['Offence3_Imposition3_Result_Code'] == "Crown prosecution costs (FCPC)" or data['Offence3_Imposition3_Result_Code'] == "Fine only (FO)" or data['Offence3_Imposition3_Result_Code'] == "Criminal courts charge (FCC)" or data['Offence3_Imposition3_Result_Code'] == "Vehicle excise duty (FVEBD)" or data['Offence3_Imposition3_Result_Code'] == "Forfeited recognizance (FFR)") %}
+        <tr class="govuk-table__row" id="Offence3_Imposition3_Row">
+          <th scope="row" class="govuk-table__header govuk-!-font-weight-regular">{{data['Offence3_Imposition3_Result_Code']}}</th>
+          <td class="govuk-table__cell">
+            
+            {% if data['Offence3_Imposition3_Result_Code'] == "Costs (FCOST)" %}
+            {% if data['Offence3_Imposition3_Creditor_Type'] == "Offence3_Imposition3_Minor_Creditor" %}
+              {% if data['Offence3_Imposition3_Minor_Creditor_Type'] == "Individual" %}
+                {{data['Offence3_Imposition3_Minor_Creditor_First_Name']}} {{data['Offence3_Imposition3_Minor_Creditor_Last_Name']}}
+              {% elseif data['Offence3_Imposition3_Minor_Creditor_Type'] == "Company" %}
+                {{data['Offence3_Imposition3_Minor_Creditor_Company_Name']}}
+              {% endif %}
+            {% elseif data['Offence3_Imposition3_Creditor_Type'] == "Offence3_Imposition3_Major_Creditor" %}  
+              {{data['Offence3_Imposition3_Major_Creditor_Name']}}
+            {% endif%}  
+            
+            {% elseif data['Offence3_Imposition3_Result_Code'] == "Compensation (FCOMP)" %}
+            {% if data['Offence3_Imposition3_Creditor_Type'] == "Offence3_Imposition3_Minor_Creditor" %}
+            {% if data['Offence3_Imposition3_Minor_Creditor_Type'] == "Individual" %}
+              {{data['Offence3_Imposition3_Minor_Creditor_First_Name']}} {{data['Offence3_Imposition3_Minor_Creditor_Last_Name']}}
+            {% elseif data['Offence3_Imposition3_Minor_Creditor_Type'] == "Company" %}
+              {{data['Offence3_Imposition3_Minor_Creditor_Company_Name']}}
+            {% endif %}
+            {% elseif data['Offence3_Imposition3_Creditor_Type'] == "Offence3_Imposition3_Major_Creditor" %}  
+              {{data['Offence3_Imposition3_Major_Creditor_Name']}}
+            {% endif%}   
+            
+            {% elseif data['Offence3_Imposition3_Result_Code'] == "Victim surcharge (FVS)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% elseif data['Offence3_Imposition3_Result_Code'] == "Crown prosecution costs (FCPC)" %}
+              Crown Prosecution Service (CPS)
+            {% elseif data['Offence3_Imposition3_Result_Code'] == "Fine only (FO)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% elseif data['Offence3_Imposition3_Result_Code'] == "Criminal courts charge (FCC)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% elseif data['Offence3_Imposition3_Result_Code'] == "Vehicle excise duty (FVEBD)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% elseif data['Offence3_Imposition3_Result_Code'] == "Forfeited recognizance (FFR)" %}
+              HM Courts and Tribunals Service (HMCTS)
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">{{ Offence3_Imposition3_Imposed_Money | currency }} </td>
+          <td class="govuk-table__cell">{{ Offence3_Imposition3_Paid_Money | currency }} </td>
+          <td class="govuk-table__cell">{{ Offence3_Imposition3_Balance | currency }}</td>
+        </tr>
+        {% endif %}
+
+
+        <tr class="govuk-table__row" style="background-color: #F3F2F1;">
+          <th scope="row" class="govuk-table__header">Totals</th>
+          <td class="govuk-table__cell"></td>
+          <td class="govuk-table__cell govuk-!-font-weight-bold">{{ (Offence3_Imposition1_Imposed_Money + Offence3_Imposition2_Imposed_Money + Offence3_Imposition3_Imposed_Money) | currency }}</td>
+          <td class="govuk-table__cell govuk-!-font-weight-bold">{{ (Offence3_Imposition1_Paid_Money + Offence3_Imposition2_Paid_Money + Offence3_Imposition3_Paid_Money) | currency }}</td>
+          <td class="govuk-table__cell govuk-!-font-weight-bold">{{ (Offence3_Imposition1_Balance + Offence3_Imposition2_Balance + Offence3_Imposition3_Balance) | currency}}</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    {% endif %}
 
     <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
-    <input type="hidden" name="offenceDetailsProvided" value="true">
+    {% if data['Offence3-Added'] == "True" %}
+    <button type="submit" class="govuk-button govuk-button--secondary" formaction="#" style="display: block;">
+      Add another offence
+    </button>
+    {% elseif data['Offence2-Added'] == "True" %}
+    <button type="submit" class="govuk-button govuk-button--secondary" formaction="./offence-3/add-offence-3" style="display: block;">
+      Add another offence
+    </button>
+    {% elseif data['Offence1-Added'] == "True" %}
+    <button type="submit" class="govuk-button govuk-button--secondary" formaction="./offence-2/add-offence-2" style="display: block;">
+      Add another offence
+    </button>
+    {% endif %}
 
-    {{ govukButton({
-      text: "Return to account details"
+    <h2 class="govuk-heading-m govuk-!-padding-bottom-2" style="border-bottom: 2px solid black;">Totals</h2>
+
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-half">
+
+
+    {% if data['Offence3-Added'] == "True" %}
+
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: {
+            text: "Amount imposed"
+          },
+          value: {
+            text: (Offence1_Imposition_Imposed_Total_Money + Offence2_Imposition_Imposed_Total_Money + Offence3_Imposition_Imposed_Total_Money ) | currency
+          }
+        },
+        {
+          key: {
+            text: "Amount paid"
+          },
+          value: {
+            text: (Offence1_Imposition_Paid_Total_Money + Offence2_Imposition_Paid_Total_Money + Offence3_Imposition_Paid_Total_Money ) | currency
+          }
+        },
+        {
+          key: {
+            text: "Balance remaining"
+          },
+          value: {
+            text: (Offence1_Imposition_Balance_Total_Money + Offence2_Imposition_Balance_Total_Money + Offence3_Imposition_Balance_Total_Money ) | currency
+          }
+        }
+      ]
     }) }}
 
-    </form>
+    {% elseif data['Offence2-Added'] == "True" %}
 
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: {
+            text: "Amount imposed"
+          },
+          value: {
+            text: (Offence1_Imposition_Imposed_Total_Money + Offence2_Imposition_Imposed_Total_Money) | currency
+          }
+        },
+        {
+          key: {
+            text: "Amount paid"
+          },
+          value: {
+            text: (Offence1_Imposition_Paid_Total_Money + Offence2_Imposition_Paid_Total_Money) | currency
+          }
+        },
+        {
+          key: {
+            text: "Balance remaining"
+          },
+          value: {
+            text: (Offence1_Imposition_Balance_Total_Money + Offence2_Imposition_Balance_Total_Money) | currency
+          }
+        }
+      ]
+    }) }}
+
+    {% else %}
+
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: {
+            text: "Amount imposed"
+          },
+          value: {
+            text: Offence1_Imposition_Imposed_Total_Money | currency
+          }
+        },
+        {
+          key: {
+            text: "Amount paid"
+          },
+          value: {
+            text: Offence1_Imposition_Paid_Total_Money | currency
+          }
+        },
+        {
+          key: {
+            text: "Balance remaining"
+          },
+          value: {
+            text: Offence1_Imposition_Balance_Total_Money | currency
+          }
+        }
+      ]
+    }) }}
+
+    {% endif %}
+
+    
+    <div class="govuk-button-group">
+      <button type="submit" class="govuk-button" id="return-to-account-details">
+        Return to account details
+      </button>
+      <button id="payment-terms-provided" type="submit" class="govuk-button govuk-button--secondary" formaction="../payment-details?Offences-Complete=true">
+        Add payment terms
+      </button>
+    </div>
+
+    </form>
   </div>
 </div>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
 
-      document.getElementById('offence-details-form').addEventListener('submit', function() {
-        localStorage.setItem('offenceDetailsProvided', 'true');
-      });
-      
+    const paymentTermsProvided = document.getElementById('payment-terms-provided');
+
+    // Ensure defendantTypeF is defined and holds the defendant type value
+    const defendantTypeF = localStorage.getItem('defendantType'); // Example: fetch from localStorage, adjust based on your actual code
+
+    // Update payment terms visibility
+    if (localStorage.getItem('personalDetailsProvided') === 'true' || defendantTypeF == 'Company') {
+      paymentTermsProvided.style.display = 'inline';
+    } else {
+      paymentTermsProvided.style.display = 'none';
+    }
+
+    document.getElementById('offence-details-form').addEventListener('submit', function() {
+      localStorage.setItem('offenceDetailsProvided', 'true');
+    });
+
   });
 </script>
 

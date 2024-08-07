@@ -154,7 +154,7 @@
       <!-- OFFENCE DETAILS -->
       <li class="govuk-task-list__item govuk-task-list__item--with-link">
         <div class="govuk-task-list__name-and-hint" >
-          {% if data['offences-complete'] == "true" %}
+          {% if data['Offence1-Added'] == "True" %}
           <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./offence-imposition/check-offences.html" aria-describedby="offence-details-status">
             Offence details
           </a>
@@ -267,7 +267,7 @@
       <!-- OFFENCE DETAILS -->
       <li class="govuk-task-list__item govuk-task-list__item--with-link">
         <div class="govuk-task-list__name-and-hint">
-          {% if data['offences-complete'] == "true" %}
+          {% if data['Offence1-Added'] == "True" %}
           <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./offence-imposition/check-offences.html" aria-describedby="offence-details-status">
             Offence details
           </a>
@@ -349,7 +349,7 @@
       <!-- OFFENCE DETAILS -->
       <li class="govuk-task-list__item govuk-task-list__item--with-link">
         <div class="govuk-task-list__name-and-hint">
-          {% if data['offences-complete'] == "true" %}
+          {% if data['Offence1-Added'] == "True" %}
           <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./offence-imposition/check-offences.html" aria-describedby="offence-details-status">
             Offence details
           </a>
@@ -521,7 +521,7 @@
       }
 
       // Update payment terms visibility
-      if (localStorage.getItem('personalDetailsProvided') === 'true' | defendantTypeF === 'Company') {
+      if (localStorage.getItem('personalDetailsProvided') === 'true' || defendantTypeF === 'Company') {
         paymentTermsProvided.style.display = 'table';
         paymentTermsNotProvided.style.display = 'none';
       } else {

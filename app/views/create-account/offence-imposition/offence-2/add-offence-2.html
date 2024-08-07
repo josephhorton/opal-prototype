@@ -11,7 +11,7 @@
 
 {% block content %}
 
-<form id="Offence1_Form" method="post" novalidate action="../check-offences?Offence1-Added=True">
+<form id="Offence2_Form" method="post" novalidate action="../check-offences?Offence2-Added=True">
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
@@ -27,7 +27,7 @@
         For example, 31/01/2023
       </div>
       <div class="govuk-input__wrapper">
-        <input class="govuk-input moj-js-datepicker-input govuk-input--width-10" id="Offence1_Date_Of_Sentence" name="Offence1_Date_Of_Sentence" type="text" autocomplete="off" value="{{data['Offence1_Date_Of_Sentence']}}">
+        <input class="govuk-input moj-js-datepicker-input govuk-input--width-10" id="Offence2_Date_Of_Sentence" name="Offence2_Date_Of_Sentence" type="text" autocomplete="off" value="{{data['Offence2_Date_Of_Sentence']}}">
         <button class="moj-datepicker-toggle moj-js-datepicker-toggle" type="button" aria-haspopup="dialog" aria-controls="datepicker-date" aria-expanded="false">
           <span class="govuk-visually-hidden">Choose date</span>
           <svg width="32" height="24" focusable="false" class="moj-datepicker-icon" aria-hidden="true" role="img" viewBox="0 0 22 22">
@@ -44,8 +44,8 @@
       formGroup: {
         classes: "govuk-!-margin-bottom-2"
       },
-      id: "Offence1_Code",
-      name: "Offence1_Code",
+      id: "Offence2_Code",
+      name: "Offence2_Code",
       classes: "govuk-input--width-10 govuk-input--extra-letter-spacing",
       label: {
         text: "Offence code",
@@ -54,14 +54,14 @@
       hint: {
         html: 'For example, TP11003. If you don’t know the offence code, you can <a href="#" class="govuk-link--no-visited-state" data-module="edge">search the offence list</a>.'
       },
-      value: data['Offence1_Code'] 
+      value: data['Offence2_Code']
     }) }}
 
     <!-- Results -->
-    <div id="Offence1_Title_Container" style="display: none;" class="govuk-!-margin-bottom-3 govuk-!-margin-top-5">
+    <div id="Offence2_Title_Container" style="display: none;" class="govuk-!-margin-bottom-3 govuk-!-margin-top-5">
       <div style="padding: 18px 15px 15px 15px; border-left: 5px solid #1d70b8; background-color: #f3f2f1;">
-        <p id="Offence1_Title_Heading" class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-0" >Offence found</p>
-        <p id="Offence1_Title_Title" class="govuk-body govuk-!-margin-bottom-0 govuk-!-margin-top-1"></p>
+        <p id="Offence2_Title_Heading" class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-0" >Offence found</p>
+        <p id="Offence2_Title_Title" class="govuk-body govuk-!-margin-bottom-0 govuk-!-margin-top-1"></p>
       </div>
     </div>
     
@@ -75,16 +75,16 @@
 <h2 class="govuk-heading-m">Impositions</h2>
 
 <!-- IMPOSITION 1 -->
-<div class="impositionWrapper govuk-!-margin-bottom-6" id="Offence1_Imposition1_Container">
+<div class="impositionWrapper govuk-!-margin-bottom-6" id="Offence2_Imposition1_Container">
   
   <!-- IMPOSITION DETAILS -->
   <div class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-right-0 imposition">
     <div class="govuk-grid-column-one-half">
       <div class="govuk-form-group govuk-!-margin-bottom-4">
-          <label class="govuk-label govuk-label--s" for="Offence1_Imposition1_Result_Code">
+          <label class="govuk-label govuk-label--s" for="Offence2_Imposition1_Result_Code">
             Result code
           </label>
-        <select class="govuk-select" id="Offence1_Imposition1_Result_Code" name="Offence1_Imposition1_Result_Code" style="width: 100%;">
+        <select class="govuk-select" id="Offence2_Imposition1_Result_Code" name="Offence2_Imposition1_Result_Code" style="width: 100%;">
           <option value="" selected disabled>Select result code</option>
           <option value="Compensation (FCOMP)">Compensation (FCOMP)</option>
           <option value="Victim surcharge (FVS)">Victim surcharge (FVS)</option>
@@ -99,9 +99,9 @@
     </div>
     <div class="govuk-grid-column-one-quarter">
       {{ govukInput({
-        id: 'Offence1_Imposition1_Imposed',
-        name: 'Offence1_Imposition1_Imposed',
-        value: data['Offence1_Imposition1_Imposed'],
+        id: 'Offence2_Imposition1_Imposed',
+        name: 'Offence2_Imposition1_Imposed',
+        value: data['Offence2_Imposition1_Imposed'],
         formGroup: {
           classes: "govuk-!-margin-bottom-4"
         },
@@ -116,9 +116,9 @@
     </div>
     <div class="govuk-grid-column-one-quarter">
       {{ govukInput({
-        id: 'Offence1_Imposition1_Paid',
-        name: 'Offence1_Imposition1_Paid',
-        value: data['Offence1_Imposition1_Paid'],
+        id: 'Offence2_Imposition1_Paid',
+        name: 'Offence2_Imposition1_Paid',
+        value: data['Offence2_Imposition1_Paid'],
         formGroup: {
           classes: "govuk-!-margin-bottom-4"
         },
@@ -134,11 +134,11 @@
   </div>
 
   <!-- CREDITOR DETAILS -->
-  <div class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-right-0 creditors" id="Offence1_Imposition1_Creditor_Add" style="display: none;">
+  <div class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-right-0 creditors" id="Offence2_Imposition1_Creditor_Add" style="display: none;">
     <div class="govuk-grid-column-full">
       
       <!-- SHOW THE MINOR CREDITOR IF FCOST OR FCOMP -->
-      <div id="Offence1_Imposition1_Creditor_Show_Minor_Creditor" style="display: none;">
+      <div id="Offence2_Imposition1_Creditor_Show_Minor_Creditor" style="display: none;">
         <div class="govuk-summary-card">
           <div class="govuk-summary-card__title-wrapper">
             <dl class="govuk-summary-list govuk-!-margin-bottom-0" >
@@ -147,10 +147,10 @@
                   Minor creditor
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  {% if data['Offence1_Imposition1_Minor_Creditor_Type'] == "Individual" %}
-                    {{data['Offence1_Imposition1_Minor_Creditor_First_Name']}} {{data['Offence1_Imposition1_Minor_Creditor_Last_Name']}}
-                  {% elseif data['Offence1_Imposition1_Minor_Creditor_Type'] == "Company" %}
-                    {{data['Offence1_Imposition1_Minor_Creditor_Company_Name']}}
+                  {% if data['Offence2_Imposition1_Minor_Creditor_Type'] == "Individual" %}
+                    {{data['Offence2_Imposition1_Minor_Creditor_First_Name']}} {{data['Offence2_Imposition1_Minor_Creditor_Last_Name']}}
+                  {% elseif data['Offence2_Imposition1_Minor_Creditor_Type'] == "Company" %}
+                    {{data['Offence2_Imposition1_Minor_Creditor_Company_Name']}}
                   {% endif %}
                 </dd>
                 <dd class="govuk-summary-list__actions" style="width: 40%;">
@@ -159,10 +159,10 @@
                       <a class="govuk-link govuk-link--no-visited-state" href="#" data-message="This has not been prototyped. It would show a summary of the details you entered for this minor creditor"><strong>Show details</strong><span class="govuk-visually-hidden"></span></a>
                     </li>
                     <li class="govuk-summary-list__actions-list-item">
-                      <a class="govuk-link govuk-link--no-visited-state" href="./add-offence-1-minor-creditor-1.html"><strong>Change</strong><span class="govuk-visually-hidden"> minor creditor</span></a>
+                      <a class="govuk-link govuk-link--no-visited-state" href="./add-offence-2-minor-creditor-1.html"><strong>Change</strong><span class="govuk-visually-hidden"> minor creditor</span></a>
                     </li>
                     <li class="govuk-summary-list__actions-list-item">
-                      <a class="govuk-link govuk-link--no-visited-state" id="Offence1_Imposition1_Creditor_Remove" href="#"><strong>Remove</strong><span class="govuk-visually-hidden"> minor creditor</span></a>
+                      <a class="govuk-link govuk-link--no-visited-state" id="Offence2_Imposition1_Creditor_Remove" href="#"><strong>Remove</strong><span class="govuk-visually-hidden"> minor creditor</span></a>
                     </li>
                   </ul>
                 </dd>
@@ -173,16 +173,16 @@
       </div>
       
       <!-- SHOW THE FORM IS NOTHING MINOR CREDITOR NOT ADDED -->
-      <div id="Offence1_Imposition1_Creditor_Show_Form">
-        {% set Offence1_Imposition1_Major_Creditor_HTML %}
+      <div id="Offence2_Imposition1_Creditor_Show_Form">
+        {% set Offence2_Imposition1_Major_Creditor_HTML %}
 
         {{ xGovukAutocomplete({
           formGroup: {
             classes: "govuk-input--width-30"
           },
-          id: "Offence1_Imposition1_Major_Creditor_Name",
-          name: "Offence1_Imposition1_Major_Creditor_Name",
-          value: data['Offence1_Imposition1_Major_Creditor_Name'],
+          id: "Offence2_Imposition1_Major_Creditor_Name",
+          name: "Offence2_Imposition1_Major_Creditor_Name",
+          value: data['Offence2_Imposition1_Major_Creditor_Name'],
           allowEmpty: false,
           displayMenu: "overlay",
           label: {
@@ -271,17 +271,17 @@
 
         {% endset -%}
 
-        {% set Offence1_Imposition1_Minor_Creditor_HTML %}
-          <p class="govuk-body"><a href="./add-offence-1-minor-creditor-1.html" id="Offence1_Add_Creditor_Link" class="govuk-link govuk-link--no-visited-state">Add minor creditor details</a></p>
+        {% set Offence2_Imposition1_Minor_Creditor_HTML %}
+          <p class="govuk-body"><a href="./add-offence-2-minor-creditor-1.html" id="Offence2_Add_Creditor_Link" class="govuk-link govuk-link--no-visited-state">Add minor creditor details</a></p>
         {% endset -%}
 
         {{ govukRadios({
           formGroup: {
             classes: "govuk-!-margin-bottom-4"
           },
-          name: "Offence1_Imposition1_Creditor_Type",
-          value: data['Offence1_Imposition1_Creditor_Type'],
-          id: "Offence1_Imposition1_Creditor_Type",
+          name: "Offence2_Imposition1_Creditor_Type",
+          value: data['Offence2_Imposition1_Creditor_Type'],
+          id: "Offence2_Imposition1_Creditor_Type",
           fieldset: {
             legend: {
               text: "Add creditor",
@@ -290,17 +290,17 @@
           },
           items: [
             {
-              value: "Offence1_Imposition1_Major_Creditor",
+              value: "Offence2_Imposition1_Major_Creditor",
               text: "Major creditor",
               conditional: {
-                html: Offence1_Imposition1_Major_Creditor_HTML 
+                html: Offence2_Imposition1_Major_Creditor_HTML 
               }
             },
             {
-              value: "Offence1_Imposition1_Minor_Creditor",
+              value: "Offence2_Imposition1_Minor_Creditor",
               text: "Minor creditor",
               conditional: {
-                html: Offence1_Imposition1_Minor_Creditor_HTML 
+                html: Offence2_Imposition1_Minor_Creditor_HTML 
               }
             }
           ]
@@ -312,16 +312,16 @@
 </div>
 
 <!-- IMPOSITION 2 -->
-<div class="impositionWrapper govuk-!-margin-bottom-6" id="Offence1_Imposition2_Container" style="display: none;">
+<div class="impositionWrapper govuk-!-margin-bottom-6" id="Offence2_Imposition2_Container" style="display: none;">
   
   <!-- IMPOSITION DETAILS -->
   <div class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-right-0 imposition">
     <div class="govuk-grid-column-one-half">
       <div class="govuk-form-group govuk-!-margin-bottom-4">
-          <label class="govuk-label govuk-label--s" for="Offence1_Imposition2_Result_Code">
+          <label class="govuk-label govuk-label--s" for="Offence2_Imposition2_Result_Code">
             Result code
           </label>
-        <select class="govuk-select" id="Offence1_Imposition2_Result_Code" name="Offence1_Imposition2_Result_Code" style="width: 100%;">
+        <select class="govuk-select" id="Offence2_Imposition2_Result_Code" name="Offence2_Imposition2_Result_Code" style="width: 100%;">
           <option value="" selected disabled>Select result code</option>
           <option value="Compensation (FCOMP)">Compensation (FCOMP)</option>
           <option value="Victim surcharge (FVS)">Victim surcharge (FVS)</option>
@@ -336,9 +336,9 @@
     </div>
     <div class="govuk-grid-column-one-quarter">
       {{ govukInput({
-        id: 'Offence1_Imposition2_Imposed',
-        name: 'Offence1_Imposition2_Imposed',
-        value: data['Offence1_Imposition2_Imposed'],
+        id: 'Offence2_Imposition2_Imposed',
+        name: 'Offence2_Imposition2_Imposed',
+        value: data['Offence2_Imposition2_Imposed'],
         formGroup: {
           classes: "govuk-!-margin-bottom-4"
         },
@@ -353,9 +353,9 @@
     </div>
     <div class="govuk-grid-column-one-quarter">
       {{ govukInput({
-        id: 'Offence1_Imposition2_Paid',
-        name: 'Offence1_Imposition2_Paid',
-        value: data['Offence1_Imposition2_Paid'],
+        id: 'Offence2_Imposition2_Paid',
+        name: 'Offence2_Imposition2_Paid',
+        value: data['Offence2_Imposition2_Paid'],
         formGroup: {
           classes: "govuk-!-margin-bottom-4"
         },
@@ -371,11 +371,11 @@
   </div>
 
   <!-- CREDITOR DETAILS -->
-  <div class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-right-0 creditors" id="Offence1_Imposition2_Creditor_Add" style="display: none;">
+  <div class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-right-0 creditors" id="Offence2_Imposition2_Creditor_Add" style="display: none;">
     <div class="govuk-grid-column-full">
       
       <!-- SHOW THE MINOR CREDITOR IF FCOST OR FCOMP -->
-      <div id="Offence1_Imposition2_Creditor_Show_Minor_Creditor" style="display: none;">
+      <div id="Offence2_Imposition2_Creditor_Show_Minor_Creditor" style="display: none;">
         <div class="govuk-summary-card govuk-!-margin-bottom-4">
           <div class="govuk-summary-card__title-wrapper">
             <dl class="govuk-summary-list govuk-!-margin-bottom-0" >
@@ -384,10 +384,10 @@
                   Minor creditor
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  {% if data['Offence1_Imposition2_Minor_Creditor_Type'] == "Individual" %}
-                    {{data['Offence1_Imposition2_Minor_Creditor_First_Name']}} {{data['Offence1_Imposition2_Minor_Creditor_Last_Name']}}
-                  {% elseif data['Offence1_Imposition2_Minor_Creditor_Type'] == "Company" %}
-                    {{data['Offence1_Imposition2_Minor_Creditor_Company_Name']}}
+                  {% if data['Offence2_Imposition2_Minor_Creditor_Type'] == "Individual" %}
+                    {{data['Offence2_Imposition2_Minor_Creditor_First_Name']}} {{data['Offence2_Imposition2_Minor_Creditor_Last_Name']}}
+                  {% elseif data['Offence2_Imposition2_Minor_Creditor_Type'] == "Company" %}
+                    {{data['Offence2_Imposition2_Minor_Creditor_Company_Name']}}
                   {% endif %}
                 </dd>
                 <dd class="govuk-summary-list__actions" style="width: 40%;">
@@ -396,10 +396,10 @@
                       <a class="govuk-link govuk-link--no-visited-state" href="#" data-message="This has not been prototyped. It would show a summary of the details you entered for this minor creditor"><strong>Show details</strong><span class="govuk-visually-hidden"></span></a>
                     </li>
                     <li class="govuk-summary-list__actions-list-item">
-                      <a class="govuk-link govuk-link--no-visited-state" href="./add-offence-1-minor-creditor-2.html"><strong>Change</strong><span class="govuk-visually-hidden"> minor creditor</span></a>
+                      <a class="govuk-link govuk-link--no-visited-state" href="./add-offence-2-minor-creditor-2.html"><strong>Change</strong><span class="govuk-visually-hidden"> minor creditor</span></a>
                     </li>
                     <li class="govuk-summary-list__actions-list-item">
-                      <a class="govuk-link govuk-link--no-visited-state" id="Offence1_Imposition2_Creditor_Remove" href="#"><strong>Remove</strong><span class="govuk-visually-hidden"> minor creditor</span></a>
+                      <a class="govuk-link govuk-link--no-visited-state" id="Offence2_Imposition2_Creditor_Remove" href="#"><strong>Remove</strong><span class="govuk-visually-hidden"> minor creditor</span></a>
                     </li>
                   </ul>
                 </dd>
@@ -410,16 +410,16 @@
       </div>
       
       <!-- SHOW THE FORM IS NOTHING MINOR CREDITOR NOT ADDED -->
-      <div id="Offence1_Imposition2_Creditor_Show_Form">
-        {% set Offence1_Imposition2_Major_Creditor_HTML %}
+      <div id="Offence2_Imposition2_Creditor_Show_Form">
+        {% set Offence2_Imposition2_Major_Creditor_HTML %}
 
         {{ xGovukAutocomplete({
           formGroup: {
             classes: "govuk-input--width-30"
           },
-          id: "Offence1_Imposition2_Major_Creditor_Name",
-          name: "Offence1_Imposition2_Major_Creditor_Name",
-          value: data['Offence1_Imposition2_Major_Creditor_Name'],
+          id: "Offence2_Imposition2_Major_Creditor_Name",
+          name: "Offence2_Imposition2_Major_Creditor_Name",
+          value: data['Offence2_Imposition2_Major_Creditor_Name'],
           allowEmpty: false,
           displayMenu: "overlay",
           label: {
@@ -508,17 +508,17 @@
 
         {% endset -%}
 
-        {% set Offence1_Imposition2_Minor_Creditor_HTML %}
-          <p class="govuk-body"><a href="./add-offence-1-minor-creditor-2.html" id="Offence1_Add_Creditor_Link" class="govuk-link govuk-link--no-visited-state">Add minor creditor details</a></p>
+        {% set Offence2_Imposition2_Minor_Creditor_HTML %}
+          <p class="govuk-body"><a href="./add-offence-2-minor-creditor-2.html" id="Offence2_Add_Creditor_Link" class="govuk-link govuk-link--no-visited-state">Add minor creditor details</a></p>
         {% endset -%}
 
         {{ govukRadios({
           formGroup: {
             classes: "govuk-!-margin-bottom-2"
           },
-          name: "Offence1_Imposition2_Creditor_Type",
-          value: data['Offence1_Imposition2_Creditor_Type'],
-          id: "Offence1_Imposition2_Creditor_Type",
+          name: "Offence2_Imposition2_Creditor_Type",
+          value: data['Offence2_Imposition2_Creditor_Type'],
+          id: "Offence2_Imposition2_Creditor_Type",
           fieldset: {
             legend: {
               text: "Add creditor",
@@ -527,17 +527,17 @@
           },
           items: [
             {
-              value: "Offence1_Imposition2_Major_Creditor",
+              value: "Offence2_Imposition2_Major_Creditor",
               text: "Major creditor",
               conditional: {
-                html: Offence1_Imposition2_Major_Creditor_HTML 
+                html: Offence2_Imposition2_Major_Creditor_HTML 
               }
             },
             {
-              value: "Offence1_Imposition2_Minor_Creditor",
+              value: "Offence2_Imposition2_Minor_Creditor",
               text: "Minor creditor",
               conditional: {
-                html: Offence1_Imposition2_Minor_Creditor_HTML
+                html: Offence2_Imposition2_Minor_Creditor_HTML
               }
             }
           ]
@@ -557,16 +557,16 @@
 </div>
 
 <!-- IMPOSITION 3 -->
-<div class="impositionWrapper govuk-!-margin-bottom-6" id="Offence1_Imposition3_Container" style="display: none;">
+<div class="impositionWrapper govuk-!-margin-bottom-6" id="Offence2_Imposition3_Container" style="display: none;">
   
   <!-- IMPOSITION DETAILS -->
   <div class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-right-0 imposition">
     <div class="govuk-grid-column-one-half">
       <div class="govuk-form-group govuk-!-margin-bottom-4">
-          <label class="govuk-label govuk-label--s" for="Offence1_Imposition3_Result_Code">
+          <label class="govuk-label govuk-label--s" for="Offence2_Imposition3_Result_Code">
             Result code
           </label>
-        <select class="govuk-select" id="Offence1_Imposition3_Result_Code" name="Offence1_Imposition3_Result_Code" style="width: 100%;">
+        <select class="govuk-select" id="Offence2_Imposition3_Result_Code" name="Offence2_Imposition3_Result_Code" style="width: 100%;">
           <option value="" selected disabled>Select result code</option>
           <option value="Compensation (FCOMP)">Compensation (FCOMP)</option>
           <option value="Victim surcharge (FVS)">Victim surcharge (FVS)</option>
@@ -581,9 +581,9 @@
     </div>
     <div class="govuk-grid-column-one-quarter">
       {{ govukInput({
-        id: 'Offence1_Imposition3_Imposed',
-        name: 'Offence1_Imposition3_Imposed',
-        value: data['Offence1_Imposition3_Imposed'],
+        id: 'Offence2_Imposition3_Imposed',
+        name: 'Offence2_Imposition3_Imposed',
+        value: data['Offence2_Imposition3_Imposed'],
         formGroup: {
           classes: "govuk-!-margin-bottom-4"
         },
@@ -598,9 +598,9 @@
     </div>
     <div class="govuk-grid-column-one-quarter">
       {{ govukInput({
-        id: 'Offence1_Imposition3_Paid',
-        name: 'Offence1_Imposition3_Paid',
-        value: data['Offence1_Imposition3_Paid'],
+        id: 'Offence2_Imposition3_Paid',
+        name: 'Offence2_Imposition3_Paid',
+        value: data['Offence2_Imposition3_Paid'],
         formGroup: {
           classes: "govuk-!-margin-bottom-4"
         },
@@ -616,11 +616,11 @@
   </div>
 
   <!-- CREDITOR DETAILS -->
-  <div class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-right-0 creditors" id="Offence1_Imposition3_Creditor_Add" style="display: none;">
+  <div class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-right-0 creditors" id="Offence2_Imposition3_Creditor_Add" style="display: none;">
     <div class="govuk-grid-column-full">
       
       <!-- SHOW THE MINOR CREDITOR IF FCOST OR FCOMP -->
-      <div id="Offence1_Imposition3_Creditor_Show_Minor_Creditor" style="display: none;">
+      <div id="Offence2_Imposition3_Creditor_Show_Minor_Creditor" style="display: none;">
         <div class="govuk-summary-card govuk-!-margin-bottom-4">
           <div class="govuk-summary-card__title-wrapper">
             <dl class="govuk-summary-list govuk-!-margin-bottom-0" >
@@ -629,10 +629,10 @@
                   Minor creditor
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  {% if data['Offence1_Imposition3_Minor_Creditor_Type'] == "Individual" %}
-                    {{data['Offence1_Imposition3_Minor_Creditor_First_Name']}} {{data['Offence1_Imposition3_Minor_Creditor_Last_Name']}}
-                  {% elseif data['Offence1_Imposition3_Minor_Creditor_Type'] == "Company" %}
-                    {{data['Offence1_Imposition3_Minor_Creditor_Company_Name']}}
+                  {% if data['Offence2_Imposition3_Minor_Creditor_Type'] == "Individual" %}
+                    {{data['Offence2_Imposition3_Minor_Creditor_First_Name']}} {{data['Offence2_Imposition3_Minor_Creditor_Last_Name']}}
+                  {% elseif data['Offence2_Imposition3_Minor_Creditor_Type'] == "Company" %}
+                    {{data['Offence2_Imposition3_Minor_Creditor_Company_Name']}}
                   {% endif %}
                 </dd>
                 <dd class="govuk-summary-list__actions" style="width: 40%;">
@@ -641,10 +641,10 @@
                       <a class="govuk-link govuk-link--no-visited-state" href="#" data-message="This has not been prototyped. It would show a summary of the details you entered for this minor creditor"><strong>Show details</strong><span class="govuk-visually-hidden"></span></a>
                     </li>
                     <li class="govuk-summary-list__actions-list-item">
-                      <a class="govuk-link govuk-link--no-visited-state" href="./add-offence-1-minor-creditor-3.html"><strong>Change</strong><span class="govuk-visually-hidden"> minor creditor</span></a>
+                      <a class="govuk-link govuk-link--no-visited-state" href="./add-offence-2-minor-creditor-3.html"><strong>Change</strong><span class="govuk-visually-hidden"> minor creditor</span></a>
                     </li>
                     <li class="govuk-summary-list__actions-list-item">
-                      <a class="govuk-link govuk-link--no-visited-state" id="Offence1_Imposition3_Creditor_Remove" href="#"><strong>Remove</strong><span class="govuk-visually-hidden"> minor creditor</span></a>
+                      <a class="govuk-link govuk-link--no-visited-state" id="Offence2_Imposition3_Creditor_Remove" href="#"><strong>Remove</strong><span class="govuk-visually-hidden"> minor creditor</span></a>
                     </li>
                   </ul>
                 </dd>
@@ -655,16 +655,16 @@
       </div>
       
       <!-- SHOW THE FORM IS NOTHING MINOR CREDITOR NOT ADDED -->
-      <div id="Offence1_Imposition3_Creditor_Show_Form">
-        {% set Offence1_Imposition3_Major_Creditor_HTML %}
+      <div id="Offence2_Imposition3_Creditor_Show_Form">
+        {% set Offence2_Imposition3_Major_Creditor_HTML %}
 
         {{ xGovukAutocomplete({
           formGroup: {
             classes: "govuk-input--width-30"
           },
-          id: "Offence1_Imposition3_Major_Creditor_Name",
-          name: "Offence1_Imposition3_Major_Creditor_Name",
-          value: data['Offence1_Imposition3_Major_Creditor_Name'],
+          id: "Offence2_Imposition3_Major_Creditor_Name",
+          name: "Offence2_Imposition3_Major_Creditor_Name",
+          value: data['Offence2_Imposition3_Major_Creditor_Name'],
           allowEmpty: false,
           displayMenu: "overlay",
           label: {
@@ -753,17 +753,17 @@
 
         {% endset -%}
 
-        {% set Offence1_Imposition3_Minor_Creditor_HTML %}
-          <p class="govuk-body"><a href="./add-offence-1-minor-creditor-3.html" id="Offence1_Add_Creditor_Link" class="govuk-link govuk-link--no-visited-state">Add minor creditor details</a></p>
+        {% set Offence2_Imposition3_Minor_Creditor_HTML %}
+          <p class="govuk-body"><a href="./add-offence-2-minor-creditor-3.html" id="Offence2_Add_Creditor_Link" class="govuk-link govuk-link--no-visited-state">Add minor creditor details</a></p>
         {% endset -%}
 
         {{ govukRadios({
           formGroup: {
             classes: "govuk-!-margin-bottom-2"
           },
-          name: "Offence1_Imposition3_Creditor_Type",
-          value: data['Offence1_Imposition3_Creditor_Type'],
-          id: "Offence1_Imposition3_Creditor_Type",
+          name: "Offence2_Imposition3_Creditor_Type",
+          value: data['Offence2_Imposition3_Creditor_Type'],
+          id: "Offence2_Imposition3_Creditor_Type",
           fieldset: {
             legend: {
               text: "Add creditor",
@@ -772,17 +772,17 @@
           },
           items: [
             {
-              value: "Offence1_Imposition3_Major_Creditor",
+              value: "Offence2_Imposition3_Major_Creditor",
               text: "Major creditor",
               conditional: {
-                html: Offence1_Imposition3_Major_Creditor_HTML 
+                html: Offence2_Imposition3_Major_Creditor_HTML 
               }
             },
             {
-              value: "Offence1_Imposition3_Minor_Creditor",
+              value: "Offence2_Imposition3_Minor_Creditor",
               text: "Minor creditor",
               conditional: {
-                html: Offence1_Imposition3_Minor_Creditor_HTML
+                html: Offence2_Imposition3_Minor_Creditor_HTML
               }
             }
           ]
@@ -803,7 +803,7 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    <button type="button" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-1" id="Offence1_Add_Another_Imposition">
+    <button type="button" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-1" id="Offence2_Add_Another_Imposition">
       Add another imposition
     </button>    
 
@@ -813,7 +813,7 @@
       <button type="submit" class="govuk-button">
         Review offence
       </button>
-      <button type="submit" class="govuk-button govuk-button--secondary" formaction="../offence-2/add-offence-2">
+      <button type="submit" class="govuk-button govuk-button--secondary" formaction="../offence-3/add-offence-3">
         Add another offence
       </button>
     </div>
@@ -828,14 +828,19 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+
+    const ids = Array.from(document.querySelectorAll('[id]')).map(el => el.id);
+    const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
+    console.log(duplicates);
+
    
-    const inputElement = document.getElementById('Offence1_Code');
-    const resultsContainer = document.getElementById('Offence1_Title_Container');
-    const offenceTitleDisplay = document.getElementById('Offence1_Title_Title');
+    const inputElement = document.getElementById('Offence2_Code');
+    const resultsContainer = document.getElementById('Offence2_Title_Container');
+    const offenceTitleDisplay = document.getElementById('Offence2_Title_Title');
 
     // Load saved input value and visibility state from localStorage
-    const savedInputValue = localStorage.getItem('Offence1_Code_Value');
-    const savedResultsVisible = localStorage.getItem('Offence1_Results_Visible');
+    const savedInputValue = localStorage.getItem('Offence2_Code_Value');
+    const savedResultsVisible = localStorage.getItem('Offence2_Results_Visible');
 
     if (savedInputValue) {
       inputElement.value = savedInputValue;
@@ -861,8 +866,8 @@
       }
 
       // Save the current state to localStorage
-      localStorage.setItem('Offence1_Code_Value', inputValue);
-      localStorage.setItem('Offence1_Results_Visible', inputValue.length === 7);
+      localStorage.setItem('Offence2_Code_Value', inputValue);
+      localStorage.setItem('Offence2_Results_Visible', inputValue.length === 7);
     });
 
     function updateOffenceTitleDisplay(inputValue) {
@@ -905,88 +910,88 @@
 
 
     // Imposition 1 Variables
-    const Offence1Imposition1resultCodeInput = document.getElementById('Offence1_Imposition1_Result_Code');
-    const Offence1Imposition1imposedInput = document.getElementById('Offence1_Imposition1_Imposed');
-    const Offence1Imposition1paidInput = document.getElementById('Offence1_Imposition1_Paid');
-    const Offence1Imposition1addCreditorSection = document.getElementById('Offence1_Imposition1_Creditor_Add');
-    const Offence1Imposition1removeImpositionLink = document.getElementById('Offence1_Imposition1_Creditor_Remove');
-    const Offence1Imposition1addCreditorForm = document.getElementById('Offence1_Imposition1_Creditor_Show_Form');
-    const Offence1Imposition1minorCreditorDetails = document.getElementById('Offence1_Imposition1_Creditor_Show_Minor_Creditor');
+    const Offence2Imposition1resultCodeInput = document.getElementById('Offence2_Imposition1_Result_Code');
+    const Offence2Imposition1imposedInput = document.getElementById('Offence2_Imposition1_Imposed');
+    const Offence2Imposition1paidInput = document.getElementById('Offence2_Imposition1_Paid');
+    const Offence2Imposition1addCreditorSection = document.getElementById('Offence2_Imposition1_Creditor_Add');
+    const Offence2Imposition1removeImpositionLink = document.getElementById('Offence2_Imposition1_Creditor_Remove');
+    const Offence2Imposition1addCreditorForm = document.getElementById('Offence2_Imposition1_Creditor_Show_Form');
+    const Offence2Imposition1minorCreditorDetails = document.getElementById('Offence2_Imposition1_Creditor_Show_Minor_Creditor');
 
     // Imposition 2 Variables
-    const Offence1Imposition2resultCodeInput = document.getElementById('Offence1_Imposition2_Result_Code');
-    const Offence1Imposition2imposedInput = document.getElementById('Offence1_Imposition2_Imposed');
-    const Offence1Imposition2paidInput = document.getElementById('Offence1_Imposition2_Paid');
-    const Offence1Imposition2addCreditorSection = document.getElementById('Offence1_Imposition2_Creditor_Add');
-    const Offence1Imposition2removeImpositionLink = document.getElementById('Offence1_Imposition2_Creditor_Remove');
-    const Offence1Imposition2addCreditorForm = document.getElementById('Offence1_Imposition2_Creditor_Show_Form');
-    const Offence1Imposition2minorCreditorDetails = document.getElementById('Offence1_Imposition2_Creditor_Show_Minor_Creditor');
+    const Offence2Imposition2resultCodeInput = document.getElementById('Offence2_Imposition2_Result_Code');
+    const Offence2Imposition2imposedInput = document.getElementById('Offence2_Imposition2_Imposed');
+    const Offence2Imposition2paidInput = document.getElementById('Offence2_Imposition2_Paid');
+    const Offence2Imposition2addCreditorSection = document.getElementById('Offence2_Imposition2_Creditor_Add');
+    const Offence2Imposition2removeImpositionLink = document.getElementById('Offence2_Imposition2_Creditor_Remove');
+    const Offence2Imposition2addCreditorForm = document.getElementById('Offence2_Imposition2_Creditor_Show_Form');
+    const Offence2Imposition2minorCreditorDetails = document.getElementById('Offence2_Imposition2_Creditor_Show_Minor_Creditor');
 
 
     // Imposition 2 Variables
-    const Offence1Imposition3resultCodeInput = document.getElementById('Offence1_Imposition3_Result_Code');
-    const Offence1Imposition3imposedInput = document.getElementById('Offence1_Imposition3_Imposed');
-    const Offence1Imposition3paidInput = document.getElementById('Offence1_Imposition3_Paid');
-    const Offence1Imposition3addCreditorSection = document.getElementById('Offence1_Imposition3_Creditor_Add');
-    const Offence1Imposition3removeImpositionLink = document.getElementById('Offence1_Imposition3_Creditor_Remove');
-    const Offence1Imposition3addCreditorForm = document.getElementById('Offence1_Imposition3_Creditor_Show_Form');
-    const Offence1Imposition3minorCreditorDetails = document.getElementById('Offence1_Imposition3_Creditor_Show_Minor_Creditor');
+    const Offence2Imposition3resultCodeInput = document.getElementById('Offence2_Imposition3_Result_Code');
+    const Offence2Imposition3imposedInput = document.getElementById('Offence2_Imposition3_Imposed');
+    const Offence2Imposition3paidInput = document.getElementById('Offence2_Imposition3_Paid');
+    const Offence2Imposition3addCreditorSection = document.getElementById('Offence2_Imposition3_Creditor_Add');
+    const Offence2Imposition3removeImpositionLink = document.getElementById('Offence2_Imposition3_Creditor_Remove');
+    const Offence2Imposition3addCreditorForm = document.getElementById('Offence2_Imposition3_Creditor_Show_Form');
+    const Offence2Imposition3minorCreditorDetails = document.getElementById('Offence2_Imposition3_Creditor_Show_Minor_Creditor');
 
 
     // Add Another Imposition
-    const Offence1addAnotherImpositionButton = document.getElementById('Offence1_Add_Another_Imposition');
-    const Offence1imposition2Container = document.getElementById('Offence1_Imposition2_Container');
-    const Offence1imposition3Container = document.getElementById('Offence1_Imposition3_Container');
+    const Offence2addAnotherImpositionButton = document.getElementById('Offence2_Add_Another_Imposition');
+    const Offence2imposition2Container = document.getElementById('Offence2_Imposition2_Container');
+    const Offence2imposition3Container = document.getElementById('Offence2_Imposition3_Container');
 
     // Show Imposition 2 if it was previously added
-    if (localStorage.getItem('Offence1Imposition2_Added') === 'true') {
-        Offence1imposition2Container.style.display = 'block';
+    if (localStorage.getItem('Offence2Imposition2_Added') === 'true') {
+        Offence2imposition2Container.style.display = 'block';
     }
 
     // Show Imposition 3 if it was previously added
-    if (localStorage.getItem('Offence1Imposition3_Added') === 'true') {
-        Offence1imposition3Container.style.display = 'block';
+    if (localStorage.getItem('Offence2Imposition3_Added') === 'true') {
+        Offence2imposition3Container.style.display = 'block';
     }
 
     // Show Imposition 2 and store the state when the button is clicked
-    Offence1addAnotherImpositionButton.addEventListener('click', function() {
-        if (Offence1imposition2Container.style.display === 'none') {
-            Offence1imposition2Container.style.display = 'block';
-            localStorage.setItem('Offence1Imposition2_Added', 'true');
-        } else if (Offence1imposition3Container.style.display === 'none') {
-            Offence1imposition3Container.style.display = 'block';
-            localStorage.setItem('Offence1Imposition3_Added', 'true');
+    Offence2addAnotherImpositionButton.addEventListener('click', function() {
+        if (Offence2imposition2Container.style.display === 'none') {
+            Offence2imposition2Container.style.display = 'block';
+            localStorage.setItem('Offence2Imposition2_Added', 'true');
+        } else if (Offence2imposition3Container.style.display === 'none') {
+            Offence2imposition3Container.style.display = 'block';
+            localStorage.setItem('Offence2Imposition3_Added', 'true');
         }
     });
 
     // To mark if Imposition 2 has been added
-    Offence1Imposition2imposedInput.addEventListener('input', function() {
-        if (Offence1Imposition2imposedInput.value.trim() !== '') {
-            localStorage.setItem('Offence1_Imposition2_Entered', 'true');
+    Offence2Imposition2imposedInput.addEventListener('input', function() {
+        if (Offence2Imposition2imposedInput.value.trim() !== '') {
+            localStorage.setItem('Offence2_Imposition2_Entered', 'true');
         } else {
-          localStorage.removeItem('Offence1_Imposition2_Entered');
+          localStorage.removeItem('Offence2_Imposition2_Entered');
         }
     });
 
-    if (Offence1Imposition2imposedInput.value.trim() !== '') {
-      localStorage.setItem('Offence1_Imposition2_Entered', 'true');
+    if (Offence2Imposition2imposedInput.value.trim() !== '') {
+      localStorage.setItem('Offence2_Imposition2_Entered', 'true');
     } else {
-      localStorage.removeItem('Offence1_Imposition2_Entered');
+      localStorage.removeItem('Offence2_Imposition2_Entered');
     }
 
     // To mark if Imposition 3 has been added
-    Offence1Imposition3imposedInput.addEventListener('input', function() {
-        if (Offence1Imposition3imposedInput.value.trim() !== '') {
-            localStorage.setItem('Offence1_Imposition3_Entered', 'true');
+    Offence2Imposition3imposedInput.addEventListener('input', function() {
+        if (Offence2Imposition3imposedInput.value.trim() !== '') {
+            localStorage.setItem('Offence2_Imposition3_Entered', 'true');
         } else {
-          localStorage.removeItem('Offence1_Imposition3_Entered');
+          localStorage.removeItem('Offence2_Imposition3_Entered');
         }
     });
 
-    if (Offence1Imposition3imposedInput.value.trim() !== '') {
-      localStorage.setItem('Offence1_Imposition3_Entered', 'true');
+    if (Offence2Imposition3imposedInput.value.trim() !== '') {
+      localStorage.setItem('Offence2_Imposition3_Entered', 'true');
     } else {
-      localStorage.removeItem('Offence1_Imposition3_Entered');
+      localStorage.removeItem('Offence2_Imposition3_Entered');
     }
 
     // Function to check the selected result code and show/hide the add-creditor section
@@ -1028,29 +1033,29 @@
     }
 
     // Show Imposition 2 if it was previously added
-    if (localStorage.getItem('Offence1Imposition2_Added') === 'true') {
-        Offence1imposition2Container.style.display = 'block';
+    if (localStorage.getItem('Offence2Imposition2_Added') === 'true') {
+        Offence2imposition2Container.style.display = 'block';
     }
 
     // Show Imposition 2 and store the state when the button is clicked
-    Offence1addAnotherImpositionButton.addEventListener('click', function() {
-        Offence1imposition2Container.style.display = 'block';
-        localStorage.setItem('Offence1Offence1Imposition2_Added', 'true');
+    Offence2addAnotherImpositionButton.addEventListener('click', function() {
+        Offence2imposition2Container.style.display = 'block';
+        localStorage.setItem('Offence2Imposition2_Added', 'true');
     });
 
     // To mark if Imposition 2 has been added
-    Offence1Imposition2imposedInput.addEventListener('input', function() {
-        if (Offence1Imposition2imposedInput.value.trim() !== '') {
-            localStorage.setItem('Offence1_Imposition2_Entered', 'true');
+    Offence2Imposition2imposedInput.addEventListener('input', function() {
+        if (Offence2Imposition2imposedInput.value.trim() !== '') {
+            localStorage.setItem('Offence2_Imposition2_Entered', 'true');
         } else {
-          localStorage.removeItem('Offence1_Imposition2_Entered');
+          localStorage.removeItem('Offence2_Imposition2_Entered');
         }
     });
 
-    if (Offence1Imposition2imposedInput.value.trim() !== '') {
-      localStorage.setItem('Offence1_Imposition2_Entered', 'true');
+    if (Offence2Imposition2imposedInput.value.trim() !== '') {
+      localStorage.setItem('Offence2_Imposition2_Entered', 'true');
     } else {
-      localStorage.removeItem('Offence1_Imposition2_Entered');
+      localStorage.removeItem('Offence2_Imposition2_Entered');
     }
 
     // Function to check the selected result code and show/hide the add-creditor section
@@ -1092,145 +1097,145 @@
     }
 
     // Add event listeners
-    Offence1Imposition1resultCodeInput.addEventListener('change', function() {
-        checkResultCode(Offence1Imposition1resultCodeInput, Offence1Imposition1addCreditorSection);
-        saveData('Offence1_Imposition1_', Offence1Imposition1resultCodeInput, Offence1Imposition1imposedInput, Offence1Imposition1paidInput);
-        localStorage.removeItem('Offence1_Imposition1_Minor_Creditor_Added'); // Reset the minor creditor flag
+    Offence2Imposition1resultCodeInput.addEventListener('change', function() {
+        checkResultCode(Offence2Imposition1resultCodeInput, Offence2Imposition1addCreditorSection);
+        saveData('Offence2_Imposition1_', Offence2Imposition1resultCodeInput, Offence2Imposition1imposedInput, Offence2Imposition1paidInput);
+        localStorage.removeItem('Offence2_Imposition1_Minor_Creditor_Added'); // Reset the minor creditor flag
     });
-    Offence1Imposition1imposedInput.addEventListener('input', function() {
-        saveData('Offence1_Imposition1_', Offence1Imposition1resultCodeInput, Offence1Imposition1imposedInput, Offence1Imposition1paidInput);
+    Offence2Imposition1imposedInput.addEventListener('input', function() {
+        saveData('Offence2_Imposition1_', Offence2Imposition1resultCodeInput, Offence2Imposition1imposedInput, Offence2Imposition1paidInput);
     });
-    Offence1Imposition1paidInput.addEventListener('input', function() {
-        saveData('Offence1_Imposition1_', Offence1Imposition1resultCodeInput, Offence1Imposition1imposedInput, Offence1Imposition1paidInput);
+    Offence2Imposition1paidInput.addEventListener('input', function() {
+        saveData('Offence2_Imposition1_', Offence2Imposition1resultCodeInput, Offence2Imposition1imposedInput, Offence2Imposition1paidInput);
     });
 
     // Handle remove imposition click
-    Offence1Imposition1removeImpositionLink.addEventListener('click', function(event) {
+    Offence2Imposition1removeImpositionLink.addEventListener('click', function(event) {
         event.preventDefault();
-        localStorage.removeItem('Offence1_Imposition1_Minor_Creditor_Added'); // Reset the minor creditor flag
-        Offence1Imposition1minorCreditorDetails.style.display = 'none';
-        Offence1Imposition1addCreditorForm.style.display = 'block';
+        localStorage.removeItem('Offence2_Imposition1_Minor_Creditor_Added'); // Reset the minor creditor flag
+        Offence2Imposition1minorCreditorDetails.style.display = 'none';
+        Offence2Imposition1addCreditorForm.style.display = 'block';
     });
 
     // Add event listeners for Imposition 2
-    Offence1Imposition2resultCodeInput.addEventListener('change', function() {
-        checkResultCode(Offence1Imposition2resultCodeInput, Offence1Imposition2addCreditorSection);
-        saveData('Offence1_Imposition2_', Offence1Imposition2resultCodeInput, Offence1Imposition2imposedInput, Offence1Imposition2paidInput);
-        localStorage.removeItem('Offence1_Imposition2_Minor_Creditor_Added'); // Reset the minor creditor flag
+    Offence2Imposition2resultCodeInput.addEventListener('change', function() {
+        checkResultCode(Offence2Imposition2resultCodeInput, Offence2Imposition2addCreditorSection);
+        saveData('Offence2_Imposition2_', Offence2Imposition2resultCodeInput, Offence2Imposition2imposedInput, Offence2Imposition2paidInput);
+        localStorage.removeItem('Offence2_Imposition2_Minor_Creditor_Added'); // Reset the minor creditor flag
     });
-    Offence1Imposition2imposedInput.addEventListener('input', function() {
-        saveData('Offence1_Imposition2_', Offence1Imposition2resultCodeInput, Offence1Imposition2imposedInput, Offence1Imposition2paidInput);
+    Offence2Imposition2imposedInput.addEventListener('input', function() {
+        saveData('Offence2_Imposition2_', Offence2Imposition2resultCodeInput, Offence2Imposition2imposedInput, Offence2Imposition2paidInput);
     });
-    Offence1Imposition2paidInput.addEventListener('input', function() {
-        saveData('Offence1_Imposition2_', Offence1Imposition2resultCodeInput, Offence1Imposition2imposedInput, Offence1Imposition2paidInput);
+    Offence2Imposition2paidInput.addEventListener('input', function() {
+        saveData('Offence2_Imposition2_', Offence2Imposition2resultCodeInput, Offence2Imposition2imposedInput, Offence2Imposition2paidInput);
     });
 
     // Handle remove imposition click for Imposition 2
-    Offence1Imposition2removeImpositionLink.addEventListener('click', function(event) {
+    Offence2Imposition2removeImpositionLink.addEventListener('click', function(event) {
         event.preventDefault();
-        localStorage.removeItem('Offence1_Imposition2_Minor_Creditor_Added'); // Reset the minor creditor flag
-        Offence1Imposition2minorCreditorDetails.style.display = 'none';
-        Offence1Imposition2addCreditorForm.style.display = 'block';
+        localStorage.removeItem('Offence2_Imposition2_Minor_Creditor_Added'); // Reset the minor creditor flag
+        Offence2Imposition2minorCreditorDetails.style.display = 'none';
+        Offence2Imposition2addCreditorForm.style.display = 'block';
     });
 
     // Add event listeners for Imposition 3
-    Offence1Imposition3resultCodeInput.addEventListener('change', function() {
-        checkResultCode(Offence1Imposition3resultCodeInput, Offence1Imposition3addCreditorSection);
-        saveData('Offence1_Imposition3_', Offence1Imposition3resultCodeInput, Offence1Imposition3imposedInput, Offence1Imposition3paidInput);
-        localStorage.removeItem('Offence1_Imposition3_Minor_Creditor_Added'); // Reset the minor creditor flag
+    Offence2Imposition3resultCodeInput.addEventListener('change', function() {
+        checkResultCode(Offence2Imposition3resultCodeInput, Offence2Imposition3addCreditorSection);
+        saveData('Offence2_Imposition3_', Offence2Imposition3resultCodeInput, Offence2Imposition3imposedInput, Offence2Imposition3paidInput);
+        localStorage.removeItem('Offence2_Imposition3_Minor_Creditor_Added'); // Reset the minor creditor flag
     });
-    Offence1Imposition3imposedInput.addEventListener('input', function() {
-        saveData('Offence1_Imposition3_', Offence1Imposition3resultCodeInput, Offence1Imposition3imposedInput, Offence1Imposition3paidInput);
+    Offence2Imposition3imposedInput.addEventListener('input', function() {
+        saveData('Offence2_Imposition3_', Offence2Imposition3resultCodeInput, Offence2Imposition3imposedInput, Offence2Imposition3paidInput);
     });
-    Offence1Imposition3paidInput.addEventListener('input', function() {
-        saveData('Offence1_Imposition3_', Offence1Imposition3resultCodeInput, Offence1Imposition3imposedInput, Offence1Imposition3paidInput);
+    Offence2Imposition3paidInput.addEventListener('input', function() {
+        saveData('Offence2_Imposition3_', Offence2Imposition3resultCodeInput, Offence2Imposition3imposedInput, Offence2Imposition3paidInput);
     });
 
     // Handle remove imposition click for Imposition 3
-    Offence1Imposition3removeImpositionLink.addEventListener('click', function(event) {
+    Offence2Imposition3removeImpositionLink.addEventListener('click', function(event) {
         event.preventDefault();
-        localStorage.removeItem('Offence1_Imposition3_Minor_Creditor_Added'); // Reset the minor creditor flag
-        Offence1Imposition3minorCreditorDetails.style.display = 'none';
-        Offence1Imposition3addCreditorForm.style.display = 'block';
+        localStorage.removeItem('Offence2_Imposition3_Minor_Creditor_Added'); // Reset the minor creditor flag
+        Offence2Imposition3minorCreditorDetails.style.display = 'none';
+        Offence2Imposition3addCreditorForm.style.display = 'block';
     });
 
      // Load Imposition 1 data
-    const Offence1imposition1CreditorType = localStorage.getItem('Offence1_Imposition1_Creditor_Type');
-    if (Offence1imposition1CreditorType) {
-        document.querySelector(`input[name="Offence1_Imposition1_Creditor_Type"][value="${Offence1imposition1CreditorType}"]`).checked = true;
+    const Offence2imposition1CreditorType = localStorage.getItem('Offence2_Imposition1_Creditor_Type');
+    if (Offence2imposition1CreditorType) {
+        document.querySelector(`input[name="Offence2_Imposition1_Creditor_Type"][value="${Offence2imposition1CreditorType}"]`).checked = true;
     }
-    const Offence1imposition1MajorCreditorName = localStorage.getItem('Offence1_Imposition1_Major_Creditor_Name');
-    if (Offence1imposition1MajorCreditorName) {
-        document.getElementById('Offence1_Imposition1_Major_Creditor_Name').value = Offence1imposition1MajorCreditorName;
+    const Offence2imposition1MajorCreditorName = localStorage.getItem('Offence2_Imposition1_Major_Creditor_Name');
+    if (Offence2imposition1MajorCreditorName) {
+        document.getElementById('Offence2_Imposition1_Major_Creditor_Name').value = Offence2imposition1MajorCreditorName;
     }
 
     // Load Imposition 2 data
-    const Offence1imposition2CreditorType = localStorage.getItem('Offence1_Imposition2_Creditor_Type');
-    if (Offence1imposition2CreditorType) {
-        document.querySelector(`input[name="Offence1_Imposition2_Creditor_Type"][value="${Offence1imposition2CreditorType}"]`).checked = true;
+    const Offence2imposition2CreditorType = localStorage.getItem('Offence2_Imposition2_Creditor_Type');
+    if (Offence2imposition2CreditorType) {
+        document.querySelector(`input[name="Offence2_Imposition2_Creditor_Type"][value="${Offence2imposition2CreditorType}"]`).checked = true;
     }
-    const Offence1imposition2MajorCreditorName = localStorage.getItem('Offence1_Imposition2_Major_Creditor_Name');
-    if (Offence1imposition2MajorCreditorName) {
-        document.getElementById('Offence1_Imposition2_Major_Creditor_Name').value = Offence1imposition2MajorCreditorName;
+    const Offence2imposition2MajorCreditorName = localStorage.getItem('Offence2_Imposition2_Major_Creditor_Name');
+    if (Offence2imposition2MajorCreditorName) {
+        document.getElementById('Offence2_Imposition2_Major_Creditor_Name').value = Offence2imposition2MajorCreditorName;
     }
 
     // Load Imposition 3 data
-    const Offence1imposition3CreditorType = localStorage.getItem('Offence1_Imposition3_Creditor_Type');
-    if (Offence1imposition3CreditorType) {
-        document.querySelector(`input[name="Offence1_Imposition3_Creditor_Type"][value="${Offence1imposition3CreditorType}"]`).checked = true;
+    const Offence2imposition3CreditorType = localStorage.getItem('Offence2_Imposition3_Creditor_Type');
+    if (Offence2imposition3CreditorType) {
+        document.querySelector(`input[name="Offence2_Imposition3_Creditor_Type"][value="${Offence2imposition3CreditorType}"]`).checked = true;
     }
-    const Offence1imposition3MajorCreditorName = localStorage.getItem('Offence1_Imposition3_Major_Creditor_Name');
-    if (Offence1imposition3MajorCreditorName) {
-        document.getElementById('Offence1_Imposition3_Major_Creditor_Name').value = Offence1imposition3MajorCreditorName;
+    const Offence2imposition3MajorCreditorName = localStorage.getItem('Offence2_Imposition3_Major_Creditor_Name');
+    if (Offence2imposition3MajorCreditorName) {
+        document.getElementById('Offence2_Imposition3_Major_Creditor_Name').value = Offence2imposition3MajorCreditorName;
     }
 
     // Initial load
-    loadData('Offence1_Imposition1_', Offence1Imposition1resultCodeInput, Offence1Imposition1imposedInput, Offence1Imposition1paidInput, Offence1Imposition1addCreditorSection, Offence1Imposition1minorCreditorDetails, Offence1Imposition1addCreditorForm);
-    loadData('Offence1_Imposition2_', Offence1Imposition2resultCodeInput, Offence1Imposition2imposedInput, Offence1Imposition2paidInput, Offence1Imposition2addCreditorSection, Offence1Imposition2minorCreditorDetails, Offence1Imposition2addCreditorForm);
-    loadData('Offence1_Imposition3_', Offence1Imposition3resultCodeInput, Offence1Imposition3imposedInput, Offence1Imposition3paidInput, Offence1Imposition3addCreditorSection, Offence1Imposition3minorCreditorDetails, Offence1Imposition3addCreditorForm);
+    loadData('Offence2_Imposition1_', Offence2Imposition1resultCodeInput, Offence2Imposition1imposedInput, Offence2Imposition1paidInput, Offence2Imposition1addCreditorSection, Offence2Imposition1minorCreditorDetails, Offence2Imposition1addCreditorForm);
+    loadData('Offence2_Imposition2_', Offence2Imposition2resultCodeInput, Offence2Imposition2imposedInput, Offence2Imposition2paidInput, Offence2Imposition2addCreditorSection, Offence2Imposition2minorCreditorDetails, Offence2Imposition2addCreditorForm);
+    loadData('Offence2_Imposition3_', Offence2Imposition3resultCodeInput, Offence2Imposition3imposedInput, Offence2Imposition3paidInput, Offence2Imposition3addCreditorSection, Offence2Imposition3minorCreditorDetails, Offence2Imposition3addCreditorForm);
 
     // Load saved date of sentence from localStorage
-    const savedOffenceDate = localStorage.getItem('Offence1_Date_Of_Sentence');
+    const savedOffenceDate = localStorage.getItem('Offence2_Date_Of_Sentence');
     if (savedOffenceDate) {
-      document.getElementById('Offence1_Date_Of_Sentence').value = savedOffenceDate;
+      document.getElementById('Offence2_Date_Of_Sentence').value = savedOffenceDate;
     }
 
-    document.querySelectorAll('#Offence1_Add_Creditor_Link').forEach(link => {
+    document.querySelectorAll('#Offence2_Add_Creditor_Link').forEach(link => {
       link.addEventListener('click', function() {
           // Save Imposition 1 data
-          const Offence1imposition1CreditorType = document.querySelector('input[name="Offence1_Imposition1_Creditor_Type"]:checked');
-          if (Offence1imposition1CreditorType) {
-              localStorage.setItem('Offence1_Imposition1_Creditor_Type', Offence1imposition1CreditorType.value);
+          const Offence2imposition1CreditorType = document.querySelector('input[name="Offence2_Imposition1_Creditor_Type"]:checked');
+          if (Offence2imposition1CreditorType) {
+              localStorage.setItem('Offence2_Imposition1_Creditor_Type', Offence2imposition1CreditorType.value);
           }
-          const Offence1imposition1MajorCreditorName = document.getElementById('Offence1_Imposition1_Major_Creditor_Name');
-          if (Offence1imposition1MajorCreditorName) {
-              localStorage.setItem('Offence1_Imposition1_Major_Creditor_Name', Offence1imposition1MajorCreditorName.value);
+          const Offence2imposition1MajorCreditorName = document.getElementById('Offence2_Imposition1_Major_Creditor_Name');
+          if (Offence2imposition1MajorCreditorName) {
+              localStorage.setItem('Offence2_Imposition1_Major_Creditor_Name', Offence2imposition1MajorCreditorName.value);
           }
 
           // Save Imposition 2 data
-          const Offence1imposition2CreditorType = document.querySelector('input[name="Offence1_Imposition2_Creditor_Type"]:checked');
-          if (Offence1imposition2CreditorType) {
-              localStorage.setItem('Offence1_Imposition2_Creditor_Type', Offence1imposition2CreditorType.value);
+          const Offence2imposition2CreditorType = document.querySelector('input[name="Offence2_Imposition2_Creditor_Type"]:checked');
+          if (Offence2imposition2CreditorType) {
+              localStorage.setItem('Offence2_Imposition2_Creditor_Type', Offence2imposition2CreditorType.value);
           }
-          const Offence1imposition2MajorCreditorName = document.getElementById('Offence1_Imposition2_Major_Creditor_Name');
-          if (Offence1imposition2MajorCreditorName) {
-              localStorage.setItem('Offence1_Imposition2_Major_Creditor_Name', Offence1imposition2MajorCreditorName.value);
+          const Offence2imposition2MajorCreditorName = document.getElementById('Offence2_Imposition2_Major_Creditor_Name');
+          if (Offence2imposition2MajorCreditorName) {
+              localStorage.setItem('Offence2_Imposition2_Major_Creditor_Name', Offence2imposition2MajorCreditorName.value);
           }
 
           // Save Imposition 3 data
-          const Offence1imposition3CreditorType = document.querySelector('input[name="Offence1_Imposition3_Creditor_Type"]:checked');
-          if (Offence1imposition3CreditorType) {
-              localStorage.setItem('Offence1_Imposition3_Creditor_Type', Offence1imposition3CreditorType.value);
+          const Offence2imposition3CreditorType = document.querySelector('input[name="Offence2_Imposition3_Creditor_Type"]:checked');
+          if (Offence2imposition3CreditorType) {
+              localStorage.setItem('Offence2_Imposition3_Creditor_Type', Offence2imposition3CreditorType.value);
           }
-          const Offence1imposition3MajorCreditorName = document.getElementById('Offence1_Imposition3_Major_Creditor_Name');
-          if (Offence1imposition3MajorCreditorName) {
-              localStorage.setItem('Offence1_Imposition3_Major_Creditor_Name', Offence1imposition3MajorCreditorName.value);
+          const Offence2imposition3MajorCreditorName = document.getElementById('Offence2_Imposition3_Major_Creditor_Name');
+          if (Offence2imposition3MajorCreditorName) {
+              localStorage.setItem('Offence2_Imposition3_Major_Creditor_Name', Offence2imposition3MajorCreditorName.value);
           }
 
-          // Save Offence1_Date_Of_Sentence
-          const offenceDate = document.getElementById('Offence1_Date_Of_Sentence').value;
+          // Save Offence2_Date_Of_Sentence
+          const offenceDate = document.getElementById('Offence2_Date_Of_Sentence').value;
           if (offenceDate) {
-            localStorage.setItem('Offence1_Date_Of_Sentence', offenceDate);
+            localStorage.setItem('Offence2_Date_Of_Sentence', offenceDate);
           }
       });
     });
