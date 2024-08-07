@@ -904,7 +904,7 @@
 
         <!-- DATE OF SENTENCE -->
         <div style="background-color: #1d70b8;" class="govuk-!-padding-2 govuk-!-margin-bottom-4">
-          <span class="govuk-body-s govuk-!-margin-right-2 govuk-!-font-weight-bold" style="color: white;">Date of sentence</span><span class="govuk-body-s" style="color: white;">{{ data['Offence1_Date_Of_Sentence'] or "23 June 2024"}}</span>
+          <span class="govuk-body-s govuk-!-margin-right-2 govuk-!-font-weight-bold" style="color: white;">Date of sentence</span><span class="govuk-body-s" style="color: white;">{{ data['Offence1_Date_Of_Sentence'] | formatDate | govukDate }}</span>
         </div>
 
         <!-- OFFENCE HEADING -->
@@ -1137,7 +1137,7 @@
         
         <!-- DATE OF SENTENCE -->
         <div style="background-color: #1d70b8;" class="govuk-!-padding-2 govuk-!-margin-bottom-4">
-          <span class="govuk-body-s govuk-!-margin-right-2 govuk-!-font-weight-bold" style="color: white;">Date of sentence</span><span class="govuk-body-s" style="color: white;">{{ data['Offence2_Date_Of_Sentence'] or "7 April 2024" }}</span>
+          <span class="govuk-body-s govuk-!-margin-right-2 govuk-!-font-weight-bold" style="color: white;">Date of sentence</span><span class="govuk-body-s" style="color: white;">{{ data['Offence2_Date_Of_Sentence'] | formatDate | govukDate  }}</span>
         </div>
 
         <!-- OFFENCE HEADING -->
@@ -1367,7 +1367,7 @@
         
         <!-- DATE OF SENTENCE -->
         <div style="background-color: #1d70b8;" class="govuk-!-padding-2 govuk-!-margin-bottom-4">
-          <span class="govuk-body-s govuk-!-margin-right-2 govuk-!-font-weight-bold" style="color: white;">Date of sentence</span><span class="govuk-body-s" style="color: white;">{{ data['Offence3_Date_Of_Sentence'] or "24 March 2024" }}</span>
+          <span class="govuk-body-s govuk-!-margin-right-2 govuk-!-font-weight-bold" style="color: white;">Date of sentence</span><span class="govuk-body-s" style="color: white;">{{ data['Offence3_Date_Of_Sentence'] | formatDate | govukDate  }}</span>
         </div>
 
         <!-- OFFENCE HEADING -->
@@ -1720,10 +1720,37 @@
       </div>
     </div>
 
-
-
     <!-- PAYMENT TERMS -->
 
+    <!-- <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          Payment terms
+        </h2>
+        <ul class="govuk-summary-card__actions">
+          <li class="govuk-summary-card__action">
+            <a class="govuk-link govuk-link--no-visited-state" href="./payment-details.html">Change<span class="govuk-visually-hidden"> payment details</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+
+          {% if data['collectionOrder'] %}
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Collection order
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['Test'] or "Not provided"}}
+            </dd>
+          </div>
+          {% endif %}
+
+        </dl>
+      </div>
+    </div> -->
 
 
     <!-- ACCOUNT NOTE -->
