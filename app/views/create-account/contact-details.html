@@ -90,9 +90,15 @@
             </button>
           {% endif %}
           {% if data['defendantTypeF'] == "Company" %}
-            <button type="submit" class="govuk-button govuk-button--secondary" formaction="./add-offence?cpCompleted=true">
+            {% if data ['Offence1-Added'] == "True" %}
+            <button type="submit" class="govuk-button govuk-button--secondary" formaction="./offence-imposition/check-offences?cpCompleted=true">
               Add offence details
             </button>
+            {% else %}
+            <button type="submit" class="govuk-button govuk-button--secondary" formaction="./offence-imposition/offence-1/add-offence-1?cpCompleted=true">
+              Add offence details
+            </button>
+            {% endif %}
           {% endif %}
         </div>
       </form>

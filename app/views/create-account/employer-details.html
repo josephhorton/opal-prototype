@@ -157,9 +157,15 @@
             Return to account details
           </button>
           {% if data['defendantTypeF'] == "Adult or youth only" %}
-          <button type="submit" class="govuk-button govuk-button--secondary"  formaction="./add-offence">
-            Add offence details
-          </button>
+            {% if data ['Offence1-Added'] == "True" %}
+            <button type="submit" class="govuk-button govuk-button--secondary" formaction="./offence-imposition/check-offences">
+              Add offence details
+            </button>
+            {% else %}
+            <button type="submit" class="govuk-button govuk-button--secondary" formaction="./offence-imposition/offence-1/add-offence-1">
+              Add offence details
+            </button>
+            {% endif %}
           {% endif %}
           {% if data['defendantTypeF'] == "Adult or youth with parent or guardian to pay" %}
           <button type="submit" class="govuk-button govuk-button--secondary"  formaction="./personal-details">

@@ -283,9 +283,15 @@
           </button>
           {% endif %}
           {% if data['defendantTypeF'] == "Adult or youth with parent or guardian to pay" %}
-          <button type="submit" class="govuk-button govuk-button--secondary"  formaction="./add-offence?pdCompleted=true">
-            Add offence details
-          </button>
+            {% if data ['Offence1-Added'] == "True" %}
+            <button type="submit" class="govuk-button govuk-button--secondary" formaction="./offence-imposition/check-offences?pdCompleted=true">
+              Add offence details
+            </button>
+            {% else %}
+            <button type="submit" class="govuk-button govuk-button--secondary" formaction="./offence-imposition/offence-1/add-offence-1?pdCompleted=true">
+              Add offence details
+            </button>
+            {% endif %}
           {% endif %}
         </div>
         
