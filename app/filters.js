@@ -26,3 +26,14 @@ addFilter('removeEmpty', function (items) {
     // Return undefined for other types
     return
   })
+
+  
+  // Define the custom filter
+  addFilter('formatDate', function(date) {
+      const parts = date.split('/');
+      if (parts.length === 3) {
+          return `${parts[2]}-${parts[1]}-${parts[0]}`;
+      }
+      return date; // Return the original date if it doesn't match the expected format
+  });
+  

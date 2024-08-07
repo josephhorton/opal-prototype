@@ -1,0 +1,53 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Test" %}
+
+{% block pageTitle %}
+{{ pageName }} – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">
+        {{ pageName }}
+    </h1>
+
+    {% set dateOfBirth = "12/06/1995" %}
+    <p>Original Date: {{ dateOfBirth }}</p>
+    <p>Formatted Date: {{ dateOfBirth | formatDate | govukDate }}</p>
+
+    <p class="govuk-body" id="convertedDateOfBirth"></p>
+
+  </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Retrieve the converted date of birth from local storage
+        var convertedDateOfBirth = localStorage.getItem('convertedDateOfBirth');
+
+        // Display the converted date of birth using the govukDate filter
+        if (convertedDateOfBirth) {
+            // Create a Nunjucks template string with the govukDate filter
+            var templateString = `
+                {% set date = '${convertedDateOfBirth}' | date("isoDate") %}
+                {{ date | govukDate }}
+            `;
+
+            // Render the template and insert the result into the page
+            var renderedHtml = nunjucks.renderString(templateString);
+            document.getElementById('convertedDateOfBirth').innerHTML = renderedHtml;
+        } else {
+            document.getElementById('convertedDateOfBirth').textContent = 'No date of birth found.';
+        }
+    });
+</script>
+
+{% endblock %}

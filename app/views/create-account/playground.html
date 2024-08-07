@@ -1,0 +1,63 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Test" %}
+
+{% block pageTitle %}
+{{ pageName }} – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">
+        {{ pageName }}
+    </h1>
+
+    <form id="dobForm" action="playground-2" method="post">
+        {{ govukInput({
+            id: "dateOfBirth",
+            name: "dateOfBirth",
+            value: "",
+            label: {
+                text: "Date of birth",
+                classes: "govuk-label--m"
+            },
+            hint: {
+                text: "Enter in the format DD/MM/YYYY"
+            }
+        }) }}
+
+        <input type="hidden" id="convertedDateOfBirth" name="convertedDateOfBirth" value="{{ data['convertedDateOfBirth'] }}">
+
+        <button type="submit" class="govuk-button">Submit</button>
+    </form>
+
+  </div>
+</div>
+
+<script>
+    document.getElementById('dobForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var inputDate = document.getElementById('dateOfBirth').value;
+        var parts = inputDate.split('/');
+        if (parts.length === 3) {
+            var formattedDate = parts[2] + '-' + parts[1] + '-' + parts[0];
+
+            // Store the formatted date in local storage
+            localStorage.setItem('convertedDateOfBirth', formattedDate);
+
+            // Submit the form
+            window.location.href = 'playground-2.html';
+        } else {
+            alert("Please enter a valid date in DD/MM/YYYY format.");
+        }
+    });
+</script>
+
+{% endblock %}

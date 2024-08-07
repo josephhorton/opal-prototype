@@ -10,9 +10,895 @@
 
 {% block content %}
 
+<!-- NUNJUCKS -->
+<div>
+
+  {% set defendantAddress %}
+    {{ data['addressLine1'] }}<br>
+    {% if data['addressLine2'] %}
+    {{ data['addressLine2'] }}<br>
+    {% endif %}
+    {% if data['addressLine3'] %}
+    {{ data['addressLine3'] }}<br>
+    {% endif %}
+    {% if data['addressPostcode'] %}
+    {{ data['addressPostcode'] }}
+    {% endif %}
+  {% endset %}
+
+  {% set employerAddress %}
+    {{ data['employerAddressLine1'] or "Not provided" }}<br>
+    {% if data['employerAddressLine2'] %}
+    {{ data['employerAddressLine2'] }}<br>
+    {% endif %}
+    {% if data['employerAddressLine3'] %}
+    {{ data['employerAddressLine3'] }}<br>
+    {% endif %}
+    {% if data['employerAddressLine4'] %}
+    {{ data['employerAddressLine4'] }}<br>
+    {% endif %}
+    {% if data['employerAddressLine5'] %}
+    {{ data['employerAddressLine5'] }}<br>
+    {% endif %}
+    {% if data['employerAddressPostcode'] %}
+    {{ data['employerAddressPostcode'] }}
+    {% endif %}
+  {% endset %}
+
+  {% set parentGuardianAddress %}
+    {{ data['PGAddressLine1'] or "Not provided" }}<br>
+    {% if data['PGAddressLine2'] %}
+    {{ data['PGAddressLine2'] }}<br>
+    {% endif %}
+    {% if data['PGAddressLine3'] %}
+    {{ data['PGAddressLine3'] }}<br>
+    {% endif %}
+    {% if data['PGAddressPostcode'] %}
+    {{ data['PGAddressPostcode'] }}
+    {% endif %}
+  {% endset %}
+
+</div>
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
     <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+
+    <!-- ACCOUNT DETAILS -->
+
+    <div class="govuk-summary-card" id="account-details-summary">
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Business unit
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['businessUnit'] or "Avon and Somerset"}}
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Account type
+            </dt>
+            <dd class="govuk-summary-list__value">
+              Fine
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Defendant type
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['defendantTypeF']}}
+            </dd>
+          </div>
+          {% if data['businessUnit'] == "Port Talbot" %}
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Document language
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{"English only" if data['documentLanguage'] == 'English' else "Welsh and English"}}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link govuk-link--no-visited-state" href="./language-preference.html">Change<span class="govuk-visually-hidden"> document language</span></a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Court hearing language
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{"English only" if data['courtHearingLanguage'] == 'English' else "Welsh and English"}}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link govuk-link--no-visited-state" href="./language-preference.html">Change<span class="govuk-visually-hidden"> document language</span></a>
+            </dd>
+          </div>
+          {% endif %}
+        </dl>
+      </div>
+    </div>
+
+    <!-- COURT DETAILS -->
+
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          Court details
+        </h2>
+        <ul class="govuk-summary-card__actions">
+          <li class="govuk-summary-card__action">
+            <a class="govuk-link govuk-link--no-visited-state" href="./court-details.html">Change<span class="govuk-visually-hidden"> court details</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Sending area or Local Justice Area (LJA)
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['ljaCode'] or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Prosecutor Case Reference (PCR)
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['pcrReference'] | upper or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Enforcement court
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['enforcementCourt'] or "Not provided"}}
+            </dd>
+          </div>
+
+        </dl>
+      </div>
+    </div>
+
+    {% if data['defendantTypeF'] == "Adult or youth only" %}
+
+    <!-- PERSONAL DETAILS -->
+
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          Personal details
+        </h2>
+        <ul class="govuk-summary-card__actions">
+          <li class="govuk-summary-card__action">
+            <a class="govuk-link govuk-link--no-visited-state" href="./personal-details.html">Change<span class="govuk-visually-hidden"> personal details</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Title
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['title'] or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              First names
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['firstName'] or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Last name
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['lastName'] or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Aliases
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {% if data['aliases'] == "yes" %}
+                {% if data['aliasFirstName'] and data['aliasFirstName'] %}
+                {{ data['aliasFirstName'] }} {{ data['aliasLastName'] }}
+                {% else %}
+                Not provided
+                {% endif %}
+              {% else %}
+              Not provided
+              {% endif %}  
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Date of birth
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['DDOB'] | formatDate | govukDate or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              National Insurance number
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['defendantNationalInsuranceNumber'] | upper or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Address
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{defendantAddress | safe}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Vehicle make and model
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['carMake'] or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Registration number
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['carRegistration'] | upper or "Not provided"}}
+            </dd>
+          </div>
+
+        </dl>
+      </div>
+    </div>
+
+    <!-- CONTACT DETAILS -->
+
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          Contact details
+        </h2>
+        <ul class="govuk-summary-card__actions">
+          <li class="govuk-summary-card__action">
+            <a class="govuk-link govuk-link--no-visited-state" href="./contact-details.html">Change<span class="govuk-visually-hidden"> contact details</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Primary email address
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['email-1'] | lower or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Secondary email address
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['email-2'] | lower or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Mobile telephone number
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['mobileNumber'] or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Home telephone number
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['homeNumber'] or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Work telephone number
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['businessNumber'] or "Not provided"}}
+            </dd>
+          </div>
+
+        </dl>
+      </div>
+    </div>
+
+    <!-- EMPLOYER DETAILS -->
+
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          Employer details
+        </h2>
+        <ul class="govuk-summary-card__actions">
+          <li class="govuk-summary-card__action">
+            <a class="govuk-link govuk-link--no-visited-state" href="./employer-details.html">Change<span class="govuk-visually-hidden"> employer details</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Employer name
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['employerName'] or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Employee reference
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['employeeReference'] | upper or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Employer email address
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['employerEmail'] | lower or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Employer telephone number 
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['employerTelephone'] or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Employer address
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{employerAddress | safe}}
+            </dd>
+          </div>
+
+        </dl>
+      </div>
+    </div>
+
+    {% elseif data['defendantTypeF'] == "Adult or youth with parent or guardian to pay" %}
+
+    <!-- PARENT OR GAURDIAN DETAILS -->
+
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          Parent or guardian details
+        </h2>
+        <ul class="govuk-summary-card__actions">
+          <li class="govuk-summary-card__action">
+            <a class="govuk-link govuk-link--no-visited-state" href="./parent-guardian-details.html">Change<span class="govuk-visually-hidden"> parent or guardian details</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              First names
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['PGFirstName']}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Last name
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['PGLastName']}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Aliases
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {% if data['PGAliases'] == "yes" %}
+                {% if data['PGAliasFirstName'] and data['PGAliasLastName'] %}
+                {{ data['PGAliasFirstName'] }} {{ data['PGAliasLastName'] }}
+                {% else %}
+                Not provided
+                {% endif %}
+              {% else %}
+              Not provided
+              {% endif %}  
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Date of birth
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['PGDOB'] | formatDate | govukDate or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              National Insurance number
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['PGNationalInsuranceNumber'] | upper or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Address
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{parentGuardianAddress | safe}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Vehicle make and model
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['carMake'] or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Registration number
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['carRegistration'] | upper or "Not provided"}}
+            </dd>
+          </div>
+
+        </dl>
+      </div>
+    </div>
+
+    <!-- CONTACT DETAILS -->
+
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+            Contact details
+        </h2>
+        <ul class="govuk-summary-card__actions">
+          <li class="govuk-summary-card__action">
+            <a class="govuk-link govuk-link--no-visited-state" href="./contact-details.html">Change<span class="govuk-visually-hidden"> contact details</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Primary email address
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['email-1'] | lower or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Secondary email address
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['email-2'] | lower or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Mobile telephone number
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['mobileNumber'] or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Home telephone number
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['homeNumber'] or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Work telephone number
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['businessNumber'] or "Not provided"}}
+            </dd>
+          </div>
+
+        </dl>
+      </div>
+    </div>
+
+    <!-- EMPLOYER DETAILS -->
+
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          Employer details
+        </h2>
+        <ul class="govuk-summary-card__actions">
+          <li class="govuk-summary-card__action">
+            <a class="govuk-link govuk-link--no-visited-state" href="./employer-details.html">Change<span class="govuk-visually-hidden"> employer details</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Employer name
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['employerName'] or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Employee reference
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['employeeReference'] | upper or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Employer email address
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['employerEmail'] | lower or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Employer telephone number 
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['employerTelephone'] or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Employer address
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{employerAddress | safe}}
+            </dd>
+          </div>
+
+        </dl>
+      </div>
+    </div>
+
+    <!-- PERSONAL DETAILS -->
+
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          Personal details
+        </h2>
+        <ul class="govuk-summary-card__actions">
+          <li class="govuk-summary-card__action">
+            <a class="govuk-link govuk-link--no-visited-state" href="./personal-details.html">Change<span class="govuk-visually-hidden"> personal details</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Title
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['title'] or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              First names
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['firstName'] or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Last name
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['lastName'] or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Aliases
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {% if data['aliases'] == "yes" %}
+                {% if data['aliasFirstName'] and data['aliasFirstName'] %}
+                {{ data['aliasFirstName'] }} {{ data['aliasLastName'] }}
+                {% else %}
+                Not provided
+                {% endif %}
+              {% else %}
+              Not provided
+              {% endif %}  
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Date of birth
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['DDOB'] | formatDate | govukDate or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              National Insurance number
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['defendantNationalInsuranceNumber'] | upper or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Address
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{defendantAddress | safe}}
+            </dd>
+          </div>
+
+        </dl>
+      </div>
+    </div>
+
+    {% elseif data['defendantTypeF'] == "Company" %}
+
+    <!-- COMPANY DETAILS -->
+
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          Company details
+        </h2>
+        <ul class="govuk-summary-card__actions">
+          <li class="govuk-summary-card__action">
+            <a class="govuk-link govuk-link--no-visited-state" href="./company-details.html">Change<span class="govuk-visually-hidden"> company details</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Company name
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['companyName']}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Aliases
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {% if data['compantAliases'] == "yes" %}
+                {% if data['companyAlias'] %}
+                {{ data['companyAlias'] }}
+                {% else %}
+                Not provided
+                {% endif %}
+              {% else %}
+              Not provided
+              {% endif %}  
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Address
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{defendantAddress | safe}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Vehicle make and model
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['carMake'] or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Registration number
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['carRegistration'] | upper or "Not provided"}}
+            </dd>
+          </div>
+
+        </dl>
+      </div>
+    </div>
+
+
+
+    <!-- CONTACT DETAILS -->
+
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+            Contact details
+        </h2>
+        <ul class="govuk-summary-card__actions">
+          <li class="govuk-summary-card__action">
+            <a class="govuk-link govuk-link--no-visited-state" href="./contact-details.html">Change<span class="govuk-visually-hidden"> contact details</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Primary email address
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['email-1'] | lower or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Secondary email address
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['email-2'] | lower or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Mobile telephone number
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['mobileNumber'] or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Home telephone number
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['homeNumber'] or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Work telephone number
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['businessNumber'] or "Not provided"}}
+            </dd>
+          </div>
+
+        </dl>
+      </div>
+    </div>
+
+    {% endif %}
+
+    <!-- OFFENCE DETAILS -->
+
+
+
+    <!-- PAYMENT TERMS -->
+
+
+
+    <!-- ACCOUNT NOTE -->
+
+    
+
 
     {{ govukButton({
       text: "Submit for review",

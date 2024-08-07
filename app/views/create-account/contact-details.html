@@ -54,17 +54,7 @@
           autocomplete: "tel",
           classes: "govuk-input--width-20"
         }) }}
-      
-        {{ govukInput({
-          label: { text: "Business telephone number", classes: "govuk-label--s" },
-          id: "business-number",
-          name: "businessNumber",
-          value: data['businessNumber'],
-          type: "tel",
-          autocomplete: "tel",
-          classes: "govuk-input--width-20"
-        }) }}
-      
+
         {{ govukInput({
           label: { text: "Home telephone number", classes: "govuk-label--s" },
           id: "home-number",
@@ -74,6 +64,18 @@
           autocomplete: "tel",
           classes: "govuk-input--width-20"
         }) }}
+      
+        {{ govukInput({
+          label: { text: "Work telephone number", classes: "govuk-label--s" },
+          id: "business-number",
+          name: "businessNumber",
+          value: data['businessNumber'],
+          type: "tel",
+          autocomplete: "tel",
+          classes: "govuk-input--width-20"
+        }) }}
+      
+        
       
         <div class="govuk-button-group">
           <button type="submit" class="govuk-button" id="return-to-account-details">

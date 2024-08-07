@@ -41,13 +41,13 @@
           }) %}
       
           {{ govukInput({
-            id: "[new][aliasCompanyName]",
-            name: "[new][aliasCompanyName]",
+            id: "companyAlias",
+            name: "companyAlias",
             classes: "govuk-input--width-30",
             label: {
               text: "Company name"
             },
-            value: data.new.aliasCompany
+            value: data['companyAlias']
           }) }}
 
           {% endcall %}
@@ -67,8 +67,8 @@
         {% endset -%}
 
         {{ govukCheckboxes({
-          name: "aliases",
-          values: data['aliases'],
+          name: "compantAliases",
+          values: data['compantAliases'],
           items: [
             {
               value: "yes",
