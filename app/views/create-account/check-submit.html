@@ -238,7 +238,11 @@
               Date of birth
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ data['DDOB'] | formatDate | govukDate or "Not provided"}}
+              {% if data['DDOB'] %}
+              {{ data['DDOB'] | formatDate | govukDate}}
+              {% else %}
+              Not provided (Adult)
+              {% endif %}
             </dd>
           </div>
 
@@ -473,7 +477,11 @@
               Date of birth
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ data['PGDOB'] | formatDate | govukDate or "Not provided"}}
+              {% if data['PGDOB'] %}
+              {{ data['PGDOB'] | formatDate | govukDate}}
+              {% else %}
+              Not provided
+              {% endif %}
             </dd>
           </div>
 
@@ -1722,7 +1730,7 @@
 
     <!-- PAYMENT TERMS -->
 
-    <!-- <div class="govuk-summary-card">
+    <div class="govuk-summary-card">
       <div class="govuk-summary-card__title-wrapper">
         <h2 class="govuk-summary-card__title">
           Payment terms
@@ -1735,36 +1743,679 @@
       </div>
 
       <div class="govuk-summary-card__content">
+
+        {% if data['defendantTypeF'] == "Adult or youth only" %}
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row"  id="conditional-collo">
+              <dt class="govuk-summary-list__key">
+                Has a collection order been made?
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data['collectionOrder']}}
+              </dd>
+            </div>
+
+            {% if data['collectionOrder'] == "Yes" %}
+            <div class="govuk-summary-list__row"  id="conditional-collo-2" style="border-bottom: 1px solid #b1b4b6;">
+              <dt class="govuk-summary-list__key">
+                Date of collection order
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['collection-order-date'] | formatDate | govukDate  }}
+              </dd>
+            </div>
+            {% endif %}
+
+            {% if data['paymentTerms'] == "Pay in full" %}
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Payment terms
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['paymentTerms'] }}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Pay by date
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['payby-date'] | formatDate | govukDate }}
+              </dd>
+            </div>
+
+            {% elseif data['paymentTerms'] == "Instalments only" %}
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Payment terms
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['paymentTerms'] }}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Instalment
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['instalmentOnlyPounds'] | currency }}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Frequency
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['instalmentOnlyFrequency']}}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Start date
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['instalment-only-start-date'] | formatDate | govukDate }}
+              </dd>
+            </div>
+            {% elseif data['paymentTerms'] == "Lump sum plus instalments" %}
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Payment terms
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['paymentTerms'] }}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Lump sum
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['lumpSum'] | currency }}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Instalment
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['instalmentLumpSumPounds'] | currency }}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Frequency
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['instalmentLumpSumFrequency']}}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Start date
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['instalment-lump-sum-start-date'] | formatDate | govukDate }}
+              </dd>
+            </div>
+            {% endif %}
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Request payment card
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['paymentCard'] or "No" }}
+              </dd>
+            </div>
+
+            <!-- DAYS IN DEFAULT -->
+
+            <div class="govuk-summary-list__row" id="conditional-days-in-default-1" >
+              <dt class="govuk-summary-list__key">
+                There are days in default
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['daysInDefault'] or "No" }}
+              </dd>
+            </div>
+
+            {% if data['daysInDefault'] == "Yes" %}
+            <div class="govuk-summary-list__row" id="conditional-days-in-default-2">
+              <dt class="govuk-summary-list__key">
+                Date days in default were imposed
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['days-in-default-start-date'] | formatDate | govukDate }}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row" id="conditional-days-in-default-3">
+              <dt class="govuk-summary-list__key">
+                Days in default
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['numberOfDaysInDefault'] + " days" }} 
+              </dd>
+            </div>
+            {% endif %}
+
+            <!-- ENFORCEMENT -->
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Enforcement action
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if data['enforcementAction'] == "Yes" %}
+                  {{ data['enforcementActionType'] }}
+                {% else %}
+                  No
+                {% endif %}
+              </dd>
+            </div>
+
+            {% if data['enforcementAction'] == "Yes" %}
+            
+              {% if data['enforcementActionType'] == "Defendant is in custody (PRIS)" %}
+
+              <div class="govuk-summary-list__row" >
+                <dt class="govuk-summary-list__key">
+                  Estimated release date
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ data['pris-release-date'] | formatDate | govukDate }}
+                </dd>
+              </div>
+    
+              <div class="govuk-summary-list__row" >
+                <dt class="govuk-summary-list__key">
+                  Prison and prison number
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ data['prisonNumber']}} 
+                </dd>
+              </div>
+
+              {% elseif data['enforcementActionType'] == "Hold enforcement on account (NOENF)" %}
+
+              <div class="govuk-summary-list__row" >
+                <dt class="govuk-summary-list__key">
+                  Reason account is on NOENF
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ data['noenfReason']}} 
+                </dd>
+              </div>
+
+              {% endif %}
+
+            {% endif %}
+        </dl>
+        {% endif %}
+
+        {% if data['defendantTypeF'] == "Adult or youth with parent or guardian to pay" %}
+        <dl class="govuk-summary-list">
+          
+            {% if data['paymentTerms'] == "Pay in full" %}
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Payment terms
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['paymentTerms'] }}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Pay by date
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['payby-date'] | formatDate | govukDate }}
+              </dd>
+            </div>
+
+            {% elseif data['paymentTerms'] == "Instalments only" %}
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Payment terms
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['paymentTerms'] }}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Instalment
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['instalmentOnlyPounds'] | currency }}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Frequency
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['instalmentOnlyFrequency']}}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Start date
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['instalment-only-start-date'] | formatDate | govukDate }}
+              </dd>
+            </div>
+            {% elseif data['paymentTerms'] == "Lump sum plus instalments" %}
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Payment terms
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['paymentTerms'] }}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Lump sum
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['lumpSum'] | currency }}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Instalment
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['instalmentLumpSumPounds'] | currency }}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Frequency
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['instalmentLumpSumFrequency']}}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Start date
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['instalment-lump-sum-start-date'] | formatDate | govukDate }}
+              </dd>
+            </div>
+            {% endif %}
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Request payment card
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['paymentCard'] or "No" }}
+              </dd>
+            </div>
+
+            <!-- DAYS IN DEFAULT -->
+
+            <div class="govuk-summary-list__row" id="conditional-days-in-default-1" >
+              <dt class="govuk-summary-list__key">
+                There are days in default
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['daysInDefault'] or "No" }}
+              </dd>
+            </div>
+
+            {% if data['daysInDefault'] == "Yes" %}
+            <div class="govuk-summary-list__row" id="conditional-days-in-default-2">
+              <dt class="govuk-summary-list__key">
+                Date days in default were imposed
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['days-in-default-start-date'] | formatDate | govukDate }}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row" id="conditional-days-in-default-3">
+              <dt class="govuk-summary-list__key">
+                Days in default
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['numberOfDaysInDefault'] + " days" }} 
+              </dd>
+            </div>
+            {% endif %}
+
+            <!-- ENFORCEMENT -->
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Enforcement action
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if data['enforcementAction'] == "Yes" %}
+                  {{ data['enforcementActionType'] }}
+                {% else %}
+                  No
+                {% endif %}
+              </dd>
+            </div>
+
+            {% if data['enforcementAction'] == "Yes" %}
+            
+              {% if data['enforcementActionType'] == "Defendant is in custody (PRIS)" %}
+
+              <div class="govuk-summary-list__row" >
+                <dt class="govuk-summary-list__key">
+                  Estimated release date
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ data['pris-release-date'] | formatDate | govukDate }}
+                </dd>
+              </div>
+    
+              <div class="govuk-summary-list__row" >
+                <dt class="govuk-summary-list__key">
+                  Prison and prison number
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ data['prisonNumber']}} 
+                </dd>
+              </div>
+
+              {% elseif data['enforcementActionType'] == "Hold enforcement on account (NOENF)" %}
+
+              <div class="govuk-summary-list__row" >
+                <dt class="govuk-summary-list__key">
+                  Reason account is on NOENF
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ data['noenfReason']}} 
+                </dd>
+              </div>
+
+              {% endif %}
+
+            {% endif %}
+        </dl>
+        {% endif %}
+
+        {% if data['defendantTypeF'] == "Company" %}
         <dl class="govuk-summary-list">
 
-          {% if data['collectionOrder'] %}
-          <div class="govuk-summary-list__row">
+          {% if data['paymentTerms'] == "Pay in full" %}
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Payment terms
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['paymentTerms'] }}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Pay by date
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['payby-date'] | formatDate | govukDate }}
+              </dd>
+            </div>
+
+            {% elseif data['paymentTerms'] == "Instalments only" %}
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Payment terms
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['paymentTerms'] }}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Instalment
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['instalmentOnlyPounds'] | currency }}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Frequency
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['instalmentOnlyFrequency']}}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Start date
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['instalment-only-start-date'] | formatDate | govukDate }}
+              </dd>
+            </div>
+            {% elseif data['paymentTerms'] == "Lump sum plus instalments" %}
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Payment terms
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['paymentTerms'] }}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Lump sum
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['lumpSum'] | currency }}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Instalment
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['instalmentLumpSumPounds'] | currency }}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Frequency
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['instalmentLumpSumFrequency']}}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Start date
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['instalment-lump-sum-start-date'] | formatDate | govukDate }}
+              </dd>
+            </div>
+          {% endif %}
+
+          <div class="govuk-summary-list__row" >
             <dt class="govuk-summary-list__key">
-              Collection order
+              Enforcement action
             </dt>
             <dd class="govuk-summary-list__value">
-              {{data['Test'] or "Not provided"}}
+              {% if data['enforcementAction'] == "Yes" %}
+                Hold enforcement on account (NOENF)
+              {% else %}
+                No
+              {% endif %}
             </dd>
           </div>
+
+          {% if data['enforcementAction'] == "Yes" %}
+          
+            <div class="govuk-summary-list__row" >
+              <dt class="govuk-summary-list__key">
+                Reason account is on NOENF
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['noenfReason'] }}
+              </dd>
+            </div>
+
           {% endif %}
 
         </dl>
+        {% endif %}
+
       </div>
-    </div> -->
+    </div>
 
 
     <!-- ACCOUNT NOTE -->
 
-    
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          Account comment and notes
+        </h2>
+        <ul class="govuk-summary-card__actions">
+          <li class="govuk-summary-card__action">
+            <a class="govuk-link govuk-link--no-visited-state" href="./account-notes.html">Change<span class="govuk-visually-hidden"> account comments and notes</span></a>
+          </li>
+        </ul>
+      </div>
 
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row" >
+            <dt class="govuk-summary-list__key">
+              Comment
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['accountComment'] or "Not provided" }}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row" >
+            <dt class="govuk-summary-list__key">
+              Account note
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['accountNote'] or "Not provided" }}
+            </dd>
+          </div>
+
+        </dl>
+
+      </div>
+
+    </div>  
 
     {{ govukButton({
       text: "Submit for review",
       href: "./confirmation.html"
     }) }}
 
+    <p class="govuk-body" data-module="edge"><a href="#" class="govuk-link destructive-link">Delete account</a></p>
+
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const dob = localStorage.getItem('dateOfBirth');
+    const age = localStorage.getItem('age');
+    const conditionalQuestionDaysInDefault = document.getElementById('conditional-days-in-default');
+    const conditionalQuestionDaysInDefault2 = document.getElementById('conditional-days-in-default-2');
+    const conditionalQuestionDaysInDefault3 = document.getElementById('conditional-days-in-default-3');
+    const conditionalQuestionCollo = document.getElementById('conditional-collo');
+    const conditionalQuestionCollo2 = document.getElementById('conditional-collo-2');
+  
+    // Function to calculate age
+    function calculateAge(dob) {
+      const [day, month, year] = dob.split('/');
+      const birthDate = new Date(year, month - 1, day);
+      const today = new Date();
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+      return age;
+    }
+  
+    // Calculate the age if dob is available
+    if (dob) {
+      const calculatedAge = calculateAge(dob);
+      if (age !== calculatedAge.toString()) {
+        localStorage.setItem('age', calculatedAge);
+      }
+  
+      // Conditionally hide the questions if under 18
+      if (calculatedAge < 18) {
+        if (conditionalQuestionCollo) {
+          conditionalQuestionCollo.style.display = 'none';
+        }
+        if (conditionalQuestionCollo2) {
+          conditionalQuestionCollo2.style.display = 'none';
+        }
+        if (conditionalQuestionDaysInDefault) {
+          conditionalQuestionDaysInDefault.style.display = 'none';
+        }
+        if (conditionalQuestionDaysInDefault2) {
+          conditionalQuestionDaysInDefault.style.display = 'none';
+        }
+        if (conditionalQuestionDaysInDefault3) {
+          conditionalQuestionDaysInDefault.style.display = 'none';
+        }
+      } else {
+        if (conditionalQuestionCollo) {
+          conditionalQuestionCollo.style.display = 'contents';
+        }
+        if (conditionalQuestionCollo2) {
+          conditionalQuestionCollo2.style.display = 'contents';
+        }
+        if (conditionalQuestionDaysInDefault) {
+          conditionalQuestionDaysInDefault.style.display = 'contents';
+        }
+        if (conditionalQuestionDaysInDefault2) {
+          conditionalQuestionDaysInDefault.style.display = 'contents';
+        }
+        if (conditionalQuestionDaysInDefault3) {
+          conditionalQuestionDaysInDefault.style.display = 'contents';
+        }
+      }
+    }
+  });
+  </script>
 
 
 {% endblock %}
