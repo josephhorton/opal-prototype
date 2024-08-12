@@ -1,25 +1,66 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = "Prototype" %}
+{% set pageName = "Research prototype" %}
 
 {% block content %}
 
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-grid-column-one-half">
       <h1 class="govuk-heading-l">{{ pageName }}</h1>
       
-      {{ govukButton({
-        text: "Start",
-        href: "./create-account/create-account.html"
-      }) }}
 
       <!-- <p class="govuk-body" data-module="edge"><a href="./create-account/create-account.html" class="govuk-link--no-visited-state" data-message="This part of the prototype has not been built.">Create fine account</a></p> -->
       <!-- <p class="govuk-body"><a href="./create-account/index.html" class="govuk-link--no-visited-state">Check and input accounts</a></p>
       <p class="govuk-body"><a href="./search/search.html" class="govuk-link--no-visited-state">Search for an account</a></p> -->
 
-      
-      
-      <!-- <h2 class="govuk-heading-m">What to expect</h2> -->
+      <p class="govuk-body">
+        Thank you for taking part in research for the new Opal service.
+      </p>
+      <p class="govuk-body">
+        This tool has been built to help you give us feedback about the new service.
+      </p>
+      <p class="govuk-body">
+        It is not a live product and will not have the same level of functionality as the new service when it goes live.
+      </p>
+      <!-- <p class="govuk-body">
+        Some things to be aware of as you use the research tool:
+      </p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>
+          No error messages
+        </li>
+        <li>
+          Can only add 3 offences and impos?
+        </li>
+        <li>
+          Date picker not working but you can input the date manually
+        </li>
+        <li>
+          Can't delete an account or imposition / offence
+        </li>
+        <li>
+          The offence list is a selection - doesn't contain them all and some are 'dummy data'
+        </li>
+        <li>
+          The search offence code link doesn't work yet
+        </li>
+        <li>
+          You can only add 1 alias but the live service will allow 5
+        </li>
+        <li>
+          Impositions: result code is a drop down rather than 'type ahead' interface
+        </li>
+        <li>
+          Days in default calculator not yet working
+        </li>
+      </ul> -->
+
+      {{ govukButton({
+        text: "Start",
+        href: "./create-account/create-account.html",
+        isStartButton: true
+      }) }}
+
       
       
 
