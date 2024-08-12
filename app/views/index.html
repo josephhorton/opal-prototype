@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = "Research prototype" %}
+{% set pageName = "Opal research prototype" %}
 
 {% block content %}
 
@@ -16,44 +16,40 @@
       <p class="govuk-body">
         Thank you for taking part in research for the new Opal service.
       </p>
+
+      <h2 class="govuk-heading-m">Before you start</h2>
       <p class="govuk-body">
         This tool has been built to help you give us feedback about the new service.
       </p>
       <p class="govuk-body">
         It is not a live product and will not have the same level of functionality as the new service when it goes live.
       </p>
-      <!-- <p class="govuk-body">
-        Some things to be aware of as you use the research tool:
+      <p class="govuk-body">
+        Parts of the prototype will not work like the real service. For example:
       </p>
       <ul class="govuk-list govuk-list--bullet">
         <li>
-          No error messages
+          there are no error messages
         </li>
         <li>
-          Can only add 3 offences and impos?
+          you can only add 3 offences and 3 impositions
         </li>
         <li>
-          Date picker not working but you can input the date manually
+          you cannot select a date using a date picker
         </li>
         <li>
-          Can't delete an account or imposition / offence
+          you cannot delete an account, offence or imposition
         </li>
         <li>
-          The offence list is a selection - doesn't contain them all and some are 'dummy data'
+          dummy data is used in certain sections
         </li>
-        <li>
-          The search offence code link doesn't work yet
-        </li>
-        <li>
-          You can only add 1 alias but the live service will allow 5
-        </li>
-        <li>
-          Impositions: result code is a drop down rather than 'type ahead' interface
-        </li>
-        <li>
-          Days in default calculator not yet working
-        </li>
-      </ul> -->
+      </ul>
+
+      <h2 class="govuk-heading-m">Start the prototype</h2>
+      
+      <!-- <p class="govuk-body">
+        This tool has been built to help you give us feedback about the new service.
+      </p> -->
 
       {{ govukButton({
         text: "Start",
