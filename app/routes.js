@@ -16,6 +16,12 @@ router.get('/clear-session', function (req, res) {
     });
 });
 
+router.get('/clear-search', function (req, res) {
+    req.session.destroy(function (err) {
+      res.redirect('/search/search.html'); // Redirect to index.html after clearing session
+    });
+});
+
 
 router.post('/create-account-form', function(request, response) {
 
