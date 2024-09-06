@@ -1,0 +1,995 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Fixed Penalty details" %}
+
+{% block beforeContent %}
+
+<a href="../create-account.html" class="govuk-back-link">Back</a>
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      
+      <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+      <form id="personal-details-form" method="post" novalidate action="check-account-details">
+
+        <!-- POLICE AND COURT DETAILS -->
+        <div>
+          <h2 class="govuk-heading-m">Police and court details</h2>
+
+          <!-- POLICE FORCE -->
+          <div>
+            {{ xGovukAutocomplete({
+              formGroup: {
+                classes: "govuk-input--width-40"
+              },
+              id: "policeForce",
+              name: "policeForce",
+              value: data['policeForce'],
+              allowEmpty: true,
+              label: {
+                classes: "govuk-label--s",
+                text: "Police force or CTO"
+              },
+              items: [
+                { text: "Police (1)" },
+                { text: "Police (2)" },
+                { text: "Police (3)" },
+                { text: "Police (4)" }
+              ]
+            }) }}
+          </div>
+
+          <!-- ENFORCEMENT COURT -->
+          <div>
+          {{ xGovukAutocomplete({
+            formGroup: {
+              classes: "govuk-input--width-40"
+            },
+            id: "enforcementCourt",
+            name: "enforcementCourt",
+            value: data['enforcementCourt'],
+            allowEmpty: true,
+            label: {
+              classes: "govuk-label--s",
+              text: "Enforcement court",
+              isPageHeading: true
+            },
+            hint: {
+              text: "Search using enforcement court or code"
+            },
+            items: [
+              { text: "Plymouth (MIGRATED CASES ONLY) (1)" },
+              { text: "Plymouth Maintenance (14)" },
+              { text: "Devon And Cornwall CFU (101)" },
+              { text: "Devon And Cornwall CFU (102)" },
+              { text: "Devon And Cornwall CFU (103)" },
+              { text: "Devon And Cornwall CFU (107)" },
+              { text: "Courtroom 1 - Plymouth Mags (108)" },
+              { text: "Courtroom 1 - Plymouth Mags (109)" },
+              { text: "Devon And Cornwall CFU (111)" },
+              { text: "Courtroom 2 - Plymouth Mags (112)" },
+              { text: "Courtroom 3, Plymouth (113)" },
+              { text: "Devon And Cornwall CFU (114)" },
+              { text: "Courtroom 5 (115)" },
+              { text: "Courtroom 6 - Plymouth Mags (116)" },
+              { text: "Courtroom 7 (117)" },
+              { text: "Courtroom 2 - Plymouth Mags (118)" },
+              { text: "Courtroom 6 - Plymouth Mags (119)" },
+              { text: "Exeter Magistrates' Court (121)" },
+              { text: "Exeter Magistrates' Court (122)" },
+              { text: "Exeter Magistrates' Court (123)" },
+              { text: "Exeter Magistrates' Court (124)" },
+              { text: "Exeter Magistrates' Court (125)" },
+              { text: "North Devon Magistrates' Court (126)" },
+              { text: "North Devon Magistrates' Court (127)" },
+              { text: "North Devon Magistrates' Court (128)" },
+              { text: "South Devon Magistrates' Court (130)" },
+              { text: "South Devon Magistrates' Court (131)" },
+              { text: "South Devon Magistrates' Court (132)" },
+              { text: "Devon And Cornwall CFU (133)" },
+              { text: "Devon And Cornwall CFU (134)" },
+              { text: "Exeter Magistrates' Court (135)" },
+              { text: "Exeter Magistrates' Court (136)" },
+              { text: "Cornwall Magistrates' Courts (137)" },
+              { text: "Cornwall Magistrates' Courts (138)" },
+              { text: "Cornwall Magistrates' Courts (199)" },
+              { text: "Devon And Cornwall CFU (201)" },
+              { text: "South Devon Magistrates' Court (202)" },
+              { text: "Devon And Cornwall CFU (203)" },
+              { text: "Devon And Cornwall CFU (204)" },
+              { text: "Devon And Cornwall CFU (205)" },
+              { text: "Devon And Cornwall CFU (206)" },
+              { text: "Devon And Cornwall CFU (207)" },
+              { text: "Devon And Cornwall CFU (208)" },
+              { text: "Devon And Cornwall CFU (209)" },
+              { text: "Exeter Magistrates' Court (210)" },
+              { text: "North Devon Magistrates' Court (211)" },
+              { text: "North Devon Magistrates' Court (212)" },
+              { text: "Exeter Magistrates' Court (213)" },
+              { text: "Plymouth Maintenance (214)" },
+              { text: "North Devon Magistrates' Court (215)" },
+              { text: "South Devon Magistrates' Court (216)" },
+              { text: "Devon And Cornwall CFU (217)" },
+              { text: "South Devon Magistrates' Court (218)" },
+              { text: "Devon And Cornwall CFU (219)" },
+              { text: "Exeter Magistrates' Court (220)" },
+              { text: "Exeter Magistrates' Court (221)" },
+              { text: "South Devon Magistrates' Court (222)" },
+              { text: "South Devon Magistrates' Court (223)" },
+              { text: "Devon And Cornwall CFU (224)" },
+              { text: "Exeter Magistrates' Court (225)" },
+              { text: "Cornwall Magistrates' Courts (226)" },
+              { text: "Cornwall Magistrates' Courts (227)" },
+              { text: "South Devon Magistrates' Court (228)" },
+              { text: "Cornwall Magistrates' Courts (229)" },
+              { text: "Cornwall Magistrates' Court (230)" },
+              { text: "Cornwall Magistrates' Courts (231)" },
+              { text: "East Cornwall Magistrates' Ct (232)" },
+              { text: "East Cornwall Magistrates' Ct (233)" },
+              { text: "East Cornwall Family Court (234)" },
+              { text: "East Cornwall Magistrates' Ct (235)" },
+              { text: "East Cornwall Magistrates' Ct (236)" },
+              { text: "East Cornwall Magistrates' Ct (237)" },
+              { text: "East Cornwall Family Court (238)" },
+              { text: "West Cornwall Magistrates' Ct (239)" },
+              { text: "West Cornwall Magistrates' Ct (240)" },
+              { text: "West Cornwall Magistrates' Ct (241)" },
+              { text: "West Cornwall Magistrates' Ct (242)" },
+              { text: "West Cornwall Magistrates' Ct (243)" },
+              { text: "North Devon Magistrates' Court (244)" },
+              { text: "Central Devon Family Court (245)" },
+              { text: "Central Devon Family Court (246)" },
+              { text: "Plymouth Maintenance -migrated (248)" },
+              { text: "South Devon Magistrates' Court (249)" },
+              { text: "West Cornwall Magistrates' Ct (250)" },
+              { text: "Devon And Cornwall CFU (301)" },
+              { text: "South Devon Magistrates' Court (302)" },
+              { text: "Exeter Magistrates' Court (303)" },
+              { text: "Cullompton Magistrates' Court (304)" },
+              { text: "South Devon Magistrates' Court (305)" },
+              { text: "South Devon Magistrates' Court (306)" },
+              { text: "South Devon Magistrates' Court (307)" },
+              { text: "Exeter Magistrates' Court (308)" },
+              { text: "Devon And Cornwall CFU (309)" },
+              { text: "Devon And Cornwall CFU (401)" },
+              { text: "Plymouth Magistrates' (990)" },
+              { text: "Plymouth Magistrates' (991)" },
+              { text: "Plymouth Magistrates' (992)" },
+              { text: "Plymouth Magistrates' (993)" },
+              { text: "Plymouth Magistrates' (994)" },
+              { text: "Plymouth Magistrates' (995)" },
+              { text: "HMCTS Dorset Enforcement (101)" },
+              { text: "HMCTS (102)" },
+              { text: "HMCTS Money Handling Team (104)" },
+              { text: "Weymouth Magistrates' Court (111)" },
+              { text: "Weymouth Magistrates' Court (112)" },
+              { text: "Weymouth Magistrates' Court (113)" },
+              { text: "Weymouth Magistrates' Court (114)" },
+              { text: "Bridport Magistrates' Court (121)" },
+              { text: "Bridport Magistrates' Court (122)" },
+              { text: "Blandford Magistrates' Court (131)" },
+              { text: "Blandford Magistrates' Court (132)" },
+              { text: "Blandford Magistrates' Court (133)" },
+              { text: "Dorset Family Proceedings Crt (135)" },
+              { text: "Dorset Family Proceedings Ct (145)" },
+              { text: "Dorset Family Proceeding CT. (150)" },
+              { text: "Dorset Family Proceedings Ct (155)" },
+              { text: "Family Court Office (156)" },
+              { text: "Family Proceedings Court -Weym (161)" },
+              { text: "Family Proceedings Court -Weym (162)" },
+              { text: "Dorset Family Proceedings Ct (165)" },
+              { text: "Dorset Family Proceedings Ct (175)" },
+              { text: "Dorset Family Proceedings Ct (185)" },
+              { text: "HMCTS Dorset Enforcement (201)" },
+              { text: "HMCTS Dorset Enforcement (202)" },
+              { text: "HMCTS Dorset (203)" },
+              { text: "HMCTS Dorset (204)" },
+              { text: "HMCTS Dorset Enforcement (207)" },
+              { text: "Poole Magistrates' Court (211)" },
+              { text: "Poole Magistrates' Court (212)" },
+              { text: "Poole Magistrates' Court (213)" },
+              { text: "HMCTS Dorset Enforcement (214)" },
+              { text: "Bournemouth Fines Clinic (231)" },
+              { text: "Poole Fines Clinic (232)" },
+              { text: "Weymouth Fines Clinic (233)" },
+              { text: "Bournemouth Fines Clinic No 1 (234)" },
+              { text: "Bournemouth Fines Clinic No 2 (235)" },
+              { text: "Bournemouth Fines Clinic No 5 (236)" },
+              { text: "Bournemouth Fines Clinic No 3 (237)" },
+              { text: "Bournemouth Fines Clinic No 4 (238)" },
+              { text: "Family Proceedings Court -Bmth (261)" },
+              { text: "Family Proceedings Court -Bmth (262)" },
+              { text: "HMCTS Dorset Enforcement (300)" },
+              { text: "HMCTS Dorset Enforcement (301)" },
+              { text: "HMCTS Dorset Enforcement (303)" },
+              { text: "HMCTS Dorset Enforcement (304)" },
+              { text: "Family Proceedings Crt -Poole (360)" },
+              { text: "Family Proceedings Crt - Poole (361)" },
+              { text: "Family Proceedings Crt -Bland (362)" },
+              { text: "Family Proceedings Crt - Bland (363)" },
+              { text: "Family Proceedings Crt - Brid (364)" },
+              { text: "Family Proceedings Court- Brid (365)" },
+              { text: "Family Proceedings Crt - Wimb (366)" },
+              { text: "Family Proceedings Crt - Wimb (367)" },
+              { text: "Family Proceedings Crt - Ware (368)" },
+              { text: "Family Proceedings Crt - Ware (369)" },
+              { text: "HMCTS DORSET ENFORCEMENT (401)" },
+              { text: "HMCTS Dorset Enforcement (501)" },
+              { text: "HMCTS DORSET ENFOREMENT (601)" },
+              { text: "HMCTS DORSET ENFORCEMENT (701)" },
+              { text: "HMCTS Dorset Enforcement (801)" },
+              { text: "HMCTS Dorset Enforcement (901)" },
+              { text: "HMCTS Dorset Enforcement (902)" },
+              { text: "Port Talbot Justice Centre (1)" },
+              { text: "Port Talbot Justice Centre (2)" },
+              { text: "Port Talbot Justice Centre (3)" },
+              { text: "Port Talbot Justice Centre (4)" },
+              { text: "Port Talbot Justice Centre (5)" },
+              { text: "Port Talbot Justice Centre (7)" },
+              { text: "Port Talbot Justice Centre (9)" },
+              { text: "Port Talbot Justice Centre (10)" },
+              { text: "Port Talbot Justice Centre (11)" },
+              { text: "Port Talbot Justice Centre (14)" },
+              { text: "North East Regional Centre (18)" },
+              { text: "HMCTS NCES (19)" },
+              { text: "Migration Court (75)" },
+              { text: "CARDIFF (101)" },
+              { text: "CARDIFF (102)" },
+              { text: "CARDIFF (103)" },
+              { text: "CARDIFF (104)" },
+              { text: "CARDIFF (105)" },
+              { text: "CARDIFF (106)" },
+              { text: "CARDIFF (107)" },
+              { text: "CARDIFF (108)" },
+              { text: "CARDIFF (109)" },
+              { text: "CARDIFF (110)" },
+              { text: "PONTYPRIDD (111)" },
+              { text: "PONTYPRIDD (112)" },
+              { text: "PONTYPRIDD (113)" },
+              { text: "MERTHYR TYDFIL (114)" },
+              { text: "CARDIFF MAGISTRATES COURT (122)" },
+              { text: "MERTHYR (141)" },
+              { text: "MERTHYR (142)" },
+              { text: "MERTHYR (143)" },
+              { text: "PONTYPRIDD MAGISTRATES COURT (150)" },
+              { text: "MERTHYR TYDFIL MAGISTRATES (151)" },
+              { text: "ABERDARE MAGISTRATES COURT (152)" },
+              { text: "LLWYNYPIA MAGISTRATES COURT (153)" },
+              { text: "BARRY MAGISTRATES COURT (154)" },
+              { text: "BRIDGEND MAGISTRATES COURT (155)" },
+              { text: "CARDIFF MAGISTRATES COURT (156)" },
+              { text: "Swansea Magistrates Court (157)" },
+              { text: "Neath Port Talbot Magistrates (158)" },
+              { text: "PONTYPRIDD FPC (160)" },
+              { text: "MERTHYR TYDFIL FPC (161)" },
+              { text: "ABERDARE FPC (162)" },
+              { text: "LLWYNYPIA FPC (163)" },
+              { text: "BARRY FPC (164)" },
+              { text: "BRIDGEND FPC (165)" },
+              { text: "CARDIFF FPC (166)" },
+              { text: "SWANSEA (201)" },
+              { text: "SWANSEA (202)" },
+              { text: "SWANSEA (203)" },
+              { text: "SWANSEA (204)" },
+              { text: "SWANSEA (205)" },
+              { text: "SWANSEA (206)" },
+              { text: "SWANSEA (207)" },
+              { text: "RHONDDA (209)" },
+              { text: "PONTYPRIDD (210)" },
+              { text: "ABERDARE (211)" },
+              { text: "MERTHYR TYDFIL (214)" },
+              { text: "MIGRATION BUCKET 248 (248)" },
+              { text: "MIGRATION BUCKET 249 (249)" },
+              { text: "CARDIFF (301)" },
+              { text: "SWANSEA (302)" },
+              { text: "PORT TALBOT (303)" },
+              { text: "BARRY (304)" },
+              { text: "NEATH (305)" },
+              { text: "BRIDGEND (307)" },
+              { text: "RHONDDA (309)" },
+              { text: "PONTYPRIDD (310)" },
+              { text: "ABERDARE (311)" },
+              { text: "MERTHYR TYDFIL (314)" },
+              { text: "CARDIFF (401)" },
+              { text: "SWANSEA (402)" },
+              { text: "HMCTS NCES (407)" },
+              { text: "MERTHYR TYDFIL (414)" },
+              { text: "HMCTS NCES (501)" },
+              { text: "BRIDGEND (701)" },
+              { text: "BRIDGEND (702)" },
+              { text: "BRIDGEND (703)" },
+              { text: "FINE ALIGNMENT (888)" },
+              { text: "CARDIFF (994)" },
+              { text: "CARDIFF (995)" },
+              { text: "CARDIFF (997)" },
+              { text: "MIGRATION BUCKET 998 (998)" },
+              { text: "MIGRATION BUCKET 999 (999)" },
+              { text: "AVON & SOMERSET NCES (1)" },
+              { text: "AVON & SOMERSET NCES (2)" },
+              { text: "AVON & SOMERSET NCES (5)" },
+              { text: "AVON & SOMERSET NCES (6)" },
+              { text: "AVON & SOMERSET NCES (9)" },
+              { text: "AVON & SOMERSET NCES (10)" },
+              { text: "AVON & SOMERSET NCES (11)" },
+              { text: "AVON & SOMERSET NCES (12)" },
+              { text: "AVON & SOMERSET NCES (13)" },
+              { text: "AVON & SOMERSET NCES (20)" },
+              { text: "AVON & SOMERSET NCES (21)" },
+              { text: "AVON & SOMERSET NCES (22)" },
+              { text: "AVON & SOMERSET NCES (23)" },
+              { text: "AVON & SOMERSET NCES (24)" },
+              { text: "AVON & SOMERSET NCES (25)" },
+              { text: "AVON & SOMERSET NCES (26)" },
+              { text: "AVON & SOMERSET NCES (27)" },
+              { text: "AVON & SOMERSET NCES (28)" },
+              { text: "AVON & SOMERSET NCES (29)" },
+              { text: "AVON & SOMERSET NCES (31)" },
+              { text: "AVON & SOMERSET NCES (32)" },
+              { text: "AVON & SOMERSET NCES (33)" },
+              { text: "Yeovil FPC (34)" },
+              { text: "Yeovil FPC - REMO (35)" },
+              { text: "AVON & SOMERSET NCES (41)" },
+              { text: "AVON & SOMERSET NCES (42)" },
+              { text: "AVON & SOMERSET NCES (43)" },
+              { text: "AVON & SOMERSET NCES (51)" },
+              { text: "AVON & SOMERSET NCES (52)" },
+              { text: "AVON & SOMERSET NCES (53)" },
+              { text: "AVON & SOMERSET NCES (54)" },
+              { text: "Bath Family Court (55)" },
+              { text: "AVON & SOMERSET NCES (60)" },
+              { text: "Avon & Somerset Central Accts (61)" },
+              { text: "North Avon Magistrates (62)" },
+              { text: "North Avon FPC (63)" },
+              { text: "North Avon FPC (64)" },
+              { text: "North Avon FPC (65)" },
+              { text: "Taunton Deane FPC (114)" },
+              { text: "Wells Magistrates' Court (124)" },
+              { text: "Frome FPC - REMO (135)" },
+              { text: "Sedgemoor FPC (144)" },
+              { text: "Minehead FPC (154)" },
+              { text: "Avon & Somerset Central Accts (199)" },
+              { text: "Bailed Enforcement Cases (210)" },
+              { text: "Bristol Lodge Court (220)" },
+              { text: "Bailed Enforcemnt Cases (230)" },
+              { text: "Money Handling Unit (310)" },
+              { text: "Money Handling Unit (311)" },
+              { text: "Money Handling Unit (312)" },
+              { text: "Avon & Somerset Central Accts (319)" },
+              { text: "Avon & Somerset Central Accts (321)" },
+              { text: "Avon & Somerset Central Accts (322)" },
+              { text: "Avon & Somerset Central Accts (329)" },
+              { text: "Avon & Somerset Central Accts (331)" },
+              { text: "Avon & Somerset Central Accts (339)" },
+              { text: "HMCTS Money Handling (409)" },
+              { text: "Money Handling Unit (410)" },
+              { text: "Money Handling Unit (411)" },
+              { text: "Money Handling Unit (412)" },
+              { text: "Taunton Deane Magistrates' (419)" },
+              { text: "Taunton Deane Magistrates (421)" },
+              { text: "Taunton Deane Magistrates (422)" },
+              { text: "Taunton Deane Magistrates' (429)" },
+              { text: "Minehead Magistrates' Court (431)" },
+              { text: "Minehead Magistrates' Court (432)" },
+              { text: "Minehead Magistrates' Court (439)" },
+              { text: "Avon & Somerset Central Accts (997)" },
+              { text: "Avon & Somerset Central Accts (999)" },
+              { text: "NORWICH FAMILY COURT (1)" },
+              { text: "KINGS LYNN FAMILY COURT (2)" },
+              { text: "GREAT YARMOUTH FAMILY COURT (3)" },
+              { text: "LOWESTOFT FAMILY COURT (4)" },
+              { text: "CHELMSFORD FAMILY COURT (5)" },
+              { text: "IPSWICH FAMILY COURT (6)" },
+              { text: "BURY ST EDMUNDS FAMILY COURT (7)" },
+              { text: "COLCHESTER FAMIY COURT (8)" },
+              { text: "BASILDON FAMILY COURT (9)" },
+              { text: "SOUTHEND FAMILY COURT (10)" },
+              { text: "CAMBRIDGE FAMILY COURT (11)" },
+              { text: "PETERBOROUGH FAMILY COURT (12)" },
+              { text: "OXFORD FAMILY COURT (13)" },
+              { text: "BICESTER FAMILY COURT (14)" },
+              { text: "BANBURY FAMILY COURT (15)" },
+              { text: "READING FAMILY COURT (16)" },
+              { text: "SLOUGH FAMILY COURT (17)" },
+              { text: "NEWBURY FAMILY COURT (18)" },
+              { text: "MILTON KEYNES FAMILY COURT (19)" },
+              { text: "AYLESBURY FAMILY COURT (20)" },
+              { text: "HIGH WYCOMBE FAMILY COURT (21)" },
+              { text: "WELLINGBOROUGH FAMILY COURT (22)" },
+              { text: "LUTON FAMILY COURT (23)" },
+              { text: "BEDFORD FAMILY COURT (24)" },
+              { text: "WATFORD FAMILY COURT (25)" },
+              { text: "ST ALBANS FAMILY COURT (26)" },
+              { text: "HERTFORD FAMILY COURT (27)" },
+              { text: "GUILDFORD FAMILY COURT (28)" },
+              { text: "REIGATE FAMILY COURT (29)" },
+              { text: "STAINES FAMILY COURT (30)" },
+              { text: "BRIGHTON FAMILY COURT (31)" },
+              { text: "HORSHAM FAMILY COURT (32)" },
+              { text: "HASTINGS FAMILY COURT (33)" },
+              { text: "MEDWAY FAMILY COURT (34)" },
+              { text: "DARTFORD FAMILY COURT (35)" },
+              { text: "MAIDSTONE FAMILY COURT (36)" },
+              { text: "SEVENOAKS FAMILY COURT (37)" },
+              { text: "TUNBRIDGE WELLS FAMILY COURT (38)" },
+              { text: "CANTERBURY FAMILY COURT (39)" },
+              { text: "CHICHESTER FAMILY COURT (40)" },
+              { text: "Birmingham Family Court (41)" },
+              { text: "Derby Family Court (42)" },
+              { text: "NOTTINGHAM FAMILY COURT (43)" },
+              { text: "LEICESTER FAMILY COURT (44)" },
+              { text: "HEREFORD FAMILY COURT (45)" },
+              { text: "WORCESTER FAMILY COURT (46)" },
+              { text: "STAFFORD COUNTY COURT (47)" },
+              { text: "BURTON FAMILY COURT (48)" },
+              { text: "SOUTH STAFFORD FAMILY COURT (49)" },
+              { text: "NORTH STAFFORDSHIRE FAMILY CT (50)" },
+              { text: "BOSTON FAMILY COURT (51)" },
+              { text: "HULL FAMILY COURT (52)" },
+              { text: "BEVERLEY FAMILY COURT (53)" },
+              { text: "BRIDLINGTON FAMILY COURT (54)" },
+              { text: "GRIMSBY FAMILY COURT (55)" },
+              { text: "SCUNTHORPE FAMILY COURT (56)" },
+              { text: "LEEDS FAMILY COURT (57)" },
+              { text: "BRADFORD FAMILY COURT (58)" },
+              { text: "HUDDERSFIELD FAMILY COURT (59)" },
+              { text: "KIRKLEES FAMILY COURT (60)" },
+              { text: "HALIFAX FAMILY COURT (61)" },
+              { text: "WAKEFIELD FAMILY COURT (62)" },
+              { text: "MIDDLESBOROUGH FAMILY COURT (63)" },
+              { text: "TEESIDE FAMILY COURT (64)" },
+              { text: "NEWTON AYCLIFFE FAMILY COURT (65)" },
+              { text: "DARLINGTON FAMILY COURT (66)" },
+              { text: "HARTLEPOOL FAMILY COURT (67)" },
+              { text: "NEWCASTLE FAMILY COURT (68)" },
+              { text: "GATESHEAD FAMILY COURT (69)" },
+              { text: "MORPETH FAMILY COURT (70)" },
+              { text: "BERWICK UPON TWEED FAMILY CT (71)" },
+              { text: "NORTH SHIELDS FAMILY COURT (72)" },
+              { text: "SOUTH SHIELDS FAMILY COURT (73)" },
+              { text: "SUNDERLAND FAMILY COURT (74)" },
+              { text: "NORTHAMPTON FAMILY COURT (75)" },
+              { text: "KETTERING FAMILY COURT (76)" },
+              { text: "DURHAM FAMILY COURT (77)" },
+              { text: "SHEFFIELD FAMILY COURT (78)" },
+              { text: "BARNSLEY FAMILY COURT (79)" },
+              { text: "ROTHERHAM FAMILY COURT (80)" },
+              { text: "DONCASTER FAMILY COURT (81)" },
+              { text: "YORK FAMILY COURT (82)" },
+              { text: "SKIPTON FAMILY COURT (83)" },
+              { text: "SCARBOROUGH FAMILY COURT (84)" },
+              { text: "NORTH ALLERTON FAMILY COURT (85)" },
+              { text: "LIVERPOOL FAMILY COURT (86)" },
+              { text: "ST HELENS FAMILY COURT (87)" },
+              { text: "BIRKENHEAD FAMILY COURT (88)" },
+              { text: "MACCLESFIELD FAMILY COURT (89)" },
+              { text: "WARRINGTON FAMILY COURT (90)" },
+              { text: "CREWE FAMILY COURT (91)" },
+              { text: "CHESTER FAMILY COURT (92)" },
+              { text: "CUMBRIA FAMILY COURT (93)" },
+              { text: "WORKINGTON FAMILY COURT (94)" },
+              { text: "BARROW IN FURNESS FAMILY COURT (95)" },
+              { text: "KENDAL FAMILY COURT (96)" },
+              { text: "PRESTON FAMILY COURT (97)" },
+              { text: "BLACKBURN FAMILY COURT (98)" },
+              { text: "LANCASTER FAMILY COURT (99)" },
+              { text: "BLACKPOOL FAMILY COURT (100)" },
+              { text: "BURNLEY FAMILY COURT (101)" },
+              { text: "MANCHESTER FAMILY COURT (102)" },
+              { text: "OLDHAM FAMILY COURT (103)" },
+              { text: "BOLTON FAMILY COURT (104)" },
+              { text: "BURY LANCS FAMILY COURT (105)" },
+              { text: "ALTRINCHAM FAMILY COURT (106)" },
+              { text: "TAMESIDE FAMILY COURT (107)" },
+              { text: "STOCKPORT FAMILY COURT (108)" },
+              { text: "WIGAN FAMILY COURT (109)" },
+              { text: "BRISTOL FAMILY COURT (110)" },
+              { text: "BATH FAMILY COURT (111)" },
+              { text: "GLOUCESTER FAMILY COURT (112)" },
+              { text: "WESTON SUPER MARE FAMILY CT (113)" },
+              { text: "TRURO FAMILY COURT (114)" },
+              { text: "BODMIN FAMILY COURT (115)" },
+              { text: "BOURNEMOUTH FAMILY COURT (116)" },
+              { text: "WEYMOUTH FAMILY COURT (117)" },
+              { text: "PORTSMOUTH FAMILY COURT (118)" },
+              { text: "ALDERSHOT FAMILY COURT (119)" },
+              { text: "SOUTHAMPTON FAMILY COURT (120)" },
+              { text: "WINCHESTER FAMILY COURT (121)" },
+              { text: "ISLE OF WIGHT FAMILY COURT (122)" },
+              { text: "BASINGSTOKE FAMILY COURT (123)" },
+              { text: "EXETER FAMILY COURT (124)" },
+              { text: "BARNSTAPLE FAMILY COURT (125)" },
+              { text: "PLYMOUTH FAMILY COURT (126)" },
+              { text: "TORQUAY FAMILY COURT (127)" },
+              { text: "TAUNTON FAMILY COURT (128)" },
+              { text: "YEOVIL FAMILY COURT (129)" },
+              { text: "SWINDON FAMILY COURT (130)" },
+              { text: "SALISBURY FAMILY COURT (131)" },
+              { text: "CHIPPENHAM FAMILY COURT (132)" },
+              { text: "COVENTRY FAMILY COURT (134)" },
+              { text: "WARWICKSHIRE FAMILY COURT (135)" },
+              { text: "LOUGHBOROUGH FAMILY COURT (137)" },
+              { text: "LINCOLN FAMILY COURT (138)" },
+              { text: "STOKE ON TRENT FAMILY COURT (140)" },
+              { text: "CHESTERFIELD FAMILY COURT (144)" },
+              { text: "BUXTON FAMILY COURT (145)" },
+              { text: "MANSFIELD FAMILY COURT (147)" },
+              { text: "WORKSOP FAMILY COURT (148)" },
+              { text: "WOLVERHAMPTON FAMILY COURT (151)" },
+              { text: "TELFORD FAMILY COURT (152)" },
+              { text: "WALSALL FAMILY COURT (153)" },
+              { text: "DUDLEY FAMILY COURT (154)" },
+              { text: "CHELTENHAM FAMILY COURT (155)" },
+              { text: "FLEETWOOD FAMILY COURT (156)" },
+              { text: "REEDLEY FAMILY COURT (157)" },
+              { text: "HARROGATE FAMILY COURT (158)" },
+              { text: "WORTHING FAMILY COURT (159)" },
+              { text: "Eastbourne Family Court (160)" },
+              { text: "Newport Family Court (161)" },
+              { text: "Rugby Family Court (162)" },
+              { text: "Shrewsbury Family Court (163)" },
+              { text: "Solihull Family Court (164)" },
+              { text: "Keighley Family Court (165)" },
+              { text: "Carlisle Family Court (166)" },
+              { text: "Leigh Family Court (167)" },
+              { text: "Rochdale Family Court (168)" },
+              { text: "Salford Family Court (169)" },
+              { text: "THANET FAMILY COURT (170)" },
+              { text: "FARNHAM FAMILY COURT (171)" },
+              { text: "PONTEFRACT FAMILY COURT (172)" },
+              { text: "TROWBRIDGE FAMILY COURT (173)" },
+              { text: "POOLE FAMILY COURT (174)" },
+              { text: "Leyland Family Court (175)" },
+              { text: "DOVER FAMILY COURT (176)" }
+            ]
+          }) }}
+          </div>
+        </div>
+
+        <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+        {% if data['defendantTypeFP'] == "Adult or youth" %}
+        <!-- PERSONAL DETAILS -->
+        <div>
+          <h2 class="govuk-heading-m">Personal details</h2>
+          
+          <!-- TITLE -->
+          <div>
+          {{ govukSelect({
+            id: "title",
+            name: "title",
+            value: data['title'],
+            label: {
+              text: "Title",
+              classes: "govuk-label--s"
+            },
+            items: [
+              {
+                value: "select",
+                text: "Select title",
+                selected: true,
+                disabled: true
+              },
+              {
+                value: "Mr",
+                text: "Mr"
+              },
+              {
+                value: "Mrs",
+                text: "Mrs"
+              },
+              {
+                value: "Miss",
+                text: "Miss"
+              },
+              {
+                value: "Ms",
+                text: "Ms"
+              }
+            ]
+          }) }}
+          </div>
+  
+          <!-- FIRST AND LATE NAME -->
+          <div>
+  
+          {{ govukInput({
+            id: "firstName",
+            name: "firstName",
+            classes: "govuk-input--width-20",
+            label: {
+              text: "First names",
+              classes: "govuk-label--s"
+            },
+            hint: {
+              text: "This can include their middle names"
+            },
+            value: data['firstName']
+          }) }}
+  
+          {{ govukInput({
+            id: "lastName",
+            name: "lastName",
+            classes: "govuk-input--width-20",
+            label: {
+              text: "Last name",
+              classes: "govuk-label--s"
+            },
+            value: data['lastName']
+          }) }}
+  
+          </div>
+  
+          <!-- DATE OF BIRTH -->
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-label--s" for="date">Date of birth</label>
+            <div id="date-hint" class="govuk-hint">
+              For example, 31/01/2023
+            </div>
+            <div class="govuk-input__wrapper">
+              <input class="govuk-input moj-js-datepicker-input govuk-input--width-10" id="date-of-birth" name="DDOB" type="text" autocomplete="off" value="{{data['DDOB']}}">
+              <button class="moj-datepicker-toggle moj-js-datepicker-toggle" type="button" aria-haspopup="dialog" aria-controls="datepicker-date" aria-expanded="false">
+                <span class="govuk-visually-hidden">Choose date</span>
+                <svg width="32" height="24" focusable="false" class="moj-datepicker-icon" aria-hidden="true" role="img" viewBox="0 0 22 22">
+                  <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M16.1333 2.93333H5.86668V4.4C5.86668 5.21002 5.21003 5.86667 4.40002 5.86667C3.59 5.86667 2.93335 5.21002 2.93335 4.4V2.93333H2C0.895431 2.93333 0 3.82877 0 4.93334V19.2667C0 20.3712 0.89543 21.2667 2 21.2667H20C21.1046 21.2667 22 20.3712 22 19.2667V4.93333C22 3.82876 21.1046 2.93333 20 2.93333H19.0667V4.4C19.0667 5.21002 18.41 5.86667 17.6 5.86667C16.79 5.86667 16.1333 5.21002 16.1333 4.4V2.93333ZM20.5333 8.06667H1.46665V18.8C1.46665 19.3523 1.91436 19.8 2.46665 19.8H19.5333C20.0856 19.8 20.5333 19.3523 20.5333 18.8V8.06667Z"></path>
+                  <rect x="3.66669" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                  <rect x="16.8667" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+        {% elseif data['defendantTypeFP'] == "Company" %}
+
+        <!-- COMPANY DETAILS -->
+        <div>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- ADDRESS DETAILS -->
+        <div>
+          {% call govukFieldset({
+            legend: {
+              text: "Address",
+              classes: "govuk-fieldset__legend--m"
+            }
+          }) %}
+          
+            {{ govukInput({
+              label: {
+                text: "Address line 1",
+                classes: "govuk-label"
+              },
+              id: "address-line-1",
+              name: "addressLine1",
+              autocomplete: "address-line1",
+              classes: "govuk-input--width-30",
+              value: data['addressLine1']
+            }) }}
+          
+            {{ govukInput({
+              label: {
+                text: "Address line 2",
+                classes: "govuk-label"
+              },
+              id: "address-line-2",
+              name: "addressLine2",
+              autocomplete: "address-line2",
+              classes: "govuk-input--width-30",
+              value: data['addressLine2']
+            }) }}
+          
+            {{ govukInput({
+              label: {
+                text: "Address line 3",
+                classes: "govuk-label"
+              },
+              id: "address-line-3",
+              name: "addressLine3",
+              classes: "govuk-input--width-20",
+              autocomplete: "address-level3",
+              value: data['addressLine3']
+            }) }}
+        
+          
+            {{ govukInput({
+              formGroup: {
+                classes: "govuk-!-margin-bottom-0"
+              },
+              label: {
+                text: "Postcode",
+                classes: "govuk-label"
+              },
+              classes: "govuk-input--width-10",
+              id: "address-postcode",
+              name: "addressPostcode",
+              autocomplete: "postal-code",
+              value: data['addressPostcode']
+            }) }}
+          
+          {% endcall %}  
+
+        </div>
+
+        <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+
+        <!-- OFFENCE DETAILS -->
+        <div>
+          <h2 class="govuk-heading-m">Offence details</h2>
+
+          {{ govukInput({
+            label: {
+              text: "Notice number",
+              classes: "govuk-label--s"
+            },
+            classes: "govuk-input--width-20 govuk-input--extra-letter-spacing",
+            id: "noticeNumber",
+            name: "noticeNumber",
+            value: data['noticeNumber']
+          }) }}
+          
+          {% set vehicleOffenceHTML %}
+
+            {{ govukInput({
+            label: {
+              text: "Registration number",
+              classes: "govuk-label--s"
+            },
+            classes: "govuk-input--width-10 govuk-input--extra-letter-spacing",
+            id: "carRegistration",
+            name: "carRegistration",
+            value: data['carRegistration']
+            }) }}
+             
+            {{ govukInput({
+              label: {
+                text: "Driving licence number",
+                classes: "govuk-label--s"
+              },
+              classes: "govuk-input--width-20 govuk-input--extra-letter-spacing",
+              id: "drivingLicence",
+              name: "drivingLicence",
+              value: data['drivingLicence']
+            }) }}
+
+            {{ govukInput({
+              label: {
+                text: "Notice to owner or hirer number (NTO/NTH)",
+                classes: "govuk-label--s"
+              },
+              classes: "govuk-input--width-10 govuk-input--extra-letter-spacing",
+              id: "noticeToOwner",
+              name: "noticeToOwner",
+              value: data['noticeToOwner']
+            }) }} 
+            
+            <!-- DATE OF OFFENCE -->
+            <div class="govuk-form-group">
+              <label class="govuk-label govuk-label--s" for="date">Date notice to owner was issued</label>
+              <div id="date-hint" class="govuk-hint">
+                For example, 31/01/2023
+              </div>
+              <div class="govuk-input__wrapper">
+                <input class="govuk-input moj-js-datepicker-input govuk-input--width-10" id="dateOffence" name="dateOffence" type="text" autocomplete="off" value="{{data['dateOffence']}}">
+                <button class="moj-datepicker-toggle moj-js-datepicker-toggle" type="button" aria-haspopup="dialog" aria-controls="datepicker-date" aria-expanded="false">
+                  <span class="govuk-visually-hidden">Choose date</span>
+                  <svg width="32" height="24" focusable="false" class="moj-datepicker-icon" aria-hidden="true" role="img" viewBox="0 0 22 22">
+                    <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M16.1333 2.93333H5.86668V4.4C5.86668 5.21002 5.21003 5.86667 4.40002 5.86667C3.59 5.86667 2.93335 5.21002 2.93335 4.4V2.93333H2C0.895431 2.93333 0 3.82877 0 4.93334V19.2667C0 20.3712 0.89543 21.2667 2 21.2667H20C21.1046 21.2667 22 20.3712 22 19.2667V4.93333C22 3.82876 21.1046 2.93333 20 2.93333H19.0667V4.4C19.0667 5.21002 18.41 5.86667 17.6 5.86667C16.79 5.86667 16.1333 5.21002 16.1333 4.4V2.93333ZM20.5333 8.06667H1.46665V18.8C1.46665 19.3523 1.91436 19.8 2.46665 19.8H19.5333C20.0856 19.8 20.5333 19.3523 20.5333 18.8V8.06667Z"></path>
+                    <rect x="3.66669" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                    <rect x="16.8667" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                  </svg>
+                </button>
+              </div>
+            </div>
+  
+        
+          {% endset -%}
+
+          {{ govukRadios({
+            name: "offenceType",
+            value: data['offenceType'],
+            classes: "govuk-radios",
+            fieldset: {
+              legend: {
+                text: "Offence type",
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            items: [
+              {
+                value: "Vehicle",
+                text: "Vehicle",
+                conditional: {
+                  html: vehicleOffenceHTML
+                }
+              },
+              {
+                value: "Non-vehicle",
+                text: "Non-vehicle"
+              }
+            ]
+          }) }}
+
+          <!-- DATE OF OFFENCE -->
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-label--s" for="date">Date of offence</label>
+            <div id="date-hint" class="govuk-hint">
+              For example, 31/01/2023
+            </div>
+            <div class="govuk-input__wrapper">
+              <input class="govuk-input moj-js-datepicker-input govuk-input--width-10" id="dateOffence" name="dateOffence" type="text" autocomplete="off" value="{{data['dateOffence']}}">
+              <button class="moj-datepicker-toggle moj-js-datepicker-toggle" type="button" aria-haspopup="dialog" aria-controls="datepicker-date" aria-expanded="false">
+                <span class="govuk-visually-hidden">Choose date</span>
+                <svg width="32" height="24" focusable="false" class="moj-datepicker-icon" aria-hidden="true" role="img" viewBox="0 0 22 22">
+                  <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M16.1333 2.93333H5.86668V4.4C5.86668 5.21002 5.21003 5.86667 4.40002 5.86667C3.59 5.86667 2.93335 5.21002 2.93335 4.4V2.93333H2C0.895431 2.93333 0 3.82877 0 4.93334V19.2667C0 20.3712 0.89543 21.2667 2 21.2667H20C21.1046 21.2667 22 20.3712 22 19.2667V4.93333C22 3.82876 21.1046 2.93333 20 2.93333H19.0667V4.4C19.0667 5.21002 18.41 5.86667 17.6 5.86667C16.79 5.86667 16.1333 5.21002 16.1333 4.4V2.93333ZM20.5333 8.06667H1.46665V18.8C1.46665 19.3523 1.91436 19.8 2.46665 19.8H19.5333C20.0856 19.8 20.5333 19.3523 20.5333 18.8V8.06667Z"></path>
+                  <rect x="3.66669" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                  <rect x="16.8667" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Offence code input -->
+          {{ govukInput({
+            id: "Offence1_Code",
+            name: "Offence1_Code",
+            classes: "govuk-input--width-10 govuk-input--extra-letter-spacing",
+            label: {
+              text: "Offence code",
+              classes: "govuk-label--s"
+            },
+            hint: {
+              html: 'For example, TP11003. If you don’t know the offence code, you can <a href="#" class="govuk-link--no-visited-state" data-module="edge">search the offence list</a>.'
+            },
+            value: data['Offence1_Code'] 
+          }) }}
+
+          <!-- Results -->
+          <div id="Offence1_Title_Container" style="display: none;" class="govuk-!-margin-bottom-6 govuk-!-margin-top-0">
+            <div style="padding: 18px 15px 15px 15px; border-left: 5px solid #1d70b8; background-color: #f3f2f1;">
+              <p id="Offence1_Title_Heading" class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-0" >Offence found</p>
+              <p id="Offence1_Title_Title" class="govuk-body govuk-!-margin-bottom-0 govuk-!-margin-top-1"></p>
+            </div>
+          </div>
+
+          {{ govukInput({
+            label: {
+              text: "Place of offence",
+              classes: "govuk-label--s"
+            },
+            classes: "govuk-input--width-30",
+            id: "placeOffence",
+            name: "placeOffence",
+            value: data['placeOffence']
+          }) }}  
+          
+          {{ govukInput({
+            id: 'amountImposed',
+            name: 'amountImposed',
+            classes: "govuk-input--width-10",
+            value: data['amountImposed'],
+            label: {
+              html: 'Amount imposed',
+              classes: 'govuk-!-font-weight-bold'
+            },
+            prefix: {
+              text: "£"
+            }
+          }) }}
+
+        </div>
+
+        <button class="govuk-button govuk-!-margin-top-4" type="submit" >
+          Review account
+        </button>
+
+        <p class="govuk-body"><a class="govuk-link govuk-! govuk-link--no-visited-state" href="../create-account.html">Cancel</a></p>
+
+      </form>
+
+      
+
+
+
+    </div>
+  </div>
+
+  <script>
+
+const inputElement = document.getElementById('Offence1_Code');
+    const resultsContainer = document.getElementById('Offence1_Title_Container');
+    const offenceTitleDisplay = document.getElementById('Offence1_Title_Title');
+
+    // Load saved input value and visibility state from localStorage
+    const savedInputValue = localStorage.getItem('Offence1_Code_Value');
+    const savedResultsVisible = localStorage.getItem('Offence1_Results_Visible');
+
+    if (savedInputValue) {
+      inputElement.value = savedInputValue;
+      updateOffenceTitleDisplay(savedInputValue);
+    }
+
+    if (savedResultsVisible === 'true') {
+      resultsContainer.style.display = 'block';
+    } else {
+      resultsContainer.style.display = 'none';
+    }
+
+    inputElement.addEventListener('input', function() {
+      const inputValue = inputElement.value.trim();
+
+      // Toggle the display of the results based on input presence
+      if (inputValue.length === 7) {
+        resultsContainer.style.display = 'block'; // Show results when there is input
+        updateOffenceTitleDisplay(inputValue);
+      } else {
+        resultsContainer.style.display = 'none'; // Hide results when input is empty
+        offenceTitleDisplay.textContent = ''; // Clear offence title
+      }
+
+      // Save the current state to localStorage
+      localStorage.setItem('Offence1_Code_Value', inputValue);
+      localStorage.setItem('Offence1_Results_Visible', inputValue.length === 7);
+    });
+
+    function updateOffenceTitleDisplay(inputValue) {
+    inputValue = inputValue.toUpperCase();
+    switch (inputValue) {
+      case 'RR84205':
+          offenceTitleDisplay.textContent = "Speeding – exceed limit for type of vehicle (not goods/passenger vehicle) – manned equipment";
+          break;
+      case 'PH97003':
+          offenceTitleDisplay.textContent = "Harassment – breach of a restraining order on conviction";
+          break;
+      case 'CD71039':
+          offenceTitleDisplay.textContent = "Criminal Damage to property valued under £5000.00";
+          break;
+      case 'TH68010':
+          offenceTitleDisplay.textContent = "Theft from a shop";
+          break;
+      case 'CA03010':
+          offenceTitleDisplay.textContent = "Use a television set without a licence";
+          break;    
+      case 'RT88567':
+          offenceTitleDisplay.textContent = "Fail to give information relating to the identification of the driver/rider of a vehicle when required";
+          break;
+      case 'CJ88116':
+          offenceTitleDisplay.textContent = "Assault by beating of an emergency worker";
+          break;
+      case 'TH68050':
+          offenceTitleDisplay.textContent = "Take a motor vehicle without the owners consent";
+          break;
+      case 'TH68036':
+          offenceTitleDisplay.textContent = "Burglary dwelling and theft – no violence";
+          break;
+      case 'TH68045':
+          offenceTitleDisplay.textContent = "Aggravated Burglary – dwelling";
+          break;
+      case 'OF61017':
+          offenceTitleDisplay.textContent = "Section 18 - Grievous Bodily Harm with Intent";
+          break;
+      default:
+          offenceTitleDisplay.textContent = "Alter/deface/mutilate/add to vehicle licence";
+      }
+    }
+
+
+  </script>
+
+    
+  
+  
+  
+
+{% endblock %}
