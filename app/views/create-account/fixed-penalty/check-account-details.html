@@ -193,7 +193,11 @@
               Address
             </dt>
             <dd class="govuk-summary-list__value">
-              {{defendantAddress | safe or "Not provided"}}
+              {% if data['addressLine1'] %}
+              {{defendantAddress | safe}}
+              {% else %}
+              Not provided
+              {% endif %}
             </dd>
           </div>
 
