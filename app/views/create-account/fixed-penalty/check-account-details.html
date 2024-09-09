@@ -1,0 +1,258 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Check account details" %}
+
+{% block beforeContent %}
+
+<a href="fixed-penalty-details.html" class="govuk-back-link">Back</a>
+
+{% endblock %}
+
+{% block content %}
+
+<!-- NUNJUCKS -->
+<div>
+
+  {% set defendantAddress %}
+    {{ data['addressLine1'] }}<br>
+    {% if data['addressLine2'] %}
+    {{ data['addressLine2'] }}<br>
+    {% endif %}
+    {% if data['addressLine3'] %}
+    {{ data['addressLine3'] }}<br>
+    {% endif %}
+    {% if data['addressPostcode'] %}
+    {{ data['addressPostcode'] }}
+    {% endif %}
+  {% endset %}
+
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+
+    <!-- ACCOUNT DETAILS -->
+
+    <div class="govuk-summary-card" id="account-details-summary">
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Business unit
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['businessUnit'] or "Avon and Somerset"}}
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Account type
+            </dt>
+            <dd class="govuk-summary-list__value">
+              Fixed Penalty
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Defendant type
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['defendantTypeFP']}}
+            </dd>
+          </div>
+          {% if data['businessUnit'] == "South Wales" %}
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Document language
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{"English only" if data['doc umentLanguage'] == 'English' else "Welsh and English"}}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link govuk-link--no-visited-state" href="./language-preference.html">Change<span class="govuk-visually-hidden"> document language</span></a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Court hearing language
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{"English only" if data['courtHearingLanguage'] == 'English' else "Welsh and English"}}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link govuk-link--no-visited-state" href="./language-preference.html">Change<span class="govuk-visually-hidden"> document language</span></a>
+            </dd>
+          </div>
+          {% endif %}
+        </dl>
+      </div>
+    </div>
+
+    <!-- COURT DETAILS -->
+
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          Issuing authority and court details
+        </h2>
+        <ul class="govuk-summary-card__actions">
+          <li class="govuk-summary-card__action">
+            <a class="govuk-link govuk-link--no-visited-state" href="./fixed-penalty-details.html">Change<span class="govuk-visually-hidden"> issuing authority and court details</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Issuing authority
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['policeForce'] or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Enforcement court
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['enforcementCourt'] or "Not provided"}}
+            </dd>
+          </div>
+
+        </dl>
+      </div>
+    </div>
+
+    {% if data['defendantTypeFP'] == "Adult or youth" %}
+
+    <!-- PERSONAL DETAILS -->
+
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          Personal details
+        </h2>
+        <ul class="govuk-summary-card__actions">
+          <li class="govuk-summary-card__action">
+            <a class="govuk-link govuk-link--no-visited-state" href="./fixed-penalty-details.html">Change<span class="govuk-visually-hidden"> personal details</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Title
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['title'] or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              First names
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['firstName'] or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Last name
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['lastName'] or "Not provided"}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Date of birth
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {% if data['DDOB'] %}
+              {{ data['DDOB'] | formatDate | govukDate}}
+              {% else %}
+              Not provided (Adult)
+              {% endif %}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Address
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{defendantAddress | safe or "Not provided"}}
+            </dd>
+          </div>
+
+        </dl>
+      </div>
+    </div>
+
+    {% elseif data['defendantTypeFP'] == "Company" %}
+
+    <!-- COMPANY DETAILS -->
+
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          Company details
+        </h2>
+        <ul class="govuk-summary-card__actions">
+          <li class="govuk-summary-card__action">
+            <a class="govuk-link govuk-link--no-visited-state" href="./fixed-penalty-details.html">Change<span class="govuk-visually-hidden"> company details</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Company name
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['companyName']}}
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Address
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{defendantAddress | safe}}
+            </dd>
+          </div>
+
+        </dl>
+      </div>
+    </div>
+
+    {% endif %}
+
+    {{ govukButton({
+      text: "Submit for review",
+      href: "./confirmation.html"
+    }) }}
+
+    <p class="govuk-body" data-module="edge"><a href="#" class="govuk-link destructive-link">Delete account</a></p>
+
+  </div>
+</div>
+
+{% endblock %}
+
