@@ -1,0 +1,42 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "You’ve submitted this account for review" %}
+
+{% block pageTitle %}
+{{ pageName }} – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-6">
+      <h1 class="govuk-panel__title govuk-!-font-size-36">
+        {{pageName}}
+      </h1>
+    </div>
+
+
+    <h2 class="govuk-heading-m">Next steps</h2>
+    <p class="govuk-body"><a class="govuk-link--no-visited-state" href="/clear-session" id="clear-storage-link">Create a new account</a></p>
+    <p class="govuk-body" data-module="edge"><a class="govuk-link--no-visited-state" href="../inputter/in-review.html">See all accounts in review</a></p>
+
+
+  </div>
+</div>    
+
+<script>
+  document.getElementById('clear-storage-link').addEventListener('click', function(event) {
+    window.localStorage.clear();
+    window.sessionStorage.clear();
+  });
+</script>
+
+{% endblock %}
+
+
