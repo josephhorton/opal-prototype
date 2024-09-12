@@ -23,14 +23,13 @@
 
           <!-- POLICE FORCE -->
           <div>
-            {{ xGovukAutocomplete({
+
+            {{ govukInput({
               formGroup: {
                 classes: "govuk-input--width-40"
               },
               id: "policeForce",
               name: "policeForce",
-              value: data['policeForce'],
-              allowEmpty: true,
               label: {
                 classes: "govuk-label--s",
                 text: "Issuing authority"
@@ -38,12 +37,7 @@
               hint: {
                 text: "Police force, Central Ticket Office (CTO) or other"
               },
-              items: [
-                { text: "Police (1)" },
-                { text: "Police (2)" },
-                { text: "Police (3)" },
-                { text: "Police (4)" }
-              ]
+              value: data['policeForce']
             }) }}
           </div>
 
@@ -628,23 +622,21 @@
           </div>
   
           <!-- DATE OF BIRTH -->
-          <div class="govuk-form-group">
-            <label class="govuk-label govuk-label--s" for="date">Date of birth</label>
-            <div id="date-hint" class="govuk-hint">
-              For example, 31/01/2023
-            </div>
-            <div class="govuk-input__wrapper">
-              <input class="govuk-input moj-js-datepicker-input govuk-input--width-10" id="date-of-birth" name="DDOB" type="text" autocomplete="off" value="{{data['DDOB']}}">
-              <button class="moj-datepicker-toggle moj-js-datepicker-toggle" type="button" aria-haspopup="dialog" aria-controls="datepicker-date" aria-expanded="false">
-                <span class="govuk-visually-hidden">Choose date</span>
-                <svg width="32" height="24" focusable="false" class="moj-datepicker-icon" aria-hidden="true" role="img" viewBox="0 0 22 22">
-                  <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M16.1333 2.93333H5.86668V4.4C5.86668 5.21002 5.21003 5.86667 4.40002 5.86667C3.59 5.86667 2.93335 5.21002 2.93335 4.4V2.93333H2C0.895431 2.93333 0 3.82877 0 4.93334V19.2667C0 20.3712 0.89543 21.2667 2 21.2667H20C21.1046 21.2667 22 20.3712 22 19.2667V4.93333C22 3.82876 21.1046 2.93333 20 2.93333H19.0667V4.4C19.0667 5.21002 18.41 5.86667 17.6 5.86667C16.79 5.86667 16.1333 5.21002 16.1333 4.4V2.93333ZM20.5333 8.06667H1.46665V18.8C1.46665 19.3523 1.91436 19.8 2.46665 19.8H19.5333C20.0856 19.8 20.5333 19.3523 20.5333 18.8V8.06667Z"></path>
-                  <rect x="3.66669" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
-                  <rect x="16.8667" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
-                </svg>
-              </button>
-            </div>
-          </div>
+          {%- from "moj/components/date-picker/macro.njk" import mojDatePicker -%}
+
+          {{ mojDatePicker({
+            id: "DDOB",
+            name: "DDOB",
+            value: data['DDOB'],
+            label: {
+                text: "Date of birth",
+                classes: "govuk-label--s"
+            },
+            hint: {
+              text: "For example, 17/5/2024"
+            }
+          }) }}
+
         </div>
 
         <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
@@ -774,6 +766,7 @@
               name: "drivingLicence",
               value: data['drivingLicence']
             }) }}
+            
 
             {{ govukInput({
               label: {
@@ -785,26 +778,22 @@
               name: "noticeToOwner",
               value: data['noticeToOwner']
             }) }} 
-            
-            <!-- DATE ISSUED -->
-            <div class="govuk-form-group">
-              <label class="govuk-label govuk-label--s" for="date">Date notice to owner was issued</label>
-              <div id="date-hint" class="govuk-hint">
-                For example, 31/01/2023
-              </div>
-              <div class="govuk-input__wrapper">
-                <input class="govuk-input moj-js-datepicker-input govuk-input--width-10" id="dateIssued" name="dateIssued" type="text" autocomplete="off" value="{{data['dateIssued']}}">
-                <button class="moj-datepicker-toggle moj-js-datepicker-toggle" type="button" aria-haspopup="dialog" aria-controls="datepicker-date" aria-expanded="false">
-                  <span class="govuk-visually-hidden">Choose date</span>
-                  <svg width="32" height="24" focusable="false" class="moj-datepicker-icon" aria-hidden="true" role="img" viewBox="0 0 22 22">
-                    <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M16.1333 2.93333H5.86668V4.4C5.86668 5.21002 5.21003 5.86667 4.40002 5.86667C3.59 5.86667 2.93335 5.21002 2.93335 4.4V2.93333H2C0.895431 2.93333 0 3.82877 0 4.93334V19.2667C0 20.3712 0.89543 21.2667 2 21.2667H20C21.1046 21.2667 22 20.3712 22 19.2667V4.93333C22 3.82876 21.1046 2.93333 20 2.93333H19.0667V4.4C19.0667 5.21002 18.41 5.86667 17.6 5.86667C16.79 5.86667 16.1333 5.21002 16.1333 4.4V2.93333ZM20.5333 8.06667H1.46665V18.8C1.46665 19.3523 1.91436 19.8 2.46665 19.8H19.5333C20.0856 19.8 20.5333 19.3523 20.5333 18.8V8.06667Z"></path>
-                    <rect x="3.66669" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
-                    <rect x="16.8667" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
-                  </svg>
-                </button>
-              </div>
-            </div>
-  
+
+            {%- from "moj/components/date-picker/macro.njk" import mojDatePicker -%}
+
+
+            {{ mojDatePicker ({
+              id: "dateIssued",
+              name: "dateIssued",
+              value: data['dateIssued'],
+              label: {
+                  text: "Date notice to owner was issued",
+                  classes: "govuk-label--s"
+              },
+              hint: {
+                text: "For example, 17/5/2024"
+              }
+            }) }}
         
           {% endset -%}
 
@@ -833,24 +822,20 @@
             ]
           }) }}
 
-          <!-- DATE OF OFFENCE -->
-          <div class="govuk-form-group">
-            <label class="govuk-label govuk-label--s" for="date">Date of offence</label>
-            <div id="date-hint" class="govuk-hint">
-              For example, 31/01/2023
-            </div>
-            <div class="govuk-input__wrapper">
-              <input class="govuk-input moj-js-datepicker-input govuk-input--width-10" id="dateOffence" name="dateOffence" type="text" autocomplete="off" value="{{data['dateOffence']}}">
-              <button class="moj-datepicker-toggle moj-js-datepicker-toggle" type="button" aria-haspopup="dialog" aria-controls="datepicker-date" aria-expanded="false">
-                <span class="govuk-visually-hidden">Choose date</span>
-                <svg width="32" height="24" focusable="false" class="moj-datepicker-icon" aria-hidden="true" role="img" viewBox="0 0 22 22">
-                  <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M16.1333 2.93333H5.86668V4.4C5.86668 5.21002 5.21003 5.86667 4.40002 5.86667C3.59 5.86667 2.93335 5.21002 2.93335 4.4V2.93333H2C0.895431 2.93333 0 3.82877 0 4.93334V19.2667C0 20.3712 0.89543 21.2667 2 21.2667H20C21.1046 21.2667 22 20.3712 22 19.2667V4.93333C22 3.82876 21.1046 2.93333 20 2.93333H19.0667V4.4C19.0667 5.21002 18.41 5.86667 17.6 5.86667C16.79 5.86667 16.1333 5.21002 16.1333 4.4V2.93333ZM20.5333 8.06667H1.46665V18.8C1.46665 19.3523 1.91436 19.8 2.46665 19.8H19.5333C20.0856 19.8 20.5333 19.3523 20.5333 18.8V8.06667Z"></path>
-                  <rect x="3.66669" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
-                  <rect x="16.8667" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
-                </svg>
-              </button>
-            </div>
-          </div>
+          {%- from "moj/components/date-picker/macro.njk" import mojDatePicker -%}
+
+          {{ mojDatePicker({
+            id: "dateOffence",
+            name: "dateOffence",
+            value: data['dateOffence'],
+            label: {
+                text: "Date of offence",
+                classes: "govuk-label--s"
+            },
+            hint: {
+              text: "For example, 17/5/2024"
+            }
+          }) }}
 
           <!-- Offence code input -->
           {{ govukInput({
@@ -917,23 +902,20 @@
           {% if data['defendantTypeFP'] == "Adult or youth" %}
           <div id="conditional-collo">
             {% set collectionOrderDate %}
-            <div class="govuk-form-group">
-              <label class="govuk-label govuk-label--s" for="collection-order-date">Date of collection order</label>
-              <div class="govuk-hint">
-                For example, 31/01/2023
-              </div>
-              <div class="govuk-input__wrapper">
-                <input class="govuk-input moj-js-datepicker-input govuk-input--width-10" id="collection-order-date" name="collection-order-date" type="text" autocomplete="off" value="{{data['collection-order-date']}}">
-                <button class="moj-datepicker-toggle moj-js-datepicker-toggle" type="button" aria-haspopup="dialog" aria-controls="datepicker-date" aria-expanded="false">
-                  <span class="govuk-visually-hidden">Choose date</span>
-                  <svg width="32" height="24" focusable="false" class="moj-datepicker-icon" aria-hidden="true" role="img" viewBox="0 0 22 22">
-                    <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M16.1333 2.93333H5.86668V4.4C5.86668 5.21002 5.21003 5.86667 4.40002 5.86667C3.59 5.86667 2.93335 5.21002 2.93335 4.4V2.93333H2C0.895431 2.93333 0 3.82877 0 4.93334V19.2667C0 20.3712 0.89543 21.2667 2 21.2667H20C21.1046 21.2667 22 20.3712 22 19.2667V4.93333C22 3.82876 21.1046 2.93333 20 2.93333H19.0667V4.4C19.0667 5.21002 18.41 5.86667 17.6 5.86667C16.79 5.86667 16.1333 5.21002 16.1333 4.4V2.93333ZM20.5333 8.06667H1.46665V18.8C1.46665 19.3523 1.91436 19.8 2.46665 19.8H19.5333C20.0856 19.8 20.5333 19.3523 20.5333 18.8V8.06667Z"></path>
-                    <rect x="3.66669" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
-                    <rect x="16.8667" width="1.46667" height="5.13333" rx="0.733333" fill="currentColor"></rect>
-                  </svg>
-                </button>
-              </div>
-            </div>
+              {%- from "moj/components/date-picker/macro.njk" import mojDatePicker -%}
+
+              {{ mojDatePicker({
+                id: "collection-order-date",
+                name: "collection-order-date",
+                value: data['collection-order-date'],
+                label: {
+                    text: "Date of collection order",
+                    classes: "govuk-label--s"
+                },
+                hint: {
+                  text: "For example, 17/5/2024"
+                }
+              }) }}
         
             {% endset -%}
   

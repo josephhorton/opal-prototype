@@ -4,13 +4,49 @@
 
 {% block beforeContent %}
 
-<a href="../index.html" class="govuk-back-link">Back</a>
+<!-- <a href="../index.html" class="govuk-back-link">Back</a> -->
 
 {% endblock %}
 
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
+
+    <!-- <div class="moj-banner moj-banner--warning" role="region" aria-label="Warning">
+    
+      <p class="govuk-body govuk-!-font-weight-bold">An error has occurred - <a class="govuk-link--no-visited-state" href="">SMITH, Harry’s</a> account has not been submitted - try again.</p>
+
+      {{ govukButton({
+        text: "Resubmit",
+        href: "#",
+        classes: "govuk-!-margin-bottom-1"
+      }) }}
+    
+    </div> -->
+    
+
+    <div class="govuk-notification-banner warning" style="border: 5px solid #d4351c; background-color: #d4351c;" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+      <div class="govuk-notification-banner__header">
+        <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+          Important
+        </h2>
+      </div>
+      <div class="govuk-notification-banner__content">
+        <p class="govuk-notification-banner__heading">
+          There was an error
+        </p>
+
+        <p class="govuk-body">
+          <a class="govuk-link--no-visited-state" href="#">Harry Smith’s</a> account has not been submitted – try again.
+        </p>
+
+        {{ govukButton({
+          text: "Resubmit",
+          href: "#"
+        }) }}
+      </div>
+    </div>
+
     <h1 class="govuk-heading-l">{{pageName}}</h1>
 
     <!-- STATS FOR CHECKER -->
