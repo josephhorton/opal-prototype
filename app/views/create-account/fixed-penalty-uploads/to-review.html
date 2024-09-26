@@ -1,4 +1,4 @@
-{% extends "layouts/checker.html" %}
+{% extends "layouts/fixed-penalty.html" %}
 
 {% set pageName = "Fixed Penalty uploads" %}
 
@@ -33,7 +33,7 @@
           <div class="moj-button-menu__wrapper">
     
             <button type="submit" class="govuk-button moj-button-menu__item govuk-button--secondary moj-page-header-actions__action" data-module="govuk-button">
-              Reports
+              Report / Register
             </button>
     
           </div>
@@ -69,6 +69,24 @@
       href: "./confirmation.html",
       classes: "govuk-!-margin-bottom-4"
     }) }}
+
+    <style>
+    .govuk-table__header {
+      vertical-align: middle;
+    }
+    .govuk-table__cell {
+      vertical-align: middle;
+    }
+    
+    .moj-multi-select__checkbox {
+      display: flex;
+      padding-left: 0;
+    }
+    
+    .govuk-table__header, .govuk-table__cell {
+      padding: 5px 20px 5px 0;
+    }
+    </style>
 
     <table class="govuk-table" data-module="moj-multi-select" data-multi-select-checkbox="#select-all">
       <thead class="govuk-table__head">
