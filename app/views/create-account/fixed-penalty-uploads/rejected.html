@@ -1,6 +1,6 @@
 {% extends "layouts/checker.html" %}
 
-{% set pageName = "Review accounts" %}
+{% set pageName = "Fixed Penalty uploads" %}
 
 {% block beforeContent %}
 
@@ -13,29 +13,34 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
 
-      <h1 class="govuk-heading-l">{{pageName}}</h1>
+      <div class="moj-page-header-actions govuk-!-margin-bottom-6">
 
-      <!-- STATS FOR CHECKER -->
-      <!-- <div style="display: inline-block" class="govuk-!-margin-bottom-4">
-
-        <div class="govuk-!-padding-3 in-review govuk-tag--grey">
-          <span class="govuk-body govuk-!-font-size-27 govuk-!-font-weight-bold review-stats-text" style="color: #282d30;">6</span>
-          <p class="govuk-body govuk-!-margin-bottom-0" style="color: #282d30;">In review</p>
+        <div class="moj-page-header-actions__title">
+          <h1 class="govuk-heading-l">{{pageName}}</h1>
         </div>
-
-        <div class="govuk-!-padding-3 govuk-!-margin-left-3 in-review govuk-tag--grey">
-          <span class="govuk-body govuk-!-font-size-27 govuk-!-font-weight-bold review-stats-text" style="color: #282d30;">3</span>
-          <p class="govuk-body govuk-!-margin-bottom-0" style="color: #282d30;">Rejected</p>
+      
+        <div class="moj-page-header-actions__actions">
+    
+          <div class="moj-button-menu">
+            <div class="moj-button-menu__wrapper">
+      
+              <button type="submit" class="govuk-button moj-button-menu__item govuk-button--secondary moj-page-header-actions__action" data-module="govuk-button">
+                Reports
+              </button>
+      
+            </div>
+          </div>
+      
         </div>
-
-      </div> -->
+      
+      </div>
 
       <nav class="moj-sub-navigation" aria-label="Sub navigation">
 
         <ul class="moj-sub-navigation__list">
           <li class="moj-sub-navigation__item">
             <a class="moj-sub-navigation__link" href="to-review.html">
-              To review
+              To publish
             </a>
           </li>
       
@@ -45,18 +50,6 @@
               <!-- <span id="notifications" class="govuk-!-margin-left-1 moj-notification-badge">1</span> -->
             </a>
           </li>
-
-          <!-- <li class="moj-sub-navigation__item">
-            <a class="moj-sub-navigation__link" href="approved.html">
-              Approved
-            </a>
-          </li> -->
-
-          <li class="moj-sub-navigation__item">
-            <a class="moj-sub-navigation__link" href="deleted.html">
-              Deleted
-            </a>
-          </li>
         </ul>
       
       </nav>
@@ -64,9 +57,9 @@
       <h2 class="govuk-heading-m ">Rejected</h2>
 
 
-      <!-- <p class="govuk-body">No accounts have been rejected.</p> -->
+      <p class="govuk-body">No uploaded accounts have been rejected.</p>
 
-      <div class="moj-scrollable-pane">
+      <!-- <div class="moj-scrollable-pane">
 
         <table class="govuk-table" data-module="moj-sortable-table">
   
@@ -115,7 +108,7 @@
         
           </tbody>
         </table>
-        </div>
+      </div> -->
 
       
 

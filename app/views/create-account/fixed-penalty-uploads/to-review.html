@@ -1,0 +1,222 @@
+{% extends "layouts/checker.html" %}
+
+{% set pageName = "Fixed Penalty uploads" %}
+
+{% block beforeContent %}
+
+
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    <!-- {% if data['published-accounts'] == "true" %}
+    {%- from "moj/components/banner/macro.njk" import mojBanner -%}
+
+    {{ mojBanner({
+    type: 'success',
+    text: 'You have successfully published 20 accounts',
+    iconFallbackText: 'Success'
+    }) }}
+    {% endif %} -->
+    
+    <div class="moj-page-header-actions govuk-!-margin-bottom-6">
+
+      <div class="moj-page-header-actions__title">
+        <h1 class="govuk-heading-l">{{pageName}}</h1>
+      </div>
+    
+      <div class="moj-page-header-actions__actions">
+  
+        <div class="moj-button-menu">
+          <div class="moj-button-menu__wrapper">
+    
+            <button type="submit" class="govuk-button moj-button-menu__item govuk-button--secondary moj-page-header-actions__action" data-module="govuk-button">
+              Reports
+            </button>
+    
+          </div>
+        </div>
+    
+      </div>
+    
+    </div>
+    
+
+    <nav class="moj-sub-navigation" aria-label="Sub navigation">
+      <ul class="moj-sub-navigation__list">
+        <li class="moj-sub-navigation__item">
+          <a class="moj-sub-navigation__link" aria-current="page" href="to-review.html">
+            To publish 
+            <!-- <span id="notifications" class="govuk-!-margin-left-1 moj-notification-badge">6</span> -->
+          </a>
+        </li>
+        <li class="moj-sub-navigation__item">
+          <a class="moj-sub-navigation__link" href="rejected.html">
+            Rejected
+            <!-- <span id="notifications" class="govuk-!-margin-left-1 moj-notification-badge">1</span> -->
+          </a>
+        </li>
+        </li>
+      </ul>
+    </nav>
+
+    <h2 class="govuk-heading-m">To publish</h2>
+
+    {{ govukButton({
+      text: "Publish",
+      href: "./confirmation.html",
+      classes: "govuk-!-margin-bottom-4"
+    }) }}
+
+    <table class="govuk-table" data-module="moj-multi-select" data-multi-select-checkbox="#select-all">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="col" id="select-all" style="width: 0%;"></th>
+          <th class="govuk-table__header" scope="col" style="width: 20%;">Name</th>
+          <th class="govuk-table__header" scope="col" style="width: 10%;">Defendant</th>
+          <th class="govuk-table__header" scope="col" style="width: 15%;">Date of birth</th>
+          <th class="govuk-table__header" scope="col" style="width: 25%;">Address line 1</th>
+          <th class="govuk-table__header" scope="col" style="width: 20%;">Amount imposed</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+
+        <tr class="govuk-table__row govuk-table__row--selected">
+          <td class="govuk-table__cell">
+            <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+              <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_john_smith">
+              <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="add_collection_order_john_smith">
+                <span class="govuk-visually-hidden">Add collection order</span>
+              </label>
+            </div>
+          </td>
+          <td class="govuk-table__cell">SMITH, John</td>
+          <td class="govuk-table__cell">Adult</td>
+          <td class="govuk-table__cell">12 Jun 1986</td>
+          <td class="govuk-table__cell">68 Abbey Lane</td>
+          <td class="govuk-table__cell">£150.00</td>
+        </tr>
+
+        <tr class="govuk-table__row govuk-table__row--selected">
+          <td class="govuk-table__cell">
+            <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+              <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_john_smith">
+              <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="add_collection_order_john_smith">
+                <span class="govuk-visually-hidden">Add collection order</span>
+              </label>
+            </div>
+          </td>
+          <td class="govuk-table__cell">SPENCER, Abigail</td>
+          <td class="govuk-table__cell">Adult</td>
+          <td class="govuk-table__cell">6 Dec 1995</td>
+          <td class="govuk-table__cell">90 Queen’s Crescent</td>
+          <td class="govuk-table__cell">£95.00</td>
+        </tr>
+
+        <tr class="govuk-table__row govuk-table__row--selected">
+          <td class="govuk-table__cell">
+            <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+              <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_john_smith">
+              <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="add_collection_order_john_smith">
+                <span class="govuk-visually-hidden">Add collection order</span>
+              </label>
+            </div>
+          </td>
+          <td class="govuk-table__cell">JONES, Elizabeth</td>
+          <td class="govuk-table__cell">Adult</td>
+          <td class="govuk-table__cell">3 Jan 1947 </td>
+          <td class="govuk-table__cell">34 Brookside Close</td>
+          <td class="govuk-table__cell">£150.00</td>
+        </tr>
+
+        <tr class="govuk-table__row govuk-table__row--selected">
+          <td class="govuk-table__cell">
+            <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+              <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_john_smith">
+              <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="add_collection_order_john_smith">
+                <span class="govuk-visually-hidden">Add collection order</span>
+              </label>
+            </div>
+          </td>
+          <td class="govuk-table__cell">Quantum Inc.</td>
+          <td class="govuk-table__cell">Adult</td>
+          <td class="govuk-table__cell">–</td>
+          <td class="govuk-table__cell">50 High Street</td>
+          <td class="govuk-table__cell">£150.00</td>
+        </tr>
+
+        <tr class="govuk-table__row govuk-table__row--selected">
+          <td class="govuk-table__cell">
+            <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+              <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_john_smith">
+              <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="add_collection_order_john_smith">
+                <span class="govuk-visually-hidden">Add collection order</span>
+              </label>
+            </div>
+          </td>
+          <td class="govuk-table__cell">STONE, Harriet</td>
+          <td class="govuk-table__cell">Adult</td>
+          <td class="govuk-table__cell">30 Jun 1989</td>
+          <td class="govuk-table__cell">Flat 1</td>
+          <td class="govuk-table__cell">£150.00</td>
+        </tr>
+
+        <tr class="govuk-table__row govuk-table__row--selected">
+          <td class="govuk-table__cell">
+            <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+              <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_john_smith">
+              <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="add_collection_order_john_smith">
+                <span class="govuk-visually-hidden">Add collection order</span>
+              </label>
+            </div>
+          </td>
+          <td class="govuk-table__cell">GARDNER, Zoe</td>
+          <td class="govuk-table__cell">Youth</td>
+          <td class="govuk-table__cell">3 Jun 2007</td>
+          <td class="govuk-table__cell">49 Church Hill</td>
+          <td class="govuk-table__cell">£150.00</td>
+        </tr>
+
+        <tr class="govuk-table__row govuk-table__row--selected">
+          <td class="govuk-table__cell">
+            <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+              <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_john_smith">
+              <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="add_collection_order_john_smith">
+                <span class="govuk-visually-hidden">Add collection order</span>
+              </label>
+            </div>
+          </td>
+          <td class="govuk-table__cell">Horizon IT Ltd.  </td>
+          <td class="govuk-table__cell">Company</td>
+          <td class="govuk-table__cell">–</td>
+          <td class="govuk-table__cell">Warehouse A</td>
+          <td class="govuk-table__cell">£95.00</td>
+        </tr>
+
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<!-- <div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-half">
+    <h2 class="govuk-heading-m">To publish</h2>
+    {% if data['published-accounts'] == "true" %}
+    <p class="govuk-body">There are no accounts to publish.</p>
+    {% else %}
+    <p class="govuk-body">You have 20 accounts to review and publish.</p>
+
+    {{ govukButton({
+      text: "Review accounts",
+      href: "./add-collection-orders.html"
+    }) }}
+    {% endif %}
+  </div>
+</div> -->
+
+
+{% endblock %}
+

@@ -34,7 +34,7 @@ router.post('/create-account-form', function(request, response) {
         response.redirect("./create-account/account-details?courtHearingLanguage=English&documentLanguage=English")
     } 
     else if (accountType == "Fixed Penalty") {
-        response.redirect("./create-account/fixed-penalty/fixed-penalty-details")
+        response.redirect("./create-account/fixed-penalty/fixed-penalty-details?offenceType=Vehicle")
     } 
     else if (accountType == "Conditional Caution"){
         response.redirect("./create-account/end-of-prototype")

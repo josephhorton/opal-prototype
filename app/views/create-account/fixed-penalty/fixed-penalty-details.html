@@ -17,6 +17,50 @@
 
       <form id="personal-details-form" method="post" novalidate action="check-account-details">
 
+        {% if data['businessUnit'] == "South Wales" %}
+        {{ govukSummaryList({
+          classes: "govuk-!-margin-bottom-7",
+          rows: [
+            {
+              key: {
+                text: "Document language"
+              },
+              value: {
+                text: "English only" if data['documentLanguage'] == 'English' else "Welsh and English"
+              },
+              actions: {
+                items: [
+                  {
+                    href: "language-preference",
+                    text: "Change",
+                    visuallyHiddenText: "document language",
+                    classes: "govuk-link--no-visited-state"
+                  }
+                ]
+              }   
+            },
+            {
+              key: {
+                text: "Court hearing language"
+              },
+              value: {
+                html: "English only" if data['courtHearingLanguage'] == 'English' else "Welsh and English"
+              },
+              actions: {
+                items: [
+                  {
+                    href: "language-preference",
+                    text: "Change",
+                    visuallyHiddenText: "language preference",
+                    classes: "govuk-link--no-visited-state"
+                  }
+                ]
+              }   
+            } 
+          ]
+        }) }}
+        {% endif %}
+
         <!-- POLICE AND COURT DETAILS -->
         <div>
           <h2 class="govuk-heading-m">Issuing authority and court details</h2>
@@ -875,6 +919,9 @@
           }) }} 
 
           {{ govukInput({
+            formGroup: {
+              classes: "govuk-!-margin-bottom-1"
+            },
             label: {
               text: "Place of offence",
               classes: "govuk-label--s"
@@ -884,6 +931,8 @@
             name: "placeOffence",
             value: data['placeOffence']
           }) }}  
+          <p class="govuk-body govuk-hint govuk-!-margin-bottom-4" >You have 30 characters remaining</p>
+
           
           {{ govukInput({
             id: 'amountImposed',
@@ -950,10 +999,10 @@
 
         <h2 class="govuk-heading-m">Comments and notes</h2>
 
-        {{ govukCharacterCount({
-          name: "accountComment",
-          id: "accountComment",
-          classes: "govuk-input--width-30",
+        {{ govukInput({
+          formGroup: {
+            classes: "govuk-!-margin-bottom-1"
+          },
           label: {
             text: "Add comment",
             classes: "govuk-label--s"
@@ -961,9 +1010,12 @@
           hint: {
             text: "For example, a warning, which will appear on the account summary"
           },
-          maxlength: 258,
+          classes: "govuk-input--width-30",
+          id: "accountComment",
+          name: "accountComment",
           value: data['accountComment']
-        }) }}
+        }) }}  
+        <p class="govuk-body govuk-hint govuk-!-margin-bottom-4" >You have 30 characters remaining</p>
   
   
         {{ govukCharacterCount({
