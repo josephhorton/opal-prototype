@@ -1,6 +1,6 @@
 {% extends "layouts/fixed-penalty.html" %}
 
-{% set pageName = "Publish" %}
+{% set pageName = "Register, review and publish" %}
 
 {% block beforeContent %}
 
@@ -15,25 +15,70 @@
       
       <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
-      <form method="post" novalidate action="to-review?published-accounts=true">
+        <h2 class="govuk-heading-m">Make collection orders</h2>
 
-        <h2 class="govuk-heading-m">Apply collection orders</h2>
+        <p class="govuk-body">Review and consider making collection orders if you have Authorised Functions.</p>
 
-        <table class="govuk-table" data-module="moj-multi-select" data-multi-select-checkbox="#select-all">
+        <style>
+          .govuk-table__header {
+            vertical-align: middle;
+          }
+      
+          .govuk-table__cell {
+            vertical-align: middle;
+          }
+          
+          .moj-multi-select__checkbox {
+            display: flex;
+            padding-left: 0;
+          }
+          
+          .govuk-table__header.table__header_COLLO {
+            padding: 4px 20px 4px 0px;
+          }
+
+          .govuk-table__cell.table__header_COLLO {
+            padding: 4px 20px 4px 0px;
+          }
+
+          .govuk-table__header {
+            padding: 13px 20px 13px 0px;
+          }
+
+          .govuk-table__cell {
+            padding: 13px 20px 13px 0px;
+          }
+      
+          #select-all {
+            max-width: 15px;
+          }
+
+          .govuk-checkboxes--small .govuk-checkboxes__input {
+              margin-left: -25px;
+          }
+          </style>
+
+
+      <div class="moj-scrollable-pane">
+        <table class="govuk-table collo" style="min-width: 1280px;" data-module="moj-multi-select" data-multi-select-checkbox="#select-all">
           <thead class="govuk-table__head">
             <tr class="govuk-table__row">
-              <th class="govuk-table__header" scope="col" id="select-all" style="width: 5%;"></th>
-              <th class="govuk-table__header" scope="col" style="width: 20%;">Name</th>
-              <th class="govuk-table__header" scope="col" style="width: 15%;">Defendant</th>
-              <th class="govuk-table__header" scope="col" style="width: 20%;">Date of birth</th>
-              <th class="govuk-table__header" scope="col" style="width: 20%;">Address line 1</th>
-              <th class="govuk-table__header" scope="col" style="width: 15%;">Amount imposed</th>
+              <th class="govuk-table__header table__header_COLLO" scope="col" id="select-all" style="width: 0%;"></th>
+              <th class="govuk-table__header table__header_COLLO" scope="col" style="width: 15%;">Name</th>
+              <th class="govuk-table__header table__header_COLLO" scope="col" style="width: 7.5%;">Defendant</th>
+              <th class="govuk-table__header table__header_COLLO" scope="col" style="width: 10%;">Date of birth</th>
+              <th class="govuk-table__header table__header_COLLO" scope="col" style="width: 15%;" >Address line 1</th>
+              <th class="govuk-table__header table__header_COLLO" scope="col" style="width: 15%;" >Business unit</th>
+              <th class="govuk-table__header table__header_COLLO" scope="col" style="width: 15%;" >Ticket number</th>
+              <th class="govuk-table__header  govuk-table__cell--numeric" scope="col" style="width: 5%;">Imposed</th>
             </tr>
           </thead>
           <tbody class="govuk-table__body">
 
+            {% if data['business-unit-upload'] == "avon_somerset" %}
+
             <tr class="govuk-table__row govuk-table__row--selected">
-              <td class="govuk-table__cell">
+              <td class="govuk-table__cell table__header_COLLO">
                 <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
                   <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_john_smith">
                   <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="add_collection_order_john_smith">
@@ -41,92 +86,451 @@
                   </label>
                 </div>
               </td>
-              <td class="govuk-table__cell">SMITH, John</td>
-              <td class="govuk-table__cell">Adult</td>
-              <td class="govuk-table__cell">12 Jun 1986</td>
-              <td class="govuk-table__cell">68 Abbey Lane</td>
-              <td class="govuk-table__cell">£150.00</td>
+              <td class="govuk-table__cell table__header_COLLO">SMITH, John</td>
+              <td class="govuk-table__cell table__header_COLLO">Adult</td>
+              <td class="govuk-table__cell table__header_COLLO">12 Jun 1986</td>
+              <td class="govuk-table__cell table__header_COLLO">68 Abbey Lane</td>
+              <td class="govuk-table__cell table__header_COLLO">Avon and Somerset</td>
+              <td class="govuk-table__cell table__header_COLLO">N1234567891234567</td>
+              <td class="govuk-table__cell  govuk-table__cell--numeric">£150.00</td>
             </tr>
 
             <tr class="govuk-table__row govuk-table__row--selected">
-              <td class="govuk-table__cell">
+              <td class="govuk-table__cell table__header_COLLO">
                 <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
-                  <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_john_smith">
+                  <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_spencer_abigail">
                   <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="add_collection_order_john_smith">
                     <span class="govuk-visually-hidden">Add collection order</span>
                   </label>
                 </div>
               </td>
-              <td class="govuk-table__cell">SPENCER, Abigail</td>
-              <td class="govuk-table__cell">Adult</td>
-              <td class="govuk-table__cell">6 Dec 1995</td>
-              <td class="govuk-table__cell">90 Queen’s Crescent</td>
-              <td class="govuk-table__cell">£95.00</td>
+              <td class="govuk-table__cell table__header_COLLO">SPENCER, Abigail</td>
+              <td class="govuk-table__cell table__header_COLLO">Adult</td>
+              <td class="govuk-table__cell table__header_COLLO">6 Dec 1995</td>
+              <td class="govuk-table__cell table__header_COLLO">90 Queen’s Crescent</td>
+              <td class="govuk-table__cell table__header_COLLO">Avon and Somerset</td>
+              <td class="govuk-table__cell table__header_COLLO">N1234567891234567</td>
+              <td class="govuk-table__cell  govuk-table__cell--numeric">£95.00</td>
             </tr>
 
             <tr class="govuk-table__row govuk-table__row--selected">
-              <td class="govuk-table__cell">
+              <td class="govuk-table__cell table__header_COLLO">
                 <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
-                  <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_john_smith">
+                  <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_elizabeth_jones">
                   <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="add_collection_order_john_smith">
                     <span class="govuk-visually-hidden">Add collection order</span>
                   </label>
                 </div>
               </td>
-              <td class="govuk-table__cell">JONES, Elizabeth</td>
-              <td class="govuk-table__cell">Adult</td>
-              <td class="govuk-table__cell">3 Jan 1947 </td>
-              <td class="govuk-table__cell">34 Brookside Close</td>
-              <td class="govuk-table__cell">£150.00</td>
+              <td class="govuk-table__cell table__header_COLLO">JONES, Elizabeth</td>
+              <td class="govuk-table__cell table__header_COLLO">Adult</td>
+              <td class="govuk-table__cell table__header_COLLO">3 Jan 1947 </td>
+              <td class="govuk-table__cell table__header_COLLO">34 Brookside Close</td>
+              <td class="govuk-table__cell table__header_COLLO">Avon and Somerset</td>
+              <td class="govuk-table__cell table__header_COLLO">N1234567891234567</td>
+              <td class="govuk-table__cell  govuk-table__cell--numeric">£150.00</td>
             </tr>
 
             <tr class="govuk-table__row govuk-table__row--selected">
-              <td class="govuk-table__cell">
+              <td class="govuk-table__cell table__header_COLLO">
                 <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
-                  <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_john_smith">
+                  <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_quantum_inc">
                   <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="add_collection_order_john_smith">
                     <span class="govuk-visually-hidden">Add collection order</span>
                   </label>
                 </div>
               </td>
-              <td class="govuk-table__cell">Quantum Inc.</td>
-              <td class="govuk-table__cell">Adult</td>
-              <td class="govuk-table__cell">–</td>
-              <td class="govuk-table__cell">50 High Street</td>
-              <td class="govuk-table__cell">£150.00</td>
+              <td class="govuk-table__cell table__header_COLLO">Quantum Inc.</td>
+              <td class="govuk-table__cell table__header_COLLO">Adult</td>
+              <td class="govuk-table__cell table__header_COLLO">–</td>
+              <td class="govuk-table__cell table__header_COLLO">50 High Street</td>
+              <td class="govuk-table__cell table__header_COLLO">Avon and Somerset</td>
+              <td class="govuk-table__cell table__header_COLLO">N1234567891234567</td>
+              <td class="govuk-table__cell  govuk-table__cell--numeric">£150.00</td>
             </tr>
 
             <tr class="govuk-table__row govuk-table__row--selected">
-              <td class="govuk-table__cell">
+              <td class="govuk-table__cell table__header_COLLO">
                 <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
-                  <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_john_smith">
+                  <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_harriet_stone">
                   <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="add_collection_order_john_smith">
                     <span class="govuk-visually-hidden">Add collection order</span>
                   </label>
                 </div>
               </td>
-              <td class="govuk-table__cell">STONE, Harriet</td>
-              <td class="govuk-table__cell">Adult</td>
-              <td class="govuk-table__cell">30 Jun 1989</td>
-              <td class="govuk-table__cell">Flat 1</td>
-              <td class="govuk-table__cell">£150.00</td>
+              <td class="govuk-table__cell table__header_COLLO">STONE, Harriet</td>
+              <td class="govuk-table__cell table__header_COLLO">Adult</td>
+              <td class="govuk-table__cell table__header_COLLO">30 Jun 1989</td>
+              <td class="govuk-table__cell table__header_COLLO">Flat 1</td>
+              <td class="govuk-table__cell table__header_COLLO">Avon and Somerset</td>
+              <td class="govuk-table__cell table__header_COLLO">N1234567891234567</td>
+              <td class="govuk-table__cell  govuk-table__cell--numeric">£150.00</td>
             </tr>
+
+            {% elseif data['business-unit-upload'] == "devon" %}
+              
+            <tr class="govuk-table__row govuk-table__row--selected">
+              <td class="govuk-table__cell table__header_COLLO">
+                <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+                  <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_emma_williams">
+                  <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="add_collection_order_emma_williams">
+                    <span class="govuk-visually-hidden">Add collection order</span>
+                  </label>
+                </div>
+              </td>
+              <td class="govuk-table__cell table__header_COLLO">WILLIAMS, Emma</td>
+              <td class="govuk-table__cell table__header_COLLO">Adult</td>
+              <td class="govuk-table__cell table__header_COLLO">14 Apr 1983</td>
+              <td class="govuk-table__cell table__header_COLLO">22 Orchard Way</td>
+              <td class="govuk-table__cell table__header_COLLO">Devon</td>
+              <td class="govuk-table__cell table__header_COLLO">N9876543210987654</td>
+              <td class="govuk-table__cell  govuk-table__cell--numeric">£120.00</td>
+            </tr>
+            
+            <tr class="govuk-table__row govuk-table__row--selected">
+              <td class="govuk-table__cell table__header_COLLO">
+                <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+                  <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_george_clark">
+                  <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="add_collection_order_george_clark">
+                    <span class="govuk-visually-hidden">Add collection order</span>
+                  </label>
+                </div>
+              </td>
+              <td class="govuk-table__cell table__header_COLLO">CLARK, George</td>
+              <td class="govuk-table__cell table__header_COLLO">Adult</td>
+              <td class="govuk-table__cell table__header_COLLO">8 Sep 1990</td>
+              <td class="govuk-table__cell table__header_COLLO">15 Maple Avenue</td>
+              <td class="govuk-table__cell table__header_COLLO">Devon</td>
+              <td class="govuk-table__cell table__header_COLLO">N1230984567891234</td>
+              <td class="govuk-table__cell  govuk-table__cell--numeric">£100.00</td>
+            </tr>
+            
+            <tr class="govuk-table__row govuk-table__row--selected">
+              <td class="govuk-table__cell table__header_COLLO">
+                <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+                  <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_sarah_johnson">
+                  <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="add_collection_order_sarah_johnson">
+                    <span class="govuk-visually-hidden">Add collection order</span>
+                  </label>
+                </div>
+              </td>
+              <td class="govuk-table__cell table__header_COLLO">JOHNSON, Sarah</td>
+              <td class="govuk-table__cell table__header_COLLO">Adult</td>
+              <td class="govuk-table__cell table__header_COLLO">23 Feb 1972</td>
+              <td class="govuk-table__cell table__header_COLLO">10 Elm Road</td>
+              <td class="govuk-table__cell table__header_COLLO">Devon</td>
+              <td class="govuk-table__cell table__header_COLLO">N2345678901234567</td>
+              <td class="govuk-table__cell  govuk-table__cell--numeric">£175.00</td>
+            </tr>
+            
+            <tr class="govuk-table__row govuk-table__row--selected">
+              <td class="govuk-table__cell table__header_COLLO">
+                <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+                  <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_tech_solutions">
+                  <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="add_collection_order_tech_solutions">
+                    <span class="govuk-visually-hidden">Add collection order</span>
+                  </label>
+                </div>
+              </td>
+              <td class="govuk-table__cell table__header_COLLO">Tech Solutions Ltd.</td>
+              <td class="govuk-table__cell table__header_COLLO">Adult</td>
+              <td class="govuk-table__cell table__header_COLLO">–</td>
+              <td class="govuk-table__cell table__header_COLLO">7 Oak Street</td>
+              <td class="govuk-table__cell table__header_COLLO">Devon</td>
+              <td class="govuk-table__cell table__header_COLLO">N2345670987654321</td>
+              <td class="govuk-table__cell  govuk-table__cell--numeric">£200.00</td>
+            </tr>
+            
+
+            {% else %}
+            <tr class="govuk-table__row govuk-table__row--selected">
+              <td class="govuk-table__cell table__header_COLLO">
+                <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+                  <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_john_smith-2">
+                  <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="add_collection_order_john_smith">
+                    <span class="govuk-visually-hidden">Add collection order</span>
+                  </label>
+                </div>
+              </td>
+              <td class="govuk-table__cell table__header_COLLO">SMITH, John</td>
+              <td class="govuk-table__cell table__header_COLLO">Adult</td>
+              <td class="govuk-table__cell table__header_COLLO">12 Jun 1986</td>
+              <td class="govuk-table__cell table__header_COLLO">68 Abbey Lane</td>
+              <td class="govuk-table__cell table__header_COLLO">Avon and Somerset</td>
+              <td class="govuk-table__cell table__header_COLLO">N1234567891234567</td>
+              <td class="govuk-table__cell  govuk-table__cell--numeric">£150.00</td>
+            </tr>
+
+            <tr class="govuk-table__row govuk-table__row--selected">
+              <td class="govuk-table__cell table__header_COLLO">
+                <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+                  <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_abigail_spencer-2">
+                  <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="add_collection_order_john_smith">
+                    <span class="govuk-visually-hidden">Add collection order</span>
+                  </label>
+                </div>
+              </td>
+              <td class="govuk-table__cell table__header_COLLO">SPENCER, Abigail</td>
+              <td class="govuk-table__cell table__header_COLLO">Adult</td>
+              <td class="govuk-table__cell table__header_COLLO">6 Dec 1995</td>
+              <td class="govuk-table__cell table__header_COLLO">90 Queen’s Crescent</td>
+              <td class="govuk-table__cell table__header_COLLO">Avon and Somerset</td>
+              <td class="govuk-table__cell table__header_COLLO">N1234567891234567</td>
+              <td class="govuk-table__cell  govuk-table__cell--numeric">£95.00</td>
+            </tr>
+
+            <tr class="govuk-table__row govuk-table__row--selected">
+              <td class="govuk-table__cell table__header_COLLO">
+                <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+                  <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_elizabeth_jones-2">
+                  <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="add_collection_order_john_smith">
+                    <span class="govuk-visually-hidden">Add collection order</span>
+                  </label>
+                </div>
+              </td>
+              <td class="govuk-table__cell table__header_COLLO">JONES, Elizabeth</td>
+              <td class="govuk-table__cell table__header_COLLO">Adult</td>
+              <td class="govuk-table__cell table__header_COLLO">3 Jan 1947 </td>
+              <td class="govuk-table__cell table__header_COLLO">34 Brookside Close</td>
+              <td class="govuk-table__cell table__header_COLLO">Avon and Somerset</td>
+              <td class="govuk-table__cell table__header_COLLO">N1234567891234567</td>
+              <td class="govuk-table__cell  govuk-table__cell--numeric">£150.00</td>
+            </tr>
+
+            <tr class="govuk-table__row govuk-table__row--selected">
+              <td class="govuk-table__cell table__header_COLLO">
+                <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+                  <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_quantum_inc-2">
+                  <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="add_collection_order_john_smith">
+                    <span class="govuk-visually-hidden">Add collection order</span>
+                  </label>
+                </div>
+              </td>
+              <td class="govuk-table__cell table__header_COLLO">Quantum Inc.</td>
+              <td class="govuk-table__cell table__header_COLLO">Adult</td>
+              <td class="govuk-table__cell table__header_COLLO">–</td>
+              <td class="govuk-table__cell table__header_COLLO">50 High Street</td>
+              <td class="govuk-table__cell table__header_COLLO">Avon and Somerset</td>
+              <td class="govuk-table__cell table__header_COLLO">N1234567891234567</td>
+              <td class="govuk-table__cell  govuk-table__cell--numeric">£150.00</td>
+            </tr>
+
+            <tr class="govuk-table__row govuk-table__row--selected">
+              <td class="govuk-table__cell table__header_COLLO">
+                <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+                  <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_harriet_stone-2">
+                  <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="add_collection_order_john_smith">
+                    <span class="govuk-visually-hidden">Add collection order</span>
+                  </label>
+                </div>
+              </td>
+              <td class="govuk-table__cell table__header_COLLO">STONE, Harriet</td>
+              <td class="govuk-table__cell table__header_COLLO">Adult</td>
+              <td class="govuk-table__cell table__header_COLLO">30 Jun 1989</td>
+              <td class="govuk-table__cell table__header_COLLO">Flat 1</td>
+              <td class="govuk-table__cell table__header_COLLO">Avon and Somerset</td>
+              <td class="govuk-table__cell table__header_COLLO">N1234567891234567</td>
+              <td class="govuk-table__cell  govuk-table__cell--numeric">£150.00</td>
+            </tr>
+
+            <tr class="govuk-table__row govuk-table__row--selected">
+              <td class="govuk-table__cell table__header_COLLO">
+                <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+                  <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_emma_williams-2">
+                  <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="add_collection_order_emma_williams">
+                    <span class="govuk-visually-hidden">Add collection order</span>
+                  </label>
+                </div>
+              </td>
+              <td class="govuk-table__cell table__header_COLLO">WILLIAMS, Emma</td>
+              <td class="govuk-table__cell table__header_COLLO">Adult</td>
+              <td class="govuk-table__cell table__header_COLLO">14 Apr 1983</td>
+              <td class="govuk-table__cell table__header_COLLO">22 Orchard Way</td>
+              <td class="govuk-table__cell table__header_COLLO">Devon</td>
+              <td class="govuk-table__cell table__header_COLLO">N9876543210987654</td>
+              <td class="govuk-table__cell  govuk-table__cell--numeric">£95.00</td>
+            </tr>
+            
+            <tr class="govuk-table__row govuk-table__row--selected">
+              <td class="govuk-table__cell table__header_COLLO">
+                <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+                  <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_george_clark-2">
+                  <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="add_collection_order_george_clark">
+                    <span class="govuk-visually-hidden">Add collection order</span>
+                  </label>
+                </div>
+              </td>
+              <td class="govuk-table__cell table__header_COLLO">CLARK, George</td>
+              <td class="govuk-table__cell table__header_COLLO">Adult</td>
+              <td class="govuk-table__cell table__header_COLLO">8 Sep 1990</td>
+              <td class="govuk-table__cell table__header_COLLO">15 Maple Avenue</td>
+              <td class="govuk-table__cell table__header_COLLO">Devon</td>
+              <td class="govuk-table__cell table__header_COLLO">N1230984567891234</td>
+              <td class="govuk-table__cell  govuk-table__cell--numeric">£150.00</td>
+            </tr>
+
+            <tr class="govuk-table__row govuk-table__row--selected"></tr>
+              <td class="govuk-table__cell table__header_COLLO">
+                <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+                  <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_tech_solutions-2">
+                  <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="add_collection_order_tech_solutions">
+                    <span class="govuk-visually-hidden">Add collection order</span>
+                  </label>
+                </div>
+              </td>
+              <td class="govuk-table__cell table__header_COLLO">Tech Solutions Ltd.</td>
+              <td class="govuk-table__cell table__header_COLLO">Adult</td>
+              <td class="govuk-table__cell table__header_COLLO">–</td>
+              <td class="govuk-table__cell table__header_COLLO">7 Oak Street</td>
+              <td class="govuk-table__cell table__header_COLLO">Devon</td>
+              <td class="govuk-table__cell table__header_COLLO">N2345670987654321</td>
+              <td class="govuk-table__cell  govuk-table__cell--numeric">£150.00</td>
+            </tr>
+            
+            <tr class="govuk-table__row govuk-table__row--selected">
+              <td class="govuk-table__cell table__header_COLLO">
+                <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+                  <input type="checkbox" class="govuk-checkboxes__input" id="add_collection_order_sarah_johnson-2">
+                  <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="add_collection_order_sarah_johnson">
+                    <span class="govuk-visually-hidden">Add collection order</span>
+                  </label>
+                </div>
+              </td>
+              <td class="govuk-table__cell table__header_COLLO">JOHNSON, Sarah</td>
+              <td class="govuk-table__cell table__header_COLLO">Adult</td>
+              <td class="govuk-table__cell table__header_COLLO">–</td>
+              <td class="govuk-table__cell table__header_COLLO">10 Elm Road</td>
+              <td class="govuk-table__cell table__header_COLLO">Devon</td>
+              <td class="govuk-table__cell table__header_COLLO">N2345678901234567</td>
+              <td class="govuk-table__cell  govuk-table__cell--numeric">£150.00</td>
+            </tr>
+            
+            
+            {% endif %}
 
           </tbody>
         </table>
+      </div>
+
+        <h2 class="govuk-heading-m">Youth and company accounts</h2>
+
+        <div class="moj-scrollable-pane">
+        <table class="govuk-table" style="min-width: 1280px;">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th class="govuk-table__header" scope="col" style="width: 17.5%;">Name</th>
+              <th class="govuk-table__header" scope="col" style="width: 7.5%;">Defendant</th>
+              <th class="govuk-table__header" scope="col" style="width: 10%;">Date of birth</th>
+              <th class="govuk-table__header" scope="col" style="width: 15%;">Address line 1</th>
+              <th class="govuk-table__header" scope="col" style="width: 15%;">Business unit</th>
+              <th class="govuk-table__header" scope="col" style="width: 15%;">Ticket number</th>
+              <th class="govuk-table__header govuk-table__cell--numeric" scope="col" style="width: 5%;">Imposed</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+
+            {% if data['business-unit-upload'] == "avon_somerset" %}
+
+            <tr class="govuk-table__row ">
+              <td class="govuk-table__cell">LEE, David</td>
+              <td class="govuk-table__cell">Youth</td>
+              <td class="govuk-table__cell">12 Apr 2008</td>
+              <td class="govuk-table__cell">68 Abbey Lane</td>
+              <td class="govuk-table__cell">Avon and Somerset</td>
+              <td class="govuk-table__cell">N1234567891234567</td>
+              <td class="govuk-table__cell govuk-table__cell--numeric">£150.00</td>
+            </tr>
+            <tr class="govuk-table__row "></tr>
+              <td class="govuk-table__cell">Apex Ltd.</td>
+              <td class="govuk-table__cell">Company</td>
+              <td class="govuk-table__cell">–</td>
+              <td class="govuk-table__cell">Warehouse A</td>
+              <td class="govuk-table__cell">Avon and Somerset</td>
+              <td class="govuk-table__cell">N1234567891234567</td>
+              <td class="govuk-table__cell govuk-table__cell--numeric">£150.00</td>
+            </tr>
+
+            {% elseif data['business-unit-upload'] == "devon" %}
+
+            <tr class="govuk-table__row govuk-table__row--selected"></tr>
+              <td class="govuk-table__cell ">JOHNSON, Sarah</td>
+              <td class="govuk-table__cell ">Youth</td>
+              <td class="govuk-table__cell ">20 Mar 2008</td>
+              <td class="govuk-table__cell ">10 Oak Avenue</td>
+              <td class="govuk-table__cell ">Devon</td>
+              <td class="govuk-table__cell ">N1234567891234567</td>
+              <td class="govuk-table__cell  govuk-table__cell--numeric">£150.00</td>
+            </tr>
+
+            {% else %}
+
+            <tr class="govuk-table__row "></tr>
+              <td class="govuk-table__cell">LEE, David</td>
+              <td class="govuk-table__cell">Youth</td>
+              <td class="govuk-table__cell">12 Apr 2008</td>
+              <td class="govuk-table__cell">68 Abbey Lane</td>
+              <td class="govuk-table__cell">Avon and Somerset</td>
+              <td class="govuk-table__cell">N1234567891234567</td>
+              <td class="govuk-table__cell govuk-table__cell--numeric">£150.00</td>
+            </tr>
+            <tr class="govuk-table__row "></tr>
+              <td class="govuk-table__cell">Apex Ltd.</td>
+              <td class="govuk-table__cell">Company</td>
+              <td class="govuk-table__cell">–</td>
+              <td class="govuk-table__cell">Warehouse A</td>
+              <td class="govuk-table__cell">Avon and Somerset</td>
+              <td class="govuk-table__cell">N1234567891234567</td>
+              <td class="govuk-table__cell govuk-table__cell--numeric">£150.00</td>
+            </tr>
+
+            <tr class="govuk-table__row govuk-table__row--selected"></tr>
+              <td class="govuk-table__cell ">JOHNSON, Sarah</td>
+              <td class="govuk-table__cell ">Youth</td>
+              <td class="govuk-table__cell ">20 Mar 2008</td>
+              <td class="govuk-table__cell ">10 Oak Avenue</td>
+              <td class="govuk-table__cell ">Devon</td>
+              <td class="govuk-table__cell ">N1234567891234567</td>
+              <td class="govuk-table__cell  govuk-table__cell--numeric">£150.00</td>
+            </tr>
+
+            {% endif %}
+
+
+          </tbody>
+        </table>
+      </div>
 
 
 
         <h2 class="govuk-heading-m">Publish</h2>
         
-        <p class="govuk-body">Notices and orders will be issued when you publish accounts live.</p>
+        <!-- <p class="govuk-body">Notices and orders will be issued when you publish accounts live.</p> -->
 
-        <button type="submit" class="govuk-button">
-          Publish all accounts
-        </button>
+        {% if data['business-unit-upload'] == "avon_somerset" %}
         
-      </form>
+        {{ govukButton({
+          text: "Publish all",
+          href: "to-review-devon-remaining.html"
+        }) }}
+        
+        {% elseif data['business-unit-upload'] == "devon" %}
+        
+        {{ govukButton({
+          text: "Publish all",
+          href: "to-review-avon-somerset-remaining.html"
+        }) }}
 
+        {% else %}
+
+        {{ govukButton({
+          text: "Publish all",
+          href: "to-review-none.html"
+        }) }}
+
+        {% endif %}
+
+        
+        
     </div>
   </div>
   

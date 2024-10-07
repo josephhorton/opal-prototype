@@ -1,0 +1,139 @@
+{% extends "layouts/fixed-penalty.html" %}
+
+{% set pageName = "Fixed Penalty uploads" %}
+
+{% block beforeContent %}
+
+
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    {%- from "moj/components/banner/macro.njk" import mojBanner -%}
+
+    {{ mojBanner({
+    type: 'success',
+    text: '5 Fixed Penalty uploads have been published',
+    iconFallbackText: 'Success'
+    }) }}
+    
+    <div class="moj-page-header-actions govuk-!-margin-bottom-6">
+
+      <div class="moj-page-header-actions__title">
+        <h1 class="govuk-heading-l">{{pageName}}</h1>
+      </div>
+    
+      <div class="moj-page-header-actions__actions">
+  
+        <div class="moj-button-menu">
+          <div class="moj-button-menu__wrapper">
+    
+            <button type="submit" class="govuk-button moj-button-menu__item govuk-button--secondary moj-page-header-actions__action" data-module="govuk-button">
+              Print register
+            </button>
+    
+          </div>
+        </div>
+    
+      </div>
+    
+    </div>
+    
+
+    <nav class="moj-sub-navigation" aria-label="Sub navigation">
+      <ul class="moj-sub-navigation__list">
+        <li class="moj-sub-navigation__item">
+          <a class="moj-sub-navigation__link" aria-current="page" href="to-review.html">
+            To publish 
+            <!-- <span id="notifications" class="govuk-!-margin-left-1 moj-notification-badge">6</span> -->
+          </a>
+        </li>
+        <li class="moj-sub-navigation__item">
+          <a class="moj-sub-navigation__link" href="published.html">
+            Published
+            <!-- <span id="notifications" class="govuk-!-margin-left-1 moj-notification-badge">1</span> -->
+          </a>
+        </li>
+        <li class="moj-sub-navigation__item">
+          <a class="moj-sub-navigation__link" href="errors.html">
+            Upload errors
+            <!-- <span id="notifications" class="govuk-!-margin-left-1 moj-notification-badge">1</span> -->
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-half">
+    <h2 class="govuk-heading-m">To publish</h2>
+
+    <style>
+      .govuk-table__header {
+        vertical-align: middle;
+      }
+  
+      .govuk-table__cell {
+        vertical-align: middle;
+      }
+      
+      .moj-multi-select__checkbox {
+        display: flex;
+        padding-left: 0;
+      }
+      
+      .govuk-table__header, .govuk-table__cell {
+        padding: 4px 20px 4px 0;
+      }
+  
+      #select-all {
+        width: 20px;
+      }
+      </style>
+
+    <p class="govuk-body">There are 7 accounts to register, review and  publish.</p>
+    
+    <form method="post" novalidate action="add-collection-orders">
+      <table class="govuk-table" data-module="moj-multi-select" data-multi-select-checkbox="#select-all">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col" id="select-all" name="business-unit-upload" value="select-all" ></th>
+            <th class="govuk-table__header" scope="col" style="width: 40%;">Business unit</th>
+            <th class="govuk-table__header" scope="col" >Accounts</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+
+          <tr class="govuk-table__row govuk-table__row--selected">
+            <td class="govuk-table__cell">
+              <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+                <input type="checkbox" class="govuk-checkboxes__input" name="business-unit-upload" value="avon_somerset" id="avon_somerset">
+                <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="avon_somerset">
+                  <span class="govuk-visually-hidden">Select Avon and Somerset</span>
+                </label>
+              </div>
+            </td>
+            <td class="govuk-table__cell">Avon and Somerset</td>
+            <td class="govuk-table__cell">7</td>
+          </tr>
+
+        </tbody>
+      </table>
+    
+
+      {{ govukButton({
+        text: "Register, review and publish"
+      }) }}
+
+    </form>
+
+  </div>
+</div>
+
+
+{% endblock %}
+

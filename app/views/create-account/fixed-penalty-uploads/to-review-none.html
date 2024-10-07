@@ -1,0 +1,83 @@
+{% extends "layouts/fixed-penalty.html" %}
+
+{% set pageName = "Fixed Penalty uploads" %}
+
+{% block beforeContent %}
+
+
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    {%- from "moj/components/banner/macro.njk" import mojBanner -%}
+
+    {{ mojBanner({
+    type: 'success',
+    text: '12 Fixed Penalty uploads have been published',
+    iconFallbackText: 'Success'
+    }) }}
+    
+    <div class="moj-page-header-actions govuk-!-margin-bottom-6">
+
+      <div class="moj-page-header-actions__title">
+        <h1 class="govuk-heading-l">{{pageName}}</h1>
+      </div>
+    
+      <div class="moj-page-header-actions__actions">
+  
+        <div class="moj-button-menu">
+          <div class="moj-button-menu__wrapper">
+    
+            <button type="submit" class="govuk-button moj-button-menu__item govuk-button--secondary moj-page-header-actions__action" data-module="govuk-button">
+              Print register
+            </button>
+    
+          </div>
+        </div>
+    
+      </div>
+    
+    </div>
+    
+
+    <nav class="moj-sub-navigation" aria-label="Sub navigation">
+      <ul class="moj-sub-navigation__list">
+        <li class="moj-sub-navigation__item">
+          <a class="moj-sub-navigation__link" aria-current="page" href="to-review.html">
+            To publish 
+            <!-- <span id="notifications" class="govuk-!-margin-left-1 moj-notification-badge">6</span> -->
+          </a>
+        </li>
+        <li class="moj-sub-navigation__item">
+          <a class="moj-sub-navigation__link" href="published.html">
+            Published
+            <!-- <span id="notifications" class="govuk-!-margin-left-1 moj-notification-badge">1</span> -->
+          </a>
+        </li>
+        <li class="moj-sub-navigation__item">
+          <a class="moj-sub-navigation__link" href="errors.html">
+            Upload errors
+            <!-- <span id="notifications" class="govuk-!-margin-left-1 moj-notification-badge">1</span> -->
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-half">
+    <h2 class="govuk-heading-m">To publish</h2>
+
+    <p class="govuk-body">There are no accounts to register, review and publish.</p>
+    
+
+  </div>
+</div>
+
+
+{% endblock %}
+
