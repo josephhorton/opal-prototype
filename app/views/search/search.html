@@ -15,6 +15,7 @@
     <form method="post" novalidate >
 
     {{ govukSummaryList({
+      classes: "govuk-!-margin-bottom-7",
       rows: [
         {
           key: {
@@ -38,30 +39,155 @@
     }) }}
     
 
-    {{ govukInput({
-      id: "referenceNumber",
-      name: "referenceNumber",
+    {% set uniqueReferenceHTML %}
+
+    
+
+    <!-- OPTION 1 -->
+    <!-- 
+    
+    <h2 class="govuk-heading-m">Unique reference</h2>
+    
+     {{ govukInput({
+      id: "accountNumber",
+      name: "accountNumber",
       classes: "govuk-input--width-10",
       label: {
-        text: "Reference number",
+        text: "Account number",
         classes: "govuk-label--s"
       },
-      hint: {
-        text: "Account number, case number or National Insurance number"
-      },
-      value: data['referenceNumber']
+      value: data['accountNumber']
     }) }}
 
     {{ govukInput({
-      id: "PCR",
-      name: "PCR",
+      id: "caseNumber",
+      name: "caseNumber",
       classes: "govuk-input--width-10",
       label: {
-        text: "Prosecutor Case Reference (PCR)",
+        text: "Case number",
         classes: "govuk-label--s"
       },
-      value: data['PCR']
+      value: data['caseNumber']
     }) }}
+
+    {{ govukInput({
+      id: "nationalInsuranceNumber",
+      name: "nationalInsuranceNumber",
+      classes: "govuk-input--width-10",
+      label: {
+        text: "National Insurance number",
+        classes: "govuk-label--s"
+      },
+      value: data['nationalInsuranceNumber']
+    }) }}
+
+    {{ govukInput({
+      id: "PCRFP",
+      name: "PCRFP",
+      classes: "govuk-input--width-10",
+      label: {
+        text: "Prosecutor Case Reference (PCR) or Fixed Penalty notice number",
+        classes: "govuk-label--s"
+      },
+      value: data['PCRFP']
+    }) }} -->
+
+    <!-- OPTION 2 -->
+
+    {% set accountNumberHTML %}
+    {{ govukInput({
+      label: {
+        text: "Account number",
+        classes: "govuk-visually-hidden"
+      },
+      classes: "govuk-input--width-10",
+      id: "account-number-value",
+      name: "account-number-value"
+    }) }}
+    {% endset -%}
+
+    {% set caseNumberHTML %}
+    {{ govukInput({
+      label: {
+        text: "Case number",
+        classes: "govuk-visually-hidden"
+      },
+      classes: "govuk-input--width-10",
+      id: "case-number-value",
+      name: "case-number-value"
+    }) }}
+
+    {% endset -%}
+
+    {% set NINOHTML %}
+    {{ govukInput({
+      label: {
+        text: "Nino number",
+        classes: "govuk-visually-hidden"
+      },
+      classes: "govuk-input--width-10",
+      id: "NINO-number-value",
+      name: "NINO-number-value"
+    }) }}
+
+    {% endset -%}
+
+    {% set PCRFPHTML %}
+    {{ govukInput({
+      label: {
+        text: "PCR number",
+        classes: "govuk-visually-hidden"
+      },
+      classes: "govuk-input--width-20",
+      id: "pcr-number-value",
+      name: "pcr-number-value"
+    }) }}
+
+    {% endset -%}
+
+
+    {{ govukRadios({
+      name: "uniqueReferenceType",
+      value: data['uniqueReferenceType'],
+      fieldset: {
+        legend: {
+          text: "Unique reference",
+          classes: "govuk-fieldset__legend--m"
+        }
+      },
+      items: [
+        {
+          value: "Account number",
+          text: "Account number",
+          conditional: {
+            html: accountNumberHTML
+          }
+        },
+        {
+          value: "Case number",
+          text: "Case number",
+          conditional: {
+            html: caseNumberHTML
+          }
+        },
+        {
+          value: "National Insurance number",
+          text: "National Insurance number",
+          conditional: {
+            html: NINOHTML
+          }
+        },
+        {
+          value: "Prosecutor Case Reference (PCR) or Fixed Penalty notice number",
+          text: "Prosecutor Case Reference (PCR) or Fixed Penalty notice number",
+          conditional: {
+            html: PCRFPHTML
+          }
+        }
+      ]
+    }) }}
+    {% endset -%}
+
 
 
     <!-- DEFENDANT SEARCH -->
@@ -489,6 +615,13 @@
     {{ govukTabs({
       items: [
         {
+          label: "Unique reference",
+          id: "unique-reference",
+          panel: {
+            html: uniqueReferenceHTML
+          }
+        },
+        {
           label: "Individuals",
           id: "individuals",
           panel: {
@@ -535,8 +668,6 @@
       {{ govukButton({
         text: "Search"
       }) }}
-    
-      <a class="govuk-link govuk-link--no-visited-state" id="clear-storage-link" href="/clear-search">Clear search</a>
     </div>
 
     
