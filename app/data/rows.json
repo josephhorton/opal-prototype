@@ -1,0 +1,92 @@
+[
+  {
+    "id": "06000427N-IM1",
+    "imposition": "FCOMP",
+    "creditor": "Royal Mail",
+    "imposed": "£300.00",
+    "paid": "£200.00",
+    "balance": "£100.00",
+    "date": "01 Jan 2014",
+    "offence": "Theft of mail bag/postal packet"
+  },
+  {
+    "id": "06000428N-IM2",
+    "imposition": "FCOMP",
+    "creditor": "DHL",
+    "imposed": "£300.00",
+    "paid": "£200.00",
+    "balance": "£100.00",
+    "date": "15 Feb 2015",
+    "offence": "Loss of parcel during transit"
+  },
+  {
+    "id": "06000429N-IM3",
+    "imposition": "FCOMP",
+    "creditor": "FedEx",
+    "imposed": "£300.00",
+    "paid": "£200.00",
+    "balance": "£100.00",
+    "date": "20 Mar 2016",
+    "offence": "Damage to package upon delivery"
+  },
+  {
+    "id": "06000431N-IM5",
+    "imposition": "FCOMP",
+    "creditor": "TNT",
+    "imposed": "£300.00",
+    "paid": "£200.00",
+    "balance": "£100.00",
+    "date": "12 May 2018",
+    "offence": "Loss of shipment at customs"
+  },
+  {
+    "id": "06000432N-IM6",
+    "imposition": "FCOMP",
+    "creditor": "DHL",
+    "imposed": "£300.00",
+    "paid": "£200.00",
+    "balance": "£100.00",
+    "date": "30 Jun 2019",
+    "offence": "Misdelivery of important documents"
+  },
+  {
+    "id": "06000433N-IM7",
+    "imposition": "FCOMP",
+    "creditor": "Royal Mail",
+    "imposed": "£300.00",
+    "paid": "£200.00",
+    "balance": "£100.00",
+    "date": "25 Jul 2020",
+    "offence": "Vandalism of delivery area"
+  },
+  {
+    "id": "06000434N-IM8",
+    "imposition": "FCOMP",
+    "creditor": "FedEx",
+    "imposed": "£300.00",
+    "paid": "£200.00",
+    "balance": "£100.00",
+    "date": "10 Aug 2021",
+    "offence": "Theft of goods in warehouse"
+  },
+  {
+    "id": "06000435N-IM9",
+    "imposition": "FCOMP",
+    "creditor": "UPS",
+    "imposed": "£300.00",
+    "paid": "£200.00",
+    "balance": "£100.00",
+    "date": "15 Sep 2022",
+    "offence": "Loss of product during handling"
+  },
+  {
+    "id": "06000435N-IM10",
+    "imposition": "FCOMP",
+    "creditor": "UPS",
+    "imposed": "£300.00",
+    "paid": "£200.00",
+    "balance": "£100.00",
+    "date": "15 Sep 2022",
+    "offence": "Loss of product during handling"
+  }
+]

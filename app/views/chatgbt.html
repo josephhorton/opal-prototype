@@ -1,0 +1,234 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Opal research prototype" %}
+
+{% block beforeContent %}
+
+<nav class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/finance-admin">Auto-payments</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/select-file">Select file</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">File processed</li>
+  </ol>
+</nav>
+
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <!-- Page header with CTA -->
+      <div class="moj-page-header-actions">
+        <div class="moj-page-header-actions__title">
+          <h1 class="govuk-heading-l">File processed successfully</h1>
+        </div>
+        <div class="moj-page-header-actions__actions">
+          <a href="/print-report" class="govuk-button">Print options</a>
+          <!-- <a href="/export-report" class="govuk-button govuk-button--secondary">Export CSV</a> -->
+        </div>
+      </div>
+
+      <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Total records read</dt>
+            <dd class="govuk-summary-list__value">24</dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Errors encountered</dt>
+            <dd class="govuk-summary-list__value">1</dd>
+          </div>
+      </dl>
+
+      <!-- MOJ secondary nav -->
+      <nav class="moj-sub-navigation" aria-label="Sub navigation">
+        <ul class="moj-sub-navigation__list">
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="#summary">Breakdown</a>
+          </li>
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="#detailed">Detailed breakdown</a>
+          </li>
+        </ul>
+      </nav>
+
+       <h3 class="govuk-heading-m">Breakdown</h3>
+
+        <table class="govuk-table">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th class="govuk-table__header">Record type</th>
+              <th class="govuk-table__header">Records read</th>
+              <th class="govuk-table__header">Errors</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">Criminal</td>
+              <td class="govuk-table__cell">24</td>
+              <td class="govuk-table__cell">1</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">Maintenance</td>
+              <td class="govuk-table__cell">0</td>
+              <td class="govuk-table__cell">0</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">Unidentified</td>
+              <td class="govuk-table__cell">0</td>
+              <td class="govuk-table__cell">0</td>
+            </tr>
+          </tbody>
+        </table>
+
+      
+
+    </div>
+  </div>
+
+
+  <!-- <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+      <h2 class="govuk-heading-l">Upload complete</h2>
+
+        <p class="govuk-body">The following results were recorded:</p>
+
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Total records read</dt>
+            <dd class="govuk-summary-list__value">24</dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Errors encountered</dt>
+            <dd class="govuk-summary-list__value">1</dd>
+          </div>
+        </dl>
+
+        <h3 class="govuk-heading-m">Breakdown</h3>
+
+        <table class="govuk-table">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th class="govuk-table__header">Record type</th>
+              <th class="govuk-table__header">Records read</th>
+              <th class="govuk-table__header">Errors</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">Criminal</td>
+              <td class="govuk-table__cell">24</td>
+              <td class="govuk-table__cell">1</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">Maintenance</td>
+              <td class="govuk-table__cell">0</td>
+              <td class="govuk-table__cell">0</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">Unidentified</td>
+              <td class="govuk-table__cell">0</td>
+              <td class="govuk-table__cell">0</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <a href="/upload-next" class="govuk-button">Continue</a>
+
+    </div>
+  </div> -->
+
+  <!-- <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+      <h1 class="govuk-heading-xl">Select an interface file to process</h1>
+
+      <p class="govuk-body">
+        These files contain payment data from external providers. Select one to begin processing.
+      </p>
+
+      <form action="/process-selection" method="post">
+        <table class="govuk-table">
+          <caption class="govuk-table__caption govuk-visually-hidden">Interface files</caption>
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header">Select</th>
+              <th scope="col" class="govuk-table__header">Filename</th>
+              <th scope="col" class="govuk-table__header">Source</th>
+              <th scope="col" class="govuk-table__header">Date</th>
+              <th scope="col" class="govuk-table__header">Code</th>
+              <th scope="col" class="govuk-table__header">Serial</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">
+                <input class="govuk-radios__input" type="radio" id="file1" name="interface-file" value="a121_250524_AP_057_CC.dat">
+                <label for="file1" class="govuk-visually-hidden">Select All Pay 24 May</label>
+              </td>
+              <td class="govuk-table__cell">a121_250524_AP_057_CC.dat</td>
+              <td class="govuk-table__cell">All Pay</td>
+              <td class="govuk-table__cell">24 May 2025</td>
+              <td class="govuk-table__cell">057</td>
+              <td class="govuk-table__cell">00</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">
+                <input class="govuk-radios__input" type="radio" id="file2" name="interface-file" value="a121_250527_AF_057_BE.dat">
+                <label for="file2" class="govuk-visually-hidden">Select All Pay 27 May</label>
+              </td>
+              <td class="govuk-table__cell">a121_250527_AF_057_BE.dat</td>
+              <td class="govuk-table__cell">All Pay</td>
+              <td class="govuk-table__cell">27 May 2025</td>
+              <td class="govuk-table__cell">057</td>
+              <td class="govuk-table__cell">00</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">
+                <input class="govuk-radios__input" type="radio" id="file3" name="interface-file" value="a121_250527_BC_057_AA.dat">
+                <label for="file3" class="govuk-visually-hidden">Select Barclaycard 27 May</label>
+              </td>
+              <td class="govuk-table__cell">a121_250527_BC_057_AA.dat</td>
+              <td class="govuk-table__cell">Barclaycard</td>
+              <td class="govuk-table__cell">27 May 2025</td>
+              <td class="govuk-table__cell">057</td>
+              <td class="govuk-table__cell">00</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">
+                <input class="govuk-radios__input" type="radio" id="file4" name="interface-file" value="a121_250527_BT_057_AM.dat">
+                <label for="file4" class="govuk-visually-hidden">Select British Telecom 27 May</label>
+              </td>
+              <td class="govuk-table__cell">a121_250527_BT_057_AM.dat</td>
+              <td class="govuk-table__cell">British Telecom</td>
+              <td class="govuk-table__cell">27 May 2025</td>
+              <td class="govuk-table__cell">057</td>
+              <td class="govuk-table__cell">00</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">
+                <input class="govuk-radios__input" type="radio" id="file5" name="interface-file" value="a121_250527_NW_057_AB.dat">
+                <label for="file5" class="govuk-visually-hidden">Select Nat West 27 May</label>
+              </td>
+              <td class="govuk-table__cell">a121_250527_NW_057_AB.dat</td>
+              <td class="govuk-table__cell">Nat West</td>
+              <td class="govuk-table__cell">27 May 2025</td>
+              <td class="govuk-table__cell">057</td>
+              <td class="govuk-table__cell">00</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <button class="govuk-button" data-module="govuk-button" type="submit">
+          Process selected file
+        </button>
+      </form>
+
+    </div>
+  </div>     -->
+
+{% endblock %}

@@ -1,0 +1,124 @@
+{% extends "layouts/main.html" %}
+{% set pageName = "Sandbox" %}
+
+{% block content %}
+  {%- from "govuk/components/table/macro.njk" import govukTable -%}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <form action="/next-page" method="post">
+
+        <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+        <div class="moj-scrollable-pane responsive-scroll-pane scroll-shadow govuk-!-margin-bottom-6">
+
+          <table class="govuk-table govuk-!-margin-bottom-0" data-module="moj-sortable-table" data-id-prefix="mountains-" style="min-width: 1440px;">
+            <caption class="govuk-table__caption govuk-heading-m">Multi-select</caption>
+
+            
+            <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                {% set headers = ["", "ID", "Imposition", "Creditor", "Imposed", "Paid/written off", "Balance", "Sentencing date", "Offence"] %}
+                  {% for header in headers %}
+                    {% if loop.first %}
+                      <th class="govuk-table__header" scope="col" id="mountains-select-all"></th>
+                    {% elseif header in ["Imposed", "Paid/written off", "Balance", "Sentencing date"] %}
+                      <th scope="col" class="govuk-table__header govuk-table__header--numeric" data-sortable="true" aria-sort="none">
+                        {{ header }}
+                      </th>
+                    {% else %}
+                      <th scope="col" class="govuk-table__header" data-sortable="true" aria-sort="none">
+                        {{ header }}
+                      </th>
+                  {% endif %}
+                {% endfor %}
+              </tr>
+            </thead>
+
+            <tbody class="govuk-table__body">
+              {% for row in rows %}
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell" style="max-width: 10px;">
+                    <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox" style="flex-wrap: inherit;">
+                      <input type="checkbox" class="govuk-checkboxes__input" id="mountains-{{ loop.index }}" value="{{ row.id }}">
+                      <label class="govuk-label govuk-checkboxes__label" for="mountains-{{ loop.index }}">
+                        <span class="govuk-visually-hidden">Select row {{ loop.index }}</span>
+                      </label>
+                    </div>
+                  </td>
+                  <td class="govuk-table__cell">{{ row.id }}</td>
+                  <td class="govuk-table__cell">{{ row.imposition }}</td>
+                  <td class="govuk-table__cell"><a class="govuk-link--no-visited-state" href="#">{{ row.creditor }}</a></td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric">{{ row.imposed }}</td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric">{{ row.paid }}</td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric">{{ row.balance }}</td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric">{{ row.date }}</td>
+                  <td class="govuk-table__cell">{{ row.offence }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+        </div>
+
+        <button class="govuk-button" data-module="govuk-button">Continue</button>
+      </form>
+    </div>
+  </div>
+
+  <style>
+
+    /* .govuk-table__row--selected {
+      background-color: #f3f2f1;
+    } */
+
+    .govuk-table__body .govuk-table__row:hover {
+      background-color: #f3f2f1;
+    }
+
+
+    .govuk-checkboxes__label {
+      padding: 0;
+    }
+
+    .govuk-table__cell {
+      padding: 5px 20px 5px 0;
+      vertical-align: middle;
+    }
+
+    .govuk-table__body .govuk-table__cell {
+      font-size: 16px;
+      line-height: 1.42857; /* govuk-body-s */
+    }
+
+    /* Enhanced scrollbar visibility */
+    @media (prefers-reduced-transparency: reduce) {
+      .responsive-scroll-pane {
+        scrollbar-width: auto;
+        scrollbar-color: #6f777b #f3f2f1;
+      }
+    }
+
+    @media screen and (min-width: 768px) {
+      .responsive-scroll-pane::-webkit-scrollbar {
+        height: 7px;
+        width: 7px;
+      }
+
+      .responsive-scroll-pane::-webkit-scrollbar-thumb {
+        background: #6f777b;
+        border-radius: 6px;
+      }
+
+      .responsive-scroll-pane::-webkit-scrollbar-track {
+        background: #f3f2f1;
+      }
+    }
+  </style>
+
+
+
+
+{% endblock %}
+
+  

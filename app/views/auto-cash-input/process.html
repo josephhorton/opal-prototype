@@ -1,0 +1,415 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Automatic cash input" %}
+{% set tab1 = "Process files" %}
+{% set tab2 = "Allocate files" %}
+
+{% block beforeContent %}
+
+<a href="../index.html" class="govuk-back-link">Back</a>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+    {{ mojSubNavigation({
+      label: "Sub navigation",
+      items: [
+      {
+        text: "Process",
+        href: "./process.html",
+        active: true
+      }, 
+      {
+        text: "Allocate",
+        href: "./allocate.html"
+      }
+      ]
+    }) }}
+
+    <h1 class="govuk-heading-m">{{tab1}}</h1>
+    
+
+    <!-- CTAs -->
+    <div class="moj-button-group-with-divider govuk-!-margin-bottom-4">
+
+      {{ govukButton({
+        text: "Refresh",
+        href: "#",
+        classes: "govuk-button--secondary govuk-!-margin-bottom-0"
+      }) }}
+
+
+      <span class="moj-button-divider" aria-hidden="true"></span>
+
+      {{ govukButton({
+        text: "Process",
+        href: "./allocate",
+        attributes: { id: "process-btn" },
+        classes: "govuk-!-margin-bottom-0"
+      }) }}
+    </div>
+
+    <!-- TO CONFIRM -->
+
+     <div class="" id="process-confirmation" hidden>
+      <div style="background-color: #F3F2F1; border: none;" class="govuk-notification-banner govuk-!-padding-4 govuk-!-margin-bottom-2" role="region" aria-labelledby="process-confirmation-heading">
+        <h2 class="govuk-heading-m govuk-!-margin-bottom-" id="process-confirmation-heading">Confirm</h2>
+
+        <p id="process-selected-summary" class="govuk-body govuk-!-margin-bottom-4">
+          <!-- dynamic text, e.g. "7 files selected from Devon and Cornwall." -->
+        </p>
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+              Inhibits for AEA files
+            </legend>
+            <div class="govuk-checkboxes govuk-checkboxes">
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="override-inhibits" name="override-inhibits" type="checkbox" value="true">
+                <label class="govuk-label govuk-checkboxes__label" for="override-inhibits">
+                  Override inhibits
+                </label>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="govuk-button-group govuk-!-margin-bottom-0">
+          <button type="submit" class="govuk-button govuk-!-margin-bottom-0" id="confirm-process-button">Confirm</button>
+          <a href="#" class="govuk-link" id="cancel-process-button">Cancel</a>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- TABLE -->
+
+    <table class="govuk-table" data-module="moj-sortable-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="col" style="width: 1.2rem;">
+            <div class="govuk-checkboxes__item govuk-checkboxes--small">
+              <input class="govuk-checkboxes__input" id="files" name="process-files" type="checkbox" value="all">
+              <label class="govuk-label govuk-checkboxes__label" for="files">
+                <span class="govuk-visually-hidden">Select all files</span>
+              </label>
+            </div>
+          </th>
+          <th class="govuk-table__header" scope="col" aria-sort="none" style="width: 25%;">File name</th>
+          <th class="govuk-table__header" scope="col" aria-sort="none">Source</th>
+          <th class="govuk-table__header" scope="col" aria-sort="none">Date</th>
+          <th class="govuk-table__header" scope="col" aria-sort="none">Time</th>
+          <th class="govuk-table__header" scope="col" aria-sort="none">Business unit</th>
+          <!-- <th class="govuk-table__header" scope="col" aria-sort="none">Serial</th> -->
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+
+        <!-- Rows from screenshot -->
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell checkbox-cell">
+            <div class="govuk-checkboxes__item govuk-checkboxes--small">
+              <input class="govuk-checkboxes__input" id="file-1" name="process-files" type="checkbox" value="nw-devon">
+              <label class="govuk-label govuk-checkboxes__label" for="file-1"><span class="govuk-visually-hidden">Select file 1</span></label>
+            </div>
+          </td>
+          <td class="govuk-table__cell">a121_200317_NW_057_BH.dat</td>
+          <td class="govuk-table__cell">Nat West</td>
+          <td class="govuk-table__cell">15 June 2025</td>
+          <td class="govuk-table__cell">08:30</td>
+          <td class="govuk-table__cell">Devon and Cornwall</td>
+          <!-- <td class="govuk-table__cell">00</td> -->
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell checkbox-cell">
+            <div class="govuk-checkboxes__item govuk-checkboxes--small">
+              <input class="govuk-checkboxes__input" id="file-2" name="process-files" type="checkbox" value="bt-devon">
+              <label class="govuk-label govuk-checkboxes__label" for="file-2"><span class="govuk-visually-hidden">Select file 2</span></label>
+            </div>
+          </td>
+          <td class="govuk-table__cell">a121_200317_BT_057_AV.dat</td>
+          <td class="govuk-table__cell">British Telecom</td>
+          <td class="govuk-table__cell">15 June 2025</td>
+          <td class="govuk-table__cell">08:30</td>
+          <td class="govuk-table__cell">Devon and Cornwall</td>
+          <!-- <td class="govuk-table__cell">00</td> -->
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell checkbox-cell">
+            <div class="govuk-checkboxes__item govuk-checkboxes--small">
+              <input class="govuk-checkboxes__input" id="file-3" name="process-files" type="checkbox" value="bc-devon">
+              <label class="govuk-label govuk-checkboxes__label" for="file-3"><span class="govuk-visually-hidden">Select file 3</span></label>
+            </div>
+          </td>
+          <td class="govuk-table__cell">a121_200317_BC_057_AR.dat</td>
+          <td class="govuk-table__cell">Barclaycard</td>
+          <td class="govuk-table__cell">15 June 2025</td>
+          <td class="govuk-table__cell">08:30</td>
+          <td class="govuk-table__cell">Devon and Cornwall</td>
+          <!-- <td class="govuk-table__cell">00</td> -->
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell checkbox-cell">
+            <div class="govuk-checkboxes__item govuk-checkboxes--small">
+              <input class="govuk-checkboxes__input" id="file-4" name="process-files" type="checkbox" value="ap-devon">
+              <label class="govuk-label govuk-checkboxes__label" for="file-4"><span class="govuk-visually-hidden">Select file 4</span></label>
+            </div>
+          </td>
+          <td class="govuk-table__cell">a121_200317_AP_057_BZ.dat</td>
+          <td class="govuk-table__cell">All Pay</td>
+          <td class="govuk-table__cell">15 June 2025</td>
+          <td class="govuk-table__cell">09:00</td>
+          <td class="govuk-table__cell">Devon and Cornwall</td>
+          <!-- <td class="govuk-table__cell">00</td> -->
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell checkbox-cell">
+            <div class="govuk-checkboxes__item govuk-checkboxes--small">
+              <input class="govuk-checkboxes__input" id="file-5" name="process-files" type="checkbox" value="db-devon-13">
+              <label class="govuk-label govuk-checkboxes__label" for="file-5"><span class="govuk-visually-hidden">Select file 5</span></label>
+            </div>
+          </td>
+          <td class="govuk-table__cell">a121_200316_DB_057_AC.dat</td>
+          <td class="govuk-table__cell">Deduction from Benefits</td>
+          <td class="govuk-table__cell">13 June 2025</td>
+          <td class="govuk-table__cell">09:30</td>
+          <td class="govuk-table__cell">Devon and Cornwall</td>
+          <!-- <td class="govuk-table__cell">00</td> -->
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell checkbox-cell">
+            <div class="govuk-checkboxes__item govuk-checkboxes--small">
+              <input class="govuk-checkboxes__input" id="file-6" name="process-files" type="checkbox" value="ap-devon-13">
+              <label class="govuk-label govuk-checkboxes__label" for="file-6"><span class="govuk-visually-hidden">Select file 6</span></label>
+            </div>
+          </td>
+          <td class="govuk-table__cell">a121_200316_AP_057_DX.dat</td>
+          <td class="govuk-table__cell">All Pay</td>
+          <td class="govuk-table__cell">13 June 2025</td>
+          <td class="govuk-table__cell">09:30</td>
+          <td class="govuk-table__cell">Devon and Cornwall</td>
+          <!-- <td class="govuk-table__cell">00</td> -->
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell checkbox-cell">
+            <div class="govuk-checkboxes__item govuk-checkboxes--small">
+              <input class="govuk-checkboxes__input" id="file-7" name="process-files" type="checkbox" value="db-devon-12">
+              <label class="govuk-label govuk-checkboxes__label" for="file-7"><span class="govuk-visually-hidden">Select file 7</span></label>
+            </div>
+          </td>
+          <td class="govuk-table__cell">a121_200313_DB_057_AC.dat</td>
+          <td class="govuk-table__cell">Deduction from Benefits</td>
+          <td class="govuk-table__cell">12 June 2025</td>
+          <td class="govuk-table__cell">09:30</td>
+          <td class="govuk-table__cell">Devon and Cornwall</td>
+          <!-- <td class="govuk-table__cell">00</td> -->
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell checkbox-cell">
+            <div class="govuk-checkboxes__item govuk-checkboxes--small">
+              <input class="govuk-checkboxes__input" id="file-8" name="process-files" type="checkbox" value="nw-avon">
+              <label class="govuk-label govuk-checkboxes__label" for="file-8"><span class="govuk-visually-hidden">Select file 8</span></label>
+            </div>
+          </td>
+          <td class="govuk-table__cell">a121_200317_NW_068_BH.dat</td>
+          <td class="govuk-table__cell">Nat West</td>
+          <td class="govuk-table__cell">15 June 2025</td>
+          <td class="govuk-table__cell">08:30</td>
+          <td class="govuk-table__cell">Avon and Somerset</td>
+          <!-- <td class="govuk-table__cell">00</td> -->
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell checkbox-cell">
+            <div class="govuk-checkboxes__item govuk-checkboxes--small">
+              <input class="govuk-checkboxes__input" id="file-9" name="process-files" type="checkbox" value="bt-avon">
+              <label class="govuk-label govuk-checkboxes__label" for="file-9"><span class="govuk-visually-hidden">Select file 9</span></label>
+            </div>
+          </td>
+          <td class="govuk-table__cell">a121_200317_BT_068_AV.dat</td>
+          <td class="govuk-table__cell">British Telecom</td>
+          <td class="govuk-table__cell">15 June 2025</td>
+          <td class="govuk-table__cell">08:30</td>
+          <td class="govuk-table__cell">Avon and Somerset</td>
+          <!-- <td class="govuk-table__cell">00</td> -->
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell checkbox-cell">
+            <div class="govuk-checkboxes__item govuk-checkboxes--small">
+              <input class="govuk-checkboxes__input" id="file-10" name="process-files" type="checkbox" value="bc-avon">
+              <label class="govuk-label govuk-checkboxes__label" for="file-10"><span class="govuk-visually-hidden">Select file 10</span></label>
+            </div>
+          </td>
+          <td class="govuk-table__cell">a121_200317_BC_068_AR.dat</td>
+          <td class="govuk-table__cell">Barclaycard</td>
+          <td class="govuk-table__cell">15 June 2025</td>
+          <td class="govuk-table__cell">08:30</td>
+          <td class="govuk-table__cell">Avon and Somerset</td>
+          <!-- <td class="govuk-table__cell">00</td> -->
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell checkbox-cell">
+            <div class="govuk-checkboxes__item govuk-checkboxes--small">
+              <input class="govuk-checkboxes__input" id="file-11" name="process-files" type="checkbox" value="ap-avon">
+              <label class="govuk-label govuk-checkboxes__label" for="file-11"><span class="govuk-visually-hidden">Select file 11</span></label>
+            </div>
+          </td>
+          <td class="govuk-table__cell">a121_200317_AP_068_BZ.dat</td>
+          <td class="govuk-table__cell">All Pay</td>
+          <td class="govuk-table__cell">15 June 2025</td>
+          <td class="govuk-table__cell">09:00</td>
+          <td class="govuk-table__cell">Avon and Somerset</td>
+          <!-- <td class="govuk-table__cell">00</td> -->
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell checkbox-cell">
+            <div class="govuk-checkboxes__item govuk-checkboxes--small">
+              <input class="govuk-checkboxes__input" id="file-12" name="process-files" type="checkbox" value="db-avon-13">
+              <label class="govuk-label govuk-checkboxes__label" for="file-12"><span class="govuk-visually-hidden">Select file 12</span></label>
+            </div>
+          </td>
+          <td class="govuk-table__cell">a121_200316_DB_068_AC.dat</td>
+          <td class="govuk-table__cell">Deduction from Benefits</td>
+          <td class="govuk-table__cell">13 June 2025</td>
+          <td class="govuk-table__cell">09:30</td>
+          <td class="govuk-table__cell">Avon and Somerset</td>
+          <!-- <td class="govuk-table__cell">00</td> -->
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell checkbox-cell">
+            <div class="govuk-checkboxes__item govuk-checkboxes--small">
+              <input class="govuk-checkboxes__input" id="file-13" name="process-files" type="checkbox" value="ap-avon-13">
+              <label class="govuk-label govuk-checkboxes__label" for="file-13"><span class="govuk-visually-hidden">Select file 13</span></label>
+            </div>
+          </td>
+          <td class="govuk-table__cell">a121_200316_AP_068_DX.dat</td>
+          <td class="govuk-table__cell">All Pay</td>
+          <td class="govuk-table__cell">13 June 2025</td>
+          <td class="govuk-table__cell">09:30</td>
+          <td class="govuk-table__cell">Avon and Somerset</td>
+          <!-- <td class="govuk-table__cell">00</td> -->
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell checkbox-cell">
+            <div class="govuk-checkboxes__item govuk-checkboxes--small">
+              <input class="govuk-checkboxes__input" id="file-14" name="process-files" type="checkbox" value="db-avon-12">
+              <label class="govuk-label govuk-checkboxes__label" for="file-14"><span class="govuk-visually-hidden">Select file 14</span></label>
+            </div>
+          </td>
+          <td class="govuk-table__cell">a121_200313_DB_068_AC.dat</td>
+          <td class="govuk-table__cell">Deduction from Benefits</td>
+          <td class="govuk-table__cell">12 June 2025</td>
+          <td class="govuk-table__cell">09:30</td>
+          <td class="govuk-table__cell">Avon and Somerset</td>
+          <!-- <td class="govuk-table__cell">00</td> -->
+        </tr>
+
+      </tbody>
+    </table>
+
+
+  </div>
+</div>
+
+<style>
+
+  .govuk-table__row--selected {
+    background-color: #E8F1F8; /* GOV.UK blue at 20% */
+  }
+
+  .govuk-table__header, .govuk-table__cell {
+    padding: 5px 5px 5px 0px;
+  }
+
+  label.govuk-checkboxes__label {
+    display: inline-table;
+  }
+
+  .govuk-table__header, .govuk-table__cell {
+    vertical-align: middle;
+  }
+
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const table = document.querySelector('.govuk-table');
+  const tbodyCheckboxes = table.querySelectorAll('tbody .govuk-checkboxes__input[name="process-files"]');
+  const selectAll = document.getElementById('files');
+  const processBtn = document.getElementById('process-btn');
+  const confirmSection = document.getElementById('process-confirmation');
+  const summaryText = document.getElementById('process-selected-summary');
+  const cancelBtn = document.getElementById('cancel-process-button');
+
+  function updateRowHighlight(checkbox) {
+    const row = checkbox.closest('tr');
+    row.classList.toggle('govuk-table__row--selected', checkbox.checked);
+  }
+
+  function updateSelectAllState() {
+    const allChecked = Array.from(tbodyCheckboxes).every(cb => cb.checked);
+    selectAll.checked = allChecked;
+  }
+
+  tbodyCheckboxes.forEach(function (checkbox) {
+    checkbox.addEventListener('change', function () {
+      updateRowHighlight(checkbox);
+      updateSelectAllState();
+    });
+  });
+
+  if (selectAll) {
+    selectAll.addEventListener('change', function () {
+      const checked = selectAll.checked;
+      tbodyCheckboxes.forEach(function (checkbox) {
+        checkbox.checked = checked;
+        updateRowHighlight(checkbox);
+      });
+    });
+  }
+
+  if (processBtn) {
+    processBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      const selected = Array.from(tbodyCheckboxes).filter(cb => cb.checked);
+      if (selected.length === 0) {
+        alert('Please select at least one file to process.');
+        return;
+      }
+
+      const businessUnits = new Set();
+      selected.forEach(cb => {
+        const row = cb.closest('tr');
+        const unit = row.querySelector('td:last-child').innerText.trim();
+        if (unit) businessUnits.add(unit);
+      });
+
+      // Build readable message
+      const summary = `${selected.length} file${selected.length !== 1 ? 's' : ''} selected from ${Array.from(businessUnits).join(', ')}.`;
+      summaryText.textContent = summary;
+
+      confirmSection.removeAttribute('hidden');
+    });
+  }
+
+  if (cancelBtn) {
+    cancelBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      confirmSection.setAttribute('hidden', true);
+    });
+  }
+});
+</script>
+
+
+
+{% endblock %}
+
+
+

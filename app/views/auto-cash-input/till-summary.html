@@ -1,0 +1,91 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "92875" %}
+
+{% block beforeContent %}
+  <a href="./allocate.html" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    <span class="govuk-caption-l">Till</span>
+    <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+    <div class="govuk-button-group govuk-!-margin-bottom-6">
+      <a href="#" class="govuk-button">Print</a>
+    </div>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-heading-m">File details</h2>
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">File name</dt>
+        <dd class="govuk-summary-list__value">a121_2250524_AP_057_CC.dat</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Source</dt>
+        <dd class="govuk-summary-list__value">British Telecom</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Amount</dt>
+        <dd class="govuk-summary-list__value">£62,256.00</dd>
+      </div>
+    </dl>
+
+    <h2 class="govuk-heading-m">Records</h2>
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Total records</dt>
+        <dd class="govuk-summary-list__value">24</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Errors</dt>
+        <dd class="govuk-summary-list__value">2</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Unidentified</dt>
+        <dd class="govuk-summary-list__value">0</dd>
+      </div>
+    </dl>
+      </div>
+    </div>
+
+    
+
+    <h2 class="govuk-heading-m">Errors</h2>
+    <h3 class="govuk-heading-s">Selected enforcement actions</h3>
+    <p class="govuk-body-s">None</p>
+
+    <h3 class="govuk-heading-s govuk-!-margin-top-6">Zero balances outstanding</h3>
+
+    <table class="govuk-table ">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row govuk-body-s">
+          <th class="govuk-table__header" scope="col">Account number</th>
+          <th class="govuk-table__header" scope="col">Surname</th>
+          <th class="govuk-table__header" scope="col">Value</th>
+          <th class="govuk-table__header" scope="col">Account no.</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body govuk-body-s">
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">23003675B</td>
+          <td class="govuk-table__cell">BLOGGS</td>
+          <td class="govuk-table__cell">£50.00</td>
+          <td class="govuk-table__cell">23003675A</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">23003675B</td>
+          <td class="govuk-table__cell">SMITH</td>
+          <td class="govuk-table__cell">£35.00</td>
+          <td class="govuk-table__cell">23003675B</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+{% endblock %}

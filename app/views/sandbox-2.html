@@ -1,0 +1,393 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Sandbox" %}
+
+{% block content %}
+
+{%- from "govuk/components/table/macro.njk" import govukTable -%}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <form action="/next-page" method="post">
+
+        <p class="govuk-body-s"><a href="sandbox-3" class="govuk-link">No vertical fixed frame</a></p>
+        <p class="govuk-body-s"><a href="sandbox" class="govuk-link">Fixed vertical frame</a></p>
+        <p class="govuk-body-s"><a href="sandbox-2" class="govuk-link">Fixed vertical frame with improvements</a></p>
+        <p class="govuk-body-s"><a href="sandbox-4" class="govuk-link">Improved multi-select</a></p>
+
+
+        <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+        <div class="moj-scrollable-pane responsive-scroll-pane govuk-!-margin-bottom-6">
+
+            <table class="govuk-table" data-module="moj-sortable-table" style="min-width: 1440px;">
+
+              <caption class="govuk-table__caption govuk-visually-hidden">Creditor and imposition details</caption>
+
+              <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                  <th scope="col" class="govuk-table__header" aria-sort="ascending">ID</th>
+                  <th scope="col" class="govuk-table__header" aria-sort="none">Imposition</th>
+                  <th scope="col" class="govuk-table__header" aria-sort="none">Creditor</th>
+                  <th scope="col" class="govuk-table__header" aria-sort="none">Imposed</th>
+                  <th scope="col" class="govuk-table__header" aria-sort="none">Paid/written off</th>
+                  <th scope="col" class="govuk-table__header" aria-sort="none">Balance</th>
+                  <th scope="col" class="govuk-table__header" aria-sort="none">Sentencing date</th>
+                  <th scope="col" class="govuk-table__header" aria-sort="none">Offence</th>
+                </tr>
+              </thead>
+
+              <tbody class="govuk-table__body">
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000427N-IM1</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">Royal Mail</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">01 Jan 2014</td>
+                  <td class="govuk-table__cell">Theft of mail bag/postal packet</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000428N-IM2</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">DHL</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">15 Feb 2015</td>
+                  <td class="govuk-table__cell">Loss of parcel during transit</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000429N-IM3</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">FedEx</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">20 Mar 2016</td>
+                  <td class="govuk-table__cell">Damage to package upon delivery</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000431N-IM5</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">TNT</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">12 May 2018</td>
+                  <td class="govuk-table__cell">Loss of shipment at customs</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000432N-IM6</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">DHL</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">30 Jun 2019</td>
+                  <td class="govuk-table__cell">Misdelivery of important documents</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000433N-IM7</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">Royal Mail</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">25 Jul 2020</td>
+                  <td class="govuk-table__cell">Vandalism of delivery area</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000434N-IM8</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">FedEx</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">10 Aug 2021</td>
+                  <td class="govuk-table__cell">Theft of goods in warehouse</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000435N-IM9</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">UPS</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">15 Sep 2022</td>
+                  <td class="govuk-table__cell">Loss of product during handling</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000435N-IM10</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">UPS</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">15 Sep 2022</td>
+                  <td class="govuk-table__cell">Loss of product during handling</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000427N-IM1</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">Royal Mail</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">01 Jan 2014</td>
+                  <td class="govuk-table__cell">Theft of mail bag/postal packet</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000428N-IM2</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">DHL</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">15 Feb 2015</td>
+                  <td class="govuk-table__cell">Loss of parcel during transit</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000429N-IM3</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">FedEx</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">20 Mar 2016</td>
+                  <td class="govuk-table__cell">Damage to package upon delivery</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000431N-IM5</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">TNT</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">12 May 2018</td>
+                  <td class="govuk-table__cell">Loss of shipment at customs</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000432N-IM6</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">DHL</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">30 Jun 2019</td>
+                  <td class="govuk-table__cell">Misdelivery of important documents</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000433N-IM7</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">Royal Mail</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">25 Jul 2020</td>
+                  <td class="govuk-table__cell">Vandalism of delivery area</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000427N-IM1</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">Royal Mail</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">01 Jan 2014</td>
+                  <td class="govuk-table__cell">Theft of mail bag/postal packet</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000428N-IM2</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">DHL</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">15 Feb 2015</td>
+                  <td class="govuk-table__cell">Loss of parcel during transit</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000429N-IM3</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">FedEx</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">20 Mar 2016</td>
+                  <td class="govuk-table__cell">Damage to package upon delivery</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000431N-IM5</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">TNT</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">12 May 2018</td>
+                  <td class="govuk-table__cell">Loss of shipment at customs</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000432N-IM6</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">DHL</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">30 Jun 2019</td>
+                  <td class="govuk-table__cell">Misdelivery of important documents</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000433N-IM7</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">Royal Mail</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">25 Jul 2020</td>
+                  <td class="govuk-table__cell">Vandalism of delivery area</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000434N-IM8</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">FedEx</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">10 Aug 2021</td>
+                  <td class="govuk-table__cell">Theft of goods in warehouse</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000435N-IM9</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">UPS</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">15 Sep 2022</td>
+                  <td class="govuk-table__cell">Loss of product during handling</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000435N-IM10</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">UPS</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">15 Sep 2022</td>
+                  <td class="govuk-table__cell">Loss of product during handling</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000427N-IM1</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">Royal Mail</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">01 Jan 2014</td>
+                  <td class="govuk-table__cell">Theft of mail bag/postal packet</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000428N-IM2</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">DHL</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">15 Feb 2015</td>
+                  <td class="govuk-table__cell">Loss of parcel during transit</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000429N-IM3</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">FedEx</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">20 Mar 2016</td>
+                  <td class="govuk-table__cell">Damage to package upon delivery</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000431N-IM5</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">TNT</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">12 May 2018</td>
+                  <td class="govuk-table__cell">Loss of shipment at customs</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000432N-IM6</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">DHL</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">30 Jun 2019</td>
+                  <td class="govuk-table__cell">Misdelivery of important documents</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">06000433N-IM7</td>
+                  <td class="govuk-table__cell">FCOMP</td>
+                  <td class="govuk-table__cell"><a href="#">Royal Mail</a></td>
+                  <td class="govuk-table__cell">£300.00</td>
+                  <td class="govuk-table__cell">£200.00</td>
+                  <td class="govuk-table__cell">£100.00</td>
+                  <td class="govuk-table__cell">25 Jul 2020</td>
+                  <td class="govuk-table__cell">Vandalism of delivery area</td>
+                </tr>
+              </tbody>
+
+            </table>
+
+        </div>
+  
+        <button class="govuk-button " data-module="govuk-button">Continue</button>
+      </form>
+    </div>
+  </div>
+
+  <style>
+
+    .govuk-table__body .govuk-table__cell {
+      font-size: 16px; /* Matches govuk-body-s */
+      line-height: 1.42857; /* Matches govuk-body-s */
+    }
+
+    .responsive-scroll-pane {
+      max-height:50dvh; /* Half the screen height */
+      overflow-y: auto;
+      overflow-x: auto; /* Just in case table is wide */
+      border: 1px solid   #b1b4b6;
+      padding-bottom: 1px; /* Prevent clipping of scrollbar */
+      -webkit-overflow-scrolling: touch; /* Improves mobile scrolling */
+    }
+
+    /* Show scrollbars more clearly if user prefers visible indicators */
+    @media (prefers-reduced-transparency: reduce) {
+      .responsive-scroll-pane {
+        scrollbar-width: auto;
+        scrollbar-color: #6f777b #f3f2f1; /* Thumb / Track */
+      }
+    }
+
+    /* Optional: always show scrollbars on desktop if needed */
+    @media screen and (min-width: 768px) {
+      .responsive-scroll-pane::-webkit-scrollbar {
+        height: 10px;
+        width: 10px;
+      }
+
+      .responsive-scroll-pane::-webkit-scrollbar-thumb {
+        background: #6f777b;
+        border-radius: 6px;
+      }
+
+      .responsive-scroll-pane::-webkit-scrollbar-track {
+        background: #f3f2f1;
+      }
+    }
+  </style>
+{% endblock %}

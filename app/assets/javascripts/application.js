@@ -19,9 +19,9 @@ window.GOVUKPrototypeKit.documentReady(() => {
   }
 
 
-  const express = require('express');
-  const app = express();
-  const nunjucks = require('nunjucks');
+  // const express = require('express');
+  // const app = express();
+  // const nunjucks = require('nunjucks');
 
   nunjucks.configure('views', { autoescape: true, express: app });
 

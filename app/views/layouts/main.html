@@ -7,20 +7,8 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 
 {% block header %}
 
-<div class="govuk-!-padding-top-3 govuk-!-padding-bottom-3" style="background-color: #ffdd00; width: 100%;" >
-  <div class="govuk-width-container">
-   
-   <p class="govuk-body govuk-!-margin-bottom-0">
-    <strong class="govuk-tag govuk-!-margin-right-1" style="background-color: #505A5F; color: white;">
-      Research tool
-    </strong>
-     For research purposes only. Some functions will not be available. 
-    </p>
-  </div>
-</div>
-
 {{ mojHeader({
-    navigationClasses: 'govuk-width-container',
+    navigationClasses: 'govuk-width-container ',
     organisationLabel: {
       text: 'HMCTS',
       href: '../index.html'
@@ -42,7 +30,7 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 
 {% block footer %}
 <footer class="govuk-footer">
-  <div class="govuk-width-container">
+  <div class="govuk-width-container ">
     <div class="govuk-footer__meta">
       <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
         <h2 class="govuk-visually-hidden">Support links</h2>
@@ -90,4 +78,21 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
     window.sessionStorage.clear();
   });
 </script>
+
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <!-- Load moj-frontend from CDN -->
+  <script src="https://unpkg.com/moj-frontend@latest/moj-frontend.min.js"></script>
+
+  <!-- Then load your prototype JavaScript -->
+  <!-- <script src="/public/javascripts/application.js"></script> -->
+
+  <script src="/public/javascripts/moj-tables.js"></script>
+
+  <script src="/public/javascripts/accounts.js"></script>
+  <script src="/public/javascripts/account-details.js"></script>
+  <script src="/public/javascripts/search.js"></script>
+
 {% endblock %}

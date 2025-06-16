@@ -1,0 +1,285 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Automatic cash input" %}
+{% set tab1 = "Process files" %}
+{% set tab2 = "Allocate files" %}
+
+{% block beforeContent %}
+
+<a href="../index.html" class="govuk-back-link">Back</a>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+    {{ mojSubNavigation({
+      label: "Sub navigation",
+      items: [
+      {
+        text: "Process",
+        href: "./process.html"
+      }, 
+      {
+        text: "Allocate",
+        href: "./allocate.html",
+        active: true
+      }
+      ]
+    }) }}
+
+    {{ mojAlert({
+      variant: "information", 
+      dismissible: false,
+      html: '4 files are being processed'
+    }) }}
+
+    <h1 class="govuk-heading-m">{{tab2}}</h1>
+
+    <div class="moj-button-group-with-divider govuk-!-margin-bottom-4">
+      <button class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0" data-module="govuk-button">Refresh</button>
+
+      <span class="moj-button-divider" aria-hidden="true"></span>
+
+      <button class="govuk-button govuk-!-margin-bottom-0" data-module="govuk-button">Allocate</button>
+    </div>
+
+    <div class="moj-scrollable-pane">
+
+      <table class="govuk-table" data-module="moj-sortable-table" style="width: 1600px;">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col" style="width: 1.2rem;">
+              <div class="govuk-checkboxes__item govuk-checkboxes--small">
+                <input class="govuk-checkboxes__input" id="files" name="allocate-files" type="checkbox" value="all">
+                <label class="govuk-label govuk-checkboxes__label" for="files">
+                  <span class="govuk-visually-hidden">Select all files</span>
+                </label>
+              </div>
+            </th>
+            <th class="govuk-table__header" scope="col" aria-sort="none">Till number</th>
+            <th class="govuk-table__header" scope="col" aria-sort="none">Errors</th>
+            <th class="govuk-table__header" scope="col" aria-sort="none">Status</th>
+            <th class="govuk-table__header" scope="col" aria-sort="none">File name</th>
+            <th class="govuk-table__header" scope="col" aria-sort="none">Source</th>
+            <th class="govuk-table__header" scope="col" aria-sort="none">Amount</th>
+            <th class="govuk-table__header" scope="col" aria-sort="none">Date</th>
+            <th class="govuk-table__header" scope="col" aria-sort="none">Time</th>
+            <th class="govuk-table__header" scope="col" aria-sort="none">Business unit</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell checkbox-cell">
+              <div class="govuk-checkboxes__item govuk-checkboxes--small">
+                <input class="govuk-checkboxes__input" id="file-1" name="allocate-files" type="checkbox" value="92871">
+                <label class="govuk-label govuk-checkboxes__label" for="file-1">
+                  <span class="govuk-visually-hidden">Select till 92871</span>
+                </label>
+              </div>
+            </td>
+            <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="./till-summary.html">92871</a></td>
+            <td class="govuk-table__cell">2</td>
+            <td class="govuk-table__cell">Ready</td>
+            <!-- <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--blue">Ready</strong></td> -->
+            <td class="govuk-table__cell">a121_200317_NW_057_BH.dat</td>
+            <td class="govuk-table__cell">Nat West</td>
+            <td class="govuk-table__cell">£5,067.00</td>
+            <td class="govuk-table__cell">15 June 2025</td>
+            <td class="govuk-table__cell">10:05</td>
+            <td class="govuk-table__cell">Devon and Cornwall</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell checkbox-cell">
+              <div class="govuk-checkboxes__item govuk-checkboxes--small">
+                <input class="govuk-checkboxes__input" id="file-2" name="allocate-files" type="checkbox" value="92872">
+                <label class="govuk-label govuk-checkboxes__label" for="file-2">
+                  <span class="govuk-visually-hidden">Select till 92872</span>
+                </label>
+              </div>
+            </td>
+            <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">92872</a></td>
+            <td class="govuk-table__cell">0</td>
+            <td class="govuk-table__cell">Ready</td>
+            <!-- <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--blue">Ready</strong></td> -->
+            <td class="govuk-table__cell">a121_200317_BT_057_AV.dat</td>
+            <td class="govuk-table__cell">British Telecom</td>
+            <td class="govuk-table__cell">£1,250.00</td>
+            <td class="govuk-table__cell">15 June 2025</td>
+            <td class="govuk-table__cell">10:05</td>
+            <td class="govuk-table__cell">Devon and Cornwall</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell checkbox-cell">
+              <div class="govuk-checkboxes__item govuk-checkboxes--small">
+                <input class="govuk-checkboxes__input" id="file-3" name="allocate-files" type="checkbox" value="92873">
+                <label class="govuk-label govuk-checkboxes__label" for="file-3">
+                  <span class="govuk-visually-hidden">Select till 92873</span>
+                </label>
+              </div>
+            </td>
+            <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">92873</a></td>
+            <td class="govuk-table__cell">1</td>
+            <td class="govuk-table__cell">Ready</td>
+            <!-- <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--blue">Ready</strong></td> -->
+            <td class="govuk-table__cell">a121_200317_BC_057_AR.dat</td>
+            <td class="govuk-table__cell">Barclaycard</td>
+            <td class="govuk-table__cell">£12,240.00</td>
+            <td class="govuk-table__cell">15 June 2025</td>
+            <td class="govuk-table__cell">10:05</td>
+            <td class="govuk-table__cell">Devon and Cornwall</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell checkbox-cell">
+              <div class="govuk-checkboxes__item govuk-checkboxes--small">
+                <input class="govuk-checkboxes__input" id="file-4" name="allocate-files" type="checkbox" value="92874" disabled>
+                <label class="govuk-label govuk-checkboxes__label" for="file-4">
+                  <span class="govuk-visually-hidden">Till 92874 is processing</span>
+                </label>
+              </div>
+            </td>
+            <td class="govuk-table__cell">92874</td>
+            <td class="govuk-table__cell">–</td>
+            <!-- <td class="govuk-table__cell">Processing</td> -->
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--light-blue">Processing</strong></td>
+            <td class="govuk-table__cell">a121_200317_AP_057_BZ.dat</td>
+            <td class="govuk-table__cell">All Pay</td>
+            <td class="govuk-table__cell">–</td>
+            <td class="govuk-table__cell">15 June 2025</td>
+            <td class="govuk-table__cell">10:05</td>
+            <td class="govuk-table__cell">Devon and Cornwall</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell checkbox-cell">
+              <div class="govuk-checkboxes__item govuk-checkboxes--small">
+                <input class="govuk-checkboxes__input" id="file-5" name="allocate-files" type="checkbox" value="92874" disabled>
+                <label class="govuk-label govuk-checkboxes__label" for="file-5">
+                  <span class="govuk-visually-hidden">Till 92874 is processing</span>
+                </label>
+              </div>
+            </td>
+            <td class="govuk-table__cell">92875</td>
+            <td class="govuk-table__cell">–</td>
+            <!-- <td class="govuk-table__cell">Processing</td> -->
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--light-blue">Processing</strong></td>
+            <td class="govuk-table__cell">a121_200316_DB_057_AC.dat</td>
+            <td class="govuk-table__cell">Deduction from Benefits</td>
+            <td class="govuk-table__cell">–</td>
+            <td class="govuk-table__cell">15 June 2025</td>
+            <td class="govuk-table__cell">10:05</td>
+            <td class="govuk-table__cell">Devon and Cornwall</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell checkbox-cell">
+              <div class="govuk-checkboxes__item govuk-checkboxes--small">
+                <input class="govuk-checkboxes__input" id="file-6" name="allocate-files" type="checkbox" value="92874" disabled>
+                <label class="govuk-label govuk-checkboxes__label" for="file-6">
+                  <span class="govuk-visually-hidden">Till 92874 is processing</span>
+                </label>
+              </div>
+            </td>
+            <td class="govuk-table__cell">92876</td>
+            <td class="govuk-table__cell">–</td>
+            <!-- <td class="govuk-table__cell">Processing</td> -->
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--light-blue">Processing</strong></td>
+            <td class="govuk-table__cell">a121_200316_AP_057_DX.dat</td>
+            <td class="govuk-table__cell">All Pay</td>
+            <td class="govuk-table__cell">–</td>
+            <td class="govuk-table__cell">15 June 2025</td>
+            <td class="govuk-table__cell">10:05</td>
+            <td class="govuk-table__cell">Devon and Cornwall</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell checkbox-cell">
+              <div class="govuk-checkboxes__item govuk-checkboxes--small">
+                <input class="govuk-checkboxes__input" id="file-7" name="allocate-files" type="checkbox" value="92874" disabled>
+                <label class="govuk-label govuk-checkboxes__label" for="file-7">
+                  <span class="govuk-visually-hidden">Till 92874 is processing</span>
+                </label>
+              </div>
+            </td>
+            <td class="govuk-table__cell">92877</td>
+            <td class="govuk-table__cell">–</td>
+            <!-- <td class="govuk-table__cell">Processing</td> -->
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--light-blue">Processing</strong></td>
+            <td class="govuk-table__cell">a121_200313_DB_057_AC.dat</td>
+            <td class="govuk-table__cell">Deduction from Benefits</td>
+            <td class="govuk-table__cell">–</td>
+            <td class="govuk-table__cell">15 June 2025</td>
+            <td class="govuk-table__cell">10:05</td>
+            <td class="govuk-table__cell">Devon and Cornwall</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    
+
+  </div>
+</div>
+
+<style>
+
+  .govuk-table__row--selected {
+    background-color: #E8F1F8; /* GOV.UK blue at 20% */
+  }
+
+  .govuk-table__header, .govuk-table__cell {
+    padding: 5px 5px 5px 0px;
+  }
+
+  label.govuk-checkboxes__label {
+    display: inline-table;
+  }
+
+  .govuk-table__header, .govuk-table__cell {
+    vertical-align: middle;
+  }
+
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const table = document.querySelector('.govuk-table');
+  const allCheckboxes = table.querySelectorAll('tbody .govuk-checkboxes__input[name="allocate-files"]');
+  const selectAll = document.getElementById('files');
+
+  // Only include enabled checkboxes in logic
+  const enabledCheckboxes = Array.from(allCheckboxes).filter(cb => !cb.disabled);
+
+  function updateRowHighlight(checkbox) {
+    const row = checkbox.closest('tr');
+    row.classList.toggle('govuk-table__row--selected', checkbox.checked);
+  }
+
+  function updateSelectAllState() {
+    const allChecked = enabledCheckboxes.every(cb => cb.checked);
+    selectAll.checked = allChecked;
+  }
+
+  allCheckboxes.forEach(function (checkbox) {
+    checkbox.addEventListener('change', function () {
+      updateRowHighlight(checkbox);
+      updateSelectAllState();
+    });
+  });
+
+  if (selectAll) {
+    selectAll.addEventListener('change', function () {
+      const checked = selectAll.checked;
+      enabledCheckboxes.forEach(function (checkbox) {
+        checkbox.checked = checked;
+        updateRowHighlight(checkbox);
+      });
+    });
+  }
+});
+</script>
+
+
+{% endblock %}
+

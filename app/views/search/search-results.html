@@ -1,0 +1,54 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Search results – GOV.UK Prototype Kit
+{% endblock %}
+
+
+{% block beforeContent %}
+
+{{ govukBackLink({
+  text: "Back",
+  href: "./search.html"
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+
+<h1 class="govuk-heading-l">Search results</h1>
+
+<!-- <p class="govuk-body" id="results-summary">Showing 1-25 of 100 individual defendants</p> -->
+
+<h2 class="govuk-heading-m">Showing 1-25 of 25 individual defendants</h2>
+
+
+<div class="moj-scrollable-pane scroll-shadow-container">
+
+<table class="govuk-table" id="results-table" data-module="moj-sortable-table" style="min-width: 1700px;">
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th class="govuk-table__header" aria-sort="none">Account</th>
+      <th class="govuk-table__header" aria-sort="none">Name</th>
+      <th class="govuk-table__header" aria-sort="none">Aliases</th>
+      <th class="govuk-table__header" aria-sort="none">Date of Birth</th>
+      <th class="govuk-table__header" aria-sort="none">Address line 1</th>
+      <th class="govuk-table__header" aria-sort="none">Postcode</th>
+      <th class="govuk-table__header" aria-sort="none">NI Number</th>
+      <th class="govuk-table__header" aria-sort="none">Parent or guardian</th>
+      <th class="govuk-table__header" aria-sort="none">Business unit</th>
+      <th class="govuk-table__header" aria-sort="none">PCR</th>
+      <th class="govuk-table__header" aria-sort="none">Enforcement</th>
+      <th class="govuk-table__header" aria-sort="none">Balance</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body govuk-body-s" id="results-body">
+    <!-- Rows inserted with JS -->
+  </tbody>
+</table>
+
+</div>
+
+{% endblock %}
+

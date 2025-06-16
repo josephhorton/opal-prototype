@@ -1,0 +1,63 @@
+{#
+For guidance on how to use layouts see:
+https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
+#}
+
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+<!-- <div class="govuk-!-padding-top-3 govuk-!-padding-bottom-3" style="background-color: #ffdd00; width: 100%;" >
+  <div class="govuk-width-container">
+   
+   <p class="govuk-body govuk-!-margin-bottom-0">
+    <strong class="govuk-tag govuk-!-margin-right-1" style="background-color: #505A5F; color: white;">
+      Research tool
+    </strong>
+     For research purposes only. Some functions will not be available. 
+    </p>
+  </div>
+</div> -->
+
+{{ mojHeader({
+    navigationClasses: 'govuk-width-container',
+    organisationLabel: {
+      text: 'HMCTS',
+      href: '../index.html'
+    },
+    serviceLabel: {
+      text: 'Opal',
+      href: '../index.html'
+    },
+    navigation: {
+      label: 'Account navigation',
+      items: [{
+        text: 'Sign out',
+        href: '#'
+      }]
+    }
+}) }}
+
+<div class="moj-primary-navigation">
+
+  <div class="govuk-width-container">
+
+    <div class="moj-primary-navigation__nav">
+
+      <nav class="moj-primary-navigation" aria-label="Primary navigation">
+
+        <ul class="moj-primary-navigation__list">
+          <li class="moj-primary-navigation__item">
+            <a class="moj-primary-navigation__link" aria-current="page" href="../search/search.html">Search</a>
+          </li>
+        </ul>
+
+      </nav>
+
+    </div>
+  </div>
+
+</div>
+
+
+{% endblock %}
+

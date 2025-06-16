@@ -5,8 +5,16 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
+const rows = require('./data/rows.json')
+
+require('./routes/account.js')(router);
 
 // Add your routes here
+
+router.get('/sandbox', function (req, res) {
+  res.render('sandbox', { rows })
+})
+
 
 require('./routes/account')(router)
 

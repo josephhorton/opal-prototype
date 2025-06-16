@@ -1,4 +1,4 @@
-{% extends "layouts/global.html" %}
+{% extends "layouts/main.html" %}
 
 {% set pageName = "Search for an account" %}
 
@@ -12,7 +12,7 @@
   <div class="govuk-grid-column-two-thirds">
     <h1 class="govuk-heading-l">{{pageName}}</h1>
 
-    <form method="post" novalidate >
+    <form method="get" action="search-results">
 
     {{ govukSummaryList({
       classes: "govuk-!-margin-bottom-7",
@@ -27,7 +27,7 @@
           actions: {
             items: [
               {
-                href: "#",
+                href: "./",
                 text: "Change",
                 classes: "govuk-link--no-visited-state",
                 visuallyHiddenText: "business unit"
@@ -37,156 +37,34 @@
         }
       ]
     }) }}
-    
+  
 
-    {% set uniqueReferenceHTML %}
-
-    
-
-    <!-- OPTION 1 -->
-    <!-- 
-    
-    <h2 class="govuk-heading-m">Unique reference</h2>
-    
-     {{ govukInput({
-      id: "accountNumber",
-      name: "accountNumber",
-      classes: "govuk-input--width-10",
+    {{ govukInput({
       label: {
         text: "Account number",
         classes: "govuk-label--s"
       },
-      value: data['accountNumber']
-    }) }}
-
-    {{ govukInput({
-      id: "caseNumber",
-      name: "caseNumber",
-      classes: "govuk-input--width-10",
-      label: {
-        text: "Case number",
-        classes: "govuk-label--s"
-      },
-      value: data['caseNumber']
-    }) }}
-
-    {{ govukInput({
-      id: "nationalInsuranceNumber",
-      name: "nationalInsuranceNumber",
-      classes: "govuk-input--width-10",
-      label: {
-        text: "National Insurance number",
-        classes: "govuk-label--s"
-      },
-      value: data['nationalInsuranceNumber']
-    }) }}
-
-    {{ govukInput({
-      id: "PCRFP",
-      name: "PCRFP",
-      classes: "govuk-input--width-10",
-      label: {
-        text: "Prosecutor Case Reference (PCR) or Fixed Penalty notice number",
-        classes: "govuk-label--s"
-      },
-      value: data['PCRFP']
-    }) }} -->
-
-    <!-- OPTION 2 -->
-
-    {% set accountNumberHTML %}
-    {{ govukInput({
-      label: {
-        text: "Account number",
-        classes: "govuk-visually-hidden"
+      hint: {
+        text: "For example, 12345678 or 12345678A"
       },
       classes: "govuk-input--width-10",
       id: "account-number-value",
       name: "account-number-value"
     }) }}
-    {% endset -%}
+    
 
-    {% set caseNumberHTML %}
+    
     {{ govukInput({
       label: {
-        text: "Case number",
-        classes: "govuk-visually-hidden"
+        text: "Reference or case number",
+        classes: "govuk-label--s"
       },
       classes: "govuk-input--width-10",
       id: "case-number-value",
       name: "case-number-value"
     }) }}
 
-    {% endset -%}
-
-    {% set NINOHTML %}
-    {{ govukInput({
-      label: {
-        text: "Nino number",
-        classes: "govuk-visually-hidden"
-      },
-      classes: "govuk-input--width-10",
-      id: "NINO-number-value",
-      name: "NINO-number-value"
-    }) }}
-
-    {% endset -%}
-
-    {% set PCRFPHTML %}
-    {{ govukInput({
-      label: {
-        text: "PCR number",
-        classes: "govuk-visually-hidden"
-      },
-      classes: "govuk-input--width-20",
-      id: "pcr-number-value",
-      name: "pcr-number-value"
-    }) }}
-
-    {% endset -%}
-
-
-    {{ govukRadios({
-      name: "uniqueReferenceType",
-      value: data['uniqueReferenceType'],
-      fieldset: {
-        legend: {
-          text: "Unique reference",
-          classes: "govuk-fieldset__legend--m"
-        }
-      },
-      items: [
-        {
-          value: "Account number",
-          text: "Account number",
-          conditional: {
-            html: accountNumberHTML
-          }
-        },
-        {
-          value: "Case number",
-          text: "Case number",
-          conditional: {
-            html: caseNumberHTML
-          }
-        },
-        {
-          value: "National Insurance number",
-          text: "National Insurance number",
-          conditional: {
-            html: NINOHTML
-          }
-        },
-        {
-          value: "Prosecutor Case Reference (PCR) or Fixed Penalty notice number",
-          text: "Prosecutor Case Reference (PCR) or Fixed Penalty notice number",
-          conditional: {
-            html: PCRFPHTML
-          }
-        }
-      ]
-    }) }}
-    {% endset -%}
+    
 
 
 
@@ -194,7 +72,7 @@
     {% set individualHTML %}
     <h2 class="govuk-heading-m">Individuals</h2>
 
-    <p class="govuk-body govuk-hint">Search for a defendant, parent or guardian</p>
+    <!-- <p class="govuk-body govuk-hint">Search for a defendant</p> -->
 
     {{ govukInput({
       id: "lastName",
@@ -261,6 +139,34 @@
     }) }}
 
     <!-- DATE OF BIRTH -->
+
+    {%- from "moj/components/date-picker/macro.njk" import mojDatePicker -%}
+
+    {{ mojDatePicker({
+      id: "date",
+      name: "date",
+      label: {
+        text: "Date of birth",
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "For example, 31/01/2023"
+      }
+    }) }}
+
+    {{ govukInput({
+      id: "NINumber",
+      name: "NINumber",
+      classes: "govuk-input--width-10",
+      label: {
+        text: "National Insurance number",
+        classes: "govuk-label--s"
+      },
+      hint: {
+        text: "For example, QQ123456C"
+      },
+      value: data['NINumber']
+    }) }}
 
     {{ govukInput({
       id: "addressLine1",
@@ -615,13 +521,6 @@
     {{ govukTabs({
       items: [
         {
-          label: "Unique reference",
-          id: "unique-reference",
-          panel: {
-            html: uniqueReferenceHTML
-          }
-        },
-        {
           label: "Individuals",
           id: "individuals",
           panel: {
@@ -664,19 +563,14 @@
       ]
     }) }}
 
-    <div class="govuk-button-group">
+    
       {{ govukButton({
         text: "Search"
       }) }}
-    </div>
 
     
     </form>
-
-    
-
    
-
   </div>
 </div>
 
