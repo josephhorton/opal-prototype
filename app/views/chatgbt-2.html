@@ -1,0 +1,124 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Opal research prototype" %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: "#"
+}) }}
+
+
+{% endblock %}
+
+{% block content %}
+
+
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">You cannot pay into this account</h1>
+
+      <!-- {{ govukWarningText({
+        text: "Warning message.",
+        iconFallbackText: "Warning"
+      }) }} -->
+
+      
+
+
+
+      <!-- <span class="govuk-caption-m">06000427N</span> -->
+
+      <h2 class="govuk-heading-m">At a glance</h2>
+
+      {{ mojAlert({
+        variant: "warning",
+        title: "Some information could not be imported",
+        showTitleAsHeading: false,
+        dismissible: false,
+        html: 'Account has been written off'
+      }) }}
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: { text: "Account number" },
+            value: { text: "06000427N" }
+          },
+          {
+            key: { text: "Name" },
+            value: { text: "Mr Terrence CONWAY-JOHNSON" }
+          },
+          {
+            key: { text: "Aliases" },
+            value: { text: "–" }
+          },
+          {
+            key: { text: "Date of birth" },
+            value: { text: "01 January 2000" }
+          },
+          {
+            key: { text: "Address" },
+            value: {
+              html: "24 High Street<br>Twyford<br>Berkshire<br>RG10 9RT"
+            }
+          },
+          {
+            key: { text: "Balance" },
+            value: { text: "£0.00" }
+          },
+          {
+            key: { text: "Enforcement action" },
+            value: { text: "Return executed warrant (REW)" }
+          },
+          {
+            key: { text: "Collection order" },
+            value: { text: "No" }
+          }
+        ]
+      }) }}
+
+      <p class="govuk-body govuk-!-margin-bottom-7">
+        To see history and notes, you can <a href="#" class="govuk-link" target="_blank">view the account in a new tab</a>.
+      </p>
+
+      <form action="/suspense-choice" method="post">
+        <!-- {{ govukRadios({
+          name: "suspenseAction",
+          fieldset: {
+            legend: {
+              text: "Next steps",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "suspense",
+              text: "Pay money into suspense"
+            },
+            {
+              value: "stop",
+              text: "Cancel and return to till"
+            }
+          ]
+        }) }} -->
+
+        {{ govukButton({
+          text: "Pay into suspense"
+        }) }}
+      </form>
+
+      <p class="govuk-body">
+        <a class="govuk-link govuk-link--no-visited-state" href="#">Cancel and return to till</a>
+      </p>
+
+
+      
+      
+    </div>
+  </div>
+
+{% endblock %}

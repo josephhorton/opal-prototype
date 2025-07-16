@@ -1,0 +1,61 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Payment category" %}
+
+{% block beforeContent %}
+
+{{ govukBackLink({
+  text: "Back",
+  href: "./till-details.html"
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form class="govuk-form-group" action="/suspense-category-form" method="post">
+
+        {{ govukRadios({
+          name: "paymentCategory",
+          id: "paymentCategory",
+          fieldset: {
+            legend: {
+              text: pageName,
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          value: data.paymentCategory,
+          items: [
+            {
+              value: "Criminal",
+              text: "Criminal"
+            },
+            {
+              value: "Court fee",
+              text: "Court fee"
+            },
+            {
+              value: "Suspense",
+              text: "Suspense"
+            }
+          ]
+        }) }}
+
+        
+        <div class="govuk-button-group">
+          <button type="submit" class="govuk-button">
+            Continue
+          </button>
+
+          <p class="govuk-body"><a href="./till-details.html" class="govuk-link govuk-link--no-visited-state">Cancel</a></p>
+        </div>
+      </form>
+      
+    </div>
+  </div>
+
+{% endblock %}

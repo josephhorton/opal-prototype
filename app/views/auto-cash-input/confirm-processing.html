@@ -1,0 +1,90 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Confirm before processing" %}
+{% set tab1 = "Process files" %}
+{% set tab2 = "Allocate files" %}
+
+{% block beforeContent %}
+
+<a href="./process.html" class="govuk-back-link">Back</a>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-half">
+    <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+    <p class="govuk-body">You have selected 7 of 14 files to process.</p>
+
+    {{ govukTable({
+      firstCellIsHeader: false,
+      head: [
+        {
+          text: "Business unit",
+          attributes: { style: "width: 50%;" }
+        },
+        {
+          text: "Files"
+        }
+      ],
+      rows: [
+        [
+          {
+            text: "Avon and Somerset"
+          },
+          {
+            text: "7"
+          }
+        ]
+      ]
+    }) }}
+
+    <form method="get" class="govuk-form-group" action="allocate">
+      {{ govukCheckboxes({
+        name: "removeInhibits",
+        id: "removeInhibits",
+        classes: "govuk-checkboxes",
+        fieldset: {
+          legend: {
+            text: "Override inhibits for AEA files",
+            isPageHeading: false,
+            classes: "govuk-fieldset__legend--s"
+          }
+        },
+        hint: {
+          text: "Inhibits will be ignored for any files you select"
+        },
+        values: data["removeInhibits"],
+        items: [
+          {
+            value: "a121_200316_DB_057_AC.dat",
+            text: "a121_200316_DB_057_AC.dat"
+          },
+          {
+            value: "a121_200313_DB_232_DB.dat",
+            text: "a121_200313_DB_232_DB.dat"
+          }
+        ]
+      }) }}
+
+      <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Confirm and process"
+        }) }}
+
+        <a class="govuk-link govuk-link--no-visited-state" href="./process.html">Cancel</a>
+      </div>
+
+     
+    </form>
+
+  </div>
+</div>
+
+
+{% endblock %}
+
+
+

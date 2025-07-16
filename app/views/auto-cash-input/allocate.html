@@ -14,8 +14,31 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
+
+
+    {{ mojAlert({
+      variant: "information", 
+      dismissible: false,
+      html: '<p class="govuk-body govuk-!-margin-bottom-1">
+              8 files are being processed:
+            </p>
+            <ul class="govuk-list govuk-list--bullet govuk-body govuk-!-margin-top-0 govuk-!-margin-bottom-0">
+              <li>Avon and Somerset (4)</li>
+              <li>Devon and Cornwall (4)</li>
+            </ul>'
+    }) }}
+
+    
+
+
     <h1 class="govuk-heading-l">{{pageName}}</h1>
 
+     <!-- {{ govukButton({
+        text: "Refresh",
+        href: "./allocate.html",
+        classes: "govuk-button--secondary govuk-!-margin-bottom-5"
+    }) }} -->
+    
     {{ mojSubNavigation({
       label: "Sub navigation",
       items: [
@@ -31,21 +54,22 @@
       ]
     }) }}
 
-    {{ mojAlert({
-      variant: "information", 
-      dismissible: false,
-      html: '4 files are being processed'
-    }) }}
-
     <h1 class="govuk-heading-m">{{tab2}}</h1>
 
     <div class="moj-button-group-with-divider govuk-!-margin-bottom-4">
-      <button class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0" data-module="govuk-button">Refresh</button>
+      {{ govukButton({
+        text: "Refresh",
+        href: "#",
+        classes: "govuk-button--secondary govuk-!-margin-bottom-0"
+      }) }}
+
 
       <span class="moj-button-divider" aria-hidden="true"></span>
-
       <button class="govuk-button govuk-!-margin-bottom-0" data-module="govuk-button">Allocate</button>
     </div>
+
+    <p class="govuk-body govuk-hint">0 of 3 tills selected</p>
+
 
     <div class="moj-scrollable-pane">
 
@@ -62,13 +86,12 @@
             </th>
             <th class="govuk-table__header" scope="col" aria-sort="none">Till number</th>
             <th class="govuk-table__header" scope="col" aria-sort="none">Errors</th>
-            <th class="govuk-table__header" scope="col" aria-sort="none">Status</th>
             <th class="govuk-table__header" scope="col" aria-sort="none">File name</th>
             <th class="govuk-table__header" scope="col" aria-sort="none">Source</th>
             <th class="govuk-table__header" scope="col" aria-sort="none">Amount</th>
-            <th class="govuk-table__header" scope="col" aria-sort="none">Date</th>
-            <th class="govuk-table__header" scope="col" aria-sort="none">Time</th>
             <th class="govuk-table__header" scope="col" aria-sort="none">Business unit</th>
+            <th class="govuk-table__header" scope="col" aria-sort="none">Processed</th>
+            <th class="govuk-table__header" scope="col" aria-sort="none">Processed by</th>
           </tr>
         </thead>
         <tbody class="govuk-table__body">
@@ -83,14 +106,12 @@
             </td>
             <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="./till-summary.html">92871</a></td>
             <td class="govuk-table__cell">2</td>
-            <td class="govuk-table__cell">Ready</td>
-            <!-- <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--blue">Ready</strong></td> -->
             <td class="govuk-table__cell">a121_200317_NW_057_BH.dat</td>
             <td class="govuk-table__cell">Nat West</td>
             <td class="govuk-table__cell">£5,067.00</td>
-            <td class="govuk-table__cell">15 June 2025</td>
-            <td class="govuk-table__cell">10:05</td>
             <td class="govuk-table__cell">Devon and Cornwall</td>
+            <td class="govuk-table__cell">12 June at 10:37am</td>
+            <td class="govuk-table__cell">jane.smith</td>
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell checkbox-cell">
@@ -103,14 +124,12 @@
             </td>
             <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">92872</a></td>
             <td class="govuk-table__cell">0</td>
-            <td class="govuk-table__cell">Ready</td>
-            <!-- <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--blue">Ready</strong></td> -->
             <td class="govuk-table__cell">a121_200317_BT_057_AV.dat</td>
             <td class="govuk-table__cell">British Telecom</td>
             <td class="govuk-table__cell">£1,250.00</td>
-            <td class="govuk-table__cell">15 June 2025</td>
-            <td class="govuk-table__cell">10:05</td>
             <td class="govuk-table__cell">Devon and Cornwall</td>
+            <td class="govuk-table__cell">12 June at 10:37am</td>
+            <td class="govuk-table__cell">jane.smith</td>
           </tr>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell checkbox-cell">
@@ -123,94 +142,12 @@
             </td>
             <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">92873</a></td>
             <td class="govuk-table__cell">1</td>
-            <td class="govuk-table__cell">Ready</td>
-            <!-- <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--blue">Ready</strong></td> -->
             <td class="govuk-table__cell">a121_200317_BC_057_AR.dat</td>
             <td class="govuk-table__cell">Barclaycard</td>
             <td class="govuk-table__cell">£12,240.00</td>
-            <td class="govuk-table__cell">15 June 2025</td>
-            <td class="govuk-table__cell">10:05</td>
             <td class="govuk-table__cell">Devon and Cornwall</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell checkbox-cell">
-              <div class="govuk-checkboxes__item govuk-checkboxes--small">
-                <input class="govuk-checkboxes__input" id="file-4" name="allocate-files" type="checkbox" value="92874" disabled>
-                <label class="govuk-label govuk-checkboxes__label" for="file-4">
-                  <span class="govuk-visually-hidden">Till 92874 is processing</span>
-                </label>
-              </div>
-            </td>
-            <td class="govuk-table__cell">92874</td>
-            <td class="govuk-table__cell">–</td>
-            <!-- <td class="govuk-table__cell">Processing</td> -->
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--light-blue">Processing</strong></td>
-            <td class="govuk-table__cell">a121_200317_AP_057_BZ.dat</td>
-            <td class="govuk-table__cell">All Pay</td>
-            <td class="govuk-table__cell">–</td>
-            <td class="govuk-table__cell">15 June 2025</td>
-            <td class="govuk-table__cell">10:05</td>
-            <td class="govuk-table__cell">Devon and Cornwall</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell checkbox-cell">
-              <div class="govuk-checkboxes__item govuk-checkboxes--small">
-                <input class="govuk-checkboxes__input" id="file-5" name="allocate-files" type="checkbox" value="92874" disabled>
-                <label class="govuk-label govuk-checkboxes__label" for="file-5">
-                  <span class="govuk-visually-hidden">Till 92874 is processing</span>
-                </label>
-              </div>
-            </td>
-            <td class="govuk-table__cell">92875</td>
-            <td class="govuk-table__cell">–</td>
-            <!-- <td class="govuk-table__cell">Processing</td> -->
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--light-blue">Processing</strong></td>
-            <td class="govuk-table__cell">a121_200316_DB_057_AC.dat</td>
-            <td class="govuk-table__cell">Deduction from Benefits</td>
-            <td class="govuk-table__cell">–</td>
-            <td class="govuk-table__cell">15 June 2025</td>
-            <td class="govuk-table__cell">10:05</td>
-            <td class="govuk-table__cell">Devon and Cornwall</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell checkbox-cell">
-              <div class="govuk-checkboxes__item govuk-checkboxes--small">
-                <input class="govuk-checkboxes__input" id="file-6" name="allocate-files" type="checkbox" value="92874" disabled>
-                <label class="govuk-label govuk-checkboxes__label" for="file-6">
-                  <span class="govuk-visually-hidden">Till 92874 is processing</span>
-                </label>
-              </div>
-            </td>
-            <td class="govuk-table__cell">92876</td>
-            <td class="govuk-table__cell">–</td>
-            <!-- <td class="govuk-table__cell">Processing</td> -->
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--light-blue">Processing</strong></td>
-            <td class="govuk-table__cell">a121_200316_AP_057_DX.dat</td>
-            <td class="govuk-table__cell">All Pay</td>
-            <td class="govuk-table__cell">–</td>
-            <td class="govuk-table__cell">15 June 2025</td>
-            <td class="govuk-table__cell">10:05</td>
-            <td class="govuk-table__cell">Devon and Cornwall</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell checkbox-cell">
-              <div class="govuk-checkboxes__item govuk-checkboxes--small">
-                <input class="govuk-checkboxes__input" id="file-7" name="allocate-files" type="checkbox" value="92874" disabled>
-                <label class="govuk-label govuk-checkboxes__label" for="file-7">
-                  <span class="govuk-visually-hidden">Till 92874 is processing</span>
-                </label>
-              </div>
-            </td>
-            <td class="govuk-table__cell">92877</td>
-            <td class="govuk-table__cell">–</td>
-            <!-- <td class="govuk-table__cell">Processing</td> -->
-            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--light-blue">Processing</strong></td>
-            <td class="govuk-table__cell">a121_200313_DB_057_AC.dat</td>
-            <td class="govuk-table__cell">Deduction from Benefits</td>
-            <td class="govuk-table__cell">–</td>
-            <td class="govuk-table__cell">15 June 2025</td>
-            <td class="govuk-table__cell">10:05</td>
-            <td class="govuk-table__cell">Devon and Cornwall</td>
+            <td class="govuk-table__cell">12 June at 10:37am</td>
+            <td class="govuk-table__cell">jane.smith</td>
           </tr>
         </tbody>
       </table>

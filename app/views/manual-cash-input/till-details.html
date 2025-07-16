@@ -1,0 +1,106 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Till details" %}
+
+{% block beforeContent %}
+
+{{ govukBackLink({
+  text: "Back",
+  href: "./business-unit.html"
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Business unit"
+            },
+            value: {
+              text: data['businessUnit']
+            }
+          }
+        ]
+      }) }}
+
+      
+
+
+      
+
+      {% if (data['payments'] == "1") %}
+
+          <h2 class="govuk-heading-m">Payments</h2>
+
+          {{ govukButton({
+              text: "Add payment",
+              classes: "govuk-button--secondary",
+              href: "./payment-category.html"
+          }) }}
+
+          <h2 class="govuk-heading-m">Summary</h2>
+          {{ govukSummaryList({
+            rows: [
+              {
+                key: {
+                  text: "Payments"
+                },
+                value: {
+                  text: data['payments']
+                }
+              },
+              {
+                key: {
+                  text: "Total"
+                },
+                value: {
+                  text: "£50"
+                }
+              }
+            ]
+          }) }}
+
+          <h2 class="govuk-heading-m">Create till</h2>
+
+          {{ govukButton({
+              text: "Create till",
+              href: "./index.html"
+          }) }}
+
+          
+
+      {% else %}
+
+          <h2 class="govuk-heading-m">Payments</h2>
+
+          <p class="govuk-body">There are no payments.</p>
+
+          {{ govukButton({
+              text: "Add payment",
+              classes: "govuk-button--secondary",
+              href: "./payment-category.html"
+          }) }}
+
+          <h2 class="govuk-heading-m">Create till</h2>
+
+          <p class="govuk-body">You must add at least 1 payment to the till.</p>
+
+      {% endif %}
+
+
+      
+
+      <p class="govuk-body"><a href="./index.html" class="govuk-link govuk-link--no-visited-state">Cancel</a></p>
+      
+    </div>
+  </div>
+
+{% endblock %}

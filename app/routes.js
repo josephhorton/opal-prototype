@@ -11,12 +11,33 @@ require('./routes/account.js')(router);
 
 // Add your routes here
 
+// MANUAL CASH INPUT
+
+router.post('/suspense-category-form', function (req, res) {
+
+  var paymentCategory = req.session.data['paymentCategory']
+
+  if (paymentCategory == "Criminal"){
+    res.redirect('/manual-cash-input/search-account.html')
+  } if (paymentCategory == "Court fee"){
+    res.redirect('/manual-cash-input/court-fee-details.html')
+  } if (paymentCategory == "Suspense"){
+    res.redirect('/manual-cash-input/suspense.html')
+  }
+
+})
+
+// OTHER FLOWS
+
+
+
 router.get('/sandbox', function (req, res) {
   res.render('sandbox', { rows })
 })
 
 
 require('./routes/account')(router)
+
 
 router.get('/clear-session', function (req, res) {
     req.session.destroy(function (err) {

@@ -16,6 +16,21 @@
   <div class="govuk-grid-column-full">
     <h1 class="govuk-heading-l">{{pageName}}</h1>
 
+     {{ govukButton({
+        text: "Refresh",
+        href: "./process.html",
+        classes: "govuk-button--secondary govuk-!-margin-bottom-5"
+    }) }}
+
+    <!-- <p class="govuk-body govuk-!-margin-bottom-2">
+      Showing files for <strong>Avon and Somerset</strong> and <strong>Devon and Cornwall</strong>.
+    </p>
+    <p class="govuk-body govuk-!-margin-bottom-4">
+      <a class="govuk-link govuk-body govuk-link--no-visited-state" href="./select-business-units">Change</a>
+    </p> -->
+
+   
+
     {{ mojSubNavigation({
       label: "Sub navigation",
       items: [
@@ -37,55 +52,23 @@
     <!-- CTAs -->
     <div class="moj-button-group-with-divider govuk-!-margin-bottom-4">
 
-      {{ govukButton({
+      <!-- {{ govukButton({
         text: "Refresh",
         href: "#",
         classes: "govuk-button--secondary govuk-!-margin-bottom-0"
-      }) }}
+      }) }} -->
 
 
-      <span class="moj-button-divider" aria-hidden="true"></span>
+      <!-- <span class="moj-button-divider" aria-hidden="true"></span> -->
 
       {{ govukButton({
         text: "Process",
-        href: "./allocate",
-        attributes: { id: "process-btn" },
+        href: "./confirm-processing",
         classes: "govuk-!-margin-bottom-0"
       }) }}
     </div>
 
-    <!-- TO CONFIRM -->
-
-     <div class="" id="process-confirmation" hidden>
-      <div style="background-color: #F3F2F1; border: none;" class="govuk-notification-banner govuk-!-padding-4 govuk-!-margin-bottom-2" role="region" aria-labelledby="process-confirmation-heading">
-        <h2 class="govuk-heading-m govuk-!-margin-bottom-" id="process-confirmation-heading">Confirm</h2>
-
-        <p id="process-selected-summary" class="govuk-body govuk-!-margin-bottom-4">
-          <!-- dynamic text, e.g. "7 files selected from Devon and Cornwall." -->
-        </p>
-
-        <div class="govuk-form-group">
-          <fieldset class="govuk-fieldset">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-              Inhibits for AEA files
-            </legend>
-            <div class="govuk-checkboxes govuk-checkboxes">
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="override-inhibits" name="override-inhibits" type="checkbox" value="true">
-                <label class="govuk-label govuk-checkboxes__label" for="override-inhibits">
-                  Override inhibits
-                </label>
-              </div>
-            </div>
-          </fieldset>
-        </div>
-
-        <div class="govuk-button-group govuk-!-margin-bottom-0">
-          <button type="submit" class="govuk-button govuk-!-margin-bottom-0" id="confirm-process-button">Confirm</button>
-          <a href="#" class="govuk-link" id="cancel-process-button">Cancel</a>
-        </div>
-      </div>
-    </div>
+    <p class="govuk-body govuk-hint">0 of 14 files selected</p>
 
 
     <!-- TABLE -->
@@ -101,12 +84,10 @@
               </label>
             </div>
           </th>
-          <th class="govuk-table__header" scope="col" aria-sort="none" style="width: 25%;">File name</th>
+          <th class="govuk-table__header" scope="col" aria-sort="none" style="width: 30%;">File name</th>
           <th class="govuk-table__header" scope="col" aria-sort="none">Source</th>
-          <th class="govuk-table__header" scope="col" aria-sort="none">Date</th>
-          <th class="govuk-table__header" scope="col" aria-sort="none">Time</th>
-          <th class="govuk-table__header" scope="col" aria-sort="none">Business unit</th>
-          <!-- <th class="govuk-table__header" scope="col" aria-sort="none">Serial</th> -->
+          <th class="govuk-table__header" scope="col" aria-sort="ascending">Business unit</th>
+            <th class="govuk-table__header" scope="col" aria-sort="none">Uploaded</th>
         </tr>
       </thead>
       <tbody class="govuk-table__body">
@@ -121,10 +102,8 @@
           </td>
           <td class="govuk-table__cell">a121_200317_NW_057_BH.dat</td>
           <td class="govuk-table__cell">Nat West</td>
-          <td class="govuk-table__cell">15 June 2025</td>
-          <td class="govuk-table__cell">08:30</td>
           <td class="govuk-table__cell">Devon and Cornwall</td>
-          <!-- <td class="govuk-table__cell">00</td> -->
+          <td class="govuk-table__cell">12 June at 10:37pm</td>
         </tr>
         <tr class="govuk-table__row">
           <td class="govuk-table__cell checkbox-cell">
@@ -135,10 +114,8 @@
           </td>
           <td class="govuk-table__cell">a121_200317_BT_057_AV.dat</td>
           <td class="govuk-table__cell">British Telecom</td>
-          <td class="govuk-table__cell">15 June 2025</td>
-          <td class="govuk-table__cell">08:30</td>
           <td class="govuk-table__cell">Devon and Cornwall</td>
-          <!-- <td class="govuk-table__cell">00</td> -->
+          <td class="govuk-table__cell">12 June at 10:37pm</td>
         </tr>
         <tr class="govuk-table__row">
           <td class="govuk-table__cell checkbox-cell">
@@ -149,10 +126,8 @@
           </td>
           <td class="govuk-table__cell">a121_200317_BC_057_AR.dat</td>
           <td class="govuk-table__cell">Barclaycard</td>
-          <td class="govuk-table__cell">15 June 2025</td>
-          <td class="govuk-table__cell">08:30</td>
           <td class="govuk-table__cell">Devon and Cornwall</td>
-          <!-- <td class="govuk-table__cell">00</td> -->
+          <td class="govuk-table__cell">12 June at 10:37pm</td>
         </tr>
         <tr class="govuk-table__row">
           <td class="govuk-table__cell checkbox-cell">
@@ -163,10 +138,8 @@
           </td>
           <td class="govuk-table__cell">a121_200317_AP_057_BZ.dat</td>
           <td class="govuk-table__cell">All Pay</td>
-          <td class="govuk-table__cell">15 June 2025</td>
-          <td class="govuk-table__cell">09:00</td>
           <td class="govuk-table__cell">Devon and Cornwall</td>
-          <!-- <td class="govuk-table__cell">00</td> -->
+          <td class="govuk-table__cell">12 June at 10:37pm</td>
         </tr>
         <tr class="govuk-table__row">
           <td class="govuk-table__cell checkbox-cell">
@@ -176,11 +149,9 @@
             </div>
           </td>
           <td class="govuk-table__cell">a121_200316_DB_057_AC.dat</td>
-          <td class="govuk-table__cell">Deduction from Benefits</td>
-          <td class="govuk-table__cell">13 June 2025</td>
-          <td class="govuk-table__cell">09:30</td>
+          <td class="govuk-table__cell">DWP or AEA</td>
           <td class="govuk-table__cell">Devon and Cornwall</td>
-          <!-- <td class="govuk-table__cell">00</td> -->
+          <td class="govuk-table__cell">12 June at 10:37pm</td>
         </tr>
         <tr class="govuk-table__row">
           <td class="govuk-table__cell checkbox-cell">
@@ -191,10 +162,8 @@
           </td>
           <td class="govuk-table__cell">a121_200316_AP_057_DX.dat</td>
           <td class="govuk-table__cell">All Pay</td>
-          <td class="govuk-table__cell">13 June 2025</td>
-          <td class="govuk-table__cell">09:30</td>
           <td class="govuk-table__cell">Devon and Cornwall</td>
-          <!-- <td class="govuk-table__cell">00</td> -->
+          <td class="govuk-table__cell">12 June at 10:37pm</td>
         </tr>
         <tr class="govuk-table__row">
           <td class="govuk-table__cell checkbox-cell">
@@ -204,11 +173,9 @@
             </div>
           </td>
           <td class="govuk-table__cell">a121_200313_DB_057_AC.dat</td>
-          <td class="govuk-table__cell">Deduction from Benefits</td>
-          <td class="govuk-table__cell">12 June 2025</td>
-          <td class="govuk-table__cell">09:30</td>
+          <td class="govuk-table__cell">DWP or AEA</td>
           <td class="govuk-table__cell">Devon and Cornwall</td>
-          <!-- <td class="govuk-table__cell">00</td> -->
+          <td class="govuk-table__cell">12 June at 10:37pm</td>
         </tr>
         <tr class="govuk-table__row">
           <td class="govuk-table__cell checkbox-cell">
@@ -219,10 +186,8 @@
           </td>
           <td class="govuk-table__cell">a121_200317_NW_068_BH.dat</td>
           <td class="govuk-table__cell">Nat West</td>
-          <td class="govuk-table__cell">15 June 2025</td>
-          <td class="govuk-table__cell">08:30</td>
           <td class="govuk-table__cell">Avon and Somerset</td>
-          <!-- <td class="govuk-table__cell">00</td> -->
+          <td class="govuk-table__cell">12 June at 10:37pm</td>
         </tr>
         <tr class="govuk-table__row">
           <td class="govuk-table__cell checkbox-cell">
@@ -233,10 +198,8 @@
           </td>
           <td class="govuk-table__cell">a121_200317_BT_068_AV.dat</td>
           <td class="govuk-table__cell">British Telecom</td>
-          <td class="govuk-table__cell">15 June 2025</td>
-          <td class="govuk-table__cell">08:30</td>
           <td class="govuk-table__cell">Avon and Somerset</td>
-          <!-- <td class="govuk-table__cell">00</td> -->
+          <td class="govuk-table__cell">12 June at 10:37pm</td>
         </tr>
         <tr class="govuk-table__row">
           <td class="govuk-table__cell checkbox-cell">
@@ -247,10 +210,8 @@
           </td>
           <td class="govuk-table__cell">a121_200317_BC_068_AR.dat</td>
           <td class="govuk-table__cell">Barclaycard</td>
-          <td class="govuk-table__cell">15 June 2025</td>
-          <td class="govuk-table__cell">08:30</td>
           <td class="govuk-table__cell">Avon and Somerset</td>
-          <!-- <td class="govuk-table__cell">00</td> -->
+          <td class="govuk-table__cell">12 June at 10:37pm</td>
         </tr>
         <tr class="govuk-table__row">
           <td class="govuk-table__cell checkbox-cell">
@@ -261,10 +222,8 @@
           </td>
           <td class="govuk-table__cell">a121_200317_AP_068_BZ.dat</td>
           <td class="govuk-table__cell">All Pay</td>
-          <td class="govuk-table__cell">15 June 2025</td>
-          <td class="govuk-table__cell">09:00</td>
           <td class="govuk-table__cell">Avon and Somerset</td>
-          <!-- <td class="govuk-table__cell">00</td> -->
+          <td class="govuk-table__cell">12 June at 10:37pm</td>
         </tr>
         <tr class="govuk-table__row">
           <td class="govuk-table__cell checkbox-cell">
@@ -274,11 +233,9 @@
             </div>
           </td>
           <td class="govuk-table__cell">a121_200316_DB_068_AC.dat</td>
-          <td class="govuk-table__cell">Deduction from Benefits</td>
-          <td class="govuk-table__cell">13 June 2025</td>
-          <td class="govuk-table__cell">09:30</td>
+          <td class="govuk-table__cell">DWP or AEA</td>
           <td class="govuk-table__cell">Avon and Somerset</td>
-          <!-- <td class="govuk-table__cell">00</td> -->
+          <td class="govuk-table__cell">12 June at 10:37pm</td>
         </tr>
         <tr class="govuk-table__row">
           <td class="govuk-table__cell checkbox-cell">
@@ -289,10 +246,8 @@
           </td>
           <td class="govuk-table__cell">a121_200316_AP_068_DX.dat</td>
           <td class="govuk-table__cell">All Pay</td>
-          <td class="govuk-table__cell">13 June 2025</td>
-          <td class="govuk-table__cell">09:30</td>
           <td class="govuk-table__cell">Avon and Somerset</td>
-          <!-- <td class="govuk-table__cell">00</td> -->
+          <td class="govuk-table__cell">12 June at 10:37pm</td>
         </tr>
         <tr class="govuk-table__row">
           <td class="govuk-table__cell checkbox-cell">
@@ -302,11 +257,9 @@
             </div>
           </td>
           <td class="govuk-table__cell">a121_200313_DB_068_AC.dat</td>
-          <td class="govuk-table__cell">Deduction from Benefits</td>
-          <td class="govuk-table__cell">12 June 2025</td>
-          <td class="govuk-table__cell">09:30</td>
+          <td class="govuk-table__cell">DWP or AEA</td>
           <td class="govuk-table__cell">Avon and Somerset</td>
-          <!-- <td class="govuk-table__cell">00</td> -->
+          <td class="govuk-table__cell">12 June at 10:37pm</td>
         </tr>
 
       </tbody>
@@ -404,6 +357,24 @@ document.addEventListener('DOMContentLoaded', function () {
       confirmSection.setAttribute('hidden', true);
     });
   }
+
+  const filterForm = document.querySelector('form');
+  const filterSelect = document.getElementById('filterBusinessUnit');
+  const tableRows = document.querySelectorAll('.govuk-table tbody tr');
+
+  filterForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const selectedValue = filterSelect.value;
+
+    tableRows.forEach(row => {
+      const unitCell = row.querySelector('td:nth-child(4)');
+      const unitText = unitCell.textContent.trim();
+
+      const shouldShow = selectedValue === 'All business units' || unitText === selectedValue;
+      row.style.display = shouldShow ? '' : 'none';
+    });
+  });
 });
 </script>
 
