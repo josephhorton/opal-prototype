@@ -6,7 +6,7 @@
 
 {{ govukBackLink({
   text: "Back",
-  href: "#"
+  href: "../finance.html"
 }) }}
 
 {% endblock %}
@@ -16,14 +16,103 @@
 
 
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-grid-column-full">
 
       <h1 class="govuk-heading-l">{{pageName}}</h1>
 
       {{ govukButton({
           text: "Create till",
-          href: "./business-unit.html"
+          href: "./business-unit.html",
+          classes: "govuk-!-margin-bottom-1"
       }) }}
+
+      {# Size modifiers: xl, l, m #}
+      <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+      <h2 class="govuk-heading-m">Allocate tills</h2>
+
+      <!-- <button class="govuk-button govuk-!-margin-bottom-0" data-module="govuk-button">Allocate</button> -->
+
+      <p class="govuk-body">There are no outstanding tills to allocate.</p>
+
+      <!-- <table class="govuk-table" data-module="moj-sortable-table" style="width: 1600px;">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col" style="width: 1.2rem;">
+              <div class="govuk-checkboxes__item govuk-checkboxes--small">
+                <input class="govuk-checkboxes__input" id="files" name="allocate-files" type="checkbox" value="all">
+                <label class="govuk-label govuk-checkboxes__label" for="files">
+                  <span class="govuk-visually-hidden">Select all files</span>
+                </label>
+              </div>
+            </th>
+            <th class="govuk-table__header" scope="col" aria-sort="none">Till number</th>
+            <th class="govuk-table__header" scope="col" aria-sort="none">Errors</th>
+            <th class="govuk-table__header" scope="col" aria-sort="none">File name</th>
+            <th class="govuk-table__header" scope="col" aria-sort="none">Source</th>
+            <th class="govuk-table__header" scope="col" aria-sort="none">Amount</th>
+            <th class="govuk-table__header" scope="col" aria-sort="none">Business unit</th>
+            <th class="govuk-table__header" scope="col" aria-sort="none">Processed</th>
+            <th class="govuk-table__header" scope="col" aria-sort="none">Processed by</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell checkbox-cell">
+              <div class="govuk-checkboxes__item govuk-checkboxes--small">
+                <input class="govuk-checkboxes__input" id="file-1" name="allocate-files" type="checkbox" value="92871">
+                <label class="govuk-label govuk-checkboxes__label" for="file-1">
+                  <span class="govuk-visually-hidden">Select till 92871</span>
+                </label>
+              </div>
+            </td>
+            <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="./till-summary.html">92871</a></td>
+            <td class="govuk-table__cell">2</td>
+            <td class="govuk-table__cell">a121_200317_NW_057_BH.dat</td>
+            <td class="govuk-table__cell">Nat West</td>
+            <td class="govuk-table__cell">£5,067.00</td>
+            <td class="govuk-table__cell">Devon and Cornwall</td>
+            <td class="govuk-table__cell">12 June at 10:37am</td>
+            <td class="govuk-table__cell">jane.smith</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell checkbox-cell">
+              <div class="govuk-checkboxes__item govuk-checkboxes--small">
+                <input class="govuk-checkboxes__input" id="file-2" name="allocate-files" type="checkbox" value="92872">
+                <label class="govuk-label govuk-checkboxes__label" for="file-2">
+                  <span class="govuk-visually-hidden">Select till 92872</span>
+                </label>
+              </div>
+            </td>
+            <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">92872</a></td>
+            <td class="govuk-table__cell">0</td>
+            <td class="govuk-table__cell">a121_200317_BT_057_AV.dat</td>
+            <td class="govuk-table__cell">British Telecom</td>
+            <td class="govuk-table__cell">£1,250.00</td>
+            <td class="govuk-table__cell">Devon and Cornwall</td>
+            <td class="govuk-table__cell">12 June at 10:37am</td>
+            <td class="govuk-table__cell">jane.smith</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell checkbox-cell">
+              <div class="govuk-checkboxes__item govuk-checkboxes--small">
+                <input class="govuk-checkboxes__input" id="file-3" name="allocate-files" type="checkbox" value="92873">
+                <label class="govuk-label govuk-checkboxes__label" for="file-3">
+                  <span class="govuk-visually-hidden">Select till 92873</span>
+                </label>
+              </div>
+            </td>
+            <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">92873</a></td>
+            <td class="govuk-table__cell">1</td>
+            <td class="govuk-table__cell">a121_200317_BC_057_AR.dat</td>
+            <td class="govuk-table__cell">Barclaycard</td>
+            <td class="govuk-table__cell">£12,240.00</td>
+            <td class="govuk-table__cell">Devon and Cornwall</td>
+            <td class="govuk-table__cell">12 June at 10:37am</td>
+            <td class="govuk-table__cell">jane.smith</td>
+          </tr>
+        </tbody>
+      </table> -->
 
       
       

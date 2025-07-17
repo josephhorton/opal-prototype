@@ -1,0 +1,166 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Payment details" %}
+
+{% block beforeContent %}
+
+{{ govukBackLink({
+  text: "Back",
+  href: "./confirm-account.html"
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      <form class="govuk-form-group" action="check-payment" method="post">
+
+        {{ govukInput({
+          id: "payment1Amount",
+          name: "payment1Amount",
+          label: {
+            text: "Amount"
+          },
+          classes: "govuk-input--width-10",
+          prefix: {
+            text: "£"
+          },
+          value: data.payment1Amount
+        }) }}
+
+        {{ govukRadios({
+          name: "payment1Payee",
+          value: data.payment1Payee,
+          fieldset: {
+            legend: {
+              text: "Payee",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "Defendant",
+              text: "Defendant"
+            },
+            {
+              value: "3rd party",
+              text: "3rd party",
+              conditional: {
+                html: govukInput({
+                  id: "payment1PartyName",
+                  name: "payment1PartyName",
+                  value: data.payment1PartyName,
+                  classes: "govuk-input--width-20",
+                  label: {
+                    text: "Name",
+                    classes: "govuk-fieldset__legend--s"
+                  }
+                })
+              }
+            }
+          ]
+        }) }}
+
+        {{ govukRadios({
+          name: "payment1Method",
+          value: data.payment1Method,
+          fieldset: {
+            legend: {
+              text: "Method of payment",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "Notes and coins",
+              text: "Notes and coins"
+            },
+            {
+              value: "Postal order",
+              text: "Postal order"
+            },
+            {
+              value: "Cheque",
+              text: "Cheque",
+              conditional: {
+                html: govukInput({
+                  id: "payment1ChequeReference",
+                  name: "payment1ChequeReference",
+                  value: data.payment1ChequeReference,
+                  classes: "govuk-input--width-20",
+                  label: {
+                    text: "Payment reference",
+                     classes: "govuk-fieldset__legend--s"
+                  }
+                })
+              }
+            },
+            {
+              value: "Credit transfer",
+              text: "Credit transfer",
+              conditional: {
+                html: "
+                  " ~ govukRadios({
+                    id: "payment1PartySource",
+                    name: "payment1PartySource",
+                    value: data.payment1PartySource,
+                    fieldset: {
+                      legend: {
+                        text: "Source",
+                        isPageHeading: false,
+                        classes: "govuk-fieldset__legend--s"
+                      }
+                    },
+                    items: [
+                      { value: "allpay", text: "allpay" },
+                      { value: "Barclaycard", text: "Barclaycard" },
+                      { value: "British Telecom", text: "British Telecom" },
+                      { value: "DWP/AEA", text: "DWP/AEA" },
+                      { value: "NatWest", text: "NatWest" }
+                    ]
+                  }) ~ "
+                  " ~ govukInput({
+                    id: "payment1PartyReference",
+                    name: "payment1PartyReference",
+                    classes: "govuk-input--width-20",
+                    value: data.payment1PartyReference,
+                    label: {
+                      text: "Payment reference",
+                      classes: "govuk-fieldset__legend--s"
+                    }
+                  })
+              }
+            }
+          ]
+        }) }}
+
+
+        <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+          <p class="govuk-body"><a href="../till-details.html" class="govuk-link govuk-link--no-visited-state">Cancel</a></p>
+
+      </div>
+
+      </form>
+
+      
+
+
+      
+      
+    </div>
+  </div>
+
+{% endblock %}

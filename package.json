@@ -19,6 +19,6 @@
     "notifications-node-client": "8.2.1"
   },
   "engines": {
-      "node": "18.x"
+    "node": "18.x"
   }
 }

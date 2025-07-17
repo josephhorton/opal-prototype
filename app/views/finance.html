@@ -1,0 +1,28 @@
+{% extends "layouts/finance.html" %}
+
+{% set pageName = "Finance" %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+      <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+      <h2 class="govuk-heading-m">Cash</h2>
+
+      <p class="govuk-body">
+       <a class="govuk-link--no-visited-state" href="./manual-cash-input/index.html">
+        Manual cash input
+       </a>
+      </p>
+
+      <p class="govuk-body">
+       <a class="govuk-link--no-visited-state" href="#">
+        Automatic cash input
+       </a>
+      </p>
+      
+    </div>
+  </div>
+
+{% endblock %}

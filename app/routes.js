@@ -15,14 +15,14 @@ require('./routes/account.js')(router);
 
 router.post('/suspense-category-form', function (req, res) {
 
-  var paymentCategory = req.session.data['paymentCategory']
+  var paymentCategory = req.session.data['payment1Category']
 
   if (paymentCategory == "Criminal"){
-    res.redirect('/manual-cash-input/search-account.html')
+    res.redirect('/manual-cash-input/payment-1/search-account.html')
   } if (paymentCategory == "Court fee"){
-    res.redirect('/manual-cash-input/court-fee-details.html')
+    res.redirect('/manual-cash-input/payment-1/court-fee-details.html')
   } if (paymentCategory == "Suspense"){
-    res.redirect('/manual-cash-input/suspense.html')
+    res.redirect('/manual-cash-input/payment-1/suspense.html')
   }
 
 })
@@ -41,7 +41,7 @@ require('./routes/account')(router)
 
 router.get('/clear-session', function (req, res) {
     req.session.destroy(function (err) {
-      res.redirect('/create-account/create-account.html'); // Redirect to index.html after clearing session
+      res.redirect('/index.html'); // Redirect to index.html after clearing session
     });
 });
 

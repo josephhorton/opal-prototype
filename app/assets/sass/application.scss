@@ -3,12 +3,25 @@
 // https://prototype-kit.service.gov.uk/docs/adding-css-javascript-and-images
 // 
 
+@import "settings"; // your overrides (like $govuk-page-width) must come first
+
 // Add extra styles here
 
-.govuk-width-container {
-  max-width: 1280px;
-  margin: 0 auto;
+@media (min-width: 1080px) {
+  .govuk-width-container, .moj-header__container {
+    max-width: 1280px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
 }
+
+// .moj-header__container {
+//   max-width: 1280px;
+// }
+
+
 
 .moj-button-group-with-divider {
   display: flex;
@@ -40,12 +53,6 @@
 
 .impositionWrapper {
   background-color: govuk-colour('light-grey');
-}
-
-
-
-.moj-header__container {
-  max-width: 1280px;
 }
 
 .destructive-link {

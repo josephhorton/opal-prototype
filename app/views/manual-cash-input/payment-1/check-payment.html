@@ -1,0 +1,190 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Check payment" %}
+
+{% block beforeContent %}
+
+{{ govukBackLink({
+  text: "Back",
+  href: "./payment-details.html"
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Payment category
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ data['payment1Category'] }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="./payment-category.html">
+              Change<span class="govuk-visually-hidden"> payment category</span>
+            </a>
+          </dd>
+        </div>
+
+        {% if data['payment1Category'] == "Criminal" %}
+
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Defendant
+          </dt>
+          <dd class="govuk-summary-list__value">
+            David THOMPSON ({{ data['payment1AccountNumber'] or "06000427N" }})
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="./payment-category.html">
+              Change<span class="govuk-visually-hidden"> defendant</span>
+            </a>
+          </dd>
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Amount
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ (data['payment1Amount'] or 50.00) | currency }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="./payment-details.html">
+              Change<span class="govuk-visually-hidden"> amount</span>
+            </a>
+          </dd>
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Payee
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ (data['payment1Payee'] or "Defendant") }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="./payment-details.html">
+              Change<span class="govuk-visually-hidden"> payee</span>
+            </a>
+          </dd>
+        </div>
+
+        {% if data['payment1Payee'] == "3rd party" %}
+
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Name
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ (data['payment1PartyName'] ) }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="./payment-details.html">
+              Change<span class="govuk-visually-hidden"> 3rd party name</span>
+            </a>
+          </dd>
+        </div>
+
+        {% endif %}
+
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Method of payment
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ (data['payment1Method'] ) }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="./payment-details.html">
+              Change<span class="govuk-visually-hidden">payment method</span>
+            </a>
+          </dd>
+        </div>
+
+        {% if data['payment1Method'] == "Cheque" %}
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Payment reference
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ (data['payment1ChequeReference'] ) }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="./payment-details.html">
+              Change<span class="govuk-visually-hidden">cheque payment reference</span>
+            </a>
+          </dd>
+        </div>
+        {% endif %}
+
+        {% if data['payment1Method'] == "Credit transfer" %}
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Source
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ (data['payment1PartySource'] ) }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="./payment-details.html">
+              Change<span class="govuk-visually-hidden">cheque payment reference</span>
+            </a>
+          </dd>
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Payment reference
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ (data['payment1PartyReference'] ) }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="./payment-details.html">
+              Change<span class="govuk-visually-hidden">credit transfer payment reference</span>
+            </a>
+          </dd>
+        </div>
+        {% endif %}
+        
+
+
+        {% endif %}
+      </dl>
+
+      
+
+      
+    
+
+      <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Confirm",
+          href: "../till-details.html?payment=1&payments=1&payment1=true"
+        }) }}
+
+        {{ govukButton({
+          text: "Add another payment",
+          classes: "govuk-button--secondary",
+          href: "./payment-category.html?payment=1&payments=1&payment1=true"
+        }) }}
+      </div>
+
+          <p class="govuk-body"><a href="../till-details.html" class="govuk-link govuk-link--no-visited-state">Cancel</a></p>
+
+      
+      
+    </div>
+  </div>
+
+{% endblock %}

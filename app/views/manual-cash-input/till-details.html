@@ -36,14 +36,47 @@
 
       
 
-      {% if (data['payments'] == "1") %}
+      {% if (data['payment'] == "1") %}
 
           <h2 class="govuk-heading-m">Payments</h2>
+
+          
+
+          
+
+          <dl class="govuk-summary-list">
+            {% if data['payment1'] == "true" %}
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key govuk-!-font-weight-regular">
+                David THOMPSON
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ (data['payment1Amount'] | currency) + " – " + (data['payment1Method'])}}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                <ul class="govuk-summary-list__actions-list">
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a class="govuk-link" href="./payment-1/check-payment.html">
+                      Change<span class="govuk-visually-hidden">payment</span>
+                    </a>
+                  </li>
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a class="govuk-link" href="#">
+                      Remove<span class="govuk-visually-hidden">payment</span>
+                    </a>
+                  </li>
+                </ul>
+              </dd>
+            </div>
+            {% endif %}
+          </dl>
+
+          
 
           {{ govukButton({
               text: "Add payment",
               classes: "govuk-button--secondary",
-              href: "./payment-category.html"
+              href: "./payment-2/payment-category.html"
           }) }}
 
           <h2 class="govuk-heading-m">Summary</h2>
@@ -62,7 +95,7 @@
                   text: "Total"
                 },
                 value: {
-                  text: "£50"
+                  text: (data['payment1Amount'] | currency)
                 }
               }
             ]
@@ -86,7 +119,7 @@
           {{ govukButton({
               text: "Add payment",
               classes: "govuk-button--secondary",
-              href: "./payment-category.html"
+              href: "./payment-1/payment-category.html"
           }) }}
 
           <h2 class="govuk-heading-m">Create till</h2>

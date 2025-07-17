@@ -6,7 +6,7 @@
 
 {{ govukBackLink({
   text: "Back",
-  href: "./till-details.html"
+  href: "../manual-cash-input/till-details.html"
 }) }}
 
 {% endblock %}
@@ -19,8 +19,8 @@
       <form class="govuk-form-group" action="/suspense-category-form" method="post">
 
         {{ govukRadios({
-          name: "paymentCategory",
-          id: "paymentCategory",
+          name: "payment1Category",
+          id: "payment1Category",
           fieldset: {
             legend: {
               text: pageName,
@@ -28,7 +28,7 @@
               classes: "govuk-fieldset__legend--l"
             }
           },
-          value: data.paymentCategory,
+          value: data.payment1Category,
           items: [
             {
               value: "Criminal",
@@ -51,7 +51,7 @@
             Continue
           </button>
 
-          <p class="govuk-body"><a href="./till-details.html" class="govuk-link govuk-link--no-visited-state">Cancel</a></p>
+          <p class="govuk-body"><a href="../till-details.html" class="govuk-link govuk-link--no-visited-state">Cancel</a></p>
         </div>
       </form>
       
