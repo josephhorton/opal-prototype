@@ -1,0 +1,114 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Print cheques" %}
+
+{% block beforeContent %}
+
+{{ govukBackLink({
+  text: "Back",
+  href: "./task-list.html"
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+            <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+            <!-- <h2 class="govuk-heading-m">To print</h2> -->
+
+            {{ govukSummaryList({
+                rows: [
+                    {
+                        key: {
+                            text: "Major creditors"
+                        },
+                        value: {
+                            text: "8 cheques"
+                        }
+                    },
+                    {
+                        key: {
+                            text: "Minor creditors"
+                        },
+                        value: {
+                            text: "5 cheques"
+                        }
+                    }
+                ]
+            }) }}
+
+            <h2 class="govuk-heading-m">Confirm before printing</h2>
+
+            {{ govukSummaryList({
+                rows: [
+                    {
+                        key: {
+                            text: "Last cheque number"
+                        },
+                        value: {
+                            text: "2883"
+                        }
+                    }
+                ]
+            }) }}
+
+            <!-- <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-2">Last cheque printed</p>
+            <p class="govuk-body-l govuk-!-margin-bottom-4">2883</p> -->
+
+            {{ govukInput({
+                id: "nextChequeNumber",
+                name: "nextChequeNumber",
+                label: {
+                    text: "Next cheque number",
+                    isPageHeading: false,
+                    classes: "govuk-label--s"
+                },
+                classes: "govuk-input--width-10",
+                value: data['nextChequeNumber']
+            }) }}
+
+            
+
+            <!-- <div id="confirmNextCheque" class="govuk-!-margin-bottom-6 govuk-!-margin-top-6">
+                <div style="padding: 18px 15px 15px 15px; border-left: 5px solid #1D70B8; background-color: #f3f2f1;">
+                    <p id="confirmNextCheque_Heading" class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-0" >10 cheques have been printed since</p>
+                    <p id="confirmNextCheque_Body" class="govuk-body govuk-!-margin-bottom-0 govuk-!-margin-top-1">Body</p>
+                </div>
+            </div> -->
+
+            <!-- {{ govukCheckboxes({
+                name: "confirmChequeLoadedPrinter",
+                fieldset: {
+                    legend: {
+                        text: "Confirm cheques have been loaded onto printer",
+                        isPageHeading: false,
+                        classes: "govuk-fieldset__legend--xl govuk-visually-hidden"
+                    }
+                },
+                values: data['confirmChequeLoadedPrinter'],
+                items: [
+                    {
+                        value: "Cheques have been loaded on printer",
+                        text: "Cheques have been loaded on printer"
+                    }
+                ]
+            }) }} -->
+
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button">
+                    Confirm and print
+                </button>
+
+                <p class="govuk-body"><a href="./task-list.html" class="govuk-link govuk-link--no-visited-state">Cancel</a></p>
+            </div>
+
+           
+
+    </div>
+  </div>
+
+{% endblock %}

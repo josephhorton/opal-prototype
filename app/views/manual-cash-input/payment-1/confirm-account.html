@@ -17,7 +17,8 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-
+      
+      <span class="govuk-caption-l">{{data['businessUnit']}}</span>
       <h1 class="govuk-heading-l">{{pageName}}</h1>
 
       {% if (data['warning'] == "true") %}
@@ -63,8 +64,20 @@
             value: { text: "Return executed warrant (REW)" }
           },
           {
-            key: { text: "Time to pay" },
-            value: { text: "£25 monthly starting 11 November 2003" }
+            key: { text: "Payment terms" },
+            value: { text: "Lump sum plus instalment" }
+          },
+          {
+            key: { text: "Frequency" },
+            value: { text: "Monthly" }
+          },
+          {
+            key: { text: "Instalments" },
+            value: { text: "£25" }
+          },
+          {
+            key: { text: "Start date" },
+            value: { text: "05 July 2025" }
           },
           {
             key: { text: "Comments" },
@@ -83,8 +96,10 @@
           href: "./payment-details.html"
         }) }}
 
-          <p class="govuk-body"><a href="../till-details.html" class="govuk-link govuk-link--no-visited-state">Cancel</a></p>
+          <p class="govuk-body"><a href="search-account.html" class="govuk-link govuk-link--no-visited-state">Search again</a></p>
       </div>
+
+      <p class="govuk-body"><a href="../till-details.html" class="govuk-link govuk-link--no-visited-state">Cancel</a></p>
 
 
       

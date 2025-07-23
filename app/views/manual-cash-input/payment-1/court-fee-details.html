@@ -1,0 +1,154 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Court fee details" %}
+
+{% block beforeContent %}
+
+{{ govukBackLink({
+  text: "Back",
+  href: "./payment-category.html"
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      <form class="govuk-form-group" action="court-fee-form" method="post">
+
+        {{ xGovukAutocomplete({
+          id: "payment1CourtFee",
+          name: "payment1CourtFee",
+          formGroup: {
+            classes: "govuk-input--width-20"
+          },
+          value: data.payment1CourtFee,
+          allowEmpty: false,
+          showAllValues: false,
+          label: {
+            classes: "govuk-label--s",
+            text: 'Court fee code'
+          },
+          items: [
+            { text: "C04.1" },
+            { text: "C04.2" },
+            { text: "C04.3" },
+            { text: "C04.4" }
+          ]
+        }) }}
+
+        <div id="Offence1_Title_Container" class="govuk-!-margin-bottom-6 govuk-!-margin-top-6">
+          <div style="padding: 18px 15px 15px 15px; border-left: 5px solid #1D70B8; background-color: #f3f2f1;">
+            <p id="Offence1_Title_Heading" class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-0" >CT – Appn Liability Order (Each defendant)</p>
+            <p id="Offence1_Title_Title" class="govuk-body govuk-!-margin-bottom-0 govuk-!-margin-top-1">Fee: £1.00</p>
+          </div>
+        </div>
+
+        <!-- <h2 class="govuk-heading-m">Payment details</h2> -->
+
+        {{ govukInput({
+          id: "payment1CourtFeeAmount",
+          name: "payment1CourtFeeAmount",
+          formGroup: {
+            classes: "govuk-!-margin-bottom-"
+          },
+          label: {
+            text: "Amount",
+            classes: "govuk-label--s"
+          },
+          classes: "govuk-input--width-10",
+          prefix: {
+            text: "£"
+          },
+          attributes: {
+            'data-fee-per-item': '1.00'
+          },
+          value: data.payment1CourtFeeAmount
+        }) }}
+
+        <!-- <p class="govuk-body govuk-!-margin-bottom-6" id="suggestion-wrapper">
+          Suggestion: <strong><span id="suggested-value">20</span><span> items</span></strong>
+          <a href="#" id="apply-suggestion" class="govuk-link govuk-link--no-visited-state">Apply</a>
+        </p> -->
+
+        {{ govukInput({
+          id: "payment1NumberItems",
+          name: "payment1NumberItems",
+          formGroup: {
+            classes: "govuk-!-margin-bottom-8 govuk-!-margin-top-6"
+          },
+          label: {
+            text: "Number of items",
+            classes: "govuk-label--s"
+          },
+          classes: "govuk-input--width-5",
+          value: data.payment1NumberItems
+        }) }}
+
+
+
+        <!-- <p class="govuk-body govuk-!-margin-bottom-6">Suggested number of items: 20 <a href="#" class="govuk-link govuk-link--no-visited-state">Apply</a></p> -->
+
+        <!-- DYBAMIC ALERT -->
+
+        <!-- <div id="paymentConfirmation" class="govuk-!-margin-bottom-8 govuk-!-margin-top-6">
+          <div style="padding: 18px 15px 15px 15px; border-left: 5px solid #F47738; background-color: #f3f2f1;">
+            <p id="Offence1_Title_Heading" class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-0" >This amount doesn’t match the selected court fee</p>
+            <p id="Offence1_Title_Title" class="govuk-body govuk-!-margin-bottom-0 govuk-!-margin-top-1">Fee code C04.1 charges £1.00 per item. <br>A payment of £30 would cover 30 items — not the 10 you entered.</p>
+          </div>
+        </div> -->
+
+
+        <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+          <p class="govuk-body"><a href="../till-details.html" class="govuk-link govuk-link--no-visited-state">Cancel</a></p>
+
+      </div>
+
+      </form>
+
+      
+
+
+      
+      
+    </div>
+  </div>
+
+  <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const courtFeeInput = document.getElementById('payment1CourtFee');
+        const panel = document.getElementById('Offence1_Title_Container');
+
+        function showPanelIfSelected() {
+          if (courtFeeInput.value.trim() !== '') {
+            panel.style.display = 'block';
+          } else {
+            panel.style.display = 'none';
+          }
+        }
+
+        // Hide panel on load
+        panel.style.display = 'none';
+
+        // Show when the user selects or types
+        courtFeeInput.addEventListener('blur', showPanelIfSelected);
+      });
+    </script>
+
+
+
+{% endblock %}
+
+
+
+

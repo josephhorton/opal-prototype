@@ -19,9 +19,10 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
+      <span class="govuk-caption-l">{{data['businessUnit']}}</span>
       <h1 class="govuk-heading-l">{{pageName}}</h1>
 
-      {{ govukSummaryList({
+      <!-- {{ govukSummaryList({
         rows: [
           {
             key: {
@@ -32,7 +33,7 @@
             }
           }
         ]
-      }) }}
+      }) }} -->
     </div>
   </div>    
 
@@ -125,17 +126,18 @@
                 <th scope="col" class="govuk-table__header">Amount</th>
                 <th scope="col" class="govuk-table__header">Payee</th>
                 <th scope="col" class="govuk-table__header">Method</th>
-                <th scope="col" class="govuk-table__header govuk-!-text-align-right" >Actions</th>
+                <th scope="col" class="govuk-table__header govuk-!-text-align-right">Actions</th>
                 
               </tr>
             </thead>
             <tbody class="govuk-table__body">
+              {% if (data['payment1'] == "true") %}
               <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header govuk-!-font-weight-regular">Criminal</th>
+                <th scope="row" class="govuk-table__header govuk-!-font-weight-regular">{{ data['payment1Category'] }}</th>
                 <td class="govuk-table__cell">David THOMPSON ({{ data['payment1AccountNumber'] or "06000427N" }})</td>
-                <td class="govuk-table__cell">£50.00</td>
-                <td class="govuk-table__cell">Defendant</td>
-                <td class="govuk-table__cell">Cheque</td>
+                <td class="govuk-table__cell">{{ data['payment1Amount'] | currency }}</td>
+                <td class="govuk-table__cell">{{ data['payment1Payee'] }}</td>
+                <td class="govuk-table__cell">{{ data['payment1Method'] }}</td>
                 <td class="govuk-table__cell">
                   <ul class="govuk-summary-list__actions-list govuk-!-text-align-right">
                         <li class="govuk-summary-list__actions-list-item">
@@ -151,50 +153,10 @@
                   </ul>
                 </td>
               </tr>
-              <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header govuk-!-font-weight-regular">Court fee</th>
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">£50.00</td>
-                <td class="govuk-table__cell">Defendant</td>
-                <td class="govuk-table__cell">Cheque</td>
-                <td class="govuk-table__cell">
-                  <ul class="govuk-summary-list__actions-list govuk-!-text-align-right">
-                        <li class="govuk-summary-list__actions-list-item">
-                          <a class="govuk-link govuk-link--no-visited-state" href="./payment-1/check-payment.html">
-                            Change<span class="govuk-visually-hidden">payment</span>
-                          </a>
-                        </li>
-                        <li class="govuk-summary-list__actions-list-item">
-                          <a class="govuk-link govuk-link--no-visited-state" href="#">
-                            Remove<span class="govuk-visually-hidden">payment</span>
-                          </a>
-                        </li>
-                  </ul>
-                </td>
-              </tr>
-              <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header govuk-!-font-weight-regular  ">Suspense</th>
-                <td class="govuk-table__cell">–</td>
-                <td class="govuk-table__cell">£50.00</td>
-                <td class="govuk-table__cell">3rd party</td>
-                <td class="govuk-table__cell">Cheque</td>
-                <td class="govuk-table__cell">
-                  <ul class="govuk-summary-list__actions-list govuk-!-text-align-right">
-                        <li class="govuk-summary-list__actions-list-item">
-                          <a class="govuk-link govuk-link--no-visited-state" href="./payment-1/check-payment.html">
-                            Change<span class="govuk-visually-hidden">payment</span>
-                          </a>
-                        </li>
-                        <li class="govuk-summary-list__actions-list-item">
-                          <a class="govuk-link govuk-link--no-visited-state" href="#">
-                            Remove<span class="govuk-visually-hidden">payment</span>
-                          </a>
-                        </li>
-                  </ul>
-                </td>
-              </tr>
+              {% endif %}
             </tbody>
           </table>
+
           </div>
           
 
@@ -225,7 +187,7 @@
                   text: "Total"
                 },
                 value: {
-                  text: ((+data['payment1Amount'] + +data['payment1Amount']) | currency)
+                  text: (+data['payment1Amount'] | currency)
                 }
               }
             ]
@@ -233,10 +195,21 @@
 
           <h2 class="govuk-heading-m">Create till</h2>
 
-          {{ govukButton({
+          <p class="govuk-body">You cannot change these details after you have created the till. You can download the till details to share for review before you create the till.</p>
+
+          <div class="govuk-button-group">
+            {{ govukButton({
               text: "Create till",
-              href: "./index.html"
+              classes: "",
+              href: "../index.html"
           }) }}
+
+            {{ govukButton({
+              text: "Save details as PDF",
+              classes: "govuk-button--secondary",
+              href: "#"
+            }) }}
+          </div>
 
           </div>
           </div>
@@ -247,13 +220,14 @@
 
           <h2 class="govuk-heading-m">Payments</h2>
 
-          <p class="govuk-body">There are no payments.</p>
+          <!-- <p class="govuk-body">There are no payments.</p> -->
 
           {{ govukButton({
               text: "Add payment",
               classes: "govuk-button--secondary",
               href: "./payment-1/payment-category.html"
           }) }}
+          
 
           <h2 class="govuk-heading-m">Create till</h2>
 

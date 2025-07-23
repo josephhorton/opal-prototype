@@ -1,0 +1,114 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Create reports" %}
+
+{% block beforeContent %}
+
+{{ govukBackLink({
+  text: "Back",
+  href: "./task-list.html"
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+            <span class="govuk-caption-l">Daily checks</span>
+            <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+            <form action="reports" method="post">
+
+            {{ govukSummaryList({
+                rows: [
+                    {
+                        key: {
+                            text: "Business unit"
+                        },
+                        value: {
+                            text: "Avon and Somerset"
+                        }
+                    }
+                ]
+            }) }}
+
+            {{ govukCheckboxes({
+                idPrefix: "reports",
+                name: "reports",
+                classes: "govuk-checkboxes--smal",
+                fieldset: {
+                    legend: {
+                    text: "Reports",
+                    isPageHeading: false,
+                    classes: "govuk-fieldset__legend--m"
+                    }
+                },
+                items: [
+                    {
+                    value: "cheque-list",
+                    text: "Cheque list and breakdowns",
+                    checked: true
+                    },
+                    {
+                    value: "unpresented-cheques",
+                    text: "List un-presented cheques",
+                    checked: true
+                    },
+                    {
+                    value: "bacs",
+                    text: "BACs",
+                    checked: true
+                    },
+                    {
+                    value: "bank-list",
+                    text: "Run bank list",
+                    checked: true
+                    },
+                    {
+                    value: "control-totals",
+                    text: "Run control totals",
+                    checked: true
+                    },
+                    {
+                    value: "dishonoured-cheques",
+                    text: "List dishonoured cheques",
+                    checked: true
+                    },
+                    {
+                    value: "witnesses",
+                    text: "List witnesses",
+                    checked: true
+                    },
+                    {
+                    value: "suspense",
+                    text: "List outstanding suspense",
+                    checked: true
+                    },
+                    {
+                    value: "reversed-payments",
+                    text: "List reversed payments",
+                    checked: true
+                    },
+                    {
+                    value: "presented-cheques",
+                    text: "List presented cheques",
+                    checked: true
+                    }
+                ]
+                }) }}
+
+                <div class="govuk-button-group">
+                    <button class="govuk-button" type="submit" data-module="govuk-button">Create reports</button>
+                    <a href="./task-list.html" class="govuk-link govuk-link--no-visited-state">Cancel</a>
+                </div>
+
+                </form>
+
+           
+
+    </div>
+  </div>
+
+{% endblock %}

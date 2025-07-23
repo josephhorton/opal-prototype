@@ -1,0 +1,92 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Daily checks" %}
+
+{% block beforeContent %}
+
+{{ govukBackLink({
+  text: "Back",
+  href: "../finance.html"
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+            <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+            {{ govukSummaryList({
+                rows: [
+                    {
+                        key: {
+                            text: "Business unit"
+                        },
+                        value: {
+                            text: "Avon and Somerset"
+                        }
+                    }
+                ]
+            }) }}
+
+            <h2 class="govuk-heading-m govuk-!-margin-top-5">Tasks</h2>
+
+            {{ govukTaskList({
+                idPrefix: "tasks",
+                items: [
+                {
+                    title: {
+                    text: "Print cheques",
+                    classes: "govuk-link--no-visited-state"
+                    },
+                    href: "./print-cheques.html",
+                    status: {
+                    tag: {
+                        text: "Not started",
+                        classes: "govuk-tag--grey"
+                    }
+                    }
+                },
+                {
+                    title: {
+                    text: "Automated presented cheques",
+                    classes: "govuk-link--no-visited-state"
+                    },
+                    href: "#",
+                    status: {
+                    tag: {
+                        text: "Not started",
+                        classes: "govuk-tag--grey"
+                    }
+                    }
+                }
+                ]
+            }) }}
+
+            <h2 class="govuk-heading-m govuk-!-margin-top-5">Reports</h2>
+
+            {{ govukTaskList({
+                idPrefix: "reports",
+                items: [
+                {
+                    title: {
+                    text: "Create reports",
+                    classes: "govuk-link--no-visited-state"
+                    },
+                    href: "./create-reports.html",
+                    status: {
+                    tag: {
+                        text: "Not started",
+                        classes: "govuk-tag--grey"
+                    }
+                    }
+                }
+                ]
+            }) }}
+
+    </div>
+  </div>
+
+{% endblock %}
