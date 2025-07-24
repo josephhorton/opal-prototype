@@ -67,6 +67,29 @@
 
             <h2 class="govuk-heading-m govuk-!-margin-top-5">Reports</h2>
 
+            {% if data['reports-created'] == "true" %}
+
+            {{ govukTaskList({
+                idPrefix: "reports",
+                items: [
+                {
+                    title: {
+                    text: "Create reports",
+                    classes: "govuk-link--no-visited-state"
+                    },
+                    href: "./reports.html",
+                    status: {
+                    tag: {
+                        text: "Completed",
+                        classes: "govuk-tag--blue"
+                    }
+                    }
+                }
+                ]
+            }) }}
+
+            {% else %}
+
             {{ govukTaskList({
                 idPrefix: "reports",
                 items: [
@@ -85,6 +108,8 @@
                 }
                 ]
             }) }}
+
+            {% endif %}
 
     </div>
   </div>

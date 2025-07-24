@@ -4,10 +4,10 @@
 
 {% block beforeContent %}
 
-{{ govukBackLink({
+<!-- {{ govukBackLink({
   text: "Back",
   href: "./task-list.html"
-}) }}
+}) }} -->
 
 {% endblock %}
 
@@ -16,10 +16,9 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-            <span class="govuk-caption-l">Daily checks</span>
             <h1 class="govuk-heading-l">{{pageName}}</h1>
 
-            <form action="reports" method="post">
+            <form action="reports?reports-created=true" method="post">
 
             {{ govukSummaryList({
                 rows: [
@@ -57,18 +56,13 @@
                     checked: true
                     },
                     {
-                    value: "bacs",
-                    text: "BACs",
+                    value: "BACS repayment report",
+                    text: "BACS repayment report",
                     checked: true
                     },
                     {
-                    value: "bank-list",
-                    text: "Run bank list",
-                    checked: true
-                    },
-                    {
-                    value: "control-totals",
-                    text: "Run control totals",
+                    value: "BACS to PC report",
+                    text: "BACS to PC report",
                     checked: true
                     },
                     {
@@ -94,6 +88,16 @@
                     {
                     value: "presented-cheques",
                     text: "List presented cheques",
+                    checked: true
+                    },
+                    {
+                    value: "bank-list",
+                    text: "Run bank list",
+                    checked: true
+                    },
+                    {
+                    value: "control-totals",
+                    text: "Run control totals",
                     checked: true
                     }
                 ]

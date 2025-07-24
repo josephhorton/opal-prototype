@@ -18,26 +18,29 @@
       <form method="post" novalidate action="/create-account-form">
 
         {{ xGovukAutocomplete({
-          id: "businessUnit",
-          name: "businessUnit",
-          classes: "govuk-!-margin-bottom-8",
-          value: data['businessUnit'],
+          id: "printer",
+          name: "printer",
+          value: data['printer'],
           allowEmpty: false,
           showAllValues: true,
           label: {
-            classes: "govuk-label--s",
-            text: 'Business unit'
-          },
-          hint: {
-            text: 'Enter area where the account is to be created'
+            classes: "govuk-label--l",
+            text: "Select printer"
           },
           items: [
-            { text: "Avon and Somerset" },
-            { text: "Dorset" },
-            { text: "Devon and Cornwall" },
-            { text: "South Wales" }
+            { text: "CA0308999P Plymouth Crim Bus 1" },
+            { text: "CA0308763P C/F Printers 3" },
+            { text: "CA0308760P Torquay County Upstairs" },
+            { text: "CA0308794P TORQUAY MC - Main Off" },
+            { text: "CA0308742P Torqu Admin Colour" },
+            { text: "CA0215491P Torquay County" },
+            { text: "CA523E199T MCSS 6.5.2" },
+            { text: "CA0169877B Plymouth CTO" },
+            { text: "CA0308892P Torquay MTD + MFD" },
+            { text: "CA0169878B Plymouth Crim" }
           ]
         }) }}
+
 
 
         <!-- DEFENDANT TYPE CONDITIONALLY REVEALED FORM -->

@@ -1,0 +1,65 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Select printer" %}
+
+{% block beforeContent %}
+
+{{ govukBackLink({
+  text: "Back",
+  href: "./print-cheques.html"
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <form class="govuk-form-group" action="print-confirmation" method="post">
+
+        {{ xGovukAutocomplete({
+            id: "printer",
+            name: "printer",
+            classes: "govuk-!-margin-bottom-8",
+            formGroup:{
+                classes: "govuk-input--width-30"
+            },
+            value: data['printer'],
+            allowEmpty: false,
+            showAllValues: true,
+            label: {
+                classes: "govuk-label--l",
+                text: "Select printer"
+            },
+            items: [
+                { text: "CA0308999P Plymouth Crim Bus 1" },
+                { text: "CA0308763P C/F Printers 3" },
+                { text: "CA0308760P Torquay County Upstairs" },
+                { text: "CA0308794P TORQUAY MC - Main Off" },
+                { text: "CA0308742P Torqu Admin Colour" },
+                { text: "CA0215491P Torquay County" },
+                { text: "CA523E199T MCSS 6.5.2" },
+                { text: "CA0169877B Plymouth CTO" },
+                { text: "CA0308892P Torquay MTD + MFD" },
+                { text: "CA0169878B Plymouth Crim" }
+            ]
+            }) }}
+
+
+
+        <div class="govuk-button-group">
+          <button type="submit" class="govuk-button">
+            Print
+          </button>
+
+          <p class="govuk-body"><a href="./task-list.html" class="govuk-link govuk-link--no-visited-state">Cancel</a></p>
+        </div>
+        
+      </form>
+           
+
+    </div>
+  </div>
+
+{% endblock %}
