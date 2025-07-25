@@ -1,0 +1,62 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Daily checks" %}
+
+{% block beforeContent %}
+<!-- 
+{{ govukBackLink({
+  text: "Back",
+  href: "../finance.html"
+}) }} -->
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+        <form class="govuk-form-group" action="task-list" method="post">
+
+        {{ xGovukAutocomplete({
+            id: "businessUnit",
+            name: "businessUnit",
+            classes: "",
+            formGroup:{
+                classes: "govuk-input--width-40"
+            },
+            value: data['businessUnit'],
+            allowEmpty: false,
+            showAllValues: true,
+            label: {
+                classes: "govuk-label--m",
+                text: "Select business unit"
+            },
+            items: [
+                { text: "Avon and Somerset" },
+                { text: "Devon and Cornwall" },
+                { text: "Dorset" },
+                { text: "Gloucestershire" },
+                { text: "London North West" }
+            ]
+            }) }}
+
+
+
+        <div class="govuk-button-group">
+          <button type="submit" class="govuk-button">
+            Continue
+          </button>
+
+          <p class="govuk-body"><a href="../finance.html" class="govuk-link govuk-link--no-visited-state">Cancel</a></p>
+        </div>
+        
+      </form>
+           
+
+    </div>
+  </div>
+
+{% endblock %}

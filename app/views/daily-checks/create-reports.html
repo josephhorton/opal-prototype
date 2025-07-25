@@ -16,7 +16,10 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
+            <span class="govuk-caption-l">Daily checks</span>
             <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+            
 
             <form action="reports?reports-created=true" method="post">
 
@@ -33,7 +36,7 @@
                 ]
             }) }}
 
-            {{ govukCheckboxes({
+            <!-- {{ govukCheckboxes({
                 idPrefix: "reports",
                 name: "reports",
                 classes: "govuk-checkboxes--smal",
@@ -96,11 +99,110 @@
                     checked: true
                     },
                     {
-                    value: "control-totals",
+                    divider: "or"
+                    },
+                    {
+                    value: "Run control totals",
                     text: "Run control totals",
+                    behaviour: "exclusive"
+                    }
+                ]
+                }) }} -->
+
+                {% set reportsConditionalHTML %}
+                {{ govukCheckboxes({
+                idPrefix: "reportsConditional",
+                name: "reportsConditional",
+                classes: "govuk-checkboxes--small",
+                fieldset: {
+                    legend: {
+                    text: "Select list reports",
+                    isPageHeading: false,
+                    classes: "govuk-fieldset__legend--s"
+                    }
+                },
+                data: value['reportsConditional'],
+                items: [
+                    {
+                    value: "cheque-list",
+                    text: "Cheque list and breakdowns",
+                    checked: true
+                    },
+                    {
+                    value: "unpresented-cheques",
+                    text: "List un-presented cheques",
+                    checked: true
+                    },
+                    {
+                    value: "BACS repayment report",
+                    text: "BACS repayment report",
+                    checked: true
+                    },
+                    {
+                    value: "BACS to PC report",
+                    text: "BACS to PC report",
+                    checked: true
+                    },
+                    {
+                    value: "dishonoured-cheques",
+                    text: "List dishonoured cheques",
+                    checked: true
+                    },
+                    {
+                    value: "witnesses",
+                    text: "List witnesses",
+                    checked: true
+                    },
+                    {
+                    value: "suspense",
+                    text: "List outstanding suspense",
+                    checked: true
+                    },
+                    {
+                    value: "reversed-payments",
+                    text: "List reversed payments",
+                    checked: true
+                    },
+                    {
+                    value: "presented-cheques",
+                    text: "List presented cheques",
                     checked: true
                     }
                 ]
+                }) }}
+                {% endset -%}
+
+                {{ govukCheckboxes ({
+                    name: "reportsRadio",
+                    fieldset: {
+                        legend: {
+                            text: "Reports",
+                            isPageHeading: false,
+                            classes: "govuk-fieldset__legend--m"
+                        }
+                    },
+                    value: data['reportsRadio'],
+                    items: [
+                        {
+                            value: "List reports",
+                            text: "List reports",
+                            conditional: {
+                                html: reportsConditionalHTML
+                            }
+                        },
+                         {
+                            value: "Bank list",
+                            text: "Bank list"
+                        },
+                        {
+                        divider: "or"
+                        },
+                        {
+                        value: "Control totals",
+                        text: "Control totals",
+                        behaviour: "exclusive"
+                        }
+                        ]
                 }) }}
 
                 <div class="govuk-button-group">

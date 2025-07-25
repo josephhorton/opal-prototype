@@ -6,7 +6,7 @@
 
 {{ govukBackLink({
   text: "Back",
-  href: "../finance.html"
+  href: "./select-business-unit.html"
 }) }}
 
 {% endblock %}
@@ -25,7 +25,17 @@
                             text: "Business unit"
                         },
                         value: {
-                            text: "Avon and Somerset"
+                            text: data['businessUnit']
+                        },
+                        actions: {
+                            items: [
+                                {
+                                    href: "./select-business-unit.html",
+                                    text: "Change",
+                                    classes: "govuk-link--no-visited-state",
+                                    visuallyHiddenText: "business unit"
+                                }
+                            ]
                         }
                     }
                 ]
@@ -33,7 +43,14 @@
 
             <h2 class="govuk-heading-m govuk-!-margin-top-5">Tasks</h2>
 
-            {{ govukTaskList({
+            <p class="govuk-body"><a href="./print-cheques.html" class="govuk-link govuk-link--no-visited-state">Print cheques</a></p>
+
+            <p class="govuk-body"><a href="#" class="govuk-link govuk-link--no-visited-state">Automated presented cheques</a></p>
+
+            
+
+
+            <!-- {{ govukTaskList({
                 idPrefix: "tasks",
                 items: [
                 {
@@ -44,8 +61,8 @@
                     href: "./print-cheques.html",
                     status: {
                     tag: {
-                        text: "Not started",
-                        classes: "govuk-tag--grey"
+                        text: "0 cheques to print",
+                        classes: "govuk-tag--blue"
                     }
                     }
                 },
@@ -63,11 +80,22 @@
                     }
                 }
                 ]
-            }) }}
+            }) }} -->
 
             <h2 class="govuk-heading-m govuk-!-margin-top-5">Reports</h2>
 
-            {% if data['reports-created'] == "true" %}
+            <p class="govuk-body"><a href="./reports.html" class="govuk-link govuk-link--no-visited-state">Create reports</a></p>
+
+
+            <!-- {% if data['reports-created'] == "true" %}
+            <p class="govuk-body"><a href="./reports.html" class="govuk-link govuk-link--no-visited-state">Create reports</a></p>
+            {% else %}
+            <p class="govuk-body"><a href="./create-reports.html" class="govuk-link govuk-link--no-visited-state">Create reports</a></p>
+            {% endif %} -->
+            
+
+
+            <!-- {% if data['reports-created'] == "true" %}
 
             {{ govukTaskList({
                 idPrefix: "reports",
@@ -109,7 +137,7 @@
                 ]
             }) }}
 
-            {% endif %}
+            {% endif %} -->
 
     </div>
   </div>

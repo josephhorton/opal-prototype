@@ -27,17 +27,9 @@
 
                     <h1 class="govuk-heading-l">{{pageName}}</h1>
 
-                    {{ govukSummaryList({
-                        rows: [
-                            {
-                                key: {
-                                    text: "Business unit"
-                                },
-                                value: {
-                                    text: "Avon and Somerset"
-                                }
-                            }
-                        ]
+                    {{ govukButton({
+                        text: "Create reports",
+                        href: "./create-reports.html"
                     }) }}
                     
             </div>
@@ -45,103 +37,123 @@
 
         <h1 class="govuk-heading-m">Today</h1>
 
-        {{ govukButton({
-            text: "Refresh",
-            classes: "govuk-button--secondary govuk-!-margin-bottom-4"
-        }) }}
+        {% if data['reports-created'] == "true" %}
 
-        <div class="moj-scrollable-pane">
-        <table class="govuk-table" data-module="moj-sortable-table">
-            <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-                <th class="govuk-table__header" scope="col" aria-sort="none" style="width: 20%;">Date and time</th>
-                <th class="govuk-table__header" scope="col" aria-sort="none">Title</th>
-                <th class="govuk-table__header" scope="col" aria-sort="none">Created by</th>
-                <th class="govuk-table__header" scope="col" aria-sort="none">Status</th>
-                <th class="govuk-table__header empty" scope="col" aria-sort="none"></th>
-            </tr>
-            </thead>
-            <tbody class="govuk-table__body">
-            <tr class="govuk-table__row">
-                <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                <td class="govuk-table__cell">List presented cheques</td>
-                <td class="govuk-table__cell">jane.smith</td>
-                <td class="govuk-table__cell">Ready</td>
-                <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
-            </tr>
-            <tr class="govuk-table__row">
-                <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                <td class="govuk-table__cell">List reversed payments</td>
-                <td class="govuk-table__cell">jane.smith</td>
-                <td class="govuk-table__cell">Ready</td>
-                <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
-            </tr>
-            <tr class="govuk-table__row">
-                <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                <td class="govuk-table__cell">List outstanding suspense</td>
-                <td class="govuk-table__cell">jane.smith</td>
-                <td class="govuk-table__cell">Ready</td>
-                <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
-            </tr>
-            <tr class="govuk-table__row">
-                <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                <td class="govuk-table__cell">List witnesses</td>
-                <td class="govuk-table__cell">jane.smith</td>
-                <td class="govuk-table__cell">Ready</td>
-                <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
-            </tr>
-            <tr class="govuk-table__row">
-                <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                <td class="govuk-table__cell">List dishonoured cheques</td>
-                <td class="govuk-table__cell">jane.smith</td>
-                <td class="govuk-table__cell">Ready</td>
-                <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
-            </tr>
-            <tr class="govuk-table__row">
-                <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                <td class="govuk-table__cell">Run control totals</td>
-                <td class="govuk-table__cell">jane.smith</td>
-                <td class="govuk-table__cell">Ready</td>
-                <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
-            </tr>
-            <tr class="govuk-table__row">
-                <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                <td class="govuk-table__cell">Run bank list</td>
-                <td class="govuk-table__cell">jane.smith</td>
-                <td class="govuk-table__cell">Ready</td>
-                <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
-            </tr>
-            <tr class="govuk-table__row">
-                <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                <td class="govuk-table__cell">BACS to PC report</td>
-                <td class="govuk-table__cell">jane.smith</td>
-                <td class="govuk-table__cell">Ready</td>
-                <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
-            </tr>
-            <tr class="govuk-table__row">
-                <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                <td class="govuk-table__cell">BACS repayment report</td>
-                <td class="govuk-table__cell">jane.smith</td>
-                <td class="govuk-table__cell">Ready</td>
-                <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
-            </tr>
-            <tr class="govuk-table__row">
-                <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                <td class="govuk-table__cell">List unpresented cheques</td>
-                <td class="govuk-table__cell">jane.smith</td>
-                <td class="govuk-table__cell">Ready</td>
-                <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
-            </tr>
-            <tr class="govuk-table__row">
-                <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                <td class="govuk-table__cell">Cheque list and breakdowns</td>
-                <td class="govuk-table__cell">jane.smith</td>
-                <td class="govuk-table__cell">Ready</td>
-                <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
-            </tr>
-            </tbody>
-        </table>
-        </div>
+            {{ govukButton({
+                text: "Refresh",
+                classes: "govuk-button--secondary govuk-!-margin-bottom-4"
+            }) }}
+
+            <div class="moj-scrollable-pane">
+            <table class="govuk-table" data-module="moj-sortable-table">
+                <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th class="govuk-table__header" scope="col" aria-sort="none" style="width: 20%;">Date and time</th>
+                    <th class="govuk-table__header" scope="col" aria-sort="none">Title</th>
+                    <th class="govuk-table__header" scope="col" aria-sort="none">Business unit</th>
+                    <th class="govuk-table__header" scope="col" aria-sort="none">Created by</th>
+                    <th class="govuk-table__header" scope="col" aria-sort="none">Status</th>
+                    <th class="govuk-table__header empty" scope="col" aria-sort="none"></th>
+                </tr>
+                </thead>
+                <tbody class="govuk-table__body">
+                <tr class="govuk-table__row">
+                    <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
+                    <td class="govuk-table__cell">List presented cheques</td>
+                    <td class="govuk-table__cell">{{data['businessUnit']}}</td>
+                    <td class="govuk-table__cell">jane.smith</td>
+                    <td class="govuk-table__cell">Ready</td>
+                    <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
+                </tr>
+                <tr class="govuk-table__row">
+                    <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
+                    <td class="govuk-table__cell">List reversed payments</td>
+                    <td class="govuk-table__cell">{{data['businessUnit']}}</td>
+                    <td class="govuk-table__cell">jane.smith</td>
+                    <td class="govuk-table__cell">Ready</td>
+                    <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
+                </tr>
+                <tr class="govuk-table__row">
+                    <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
+                    <td class="govuk-table__cell">List outstanding suspense</td>
+                    <td class="govuk-table__cell">{{data['businessUnit']}}</td>
+                    <td class="govuk-table__cell">jane.smith</td>
+                    <td class="govuk-table__cell">Ready</td>
+                    <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
+                </tr>
+                <tr class="govuk-table__row">
+                    <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
+                    <td class="govuk-table__cell">List witnesses</td>
+                    <td class="govuk-table__cell">{{data['businessUnit']}}</td>
+                    <td class="govuk-table__cell">jane.smith</td>
+                    <td class="govuk-table__cell">Ready</td>
+                    <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
+                </tr>
+                <tr class="govuk-table__row">
+                    <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
+                    <td class="govuk-table__cell">List dishonoured cheques</td>
+                    <td class="govuk-table__cell">{{data['businessUnit']}}</td>
+                    <td class="govuk-table__cell">jane.smith</td>
+                    <td class="govuk-table__cell">Ready</td>
+                    <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
+                </tr>
+                <tr class="govuk-table__row">
+                    <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
+                    <td class="govuk-table__cell">Run control totals</td>
+                    <td class="govuk-table__cell">{{data['businessUnit']}}</td>
+                    <td class="govuk-table__cell">jane.smith</td>
+                    <td class="govuk-table__cell">Ready</td>
+                    <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
+                </tr>
+                <tr class="govuk-table__row">
+                    <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
+                    <td class="govuk-table__cell">Run bank list</td>
+                    <td class="govuk-table__cell">{{data['businessUnit']}}</td>
+                    <td class="govuk-table__cell">jane.smith</td>
+                    <td class="govuk-table__cell">Ready</td>
+                    <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
+                </tr>
+                <tr class="govuk-table__row">
+                    <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
+                    <td class="govuk-table__cell">BACS to PC report</td>
+                    <td class="govuk-table__cell">{{data['businessUnit']}}</td>
+                    <td class="govuk-table__cell">jane.smith</td>
+                    <td class="govuk-table__cell">Ready</td>
+                    <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
+                </tr>
+                <tr class="govuk-table__row">
+                    <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
+                    <td class="govuk-table__cell">BACS repayment report</td>
+                    <td class="govuk-table__cell">{{data['businessUnit']}}</td>
+                    <td class="govuk-table__cell">jane.smith</td>
+                    <td class="govuk-table__cell">Ready</td>
+                    <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
+                </tr>
+                <tr class="govuk-table__row">
+                    <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
+                    <td class="govuk-table__cell">List unpresented cheques</td>
+                    <td class="govuk-table__cell">{{data['businessUnit']}}</td>
+                    <td class="govuk-table__cell">jane.smith</td>
+                    <td class="govuk-table__cell">Ready</td>
+                    <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
+                </tr>
+                <tr class="govuk-table__row">
+                    <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
+                    <td class="govuk-table__cell">Cheque list and breakdowns</td>
+                    <td class="govuk-table__cell">{{data['businessUnit']}}</td>
+                    <td class="govuk-table__cell">jane.smith</td>
+                    <td class="govuk-table__cell">Ready</td>
+                    <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+
+        {% else %}
+            <p class="govuk-body">No reports have been created today.</p>
+        {% endif %}
+
+        
 
     </div>
   </div>

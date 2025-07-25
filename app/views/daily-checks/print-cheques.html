@@ -4,10 +4,10 @@
 
 {% block beforeContent %}
 
-{{ govukBackLink({
+<!-- {{ govukBackLink({
   text: "Back",
   href: "./task-list.html"
-}) }}
+}) }} -->
 
 {% endblock %}
 
@@ -20,6 +20,8 @@
 
             <h1 class="govuk-heading-l">{{pageName}}</h1>
 
+            <h2 class="govuk-heading-m">Cheques to print</h2>
+
             {{ govukSummaryList({
                 rows: [
                     {
@@ -27,7 +29,7 @@
                             text: "Major creditors"
                         },
                         value: {
-                            text: "8 cheques"
+                            text: "7"
                         }
                     },
                     {
@@ -35,13 +37,21 @@
                             text: "Minor creditors"
                         },
                         value: {
-                            text: "5 cheques"
+                            text: "7"
                         }
-                    }
-                ]
+                    },
+                    {
+                        key: {
+                            text: "Total"
+                        },
+                        value: {
+                            text: "14"
+                        }
+                    }                
+                    ]
             }) }}
 
-            <h2 class="govuk-heading-m">Confirm before printing</h2>
+            <h2 class="govuk-heading-m">Confirm next cheque</h2>
 
             {{ govukSummaryList({
                 rows: [
@@ -56,7 +66,7 @@
                 ]
             }) }}
 
-            <!-- <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-2">Last cheque printed</p>
+            <!-- <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-0">Last cheque number</p>
             <p class="govuk-body-l govuk-!-margin-bottom-4">2883</p> -->
 
             {{ govukInput({
@@ -73,12 +83,11 @@
 
             
 
-            <div id="confirmNextCheque" class="govuk-!-margin-bottom-6 govuk-!-margin-top-6">
+            <!-- <div id="confirmNextCheque" class="govuk-!-margin-bottom-6 govuk-!-margin-top-6">
                 <div style="padding: 18px 15px 15px 15px; border-left: 5px solid #1D70B8; background-color: #f3f2f1;">
-                    <!-- <p id="confirmNextCheque_Heading" class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-0" >10 cheques have been printed since</p> -->
                     <p id="confirmNextCheque_Body" class="govuk-body govuk-!-margin-bottom-0">All cheque numbers are in sequence</p>
                 </div>
-            </div>
+            </div> -->
 
             <!-- {{ govukCheckboxes({
                 name: "confirmChequeLoadedPrinter",
@@ -100,7 +109,7 @@
 
             <div class="govuk-button-group">
                 <button type="submit" class="govuk-button">
-                    Continue
+                   Confirm and print
                 </button>
 
                 <p class="govuk-body"><a href="./task-list.html" class="govuk-link govuk-link--no-visited-state">Cancel</a></p>
