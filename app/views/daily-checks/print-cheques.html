@@ -4,10 +4,10 @@
 
 {% block beforeContent %}
 
-<!-- {{ govukBackLink({
+{{ govukBackLink({
   text: "Back",
   href: "./task-list.html"
-}) }} -->
+}) }}
 
 {% endblock %}
 
@@ -16,10 +16,36 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-        <form class="govuk-form-group" action="select-printer" method="post">
+        
 
+        <form class="govuk-form-group" action="print-cheques?chequesPrinted=true" method="post">
+
+            {% if data['chequesPrinted'] == "true" %}
+
+            {% if data['chequesPrintedReturn'] == "true" %}
+                
+            {% else %}
+                {{ mojAlert({
+                    variant: "success",
+                    dismissible: false,
+                    html: '14 cheques have been printed'
+                }) }}
+            {% endif %}
+
+            
+
+            <span class="govuk-caption-l">Daily checks</span>
             <h1 class="govuk-heading-l">{{pageName}}</h1>
 
+            <p class="govuk-body">There are no cheques to print.</p>
+
+            <!-- <p class="govuk-body"><a href="./task-list.html?chequesPrintedReturn=true" class="govuk-link govuk-link--no-visited-state">Cancel</a></p> -->
+
+            {% else %}
+
+            
+            <span class="govuk-caption-l">Daily checks</span>
+            <h1 class="govuk-heading-l">{{pageName}}</h1>
             <h2 class="govuk-heading-m">Cheques to print</h2>
 
             {{ govukSummaryList({
@@ -66,8 +92,8 @@
                 ]
             }) }}
 
-            <!-- <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-0">Last cheque number</p>
-            <p class="govuk-body-l govuk-!-margin-bottom-4">2883</p> -->
+            <!-- <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1">Last cheque number</p>
+            <p class="govuk-!-font-size-27 govuk-!-margin-bottom-4">2883</p> -->
 
             {{ govukInput({
                 id: "nextChequeNumber",
@@ -112,8 +138,10 @@
                    Confirm and print
                 </button>
 
-                <p class="govuk-body"><a href="./task-list.html" class="govuk-link govuk-link--no-visited-state">Cancel</a></p>
+                <!-- <p class="govuk-body"><a href="./task-list.html" class="govuk-link govuk-link--no-visited-state">Cancel</a></p> -->
             </div>
+
+            {% endif %}
 
         </form>
 
