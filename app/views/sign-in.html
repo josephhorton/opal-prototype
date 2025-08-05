@@ -1,0 +1,41 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Sign in" %}
+{% set userEmail = "yourname@hmcts.gov.uk" %}
+
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+      <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+      <form class="govuk-form-group" action="finance" method="post">
+
+        <div class="govuk-form-group govuk-!-margin-bottom-6">
+          {{ govukInput({
+          id: "userEmail",
+          name: "userEmail",
+          classes: "govuk-input--width-30",
+          label: {
+            text: "Email",
+            isPageHeading: false,
+            classes: "govuk-label--body"
+          },
+          value: "yourname@hmcts.gov.uk"
+        }) }}
+        </div>
+        
+
+        
+        {{ govukButton ({
+          text: "Sign in"
+        }) }}
+
+      </form>
+
+      
+    </div>
+  </div>
+
+{% endblock %}
