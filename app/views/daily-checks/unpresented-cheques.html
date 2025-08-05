@@ -1,5 +1,7 @@
 {% extends "layouts/main.html" %}
 
+{% set journeyName = "Daily checks" %}
+{% set headerCaption = data['businessUnit'] %}
 {% set pageName = "List unpresented cheques report" %}
 
 {% block beforeContent %}
@@ -23,13 +25,13 @@
                     {{ mojAlert({
                         variant: "success",
                         dismissible: false,
-                        html: 'Success message'
+                        html: 'Report created'
                     }) }}
                 {% elseif data['unpresentedCheques'] == "ready" %}
                     {{ mojAlert({
                         variant: "success",
                         dismissible: false,
-                        html: 'Success message'
+                        html: 'Report created'
                     }) }}
                 {% else %}
                 {% endif %}
@@ -37,7 +39,7 @@
         {% endif %}
 
 
-            <span class="govuk-caption-l">Daily checks</span>
+            <span class="govuk-caption-l">{{journeyName}} – {{headerCaption}}</span>
             <h1 class="govuk-heading-l">{{pageName}}</h1>
             
             <div class="govuk-button-group">
@@ -85,7 +87,7 @@
                     <td class="govuk-table__cell">{{data['businessUnit']}}</td>
                     <td class="govuk-table__cell">jane.smith</td>
                     <td class="govuk-table__cell">Ready</td>
-                    <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
+                    <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state"  href="/public/files/unpresented-cheques-opal-research-report.csv" download>Download</a></td>
                 </tr>
                 </tbody>
             </table>
@@ -127,11 +129,11 @@
 
             <p class="govuk-body">No reports have been created for daily checks.</p>
 
-            {{ govukButton({
+            <!-- {{ govukButton({
                     text: "Refresh",
                     classes: "govuk-button--secondary ",
                     href: "#"
-                }) }}
+                }) }} -->
             {% endif %}
 
 

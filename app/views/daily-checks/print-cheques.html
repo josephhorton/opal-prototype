@@ -1,5 +1,7 @@
 {% extends "layouts/main.html" %}
 
+{% set journeyName = "Daily checks" %}
+{% set headerCaption = data['businessUnit'] %}
 {% set pageName = "Print cheques" %}
 
 {% block beforeContent %}
@@ -14,134 +16,76 @@
 {% block content %}
 
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-grid-column-full">
 
         
 
-        <form class="govuk-form-group" action="print-cheques?chequesPrinted=true" method="post">
+        <form class="govuk-form-group" action="check-print-number" method="post">
+
+            <span class="govuk-caption-l">{{journeyName}} – {{headerCaption}}</span>
+            <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+            <nav class="moj-sub-navigation" aria-label="Sub navigation">
+            <ul class="moj-sub-navigation__list">
+                <li class="moj-sub-navigation__item">
+                <a class="moj-sub-navigation__link" aria-current="page" href="./print-cheques.html">
+                    To print 
+                </a>
+                </li>
+                <li class="moj-sub-navigation__item">
+                <a class="moj-sub-navigation__link" href="./printed-cheques.html">
+                    Print report
+                </a>
+                </li>
+            </ul>
+            </nav>
+
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-two-thirds">
+
+            <h2 class="govuk-heading-m">To print</h2>
 
             {% if data['chequesPrinted'] == "true" %}
 
-            {% if data['chequesPrintedReturn'] == "true" %}
-                
-            {% else %}
-                {{ mojAlert({
-                    variant: "success",
-                    dismissible: false,
-                    html: '14 cheques have been printed'
-                }) }}
-            {% endif %}
-
-            
-
-            <span class="govuk-caption-l">Daily checks</span>
-            <h1 class="govuk-heading-l">{{pageName}}</h1>
-
             <p class="govuk-body">There are no cheques to print.</p>
 
-            <!-- <p class="govuk-body"><a href="./task-list.html?chequesPrintedReturn=true" class="govuk-link govuk-link--no-visited-state">Cancel</a></p> -->
-
             {% else %}
 
-            
-            <span class="govuk-caption-l">Daily checks</span>
-            <h1 class="govuk-heading-l">{{pageName}}</h1>
-            <h2 class="govuk-heading-m">Cheques to print</h2>
+             <table class="govuk-table">
+                <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                    <th scope="col" class="govuk-table__header" style="width: 40%;">Creditors</th>
+                    <th scope="col" class="govuk-table__header">Cheques</th>
+                    </tr>
+                </thead>
+                <tbody class="govuk-table__body">
+                    <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">Major creditor</td>
+                    <td class="govuk-table__cell">0</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">Minor creditor</td>
+                    <td class="govuk-table__cell">7</td>
+                    </tr>
+                </tbody>
+                </table>
 
-            {{ govukSummaryList({
-                rows: [
-                    {
-                        key: {
-                            text: "Major creditors"
-                        },
-                        value: {
-                            text: "7"
-                        }
-                    },
-                    {
-                        key: {
-                            text: "Minor creditors"
-                        },
-                        value: {
-                            text: "7"
-                        }
-                    },
-                    {
-                        key: {
-                            text: "Total"
-                        },
-                        value: {
-                            text: "14"
-                        }
-                    }                
-                    ]
-            }) }}
-
-            <h2 class="govuk-heading-m">Confirm next cheque</h2>
-
-            {{ govukSummaryList({
-                rows: [
-                    {
-                        key: {
-                            text: "Last cheque number"
-                        },
-                        value: {
-                            text: "2883"
-                        }
-                    }
-                ]
-            }) }}
-
-            <!-- <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1">Last cheque number</p>
-            <p class="govuk-!-font-size-27 govuk-!-margin-bottom-4">2883</p> -->
-
-            {{ govukInput({
-                id: "nextChequeNumber",
-                name: "nextChequeNumber",
-                label: {
-                    text: "Next cheque number",
-                    isPageHeading: false,
-                    classes: "govuk-label--s"
-                },
-                classes: "govuk-input--width-10",
-                value: data['nextChequeNumber']
-            }) }}
-
-            
-
-            <!-- <div id="confirmNextCheque" class="govuk-!-margin-bottom-6 govuk-!-margin-top-6">
-                <div style="padding: 18px 15px 15px 15px; border-left: 5px solid #1D70B8; background-color: #f3f2f1;">
-                    <p id="confirmNextCheque_Body" class="govuk-body govuk-!-margin-bottom-0">All cheque numbers are in sequence</p>
-                </div>
-            </div> -->
-
-            <!-- {{ govukCheckboxes({
-                name: "confirmChequeLoadedPrinter",
-                fieldset: {
-                    legend: {
-                        text: "Confirm cheques have been loaded onto printer",
-                        isPageHeading: false,
-                        classes: "govuk-fieldset__legend--xl govuk-visually-hidden"
-                    }
-                },
-                values: data['confirmChequeLoadedPrinter'],
-                items: [
-                    {
-                        value: "Cheques have been loaded on printer",
-                        text: "Cheques have been loaded on printer"
-                    }
-                ]
-            }) }} -->
 
             <div class="govuk-button-group">
                 <button type="submit" class="govuk-button">
-                   Confirm and print
+                   Continue
                 </button>
 
                 <!-- <p class="govuk-body"><a href="./task-list.html" class="govuk-link govuk-link--no-visited-state">Cancel</a></p> -->
             </div>
 
+            </div>
+            </div>
+
             {% endif %}
+
+           
+
 
         </form>
 

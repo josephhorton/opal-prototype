@@ -23,13 +23,13 @@
                     {{ mojAlert({
                         variant: "success",
                         dismissible: false,
-                        html: 'Success message'
+                        html: 'Report created'
                     }) }}
                 {% elseif data['controlTotal'] == "ready" %}
                     {{ mojAlert({
                         variant: "success",
                         dismissible: false,
-                        html: 'Success message'
+                        html: 'Report created'
                     }) }}
                 {% else %}
                 {% endif %}
@@ -127,11 +127,6 @@
 
             <p class="govuk-body">No reports have been created for daily checks.</p>
 
-            {{ govukButton({
-                    text: "Refresh",
-                    classes: "govuk-button--secondary ",
-                    href: "#"
-                }) }}
             {% endif %}
 
 

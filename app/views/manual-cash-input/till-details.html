@@ -132,7 +132,7 @@
             </thead>
             <tbody class="govuk-table__body">
               {% if (data['payment1'] == "true") %}
-              <tr class="govuk-table__row">
+              <tr class="govuk-table__row govuk-body-s">
                 <th scope="row" class="govuk-table__header govuk-!-font-weight-regular">{{ data['payment1Category'] }}</th>
                 <td class="govuk-table__cell">David THOMPSON ({{ data['payment1AccountNumber'] or "06000427N" }})</td>
                 <td class="govuk-table__cell">{{ data['payment1Amount'] | currency }}</td>

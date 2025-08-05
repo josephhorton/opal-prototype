@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = "List outstanding payments report" %}
+{% set pageName = "List reversed payments report" %}
 
 {% block beforeContent %}
 
@@ -23,13 +23,13 @@
                     {{ mojAlert({
                         variant: "success",
                         dismissible: false,
-                        html: 'Success message'
+                        html: 'Report created'
                     }) }}
                 {% elseif data['outstandingPayment'] == "ready" %}
                     {{ mojAlert({
                         variant: "success",
                         dismissible: false,
-                        html: 'Success message'
+                        html: 'Report created'
                     }) }}
                 {% else %}
                 {% endif %}
@@ -81,7 +81,7 @@
                 <tbody class="govuk-table__body">
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                    <td class="govuk-table__cell">List outstanding payments</td>
+                    <td class="govuk-table__cell">List reversed payments</td>
                     <td class="govuk-table__cell">{{data['businessUnit']}}</td>
                     <td class="govuk-table__cell">jane.smith</td>
                     <td class="govuk-table__cell">Ready</td>
@@ -113,7 +113,7 @@
                     <tbody class="govuk-table__body">
                     <tr class="govuk-table__row">
                         <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                        <td class="govuk-table__cell">List outstanding payments</td>
+                        <td class="govuk-table__cell">List reversed payments</td>
                         <td class="govuk-table__cell">{{data['businessUnit']}}</td>
                         <td class="govuk-table__cell">jane.smith</td>
                         <td class="govuk-table__cell">In progress</td>
@@ -127,11 +127,6 @@
 
             <p class="govuk-body">No reports have been created for daily checks.</p>
 
-            {{ govukButton({
-                    text: "Refresh",
-                    classes: "govuk-button--secondary ",
-                    href: "#"
-                }) }}
             {% endif %}
 
 
