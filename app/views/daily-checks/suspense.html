@@ -1,6 +1,8 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = "Bank report" %}
+{% set journeyName = "Daily checks" %}
+{% set headerCaption = data['businessUnit'] %}
+{% set pageName = "Suspense report" %}
 
 {% block beforeContent %}
 
@@ -16,14 +18,15 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
 
-        {% if data['bankReportReturning'] == "true" %}
+      {% if data['suspenseReturning'] == "true" %}
 
-                {% else %}
-                {% if (data['bankList'] == "in-progress" or data['bankList'] == "ready") %}
+      {% else %}
+
+                {% if (data['suspenseReport'] == "in-progress" or data['suspenseReport'] == "ready") %}
                     {{ mojAlert({
                         variant: "success",
                         dismissible: false,
-                        html: 'Success message'
+                        html: 'Report created'
                     }) }}
                 {% else %}
                 {% endif %}
@@ -31,7 +34,7 @@
         {% endif %}
 
 
-            <span class="govuk-caption-l">{{data['businessUnit']}}</span>
+            <span class="govuk-caption-l">{{headerCaption}}</span>
             <h1 class="govuk-heading-l">{{pageName}}</h1>
             
             <div class="govuk-button-group">
@@ -43,7 +46,7 @@
                 {{ govukButton({
                     text: "Create report",
                     classes: "",
-                    href: "./bank-list.html?bankList=in-progress&bankReportCreated=true"
+                    href: "./create-suspense-report.html"
                 }) }}
 
                 
@@ -51,13 +54,13 @@
 
             <!-- TABLE -->
 
-            {% if data['bankList'] == "ready" %}
+            {% if data['suspenseReport'] == "ready" %}
             <h2 class="govuk-heading-m">Today</h2>
 
             {{ govukButton({
                     text: "Refresh",
                     classes: "govuk-button--secondary govuk-!-margin-bottom-4",
-                    href: "./bank-list.html?bankList=ready"
+                    href: "./suspense.html?suspenseReport=ready"
                 }) }}
 
             <div class="moj-scrollable-pane">
@@ -75,22 +78,22 @@
                 <tbody class="govuk-table__body">
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                    <td class="govuk-table__cell">Bank report</td>
+                    <td class="govuk-table__cell">Suspense report – {{data['suspenseCategory']}}</td>
                     <td class="govuk-table__cell">{{data['businessUnit']}}</td>
                     <td class="govuk-table__cell">jane.smith</td>
                     <td class="govuk-table__cell">Ready</td>
-                    <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
+                    <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state"  href="#" download>Download</a></td>
                 </tr>
                 </tbody>
             </table>
             </div>
-            {% elseif data['bankList'] == "in-progress" %}
+            {% elseif data['suspenseReport'] == "in-progress" %}
             <h2 class="govuk-heading-m">Today</h2>
 
             {{ govukButton({
                     text: "Refresh",
                     classes: "govuk-button--secondary govuk-!-margin-bottom-4",
-                    href: "./bank-list.html?bankList=ready"
+                    href: "./suspense.html?suspenseReport=ready"
                 }) }}
 
             <div class="moj-scrollable-pane">
@@ -107,7 +110,7 @@
                     <tbody class="govuk-table__body">
                     <tr class="govuk-table__row">
                         <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                        <td class="govuk-table__cell">Bank report</td>
+                        <td class="govuk-table__cell">Suspense report – {{data['suspenseCategory']}}</td>
                         <td class="govuk-table__cell">{{data['businessUnit']}}</td>
                         <td class="govuk-table__cell">jane.smith</td>
                         <td class="govuk-table__cell">In progress</td>
@@ -119,8 +122,13 @@
             <h2 class="govuk-heading-m">Today</h2>
             
 
-            <p class="govuk-body">No bank reports have been created.</p>
+            <p class="govuk-body">No suspense reports have been created.</p>
 
+            <!-- {{ govukButton({
+                    text: "Refresh",
+                    classes: "govuk-button--secondary ",
+                    href: "#"
+                }) }} -->
             {% endif %}
 
 

@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = "List reversed payments report" %}
+{% set pageName = "Reversed payments report" %}
 
 {% block beforeContent %}
 
@@ -16,20 +16,14 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
 
-      {% if data['outstandingPaymentReturn'] == "true" %}
+      {% if data['reversedPaymentReturning'] == "true" %}
 
                 {% else %}
-                {% if data['outstandingPayment'] == "in-progress" %}
+                {% if (data['outstandingPayment'] == "in-progress" or data['outstandingPayment'] == "ready") %}
                     {{ mojAlert({
                         variant: "success",
                         dismissible: false,
-                        html: 'Report created'
-                    }) }}
-                {% elseif data['outstandingPayment'] == "ready" %}
-                    {{ mojAlert({
-                        variant: "success",
-                        dismissible: false,
-                        html: 'Report created'
+                        html: 'Report created.'
                     }) }}
                 {% else %}
                 {% endif %}
@@ -37,7 +31,7 @@
         {% endif %}
 
 
-            <span class="govuk-caption-l">Daily checks</span>
+            <span class="govuk-caption-l">{{data['businessUnit']}}</span>
             <h1 class="govuk-heading-l">{{pageName}}</h1>
             
             <div class="govuk-button-group">
@@ -49,7 +43,7 @@
                 {{ govukButton({
                     text: "Create report",
                     classes: "",
-                    href: "./outstanding-payment.html?outstandingPayment=in-progress"
+                    href: "./outstanding-payment.html?outstandingPayment=in-progress&reversedPaymentCreated=true"
                 }) }}
 
                 
@@ -81,7 +75,7 @@
                 <tbody class="govuk-table__body">
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                    <td class="govuk-table__cell">List reversed payments</td>
+                    <td class="govuk-table__cell">Reversed payments report</td>
                     <td class="govuk-table__cell">{{data['businessUnit']}}</td>
                     <td class="govuk-table__cell">jane.smith</td>
                     <td class="govuk-table__cell">Ready</td>
@@ -113,7 +107,7 @@
                     <tbody class="govuk-table__body">
                     <tr class="govuk-table__row">
                         <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                        <td class="govuk-table__cell">List reversed payments</td>
+                        <td class="govuk-table__cell">Reversed payments report</td>
                         <td class="govuk-table__cell">{{data['businessUnit']}}</td>
                         <td class="govuk-table__cell">jane.smith</td>
                         <td class="govuk-table__cell">In progress</td>
@@ -125,7 +119,7 @@
             <h2 class="govuk-heading-m">Today</h2>
             
 
-            <p class="govuk-body">No reports have been created for daily checks.</p>
+            <p class="govuk-body">No reversed payments reports have been created.</p>
 
             {% endif %}
 

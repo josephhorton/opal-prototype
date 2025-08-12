@@ -1,0 +1,102 @@
+{# app/views/reports/list.html #}
+{% extends "layouts/main.html" %}
+
+{% block beforeContent %}
+  {% if backHref %}
+    {{ govukBackLink({ text: "Back", href: backHref }) }}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    <div aria-live="polite" class="govuk-visually-hidden">
+      {% if flash %}{{ flash.text }}{% endif %}
+    </div>
+
+    {% if flash and flash.type == "success" %}
+      {{ mojAlert({ variant: "success", dismissible: false, html: flash.text }) }}
+    {% endif %}
+
+    {% if data['businessUnit'] %}
+      <span class="govuk-caption-l">{{ data['businessUnit'] }}</span>
+    {% endif %}
+    <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+    <div class="govuk-button-group">
+      <form action="/reports/{{ type }}/create" method="post">
+        {% if titleOverride %}
+          <input type="hidden" name="title" value="{{ titleOverride }}">
+        {% endif %}
+        {{ govukButton({ text: "Create report" }) }}
+      </form>
+
+      <form action="/reports/{{ type }}/refresh" method="post">
+        {{ govukButton({ text: "Refresh", classes: "govuk-button--secondary" }) }}
+      </form>
+
+      <form action="/reports/{{ type }}/clear" method="post">
+        {{ govukButton({ text: "Clear all", classes: "govuk-button--secondary" }) }}
+      </form>
+    </div>
+
+    <h2 class="govuk-heading-m">Today</h2>
+
+    {% set list = (data.reports and data.reports[type]) or [] %}
+    {% if list.length %}
+      <div class="moj-scrollable-pane">
+        <table class="govuk-table" data-module="moj-sortable-table">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header" aria-sort="none" style="width:22%;">Date and time</th>
+              <th scope="col" class="govuk-table__header" aria-sort="none">Title</th>
+              <th scope="col" class="govuk-table__header" aria-sort="none">Business unit</th>
+              <th scope="col" class="govuk-table__header" aria-sort="none">Created by</th>
+              <th scope="col" class="govuk-table__header" aria-sort="none">Status</th>
+              <th scope="col" class="govuk-table__header">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            {% for r in list %}
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">
+                  <a class="govuk-link govuk-link--no-visited-state" href="/reports/{{ type }}/{{ r.id }}">
+                    {{ r.createdAt | date("D MMM YYYY 'at' HH:mm") }}
+                  </a>
+                </td>
+                <td class="govuk-table__cell">{{ r.title }}</td>
+                <td class="govuk-table__cell">{{ r.businessUnit or '—' }}</td>
+                <td class="govuk-table__cell">{{ r.createdBy }}</td>
+                <td class="govuk-table__cell">{{ r.status }}</td>
+                <td class="govuk-table__cell">
+                  <div class="govuk-button-group">
+                    {% if r.status != "Ready" %}
+                      <form action="/reports/{{ type }}/{{ r.id }}/ready" method="post">
+                        {{ govukButton({ text: "Mark ready", classes: "govuk-button--secondary" }) }}
+                      </form>
+                    {% else %}
+                      <a class="govuk-link govuk-link--no-visited-state" href="#"
+                         aria-describedby="title-{{ r.id }}">Download
+                        <span class="govuk-visually-hidden"> {{ r.title }}</span>
+                      </a>
+                    {% endif %}
+                  </div>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p class="govuk-body">No reports have been created for daily checks.</p>
+    {% endif %}
+
+  </div>
+</div>
+
+<style>
+  .govuk-table__cell:last-child,
+  .govuk-table__header:last-child { text-align: right; }
+</style>
+{% endblock %}

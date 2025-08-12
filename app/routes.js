@@ -7,9 +7,15 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const rows = require('./data/rows.json')
 
-require('./routes/account.js')(router);
+const reportsRoutes = require('./routes/reports')
+reportsRoutes(router)
 
 // Add your routes here
+
+// DAILY CHECKS
+router.get('/bank-list', (req, res) => {
+  res.render('bank-list')
+})
 
 // MANUAL CASH INPUT
 
@@ -141,4 +147,7 @@ router.post('/sending-court-question', function(request, response) {
         response.redirect("./create-account/court-details/enforcement-court?cd-status=started")
     }
 })
+
+module.exports = router
+
 

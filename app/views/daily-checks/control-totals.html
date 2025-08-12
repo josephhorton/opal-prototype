@@ -6,7 +6,7 @@
 
 {{ govukBackLink({
   text: "Back",
-  href: "./task-list.html?controlTotalReturn=true"
+  href: "./task-list.html"
 }) }}
 
 {% endblock %}
@@ -16,16 +16,10 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
 
-      {% if data['controlTotalReturn'] == "true" %}
+      {% if data['controlTotalsReturning'] == "true" %}
 
-                {% else %}
-                {% if data['controlTotal'] == "in-progress" %}
-                    {{ mojAlert({
-                        variant: "success",
-                        dismissible: false,
-                        html: 'Report created'
-                    }) }}
-                {% elseif data['controlTotal'] == "ready" %}
+        {% else %}
+                {% if (data['controlTotal'] == "in-progress" or data['controlTotal'] == "ready") %}
                     {{ mojAlert({
                         variant: "success",
                         dismissible: false,
@@ -37,7 +31,7 @@
         {% endif %}
 
 
-            <span class="govuk-caption-l">Daily checks</span>
+            <span class="govuk-caption-l">{{data['businessUnit']}}</span>
             <h1 class="govuk-heading-l">{{pageName}}</h1>
             
             <div class="govuk-button-group">
@@ -49,7 +43,7 @@
                 {{ govukButton({
                     text: "Create report",
                     classes: "",
-                    href: "./control-totals.html?controlTotal=in-progress"
+                    href: "./control-totals.html?controlTotal=in-progress&controlTotalsCreated=true"
                 }) }}
 
                 
@@ -81,7 +75,7 @@
                 <tbody class="govuk-table__body">
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                    <td class="govuk-table__cell">Control totals</td>
+                    <td class="govuk-table__cell">Control totals report</td>
                     <td class="govuk-table__cell">{{data['businessUnit']}}</td>
                     <td class="govuk-table__cell">jane.smith</td>
                     <td class="govuk-table__cell">Ready</td>
@@ -113,7 +107,7 @@
                     <tbody class="govuk-table__body">
                     <tr class="govuk-table__row">
                         <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                        <td class="govuk-table__cell">Control totals</td>
+                        <td class="govuk-table__cell">Control totals report</td>
                         <td class="govuk-table__cell">{{data['businessUnit']}}</td>
                         <td class="govuk-table__cell">jane.smith</td>
                         <td class="govuk-table__cell">In progress</td>
@@ -125,7 +119,7 @@
             <h2 class="govuk-heading-m">Today</h2>
             
 
-            <p class="govuk-body">No reports have been created for daily checks.</p>
+            <p class="govuk-body">No control totals reports have been created.</p>
 
             {% endif %}
 

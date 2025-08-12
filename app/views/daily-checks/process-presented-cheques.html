@@ -18,7 +18,7 @@
 
         <form class="govuk-form-group" action="processed-presented-cheques?chequesProcessed=true" method="post">
 
-            <span class="govuk-caption-l">Daily checks</span>
+            <span class="govuk-caption-l">{{data['businessUnit']}}</span>
             <h1 class="govuk-heading-l">{{pageName}}</h1>
 
             <nav class="moj-sub-navigation" aria-label="Sub navigation">
@@ -30,7 +30,7 @@
                 </li>
                 <li class="moj-sub-navigation__item">
                 <a class="moj-sub-navigation__link" href="./processed-presented-cheques.html">
-                    Processed cheques
+                    Processed
                 </a>
                 </li>
             </ul>

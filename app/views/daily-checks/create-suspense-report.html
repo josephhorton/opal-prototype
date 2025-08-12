@@ -1,0 +1,77 @@
+{% extends "layouts/main.html" %}
+
+{% set headerCaption = data['businessUnit'] %}
+{% set pageName = "Create report" %}
+
+{% block beforeContent %}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        <span class="govuk-caption-l">{{data['businessUnit']}}</span>
+        <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+        <form class="govuk-form-group" action="suspense?suspenseReport=in-progress&suspenseCreated=true" method="post">
+
+        {{ govukRadios({
+            name: "suspenseCategory",
+            id: "suspenseCategory",
+            fieldset: {
+                legend: {
+                    text: "Categories",
+                    isPageHeading: false,
+                    classes: "govuk-fieldset__legend--m"
+                }
+            },
+            value: data['suspenseCategory'],
+            items: [
+                {
+                    value: "all",
+                    text: "All"
+                },
+                {
+                    value: "selected",
+                    text: "Selected"
+                },
+                {
+                    value: "outstanding",
+                    text: "Outstanding"
+                },
+                {
+                    value: "movements",
+                    text: "Movements"
+                }
+            ]
+        }) }}
+
+
+
+        <div class="govuk-button-group">
+          <button type="submit" class="govuk-button">
+            Create report
+          </button>
+
+          <p class="govuk-body"><a href="./suspense.html" class="govuk-link govuk-link--no-visited-state">Cancel</a></p>
+        </div>
+        
+      </form>
+
+      
+
+
+
+               
+
+
+            
+
+    </div>
+  </div>
+
+{% endblock %}
+
+

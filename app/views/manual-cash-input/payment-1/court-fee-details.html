@@ -23,25 +23,76 @@
       <form class="govuk-form-group" action="court-fee-form" method="post">
 
         {{ xGovukAutocomplete({
-          id: "payment1CourtFee",
-          name: "payment1CourtFee",
-          formGroup: {
-            classes: "govuk-input--width-20"
+          id: "courtFeeCode",
+          name: "courtFeeCode",
+          classes: "",
+          formGroup:{
+            classes: "govuk-input--width-40"
           },
-          value: data.payment1CourtFee,
+          value: data['courtFeeCode'],
           allowEmpty: false,
-          showAllValues: false,
+          showAllValues: true,
           label: {
             classes: "govuk-label--s",
-            text: 'Court fee code'
+            text: "Court fee code"
           },
           items: [
-            { text: "C04.1" },
-            { text: "C04.2" },
-            { text: "C04.3" },
-            { text: "C04.4" }
+            { text: "C01.1 – A JP PERFORMING A FUNCTION AWAY FROM COURT (£29.00)", value: "C01.1" },
+            { text: "C02.1 – APP TO STATE CASE FOR OPINION OF H/C (£156.00)", value: "C02.1" },
+            { text: "C02.2 – CSA91 APPEAL AGAINST DEDUCTION FROM EARNINGS (£22.00)", value: "C02.2" },
+            { text: "C02.3 – APPEAL SCH 5 TO LICENSING ACT 2003 (£70.00)", value: "C02.3" },
+            { text: "C02.4 – AN APPEAL WHERE NO OTHER FEE SPECIFIED (£70.00)", value: "C02.4" },
+            { text: "C03.1 – REQUEST FOR CERT OF REFUSAL TO STATE CASE (£0.00)", value: "C03.1" },
+            { text: "C03.2 – REQUEST FOR CERTIFICATE OF SATISFACTION (£19.00)", value: "C03.2" },
+            { text: "C03.3 – REQUEST FOR CERTIFIED COPY OF MEMO OF CONVICTION (£15.00)", value: "C03.3" },
+            { text: "C03.4 – REQUEST FOR CERTIFICATE OR DOC NO OTHER FEE (£23.00)", value: "C03.4" },
+            { text: "C04.1 – CT APPN FOR LIABILITY ORDER (£0.50)", value: "C04.1" },
+            { text: "C04.2 – CSA 91 Application For Liability Order (£14.00)", value: "C04.2" },
+            { text: "C05.1A – COPY OF DOCUMENT FIRST 10 PAGES (£11.00)", value: "C05.1A" },
+            { text: "C05.1B – COPY OF DOCUMENT EACH SUBSEQUENT PAGE (£0.50)", value: "C05.1B" },
+            { text: "C05.2 – COPY OF DOCUMENT ON DISK (£11.00)", value: "C05.2" },
+            { text: "C06.1 – LICENCE, CONSENT OR AUTHORITY NO FEE (£0.00)", value: "C06.1" },
+            { text: "C06.2 – APPLICATION FOR RENEWAL OR VARIATION LICENCE (£31.00)", value: "C06.2" },
+            { text: "C06.3 – APPLICATION FOR REVOCATION OF LICENCE (£31.00)", value: "C06.3" }
           ]
         }) }}
+
+        <!-- {{ xGovukAutocomplete({
+          id: "courtFeeCode",
+          name: "courtFeeCode",
+          classes: "",
+          formGroup:{
+            classes: "govuk-input--width-40"
+          },
+          value: data['courtFeeCode'],
+          allowEmpty: false,
+          showAllValues: true,
+          label: {
+            classes: "govuk-label--s",
+            text: "Court fee"
+          },
+          items: [
+            { text: "£29.00 – A JP performing a function away from court (C01.1)", value: "C01.1" },
+            { text: "£156.00 – App to state case for opinion of H/C (C02.1)", value: "C02.1" },
+            { text: "£22.00 – CSA91 appeal against deduction from earnings (C02.2)", value: "C02.2" },
+            { text: "£70.00 – Appeal Sch 5 to Licensing Act 2003 (C02.3)", value: "C02.3" },
+            { text: "£70.00 – An appeal where no other fee specified (C02.4)", value: "C02.4" },
+            { text: "£0.00 – Request for cert of refusal to state case (C03.1)", value: "C03.1" },
+            { text: "£19.00 – Request for certificate of satisfaction (C03.2)", value: "C03.2" },
+            { text: "£15.00 – Request for certified copy of memo of conviction (C03.3)", value: "C03.3" },
+            { text: "£23.00 – Request for certificate or doc no other fee (C03.4)", value: "C03.4" },
+            { text: "£0.50 – CT appn for liability order (C04.1)", value: "C04.1" },
+            { text: "£14.00 – CSA 91 application for liability order (C04.2)", value: "C04.2" },
+            { text: "£11.00 – Copy of document first 10 pages (C05.1A)", value: "C05.1A" },
+            { text: "£0.50 – Copy of document each subsequent page (C05.1B)", value: "C05.1B" },
+            { text: "£11.00 – Copy of document on disk (C05.2)", value: "C05.2" },
+            { text: "£0.00 – Licence, consent or authority no fee (C06.1)", value: "C06.1" },
+            { text: "£31.00 – Application for renewal or variation licence (C06.2)", value: "C06.2" },
+            { text: "£31.00 – Application for revocation of licence (C06.3)", value: "C06.3" }
+          ]
+        }) }} -->
+
+
 
         <div id="Offence1_Title_Container" class="govuk-!-margin-bottom-6 govuk-!-margin-top-6">
           <div style="padding: 18px 15px 15px 15px; border-left: 5px solid #1D70B8; background-color: #f3f2f1;">

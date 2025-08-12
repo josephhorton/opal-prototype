@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = "List witnesses report" %}
+{% set pageName = "Witness expenses report" %}
 
 {% block beforeContent %}
 
@@ -16,16 +16,10 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
 
-      {% if data['witnessReturn'] == "true" %}
+      {% if data['witnessReturning'] == "true" %}
 
                 {% else %}
-                {% if data['witness'] == "in-progress" %}
-                    {{ mojAlert({
-                        variant: "success",
-                        dismissible: false,
-                        html: 'Report created'
-                    }) }}
-                {% elseif data['witness'] == "ready" %}
+                {% if (data['witness'] == "in-progress" or data['witness'] == "ready") %}
                     {{ mojAlert({
                         variant: "success",
                         dismissible: false,
@@ -37,7 +31,7 @@
         {% endif %}
 
 
-            <span class="govuk-caption-l">Daily checks</span>
+            <span class="govuk-caption-l">{{data['businessUnit']}}</span>
             <h1 class="govuk-heading-l">{{pageName}}</h1>
             
             <div class="govuk-button-group">
@@ -49,7 +43,7 @@
                 {{ govukButton({
                     text: "Create report",
                     classes: "",
-                    href: "./witnesses.html?witness=in-progress"
+                    href: "./witnesses.html?witness=in-progress&witnessCreated=true"
                 }) }}
 
                 
@@ -81,7 +75,7 @@
                 <tbody class="govuk-table__body">
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                    <td class="govuk-table__cell">List witnesses</td>
+                    <td class="govuk-table__cell">Witness expenses report</td>
                     <td class="govuk-table__cell">{{data['businessUnit']}}</td>
                     <td class="govuk-table__cell">jane.smith</td>
                     <td class="govuk-table__cell">Ready</td>
@@ -113,7 +107,7 @@
                     <tbody class="govuk-table__body">
                     <tr class="govuk-table__row">
                         <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                        <td class="govuk-table__cell">List witnesses</td>
+                        <td class="govuk-table__cell">Witness expenses report</td>
                         <td class="govuk-table__cell">{{data['businessUnit']}}</td>
                         <td class="govuk-table__cell">jane.smith</td>
                         <td class="govuk-table__cell">In progress</td>
@@ -125,7 +119,7 @@
             <h2 class="govuk-heading-m">Today</h2>
             
 
-            <p class="govuk-body">No reports have been created for daily checks.</p>
+            <p class="govuk-body">No witness expenses reports have been created.</p>
 
             <!-- {{ govukButton({
                     text: "Refresh",

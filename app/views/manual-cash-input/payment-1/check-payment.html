@@ -18,6 +18,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
 
+      <span class="govuk-caption-l">Avon and Somerset</span>
       <h1 class="govuk-heading-l">{{pageName}}</h1>
 
       <div class="govuk-summary-card">
@@ -172,6 +173,24 @@
       </dl>
       </div>
 
+      </div>
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+
+          {{ govukCharacterCount({
+            name: "suspenseNote",
+            id: "suspenseNote",
+            label: {
+              text: "Add suspense note",
+              isPageHeading: false,
+              classes: "govuk-label--m"
+            },
+            maxlength: 1000,
+            value: data['suspenseNote']
+          }) }}
+
+        </div>
       </div>
 
       

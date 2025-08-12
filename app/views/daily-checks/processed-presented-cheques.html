@@ -18,7 +18,7 @@
 
         <form class="govuk-form-group" action="./process-presented-cheques.html" method="post">
 
-            <span class="govuk-caption-l">Daily checks</span>
+            <span class="govuk-caption-l">{{data['businessUnit']}}</span>
             <h1 class="govuk-heading-l">{{pageName}}</h1>
 
             <nav class="moj-sub-navigation" aria-label="Sub navigation">
@@ -30,7 +30,7 @@
                 </li>
                 <li class="moj-sub-navigation__item">
                 <a class="moj-sub-navigation__link" aria-current="page" href="./processed-presented-cheques.html">
-                    Processed cheques
+                    Processed
                 </a>
                 </li>
             </ul>
@@ -41,6 +41,12 @@
             {% if data['chequesProcessed'] == "true" %}
 
             <h2 class="govuk-heading-m">Processed</h2>
+
+            {{ govukButton({
+                text: "Refresh",
+                href: "#",
+                classes: "govuk-button--secondary govuk-!-margin-bottom-4"
+            }) }}
 
             <div class="moj-scrollable-pane">
                 <table class="govuk-table" data-module="moj-sortable-table">
@@ -72,6 +78,11 @@
             <h2 class="govuk-heading-m">Processed</h2>
 
             <p class="govuk-body">There are no processed files yet.</p>
+
+            {{ govukButton({
+                text: "Refresh",
+                classes: "govuk-button--secondary"
+            }) }}
 
             {% endif %}
 
