@@ -18,7 +18,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-half">
 
-      <span class="govuk-caption-l">{{headerCaption}}</span>
+      <span class="govuk-caption-l">{{data['businessUnit']}}</span>
       <h1 class="govuk-heading-l">{{pageName}}</h1>
     
 
@@ -34,7 +34,7 @@
             Next cheque number
           </label>
 
-          <input class="govuk-input govuk-input--width-10" id="nextChequeNumber" name="nextChequeNumber" type="text">
+          <input class="govuk-input govuk-input--width-10" id="nextChequeNumber" name="nextChequeNumber" type="text" autocomplete="off">
         </div>
 
         <div id="confirmNextCheque" class="govuk-!-margin-bottom-6 govuk-!-margin-top-6" hidden>
@@ -61,44 +61,69 @@
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const input = document.getElementById('nextChequeNumber');
-      const messageContainer = document.getElementById('confirmNextCheque');
-      const lastChequeNumber = 2883;
+  document.addEventListener('DOMContentLoaded', function () {
+    const input = document.getElementById('nextChequeNumber');
+    const messageContainer = document.getElementById('confirmNextCheque');
+    const lastChequeNumber = 2883;
 
-      input.addEventListener('input', function () {
-        const value = input.value.trim();
+    // announce updates for screen readers (WCAG 2.2)
+    messageContainer.setAttribute('role', 'status');
+    messageContainer.setAttribute('aria-live', 'polite');
 
-        // Only act when value is a 4+ digit number
-        if (/^\d{4,}$/.test(value)) {
-          const chequeNumber = parseInt(value, 10);
-          const diff = chequeNumber - lastChequeNumber;
+    input.addEventListener('input', function () {
+      const value = input.value.trim();
 
-          // Clear previous content
-          messageContainer.innerHTML = '';
+      if (/^\d{4,}$/.test(value)) {
+        const chequeNumber = parseInt(value, 10);
+        const diff = chequeNumber - lastChequeNumber;
 
-          if (diff === 1) {
-            messageContainer.innerHTML = `
-              <div style="padding: 15px; border-left: 5px solid #1D70B8; background-color: #f3f2f1;">
-                <p class="govuk-body govuk-!-margin-bottom-0">0 cheques are missing</p>
-              </div>`;
-            messageContainer.hidden = false;
-          } else if (diff >= 2) {
-            messageContainer.innerHTML = `
-              <div style="padding: 15px; border-left: 5px solid #F47738; background-color: #f3f2f1;">
-                <p class="govuk-body govuk-!-margin-bottom-0">${diff - 1} cheque${diff - 1 === 1 ? '' : 's'} are missing</p>
-              </div>`;
-            messageContainer.hidden = false;
-          } else {
-            // Less than or equal to 2883 — hide the container
-            messageContainer.hidden = true;
-          }
+        if (diff === 1) {
+          // 2884 -> 0 missing
+          messageContainer.innerHTML = `
+            {{ mojAlert({
+              variant: "information",
+              dismissible: false,
+              html: "0 cheques are missing"
+            }) | safe }}
+          `;
+          messageContainer.hidden = false;
+
+        } else if (diff === 2) {
+          // 2885 -> 1 missing
+          messageContainer.innerHTML = `
+            {{ mojAlert({
+              variant: "warning",
+              dismissible: false,
+              html: "1 cheque is missing"
+            }) | safe }}
+          `;
+          messageContainer.hidden = false;
+
+        } else if (diff > 2) {
+          // 2886+ -> diff - 1 missing
+          messageContainer.innerHTML = `
+            {{ mojAlert({
+              variant: "warning",
+              dismissible: false,
+              html: "${diff - 1} cheques are missing"
+            }) | safe }}
+          `;
+          messageContainer.hidden = false;
+
         } else {
+          // entered <= last -> hide
           messageContainer.hidden = true;
+          messageContainer.innerHTML = '';
         }
-      });
+      } else {
+        messageContainer.hidden = true;
+        messageContainer.innerHTML = '';
+      }
     });
-  </script>
+  });
+</script>
+
+
 
 
 {% endblock %}
