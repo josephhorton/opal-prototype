@@ -6,20 +6,24 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 {% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
 
 {% block header %}
-<!-- <div class="govuk-!-padding-top-3 govuk-!-padding-bottom-3" style="background-color: #ffdd00; width: 100%;" >
+<div class="govuk-!-padding-top-3 prototype-banner govuk-!-padding-bottom-3" style="background-color: #ffdd00; width: 100%; position: fixed; top: 0; right: 0; z-index: 1000;" >
   <div class="govuk-width-container">
    
    <p class="govuk-body govuk-!-margin-bottom-0">
-    <strong class="govuk-tag govuk-!-margin-right-1" style="background-color: #505A5F; color: white;">
-      Research tool
+    <strong class="govuk-tag govuk-!-margin-right-1" style="background-color: #000; color: white;">
+      Prototype
     </strong>
-     For research purposes only. Some functions will not be available. 
+     For research purposes only.
     </p>
   </div>
-</div> -->
+</div>
+
 
 {{ mojHeader({
     navigationClasses: 'govuk-width-container',
+    attributes: {
+      style: "margin-top: 55px;"
+    },
     organisationLabel: {
       text: 'HMCTS',
       href: '../index.html'
@@ -72,6 +76,14 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
   </div>
 
 </div>
+
+<style>
+  @media (max-width: 640px) {
+  .prototype-banner {
+    margin-top: 50px !important;
+  }
+}
+</style>
 
 
 {% endblock %}

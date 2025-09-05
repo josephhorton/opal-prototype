@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = "Opal research prototype" %}
+{% set pageName = "Pay out creditors" %}
 
 {% block beforeContent %}
 {{ govukBackLink({
@@ -16,107 +16,173 @@
 
 
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-grid-column-full">
 
-      <h1 class="govuk-heading-l">You cannot pay into this account</h1>
-
-      <!-- {{ govukWarningText({
-        text: "Warning message.",
-        iconFallbackText: "Warning"
-      }) }} -->
-
+      <!-- {{ mojAlert({
+            variant: "success",
+            title: "",
+            showTitleAsHeading: false,
+            dismissible: false,
+            html: 'Success message.'
+      }) }}
       
+      <span class="govuk-caption-l">Avon and Somerset</span>
+      <h2 class="govuk-heading-l">{{pageName}}</h2>
+
+      <nav class="moj-sub-navigation" aria-label="Sub navigation">
+      <ul class="moj-sub-navigation__list">
+          <li class="moj-sub-navigation__item">
+          <a class="moj-sub-navigation__link" aria-current="page" href="#">
+              Pay HMCTS
+          </a>
+          </li>
+          <li class="moj-sub-navigation__item">
+          <a class="moj-sub-navigation__link"  href="#">
+              Pay major creditors
+          </a>
+          </li>
+          <li class="moj-sub-navigation__item">
+          <a class="moj-sub-navigation__link"  href="#">
+              Pay minor creditors
+          </a>
+          </li>
+      </ul>
+      </nav>
 
 
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
 
-      <!-- <span class="govuk-caption-m">06000427N</span> -->
+        
+      
+      <form action="#" method="post">
 
-      <h2 class="govuk-heading-m">At a glance</h2>
+        <h2 class="govuk-heading-m">Pay HMCTS</h2>
 
-      {{ mojAlert({
-        variant: "warning",
-        title: "Some information could not be imported",
-        showTitleAsHeading: false,
-        dismissible: false,
-        html: 'Account has been written off'
-      }) }}
-
-      {{ govukSummaryList({
-        rows: [
-          {
-            key: { text: "Account number" },
-            value: { text: "06000427N" }
-          },
-          {
-            key: { text: "Name" },
-            value: { text: "Mr Terrence CONWAY-JOHNSON" }
-          },
-          {
-            key: { text: "Aliases" },
-            value: { text: "–" }
-          },
-          {
-            key: { text: "Date of birth" },
-            value: { text: "01 January 2000" }
-          },
-          {
-            key: { text: "Address" },
-            value: {
-              html: "24 High Street<br>Twyford<br>Berkshire<br>RG10 9RT"
-            }
-          },
-          {
-            key: { text: "Balance" },
-            value: { text: "£0.00" }
-          },
-          {
-            key: { text: "Enforcement action" },
-            value: { text: "Return executed warrant (REW)" }
-          },
-          {
-            key: { text: "Collection order" },
-            value: { text: "No" }
-          }
-        ]
-      }) }}
-
-      <p class="govuk-body govuk-!-margin-bottom-7">
-        To see history and notes, you can <a href="#" class="govuk-link" target="_blank">view the account in a new tab</a>.
-      </p>
-
-      <form action="/suspense-choice" method="post">
-        <!-- {{ govukRadios({
-          name: "suspenseAction",
-          fieldset: {
-            legend: {
-              text: "Next steps",
-              isPageHeading: false,
-              classes: "govuk-fieldset__legend--m"
-            }
-          },
-          items: [
+        {{ govukSummaryList({
+          rows: [
             {
-              value: "suspense",
-              text: "Pay money into suspense"
-            },
-            {
-              value: "stop",
-              text: "Cancel and return to till"
+              key: {
+                text: "Balance"
+              },
+              value: {
+                text: "£0.00"
+              }
             }
           ]
-        }) }} -->
-
-        {{ govukButton({
-          text: "Pay into suspense"
         }) }}
+
       </form>
 
-      <p class="govuk-body">
-        <a class="govuk-link govuk-link--no-visited-state" href="#">Cancel and return to till</a>
-      </p>
+      <h2 class="govuk-heading-m">Heading</h2>
 
+      <p class="govuk-body">Showing payouts made to HMCTS today.</p>
 
-      
+      {{ govukSummaryList({
+          rows: [
+            {
+              key: {
+                text: "19 Mar 2025 at 09:10",
+                classes: "govuk-link govuk-!-font-weight-regular",
+                href: "#"
+              },
+              value: {
+                text: "£35,000.00"
+              },
+              actions: {
+                items: [
+                  {
+                    href: "#",
+                    text: "Download",
+                    visuallyHiddenText: "Item label"
+                  }
+                ]
+              }
+            }
+          ]
+        }) }} 
+
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key govuk-!-font-weight-regular">
+              19 Mar 2025 at 09:10
+            </dt>
+            <dd class="govuk-summary-list__value">
+              £35,000.00
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <ul class="govuk-summary-list__actions-list">
+                <li class="govuk-summary-list__actions-list-item">
+                  <a class="govuk-link govuk-link--no-visited-state" href="#">View<span class="govuk-visually-hidden"> contact details</span></a>
+                </li>
+                <li class="govuk-summary-list__actions-list-item">
+                  <a class="govuk-link govuk-link--no-visited-state" href="#">Download<span class="govuk-visually-hidden"> contact details</span></a>
+                </li>
+              </ul>
+            </dd>
+          </div>
+        </dl>
+
+      </div>
+      </div>
+      -->
+
+<table class="govuk-table">
+  <caption class="govuk-table__caption">Summary of record processing</caption>
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header">Type</th>
+      <th scope="col" class="govuk-table__header">Number</th>
+      <th scope="col" class="govuk-table__header">Value</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    <tr>
+      <th colspan="3" class="govuk-table__header">Total records</th>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Records read</th>
+      <td class="govuk-table__cell">38</td>
+      <td class="govuk-table__cell">£10,000.00</td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Records accepted</th>
+      <td class="govuk-table__cell">36</td>
+      <td class="govuk-table__cell">£9,500.00</td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Records rejected</th>
+      <td class="govuk-table__cell">2</td>
+      <td class="govuk-table__cell">£500.00</td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Records ignored</th>
+      <td class="govuk-table__cell">0</td>
+      <td class="govuk-table__cell">£0.00</td>
+    </tr>
+
+    <tr>
+      <th colspan="3" class="govuk-table__header">Criminal records</th>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Records read</th>
+      <td class="govuk-table__cell">37</td>
+      <td class="govuk-table__cell">£10,141.50</td>
+    </tr>
+    <!-- ... and so on for each category ... -->
+
+    <tr>
+      <th colspan="3" class="govuk-table__header">Maintenance records</th>
+    </tr>
+    <!-- Records rows -->
+
+    <tr>
+      <th colspan="3" class="govuk-table__header">Unidentified records</th>
+    </tr>
+    <!-- Records rows -->
+  </tbody>
+</table>
+
       
     </div>
   </div>

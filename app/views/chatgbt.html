@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = "Opal research prototype" %}
+{% set pageName = "Pay out creditors" %}
 
 {% block beforeContent %}
 {{ govukBackLink({
@@ -16,102 +16,67 @@
 
 
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-
-      <h1 class="govuk-heading-l">Confirm account</h1>
+    <div class="govuk-grid-column-full">
       
-      <span class="govuk-caption-m">06000427N</span>
-      <h2 class="govuk-heading-m">Mr Terrence CONWAY-JOHNSON</h2>
+      <span class="govuk-caption-l">Avon and Somerset</span>
+      <h2 class="govuk-heading-l">{{pageName}}</h2>
 
+      <nav class="moj-sub-navigation" aria-label="Sub navigation">
+      <ul class="moj-sub-navigation__list">
+          <li class="moj-sub-navigation__item">
+          <a class="moj-sub-navigation__link" aria-current="page" href="#">
+              Pay HMCTS
+          </a>
+          </li>
+          <li class="moj-sub-navigation__item">
+          <a class="moj-sub-navigation__link"  href="#">
+              Pay major creditors
+          </a>
+          </li>
+          <li class="moj-sub-navigation__item">
+          <a class="moj-sub-navigation__link"  href="#">
+              Pay minor creditors
+          </a>
+          </li>
+      </ul>
+      </nav>
+
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+
+        
       
+      <form action="chatgbt-2" method="post">
 
-      <!-- {{ govukSummaryList({
-        card: {
-          title: {
-            text: "Key details"
-          }
-        },
-        rows: [
-          {
-            key: { text: "Aliases" },
-            value: {
-              html: "Frederick SMITH<br>Fred SMITH"
+        <h2 class="govuk-heading-m">Pay HMCTS</h2>
+
+        {{ govukSummaryList({
+          rows: [
+            {
+              key: {
+                text: "Balance"
+              },
+              value: {
+                text: "£35,000.00"
+              }
             }
-          },
-          {
-            key: { text: "Date of birth" },
-            value: { text: "01 January 2000" }
-          },
-          {
-            key: { text: "Address" },
-            value: {
-              html: "24 High Street<br>Twyford<br>Berkshire<br>RG10 9RT"
-            }
-          },
-          {
-            key: { text: "Enforcement action" },
-            value: {
-              html: "Return executed warrant (REW)"
-            }
-          },
-          {
-            key: { text: "Collection order" },
-            value: {
-              html: "No"
-            }
-          }
-        ]
-      }) }} -->
+          ]
+        }) }}
 
-      <dl class="govuk-summary-list">
-
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">Aliases</dt>
-          <dd class="govuk-summary-list__value">
-            –
-          </dd>
-        </div>
-
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">Date of birth</dt>
-          <dd class="govuk-summary-list__value">01 January 2000</dd>
-        </div>
-
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">Address</dt>
-          <dd class="govuk-summary-list__value">
-            24 High Street<br>
-            Twyford<br>
-            Berkshire<br>
-            RG10 9RT
-          </dd>
-        </div>
-
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">Balance</dt>
-          <dd class="govuk-summary-list__value">£125.00</dd>
-        </div>
-
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">Enforcement action</dt>
-          <dd class="govuk-summary-list__value">Return executed warrant (REW)</dd>
-        </div>
-
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">Collection order</dt>
-          <dd class="govuk-summary-list__value">No</dd>
-        </div>
-      </dl>
-
-      <p class="govuk-body govuk-!-margin-bottom-6">
-        To see more information, you can <a href="#" class="govuk-link" target="_blank">view the account in a new tab</a>.
-      </p>
-
-      <form action="/confirm-account" method="post">
         <button type="submit" class="govuk-button" data-module="govuk-button">
-          Confirm
+          Pay out
         </button>
+
       </form>
+
+      <h2 class="govuk-heading-m">Heading</h2>
+
+      <p class="govuk-body">No payouts have been made to HMCTS today.</p>
+
+      </div>
+      </div>
+
       
     </div>
   </div>

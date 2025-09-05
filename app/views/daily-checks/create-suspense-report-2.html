@@ -15,11 +15,11 @@
         <span class="govuk-caption-l">{{data['businessUnit']}}</span>
         <h1 class="govuk-heading-l">{{pageName}}</h1>
 
-        <form class="govuk-form-group" action="suspense?suspenseReport=in-progress&suspenseCreated=true" method="post">
+        <form class="govuk-form-group" action="suspense?suspenseReport2=in-progress&suspenseCreated2=true" method="post">
 
         {% set selectedHtml %}
         {{ govukCheckboxes ({
-          name: "selectedParameters",
+          name: "suspense2SelectedParameters",
           classes: "govuk-checkboxes--small",
           fieldset: {
             legend: {
@@ -28,7 +28,7 @@
               classes: "govuk-fieldset__legend--s"
             }
           },
-          values: data['selectedParameters'],
+          values: data['suspense2SelectedParameters'],
           items: [
             {
               value: "Fines",
@@ -60,7 +60,7 @@
 
         {% set outstandingHtml %}
         {{ govukCheckboxes ({
-          name: "outstandingParameters",
+          name: "suspense2OutstandingParameters",
           classes: "govuk-checkboxes--small",
           fieldset: {
             legend: {
@@ -69,7 +69,7 @@
               classes: "govuk-fieldset__legend--s"
             }
           },
-          values: data['outstandingParameters'],
+          values: data['suspense2OutstandingParameters'],
           items: [
             {
               value: "Fines",
@@ -101,7 +101,7 @@
 
         {% set movementsHtml %}
         {{ govukCheckboxes ({
-          name: "movementsParameters",
+          name: "suspense2MovementsParameters",
           classes: "govuk-checkboxes--small",
           formGroup: {
             classes: "govuk-!-margin-bottom-5"
@@ -113,7 +113,7 @@
               classes: "govuk-fieldset__legend--s"
             }
           },
-          values: data['movementsParameters'],
+          values: data['suspense2MovementsParameters'],
           items: [
             {
               value: "Fines",
@@ -143,8 +143,9 @@
         }) }}
 
         {{ mojDatePicker({
-          id: "dateFrom",
-          name: "dateFrom",
+          id: "suspense2DateFrom",
+          name: "suspense2DateFrom",
+          value: data['suspense2DateFrom'],
           formGroup: {
             classes: "govuk-!-margin-bottom-5"
           },
@@ -158,8 +159,9 @@
         }) }}
 
         {{ mojDatePicker({
-          id: "dateTo",
-          name: "dateTo",
+          id: "suspense2DateTo",
+          name: "suspense2DateTo",
+          value: data['suspense2DateTo'],
           label: {
             text: "Enter date to",
             classes: "govuk-label--s"
@@ -171,8 +173,8 @@
         {% endset %}
 
         {{ govukRadios({
-          name: "suspenseCategory",
-          idPrefix: "suspenseCategory",
+          name: "suspense2Category",
+          idPrefix: "suspense2Category",
           classes: "govuk-radios--conditional",
           fieldset: {
             legend: {
@@ -181,7 +183,7 @@
               classes: "govuk-fieldset__legend--m"
             }
           },
-          value: data['suspenseCategory'],
+          value: data['suspense2Category'],
           items: [
             {
               value: "All",
