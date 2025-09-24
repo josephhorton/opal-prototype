@@ -35,112 +35,134 @@
             </ul>
             </nav>
 
+            {% if data['transferredReturning'] == "true" %}
 
-            <h2 class="govuk-heading-m">Transfer court fees</h2>
+                {% else %}
+                {% if data['transferred'] == "true" %}
+                    {{ mojAlert({
+                        variant: "success",
+                        dismissible: true,
+                        html: '5 court fees transferred. Total balance: £3,000.00'
+                    }) }}
+                {% else %}
+                {% endif %}
 
-            {{ govukButton({
-                text: "Transfer",
-                classes: "govuk-!-margin-bottom-4"
-            }) }}
+            {% endif %}
 
-            <p class="govuk-body govuk-hint govuk-!-margin-bottom-2">0 of 5 selected</p>
+            {% if data['transferred'] == "true" %}
+                <h2 class="govuk-heading-m">Transfer court fees</h2>
+                <p class="govuk-body">There are no court fees to transfer.</p>
+            {% else %}
+            
+                <h2 class="govuk-heading-m">Transfer court fees</h2>
+                    
+                <form class="govuk-form-group" action="court-fees-transfer?transferred=true" method="post">
+
+                    {{ govukButton({
+                        text: "Transfer",
+                        classes: "govuk-!-margin-bottom-4"
+                    }) }}
+
+                    <p class="govuk-body govuk-hint govuk-!-margin-bottom-2">0 of 5 selected</p>
+
+
+                    <table class="govuk-table" data-module="moj-multi-select" data-multi-select-checkbox="#select-all">
+                        <thead class="govuk-table__head">
+                        <tr class="govuk-table__row">
+                            <th class="govuk-table__header" scope="col" id="select-all" name="business-unit-upload" value="select-all" ></th>
+                            <th class="govuk-table__header" scope="col" >Court fee code</th>
+                            <th class="govuk-table__header govuk-table__cell--numeric" scope="col" style="width: 20%;">Suspense reference</th>
+                            <th class="govuk-table__header govuk-table__cell--numeric" scope="col" >Amount received</th>
+                            <th class="govuk-table__header govuk-table__cell--numeric" scope="col" >Date received</th>
+                        </tr>
+                        </thead>
+                        <tbody class="govuk-table__body">
+
+                        <tr class="govuk-table__row govuk-table__row--selected">
+                            <td class="govuk-table__cell">
+                            <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+                                <input type="checkbox" class="govuk-checkboxes__input" name="business-unit-upload" value="avon_somerset" id="avon_somerset">
+                                <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="avon_somerset">
+                                <span class="govuk-visually-hidden">Select Avon and Somerset</span>
+                                </label>
+                            </div>
+                            </td>
+                            <td class="govuk-table__cell">C01.1</td>
+                            <td class="govuk-table__cell govuk-table__cell--numeric">29</td>
+                            <td class="govuk-table__cell govuk-table__cell--numeric">£250.00</td>
+                            <td class="govuk-table__cell govuk-table__cell--numeric">12 June 2025 at 10:30</td>
+                        </tr>
+
+                        <tr class="govuk-table__row govuk-table__row--selected">
+                            <td class="govuk-table__cell">
+                            <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+                                <input type="checkbox" class="govuk-checkboxes__input" name="business-unit-upload" value="avon_somerset" id="avon_somerset">
+                                <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="avon_somerset">
+                                <span class="govuk-visually-hidden">Select Avon and Somerset</span>
+                                </label>
+                            </div>
+                            </td>
+                            <td class="govuk-table__cell">C02.2</td>
+                            <td class="govuk-table__cell govuk-table__cell--numeric">37</td>
+                            <td class="govuk-table__cell govuk-table__cell--numeric">£125.00</td>
+                            <td class="govuk-table__cell govuk-table__cell--numeric">12 June 2025 at 10:30</td>
+                        </tr>
+
+                        <tr class="govuk-table__row govuk-table__row--selected">
+                            <td class="govuk-table__cell">
+                            <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+                                <input type="checkbox" class="govuk-checkboxes__input" name="business-unit-upload" value="avon_somerset" id="avon_somerset">
+                                <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="avon_somerset">
+                                <span class="govuk-visually-hidden">Select Avon and Somerset</span>
+                                </label>
+                            </div>
+                            </td>
+                            <td class="govuk-table__cell">C01.1</td>
+                            <td class="govuk-table__cell govuk-table__cell--numeric">38</td>
+                            <td class="govuk-table__cell govuk-table__cell--numeric">£75.00</td>
+                            <td class="govuk-table__cell govuk-table__cell--numeric">13 June 2025 at 10:30</td>
+                        </tr>
+
+                        <tr class="govuk-table__row govuk-table__row--selected">
+                            <td class="govuk-table__cell">
+                            <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+                                <input type="checkbox" class="govuk-checkboxes__input" name="business-unit-upload" value="avon_somerset" id="avon_somerset">
+                                <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="avon_somerset">
+                                <span class="govuk-visually-hidden">Select Avon and Somerset</span>
+                                </label>
+                            </div>
+                            </td>
+                            <td class="govuk-table__cell">C02.2</td>
+                            <td class="govuk-table__cell govuk-table__cell--numeric">44</td>
+                            <td class="govuk-table__cell govuk-table__cell--numeric">£500.00</td>
+                            <td class="govuk-table__cell govuk-table__cell--numeric">13 June 2025 at 10:30</td>
+                        </tr>
+
+                        <tr class="govuk-table__row govuk-table__row--selected">
+                            <td class="govuk-table__cell">
+                            <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+                                <input type="checkbox" class="govuk-checkboxes__input" name="business-unit-upload" value="avon_somerset" id="avon_somerset">
+                                <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="avon_somerset">
+                                <span class="govuk-visually-hidden">Select Avon and Somerset</span>
+                                </label>
+                            </div>
+                            </td>
+                            <td class="govuk-table__cell">C02.2</td>
+                            <td class="govuk-table__cell govuk-table__cell--numeric">45</td>
+                            <td class="govuk-table__cell govuk-table__cell--numeric">£750.00</td>
+                            <td class="govuk-table__cell govuk-table__cell--numeric">14 June 2025 at 10:30</td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
                 
-            <form class="govuk-form-group" action="court-fees-transfer?transferred=true" method="post">
-                <table class="govuk-table" data-module="moj-multi-select" data-multi-select-checkbox="#select-all">
-                    <thead class="govuk-table__head">
-                    <tr class="govuk-table__row">
-                        <th class="govuk-table__header" scope="col" id="select-all" name="business-unit-upload" value="select-all" ></th>
-                        <th class="govuk-table__header" scope="col" >Court fee code</th>
-                        <th class="govuk-table__header govuk-table__cell--numeric" scope="col" style="width: 20%;">Suspense reference</th>
-                        <th class="govuk-table__header govuk-table__cell--numeric" scope="col" >Amount received</th>
-                        <th class="govuk-table__header govuk-table__cell--numeric" scope="col" >Date received</th>
-                    </tr>
-                    </thead>
-                    <tbody class="govuk-table__body">
 
-                    <tr class="govuk-table__row govuk-table__row--selected">
-                        <td class="govuk-table__cell">
-                        <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
-                            <input type="checkbox" class="govuk-checkboxes__input" name="business-unit-upload" value="avon_somerset" id="avon_somerset">
-                            <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="avon_somerset">
-                            <span class="govuk-visually-hidden">Select Avon and Somerset</span>
-                            </label>
-                        </div>
-                        </td>
-                        <td class="govuk-table__cell">C01.1</td>
-                        <td class="govuk-table__cell govuk-table__cell--numeric">29</td>
-                        <td class="govuk-table__cell govuk-table__cell--numeric">£250.00</td>
-                        <td class="govuk-table__cell govuk-table__cell--numeric">12 June 2025 at 10:30</td>
-                    </tr>
+                
 
-                    <tr class="govuk-table__row govuk-table__row--selected">
-                        <td class="govuk-table__cell">
-                        <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
-                            <input type="checkbox" class="govuk-checkboxes__input" name="business-unit-upload" value="avon_somerset" id="avon_somerset">
-                            <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="avon_somerset">
-                            <span class="govuk-visually-hidden">Select Avon and Somerset</span>
-                            </label>
-                        </div>
-                        </td>
-                        <td class="govuk-table__cell">C02.2</td>
-                        <td class="govuk-table__cell govuk-table__cell--numeric">37</td>
-                        <td class="govuk-table__cell govuk-table__cell--numeric">£125.00</td>
-                        <td class="govuk-table__cell govuk-table__cell--numeric">12 June 2025 at 10:30</td>
-                    </tr>
+                </form>
 
-                    <tr class="govuk-table__row govuk-table__row--selected">
-                        <td class="govuk-table__cell">
-                        <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
-                            <input type="checkbox" class="govuk-checkboxes__input" name="business-unit-upload" value="avon_somerset" id="avon_somerset">
-                            <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="avon_somerset">
-                            <span class="govuk-visually-hidden">Select Avon and Somerset</span>
-                            </label>
-                        </div>
-                        </td>
-                        <td class="govuk-table__cell">C01.1</td>
-                        <td class="govuk-table__cell govuk-table__cell--numeric">38</td>
-                        <td class="govuk-table__cell govuk-table__cell--numeric">£75.00</td>
-                        <td class="govuk-table__cell govuk-table__cell--numeric">13 June 2025 at 10:30</td>
-                    </tr>
-
-                    <tr class="govuk-table__row govuk-table__row--selected">
-                        <td class="govuk-table__cell">
-                        <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
-                            <input type="checkbox" class="govuk-checkboxes__input" name="business-unit-upload" value="avon_somerset" id="avon_somerset">
-                            <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="avon_somerset">
-                            <span class="govuk-visually-hidden">Select Avon and Somerset</span>
-                            </label>
-                        </div>
-                        </td>
-                        <td class="govuk-table__cell">C02.2</td>
-                        <td class="govuk-table__cell govuk-table__cell--numeric">44</td>
-                        <td class="govuk-table__cell govuk-table__cell--numeric">£500.00</td>
-                        <td class="govuk-table__cell govuk-table__cell--numeric">13 June 2025 at 10:30</td>
-                    </tr>
-
-                    <tr class="govuk-table__row govuk-table__row--selected">
-                        <td class="govuk-table__cell">
-                        <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
-                            <input type="checkbox" class="govuk-checkboxes__input" name="business-unit-upload" value="avon_somerset" id="avon_somerset">
-                            <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="avon_somerset">
-                            <span class="govuk-visually-hidden">Select Avon and Somerset</span>
-                            </label>
-                        </div>
-                        </td>
-                        <td class="govuk-table__cell">C02.2</td>
-                        <td class="govuk-table__cell govuk-table__cell--numeric">45</td>
-                        <td class="govuk-table__cell govuk-table__cell--numeric">£750.00</td>
-                        <td class="govuk-table__cell govuk-table__cell--numeric">14 June 2025 at 10:30</td>
-                    </tr>
-
-
-                    </tbody>
-                </table>
-            
-
-            
-
-            </form>
+            {% endif %}
            
 
     </div>

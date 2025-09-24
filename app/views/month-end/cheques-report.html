@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = "Court fees" %}
+{% set pageName = "Cheques report" %}
 
 {% block beforeContent %}
 
@@ -16,31 +16,10 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
 
-        
-
-
-            <span class="govuk-caption-l">{{data['businessUnit']}}</span>
-            <h1 class="govuk-heading-l">{{pageName}}</h1>
-
-            <nav class="moj-sub-navigation" aria-label="Sub navigation">
-            <ul class="moj-sub-navigation__list">
-                <li class="moj-sub-navigation__item">
-                <a class="moj-sub-navigation__link" aria-current="page" href="./court-fees-report.html">
-                    Reports
-                </a>
-                </li>
-                <li class="moj-sub-navigation__item">
-                <a class="moj-sub-navigation__link" href="./court-fees-transfer.html">
-                    Transfer court fees
-                </a>
-                </li>
-            </ul>
-            </nav>
-
-            {% if data['courtFeesReportReturning'] == "true" %}
+        {% if data['chequesReportReturning'] == "true" %}
 
                 {% else %}
-                {% if (data['courtFees'] == "in-progress" or data['courtFees'] == "ready" or data['courtFees2'] == "in-progress" or data['courtFees2'] == "ready") %}
+                {% if (data['chequesReport'] == "in-progress" or data['chequesReport'] == "ready" or data['chequesReport2'] == "in-progress" or data['chequesReport2'] == "ready") %}
                     {{ mojAlert({
                         variant: "success",
                         dismissible: false,
@@ -51,27 +30,30 @@
 
             {% endif %}
 
-            <h2 class="govuk-heading-m">Court fees report</h2>
+
+            <span class="govuk-caption-l">{{data['businessUnit']}}</span>
+            <h1 class="govuk-heading-l">{{pageName}}</h1>
+
             
             <div class="govuk-button-group" data-module="edge">
 
-                {% if (data['courtFeesReportCreated'] == "true" and data['courtFeesReportCreated2'] == "true") %}
+                {% if (data['chequesReportCreated'] == "true" and data['chequesReportCreated2'] == "true") %}
                 {{ govukButton({
                     text: "Create report",
                     classes: "",
                     href: "#"
                 }) }}
-                {% elseif data['courtFeesReportCreated'] == "true"  %}
+                {% elseif data['chequesReportCreated'] == "true"  %}
                 {{ govukButton({
                     text: "Create report",
                     classes: "",
-                    href: "./create-court-fees-report-2.html"
+                    href: "./create-cheques-report-2.html"
                 }) }}
                 {% else %}
                 {{ govukButton({
                     text: "Create report",
                     classes: "",
-                    href: "./create-court-fees-report.html"
+                    href: "./create-cheques-report.html"
                 }) }}
                 {% endif %}
 
@@ -80,21 +62,21 @@
 
             <!-- TABLE -->
 
-            {% if data['courtFeesReportCreated'] == "true" %}
+            {% if data['chequesReportCreated'] == "true" %}
                 <h2 class="govuk-heading-m">Today</h2>
 
 
-                {% if data['courtFees'] == "in-progress" %}
+                {% if data['chequesReport'] == "in-progress" %}
                 {{ govukButton({
                         text: "Refresh",
                         classes: "govuk-button--secondary govuk-!-margin-bottom-4",
-                        href: "./court-fees-report.html?courtFees=ready&courtFees2=ready"
+                        href: "./cheques-report.html?chequesReport=ready&chequesReport2=ready"
                 }) }}
-                {% elseif data['courtFees'] == "ready" %}
+                {% elseif data['chequesReport'] == "ready" %}
                 {{ govukButton({
                         text: "Refresh",
                         classes: "govuk-button--secondary govuk-!-margin-bottom-4",
-                        href: "./court-fees-report.html?courtFees=ready&courtFees2=ready"
+                        href: "./cheques-report.html?chequesReport=ready&chequesReport2=ready"
                 }) }}
                 {% endif %}
 
@@ -113,41 +95,41 @@
                     </thead>
                     <tbody class="govuk-table__body">
 
-                    {% if (data['courtFeesReportCreated2'] == "true" and data['courtFees2'] == "in-progress") %}
+                    {% if (data['chequesReportCreated2'] == "true" and data['chequesReport2'] == "in-progress") %}
                         <tr class="govuk-table__row">
                             <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                            <td class="govuk-table__cell">Court fees report – {{data['courtFeesReportType2']}}</td>
+                            <td class="govuk-table__cell">Cheques report – {{data['chequesReportType2']}}</td>
                             <td class="govuk-table__cell">{{data['businessUnit']}}</td>
                             <td class="govuk-table__cell">jane.smith</td>
                             <td class="govuk-table__cell">In progress</td>
                             <td class="govuk-table__cell"></td>
                         </tr>
                     {% endif %}
-                    {% if (data['courtFeesReportCreated2'] == "true" and data['courtFees2'] == "ready") %}
+                    {% if (data['chequesReportCreated2'] == "true" and data['chequesReport2'] == "ready") %}
                         <tr class="govuk-table__row">
                             <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                            <td class="govuk-table__cell">Court fees report – {{data['courtFeesReportType2']}}</td>
+                            <td class="govuk-table__cell">Cheques report – {{data['chequesReportType2']}}</td>
                             <td class="govuk-table__cell">{{data['businessUnit']}}</td>
                             <td class="govuk-table__cell">jane.smith</td>
                             <td class="govuk-table__cell">Ready</td>
                             <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state"  href="#" download>Download</a></td>
                         </tr>
                     {% endif %}
-
-                    {% if data['courtFees'] == "in-progress" %}
+                    
+                    {% if data['chequesReport'] == "in-progress" %}
                     <tr class="govuk-table__row">
                             <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                            <td class="govuk-table__cell">Court fees report – {{data['courtFeesReportType']}}</td>
+                            <td class="govuk-table__cell">Cheques report – {{data['chequesReportType']}}</td>
                             <td class="govuk-table__cell">{{data['businessUnit']}}</td>
                             <td class="govuk-table__cell">jane.smith</td>
                             <td class="govuk-table__cell">In progress</td>
                             <td class="govuk-table__cell"></td>
                     </tr>
                     {% endif %}
-                    {% if data['courtFees'] == "ready" %}
+                    {% if data['chequesReport'] == "ready" %}
                     <tr class="govuk-table__row">
                         <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                        <td class="govuk-table__cell">Court fees report – {{data['courtFeesReportType']}}</td>
+                        <td class="govuk-table__cell">Cheques report – {{data['chequesReportType']}}</td>
                         <td class="govuk-table__cell">{{data['businessUnit']}}</td>
                         <td class="govuk-table__cell">jane.smith</td>
                         <td class="govuk-table__cell">Ready</td>
@@ -165,7 +147,7 @@
             <h2 class="govuk-heading-m">Today</h2>
             
 
-            <p class="govuk-body">No court fees reports have been created.</p>
+            <p class="govuk-body">No cheques reports have been created.</p>
 
     
             {% endif %}

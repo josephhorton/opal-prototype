@@ -1,12 +1,12 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = "Presented cheques report" %}
+{% set pageName = "Write-off analysis report" %}
 
 {% block beforeContent %}
 
 {{ govukBackLink({
   text: "Back",
-  href: "./task-list.html"
+  href: "./task-list.html?witnessReturn=true"
 }) }}
 
 {% endblock %}
@@ -16,19 +16,19 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
 
-                {% if data['presentedChequesReturning'] == "true" %}
+      {% if data['writeOffReturning'] == "true" %}
 
                 {% else %}
-                {% if (data['presentedCheques'] == "in-progress" or data['presentedCheques'] == "ready") %}
+                {% if (data['writeOff'] == "in-progress" or data['writeOff'] == "ready") %}
                     {{ mojAlert({
                         variant: "success",
                         dismissible: false,
-                        html: 'Report created'
+                        html: 'Report in progress.'
                     }) }}
                 {% else %}
                 {% endif %}
 
-                {% endif %}
+        {% endif %}
 
 
             <span class="govuk-caption-l">{{data['businessUnit']}}</span>
@@ -38,12 +38,12 @@
                 <!-- {{ govukButton({
                     text: "Refresh",
                     classes: "govuk-button--secondary",
-                    href: "./presented-cheques.html?presentedCheques=ready"
+                    href: "./bank-list.html?presentedCheques=ready"
                 }) }} -->
                 {{ govukButton({
                     text: "Create report",
                     classes: "",
-                    href: "./presented-cheques.html?presentedCheques=in-progress&presentedChequesCreated=true"
+                    href: "./write-off-report.html?writeOff=in-progress&writeOffCreated=true"
                 }) }}
 
                 
@@ -51,13 +51,13 @@
 
             <!-- TABLE -->
 
-            {% if data['presentedCheques'] == "ready" %}
+            {% if data['writeOff'] == "ready" %}
             <h2 class="govuk-heading-m">Today</h2>
 
             {{ govukButton({
                     text: "Refresh",
                     classes: "govuk-button--secondary govuk-!-margin-bottom-4",
-                    href: "./presented-cheques.html?presentedCheques=ready"
+                    href: "./write-off-report.html?writeOff=ready"
                 }) }}
 
             <div class="moj-scrollable-pane">
@@ -75,23 +75,23 @@
                 <tbody class="govuk-table__body">
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                    <td class="govuk-table__cell">Presented cheques report</td>
+                    <td class="govuk-table__cell">Write-off analysis report</td>
                     <td class="govuk-table__cell">{{data['businessUnit']}}</td>
                     <td class="govuk-table__cell">jane.smith</td>
-                    <td class="govuk-table__cell">Ready</td>
+                    <td class="govuk-table__cell">No records</td>
                     <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
                 </tr>
                 </tbody>
             </table>
             </div>
-            {% elseif data['presentedCheques'] == "in-progress" %}
+            {% elseif data['writeOff'] == "in-progress" %}
             <h2 class="govuk-heading-m">Today</h2>
 
             {{ govukButton({
                     text: "Refresh",
                     classes: "govuk-button--secondary govuk-!-margin-bottom-4",
-                    href: "./presented-cheques.html?presentedCheques=ready"
-            }) }}
+                    href: "./write-off-report.html?writeOff=ready"
+                }) }}
 
             <div class="moj-scrollable-pane">
                 <table class="govuk-table" data-module="moj-sortable-table">
@@ -107,7 +107,7 @@
                     <tbody class="govuk-table__body">
                     <tr class="govuk-table__row">
                         <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                        <td class="govuk-table__cell">Presented cheques report</td>
+                        <td class="govuk-table__cell">Write-off analysis report</td>
                         <td class="govuk-table__cell">{{data['businessUnit']}}</td>
                         <td class="govuk-table__cell">jane.smith</td>
                         <td class="govuk-table__cell">In progress</td>
@@ -119,9 +119,13 @@
             <h2 class="govuk-heading-m">Today</h2>
             
 
-            <p class="govuk-body">No presented cheques reports have been created.</p>
+            <p class="govuk-body">No write-off analysis reports have been created.</p>
+
             {% endif %}
 
+
+
+               
 
 
             

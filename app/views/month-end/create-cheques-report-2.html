@@ -1,0 +1,69 @@
+{% extends "layouts/main.html" %}
+
+{% set headerCaption = data['businessUnit'] %}
+{% set pageName = "Create report" %}
+
+{% block beforeContent %}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        <span class="govuk-caption-l">{{data['businessUnit']}}</span>
+        <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+        <form class="govuk-form-group" action="cheques-report?chequesReport2=in-progress&chequesReportCreated2=true" method="post">
+
+        {{ govukRadios({
+          name: "chequesReportType2",
+          idPrefix: "chequesReportType2",
+          fieldset: {
+            legend: {
+              text: "Cheques",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          value: data['chequesReportType2'],
+          items: [
+            {
+              value: "Unpresented",
+              text: "Unpresented"
+            },
+            {
+              value: "Presented",
+              text: "Presented"
+            }
+          ]
+        }) }}
+
+
+
+        <div class="govuk-button-group">
+          <button type="submit" class="govuk-button">
+            Create report
+          </button>
+
+          <p class="govuk-body"><a href="./cheques-report.html" class="govuk-link govuk-link--no-visited-state">Cancel</a></p>
+        </div>
+        
+      </form>
+
+      
+
+
+
+               
+
+
+            
+
+    </div>
+  </div>
+
+{% endblock %}
+
+

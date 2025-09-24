@@ -71,7 +71,7 @@
                 <li class="govuk-task-list__item govuk-task-list__item--with-link">
                     <div class="govuk-task-list__name-and-hint">
                     {% if data['courtFeesReportCreated'] == "true" %}
-                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./court-fees-report.html?courtFeesReportReturning=true" aria-describedby="court-fees-list-status">Court fees</a>
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./court-fees-report.html?courtFeesReportReturning=true&transferredReturning=true" aria-describedby="court-fees-list-status">Court fees</a>
                     {% else %}
                         <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./court-fees-report.html" aria-describedby="court-fees-list-status">Court fees</a>
                     {% endif %}
@@ -92,7 +92,7 @@
                 <!-- Payout -->
                 <li class="govuk-task-list__item govuk-task-list__item--with-link">
                     <div class="govuk-task-list__name-and-hint">
-                    <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./payout.html" aria-describedby="payout-status">
+                    <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./payout-minor.html" aria-describedby="payout-status">
                         Pay out
                     </a>
                     </div>
@@ -165,8 +165,8 @@
                 <!-- Write-off analysis report -->
                 <li class="govuk-task-list__item govuk-task-list__item--with-link">
                     <div class="govuk-task-list__name-and-hint">
-                    {% if data['writeOffReportCreated'] == "true" %}
-                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./write-off-report.html?writeOffReportReturning=true" aria-describedby="witnesses-status">Write-off analysis report</a>
+                    {% if data['writeOffCreated'] == "true" %}
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./write-off-report.html?writeOffReturning=true" aria-describedby="witnesses-status">Write-off analysis report</a>
                     {% else %}
                         <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./write-off-report.html" aria-describedby="witnesses-status">Write-off analysis report</a>
                     {% endif %}

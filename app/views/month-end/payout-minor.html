@@ -2,7 +2,7 @@
 
 {% set journeyName = "Daily checks" %}
 {% set headerCaption = data['businessUnit'] %}
-{% set pageName = "BACS file" %}
+{% set pageName = "Pay out creditors" %}
 
 {% block beforeContent %}
 
@@ -27,13 +27,18 @@
             <nav class="moj-sub-navigation" aria-label="Sub navigation">
             <ul class="moj-sub-navigation__list">
                 <li class="moj-sub-navigation__item">
-                <a class="moj-sub-navigation__link" aria-current="page" href="./bacs-file.html">
-                    BACS file report
+                <a class="moj-sub-navigation__link" aria-current="page" href="./payout-minor.html">
+                    Minor creditors
                 </a>
                 </li>
                 <li class="moj-sub-navigation__item">
-                <a class="moj-sub-navigation__link"  href="./major-c-bacs.html">
-                    Major creditor remittances
+                <a class="moj-sub-navigation__link"  href="./payout-major.html">
+                    Major creditors
+                </a>
+                </li>
+                <li class="moj-sub-navigation__item">
+                <a class="moj-sub-navigation__link"  href="./payout-hmcts.html">
+                    HMCTS/Other
                 </a>
                 </li>
             </ul>
@@ -41,7 +46,7 @@
 
             {% if data['bacsFileReportReturning'] == "true" %}
 
-      {% else %}
+            {% else %}
 
                 {% if (data['bacsFile'] == "in-progress" or data['bacsFile'] == "ready") %}
                     {{ mojAlert({
@@ -52,9 +57,9 @@
                 {% else %}
                 {% endif %}
 
-        {% endif %}
+            {% endif %}
 
-            <h2 class="govuk-heading-m">BACS file report</h2>
+            <h2 class="govuk-heading-m">Pay minor creditors</h2>
 
             
             <div class="govuk-button-group">
@@ -66,7 +71,7 @@
                 {{ govukButton({
                     text: "Create report",
                     classes: "",
-                    href: "./bacs-file.html?bacsFile=in-progress&bacsFileCreated=true"
+                    href: "#"
                 }) }}
 
                 
@@ -74,14 +79,8 @@
 
             <!-- TABLE -->
 
-            {% if data['bacsFile'] == "ready" %}
+            {% if data['minorCreditorsPaidOut'] == "true" %}
             <h2 class="govuk-heading-m">Today</h2>
-
-            {{ govukButton({
-                    text: "Refresh",
-                    classes: "govuk-button--secondary govuk-!-margin-bottom-4",
-                    href: "./bacs-file.html?bacsFile=ready"
-                }) }}
 
             <div class="moj-scrollable-pane">
             <table class="govuk-table" data-module="moj-sortable-table">
@@ -107,48 +106,11 @@
                 </tbody>
             </table>
             </div>
-            {% elseif data['bacsFile'] == "in-progress" %}
-            <h2 class="govuk-heading-m">Today</h2>
-
-            {{ govukButton({
-                    text: "Refresh",
-                    classes: "govuk-button--secondary govuk-!-margin-bottom-4",
-                    href: "./bacs-file.html?bacsFile=ready"
-                }) }}
-
-            <div class="moj-scrollable-pane">
-                <table class="govuk-table" data-module="moj-sortable-table">
-                    <thead class="govuk-table__head">
-                    <tr class="govuk-table__row">
-                        <th class="govuk-table__header" scope="col" aria-sort="none" style="width: 20%;">Date and time</th>
-                        <th class="govuk-table__header" scope="col" aria-sort="none">Title</th>
-                        <th class="govuk-table__header" scope="col" aria-sort="none">Business unit</th>
-                        <th class="govuk-table__header" scope="col" aria-sort="none">Created by</th>
-                        <th class="govuk-table__header" scope="col" aria-sort="none">Status</th>
-                    </tr>
-                    </thead>
-                    <tbody class="govuk-table__body">
-                    <tr class="govuk-table__row">
-                        <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
-                        <td class="govuk-table__cell">BACS file report</td>
-                        <td class="govuk-table__cell">{{data['businessUnit']}}</td>
-                        <td class="govuk-table__cell">jane.smith</td>
-                        <td class="govuk-table__cell">In progress</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
             {% else %}
-            <h2 class="govuk-heading-m">Today</h2>
-            
+            <h2 class="govuk-heading-m">Today</h2>            
 
-            <p class="govuk-body">No BACS file reports have been created.</p>
+            <p class="govuk-body">No minor creditors have been paid out today. </p>
 
-            <!-- {{ govukButton({
-                    text: "Refresh",
-                    classes: "govuk-button--secondary ",
-                    href: "#"
-                }) }} -->
             {% endif %}
 
 
