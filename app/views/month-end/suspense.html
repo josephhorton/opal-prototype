@@ -1,0 +1,235 @@
+{% extends "layouts/main.html" %}
+
+{% set journeyName = "Daily checks" %}
+{% set headerCaption = data['businessUnit'] %}
+{% set pageName = "Suspense report" %}
+
+{% block beforeContent %}
+
+{{ govukBackLink({
+  text: "Back",
+  href: "./task-list.html"
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+      {% if data['suspenseReturning'] == "true" %}
+
+      {% else %}
+
+                {% if (data['suspenseReport'] == "in-progress" or data['suspenseReport'] == "ready") %}
+                    {{ mojAlert({
+                        variant: "success",
+                        dismissible: false,
+                        html: 'Report created'
+                    }) }}
+                {% else %}
+                {% endif %}
+
+        {% endif %}
+
+
+            <span class="govuk-caption-l">{{headerCaption}}</span>
+            <h1 class="govuk-heading-l">{{pageName}}</h1>
+            
+            <div class="govuk-button-group">
+                
+                {% if data['suspenseCreated'] == "true" and data['suspenseCreated2'] == "true" and data['suspenseCreated3'] == "true" %}
+                    {{ govukButton({
+                        text: "Create report",
+                        classes: "",
+                        href: "#"
+                    }) }}
+                    {% elseif data['suspenseCreated'] == "true" and data['suspenseCreated2'] == "true" %}
+                    {{ govukButton({
+                        text: "Create report",
+                        classes: "",
+                        href: "./create-suspense-report-3.html"
+                    }) }}
+                    {% elseif data['suspenseCreated'] == "true" %}
+                    {{ govukButton({
+                        text: "Create report",
+                        classes: "",
+                        href: "./create-suspense-report-2.html"
+                    }) }}
+                    {% else %}
+                    {{ govukButton({
+                        text: "Create report",
+                        classes: "",
+                        href: "./create-suspense-report.html"
+                    }) }}
+                    {% endif %}
+
+
+                
+            </div>
+
+            <!-- TABLE -->
+
+            <!-- if suspense1created
+                show refresh
+                    if suspense1 = in progress 
+                    show in progress
+                    if suspesne1 = ready 
+                    show ready
+
+                    if suspense2 = in progress 
+                    show in progress
+                    if suspesne2 = ready 
+                    show ready
+
+                show table 
+                    if suspense1 = in progress 
+                    show in progress
+                    if suspesne1 = ready 
+                    show ready
+
+                    if suspense2 = in progress 
+                    show in progress
+                    if suspesne2 = ready 
+                    show ready
+            else 
+                show nothing
+            end -->
+
+            {% if data['suspenseCreated'] == "true" %}
+                <h2 class="govuk-heading-m">Today</h2>
+
+
+                {% if data['suspenseReport'] == "in-progress" %}
+                {{ govukButton({
+                        text: "Refresh",
+                        classes: "govuk-button--secondary govuk-!-margin-bottom-4",
+                        href: "./suspense.html?suspenseReport=ready&suspenseReport2=ready&suspenseReport3=ready"
+                }) }}
+                {% elseif data['suspenseReport'] == "ready" %}
+                {{ govukButton({
+                        text: "Refresh",
+                        classes: "govuk-button--secondary govuk-!-margin-bottom-4",
+                        href: "./suspense.html?suspenseReport=ready&suspenseReport2=ready&suspenseReport3=ready"
+                }) }}
+                {% endif %}
+
+
+                <div class="moj-scrollable-pane">
+                <table class="govuk-table" data-module="moj-sortable-table">
+                    <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                        <th class="govuk-table__header" scope="col" aria-sort="none" style="width: 20%;">Date and time</th>
+                        <th class="govuk-table__header" scope="col" aria-sort="none">Title</th>
+                        <th class="govuk-table__header" scope="col" aria-sort="none">Business unit</th>
+                        <th class="govuk-table__header" scope="col" aria-sort="none">Created by</th>
+                        <th class="govuk-table__header" scope="col" aria-sort="none">Status</th>
+                        <th class="govuk-table__header empty" scope="col" aria-sort="none"></th>
+                    </tr>
+                    </thead>
+                    <tbody class="govuk-table__body">
+                    
+                    {% if (data['suspenseCreated3'] == "true" and data['suspenseReport3'] == "in-progress") %}
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
+                            <td class="govuk-table__cell">Suspense report – {{data['suspense3Category']}}</td>
+                            <td class="govuk-table__cell">{{data['businessUnit']}}</td>
+                            <td class="govuk-table__cell">jane.smith</td>
+                            <td class="govuk-table__cell">In progress</td>
+                            <td class="govuk-table__cell"></td>
+                        </tr>
+                    {% endif %}
+                    {% if (data['suspenseCreated3'] == "true" and data['suspenseReport3'] == "ready") %}
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
+                            <td class="govuk-table__cell">Suspense report – {{data['suspense3Category']}}</td>
+                            <td class="govuk-table__cell">{{data['businessUnit']}}</td>
+                            <td class="govuk-table__cell">jane.smith</td>
+                            <td class="govuk-table__cell">Ready</td>
+                            <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state"  href="#" download>Download</a></td>
+                        </tr>
+                    {% endif %}
+                    </tbody>
+
+                    {% if (data['suspenseCreated2'] == "true" and data['suspenseReport2'] == "in-progress") %}
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
+                            <td class="govuk-table__cell">Suspense report – {{data['suspense2Category']}}</td>
+                            <td class="govuk-table__cell">{{data['businessUnit']}}</td>
+                            <td class="govuk-table__cell">jane.smith</td>
+                            <td class="govuk-table__cell">In progress</td>
+                            <td class="govuk-table__cell"></td>
+                        </tr>
+                    {% endif %}
+                    {% if (data['suspenseCreated2'] == "true" and data['suspenseReport2'] == "ready") %}
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
+                            <td class="govuk-table__cell">Suspense report – {{data['suspense2Category']}}</td>
+                            <td class="govuk-table__cell">{{data['businessUnit']}}</td>
+                            <td class="govuk-table__cell">jane.smith</td>
+                            <td class="govuk-table__cell">Ready</td>
+                            <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state"  href="#" download>Download</a></td>
+                        </tr>
+                    {% endif %}
+
+                    {% if data['suspenseReport'] == "in-progress" %}
+                    <tr class="govuk-table__row">
+                            <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
+                            <td class="govuk-table__cell">Suspense report – {{data['suspenseCategory']}}</td>
+                            <td class="govuk-table__cell">{{data['businessUnit']}}</td>
+                            <td class="govuk-table__cell">jane.smith</td>
+                            <td class="govuk-table__cell">In progress</td>
+                            <td class="govuk-table__cell"></td>
+                        </tr>
+                    {% endif %}
+                    {% if data['suspenseReport'] == "ready" %}
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
+                        <td class="govuk-table__cell">Suspense report – {{data['suspenseCategory']}}</td>
+                        <td class="govuk-table__cell">{{data['businessUnit']}}</td>
+                        <td class="govuk-table__cell">jane.smith</td>
+                        <td class="govuk-table__cell">Ready</td>
+                        <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state"  href="#" download>Download</a></td>
+                    </tr>
+                    {% endif %}
+
+                </table>
+                </div>
+            
+
+            {% else %}
+            <h2 class="govuk-heading-m">Today</h2>
+            
+
+            <p class="govuk-body">No suspense reports have been created.</p>
+
+    
+            {% endif %}
+
+
+
+               
+
+
+            
+
+    </div>
+  </div>
+
+   <style>
+
+    .govuk-table__header.empty button {
+        display: none;
+        text-align: right;
+    }
+
+    .govuk-table__cell.download {
+        text-align: right;
+    }
+
+  </style>
+
+{% endblock %}
+
+

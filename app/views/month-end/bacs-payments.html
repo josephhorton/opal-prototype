@@ -1,0 +1,161 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "BACS payments report" %}
+
+{% block beforeContent %}
+
+{{ govukBackLink({
+  text: "Back",
+  href: "./task-list.html"
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        {% if data['bacsPaymentReportReturning'] == "true" %}
+
+                {% else %}
+                {% if (data['bacsPayment'] == "in-progress" or data['bacsPayment'] == "ready") %}
+                    {{ mojAlert({
+                        variant: "success",
+                        dismissible: false,
+                        html: 'Success message'
+                    }) }}
+                {% else %}
+                {% endif %}
+
+        {% endif %}
+
+
+            <span class="govuk-caption-l">{{data['businessUnit']}}</span>
+            <h1 class="govuk-heading-l">{{pageName}}</h1>
+            
+            <div class="govuk-button-group" data-module="edge">
+                <!-- {{ govukButton({
+                    text: "Refresh",
+                    classes: "govuk-button--secondary",
+                    href: "./bank-list.html?presentedCheques=ready"
+                }) }} -->
+
+                {% if data['bacsPaymentReportCreated'] == 'true' %}
+                {{ govukButton({
+                    text: "Create report",
+                    classes: "",
+                    href: "#",
+                    dataMessage: 'Hello'
+                }) }}
+                {% else %}
+                {{ govukButton({
+                    text: "Create report",
+                    classes: "",
+                    href: "./create-bacs-payments.html"
+                }) }}
+                {% endif %}
+
+                
+            </div>
+
+            <!-- TABLE -->
+
+            {% if data['bacsPayment'] == "ready" %}
+            <h2 class="govuk-heading-m">Today</h2>
+
+            {{ govukButton({
+                    text: "Refresh",
+                    classes: "govuk-button--secondary govuk-!-margin-bottom-4",
+                    href: "./bacs-payments.html?bacsPayment=ready"
+                }) }}
+
+            <div class="moj-scrollable-pane">
+            <table class="govuk-table" data-module="moj-sortable-table">
+                <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th class="govuk-table__header" scope="col" aria-sort="none" style="width: 20%;">Date and time</th>
+                    <th class="govuk-table__header" scope="col" aria-sort="none">Title</th>
+                    <th class="govuk-table__header" scope="col" aria-sort="none">Business unit</th>
+                    <th class="govuk-table__header" scope="col" aria-sort="none">Created by</th>
+                    <th class="govuk-table__header" scope="col" aria-sort="none">Status</th>
+                    <th class="govuk-table__header empty" scope="col" aria-sort="none"></th>
+                </tr>
+                </thead>
+                <tbody class="govuk-table__body">
+                <tr class="govuk-table__row">
+                    <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
+                    <td class="govuk-table__cell">BACS payments report – {{data['bacsReportType']}}</td>
+                    <td class="govuk-table__cell">{{data['businessUnit']}}</td>
+                    <td class="govuk-table__cell">jane.smith</td>
+                    <td class="govuk-table__cell">Ready</td>
+                    <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+            {% elseif data['bacsPayment'] == "in-progress" %}
+            <h2 class="govuk-heading-m">Today</h2>
+
+            {{ govukButton({
+                    text: "Refresh",
+                    classes: "govuk-button--secondary govuk-!-margin-bottom-4",
+                    href: "./bacs-payments.html?bacsPayment=ready"
+                }) }}
+
+            <div class="moj-scrollable-pane">
+                <table class="govuk-table" data-module="moj-sortable-table">
+                    <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                        <th class="govuk-table__header" scope="col" aria-sort="none" style="width: 20%;">Date and time</th>
+                        <th class="govuk-table__header" scope="col" aria-sort="none">Title</th>
+                        <th class="govuk-table__header" scope="col" aria-sort="none">Business unit</th>
+                        <th class="govuk-table__header" scope="col" aria-sort="none">Created by</th>
+                        <th class="govuk-table__header" scope="col" aria-sort="none">Status</th>
+                    </tr>
+                    </thead>
+                    <tbody class="govuk-table__body">
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
+                        <td class="govuk-table__cell">BACS payments report – {{data['bacsReportType']}}</td>
+                        <td class="govuk-table__cell">{{data['businessUnit']}}</td>
+                        <td class="govuk-table__cell">jane.smith</td>
+                        <td class="govuk-table__cell">In progress</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <h2 class="govuk-heading-m">Today</h2>
+            
+
+            <p class="govuk-body">No BACS payments reports have been created.</p>
+
+            {% endif %}
+
+
+
+               
+
+
+            
+
+    </div>
+  </div>
+
+   <style>
+
+    .govuk-table__header.empty button {
+        display: none;
+        text-align: right;
+    }
+
+    .govuk-table__cell.download {
+        text-align: right;
+    }
+
+  </style>
+
+{% endblock %}
+
+

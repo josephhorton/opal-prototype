@@ -1,0 +1,120 @@
+{% extends "layouts/main.html" %}
+
+{% set journeyName = "Daily checks" %}
+{% set headerCaption = data['businessUnit'] %}
+{% set pageName = "Print cheques" %}
+
+{% block beforeContent %}
+
+{{ govukBackLink({
+  text: "Back",
+  href: "./task-list.html?printChequesReturn=true"
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        
+        
+
+        <form class="govuk-form-group" action="check-print-number" method="post">
+
+            <span class="govuk-caption-l">{{headerCaption}}</span>
+            <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+            <nav class="moj-sub-navigation" aria-label="Sub navigation">
+            <ul class="moj-sub-navigation__list">
+                <li class="moj-sub-navigation__item">
+                <a class="moj-sub-navigation__link" aria-current="page" href="./print-cheques.html">
+                    To print 
+                </a>
+                </li>
+                <li class="moj-sub-navigation__item">
+                <a class="moj-sub-navigation__link" href="./print-report.html">
+                    Print report
+                </a>
+                </li>
+            </ul>
+            </nav>
+
+            {% if data['printChequesReturn'] == "true" %}
+
+        {% else %}
+
+        {% if data['chequesPrinted'] == "true" %}
+
+        {{ mojAlert({
+            variant: "success",
+            title: "",
+            showTitleAsHeading: false,
+            dismissible: false,
+            html: 'Success message.'
+        }) }}
+
+        {% else %}
+
+        {% endif %}
+
+        {% endif %}
+
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-two-thirds">
+
+                    
+
+            <h2 class="govuk-heading-m">To print</h2>
+
+            {% if data['chequesPrinted'] == "true" %}
+
+            <p class="govuk-body">There are no cheques to print.</p>
+
+            {% else %}
+
+             <table class="govuk-table">
+                <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                    <th scope="col" class="govuk-table__header" style="width: 40%;">Creditors</th>
+                    <th scope="col" class="govuk-table__header">Cheques</th>
+                    </tr>
+                </thead>
+                <tbody class="govuk-table__body">
+                    <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">Major creditor</td>
+                    <td class="govuk-table__cell">5</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">Minor creditor</td>
+                    <td class="govuk-table__cell">14</td>
+                    </tr>
+                </tbody>
+                </table>
+
+
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button">
+                   Continue
+                </button>
+
+                <!-- <p class="govuk-body"><a href="./task-list.html" class="govuk-link govuk-link--no-visited-state">Cancel</a></p> -->
+            </div>
+
+            </div>
+            </div>
+
+            {% endif %}
+
+           
+
+
+        </form>
+
+           
+
+    </div>
+  </div>
+
+{% endblock %}

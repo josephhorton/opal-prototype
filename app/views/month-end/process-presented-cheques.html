@@ -1,0 +1,92 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Automated presented cheques" %}
+
+{% block beforeContent %}
+
+{{ govukBackLink({
+  text: "Back",
+  href: "./task-list.html"
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        <form class="govuk-form-group" action="processed-presented-cheques?chequesProcessed=true" method="post">
+
+            <span class="govuk-caption-l">{{data['businessUnit']}}</span>
+            <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+            <nav class="moj-sub-navigation" aria-label="Sub navigation">
+            <ul class="moj-sub-navigation__list">
+                <li class="moj-sub-navigation__item">
+                <a class="moj-sub-navigation__link" aria-current="page" href="./process-presented-cheques.html">
+                    To process 
+                </a>
+                </li>
+                <li class="moj-sub-navigation__item">
+                <a class="moj-sub-navigation__link" href="./processed-presented-cheques.html">
+                    Processed
+                </a>
+                </li>
+            </ul>
+            </nav>
+
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-two-thirds">
+
+            <h2 class="govuk-heading-m">To process</h2>
+
+            {% if data['chequesProcessed'] == "true" %}
+
+            <p class="govuk-body">There are no files to process.</p>
+
+            <!-- <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="./task-list.html">Cancel</a></p> -->
+
+            {% else %}
+
+             {{ govukTable({
+                caption: "",
+                firstCellIsHeader: false,
+                head: [
+                    {
+                        text: "File name"
+                    }
+                ],
+                rows: [
+                    [
+                        {
+                            text: "bacs_0046099_53501.txt"
+                        }
+                    ]
+                ]
+            }) }}
+
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button">
+                   Process
+                </button>
+
+                <!-- <p class="govuk-body"><a href="./task-list.html" class="govuk-link govuk-link--no-visited-state">Cancel</a></p> -->
+            </div>
+
+            </div>
+            </div>
+
+            {% endif %}
+
+           
+
+
+        </form>
+
+           
+
+    </div>
+  </div>
+
+{% endblock %}

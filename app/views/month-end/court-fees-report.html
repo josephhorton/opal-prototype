@@ -1,0 +1,198 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Court fees" %}
+
+{% block beforeContent %}
+
+{{ govukBackLink({
+  text: "Back",
+  href: "./task-list.html"
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        
+
+
+            <span class="govuk-caption-l">{{data['businessUnit']}}</span>
+            <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+            <nav class="moj-sub-navigation" aria-label="Sub navigation">
+            <ul class="moj-sub-navigation__list">
+                <li class="moj-sub-navigation__item">
+                <a class="moj-sub-navigation__link" aria-current="page" href="./court-fees-report.html">
+                    Reports
+                </a>
+                </li>
+                <li class="moj-sub-navigation__item">
+                <a class="moj-sub-navigation__link" href="./court-fees-transfer.html">
+                    Transfer court fees
+                </a>
+                </li>
+            </ul>
+            </nav>
+
+            {% if data['courtFeesReportReturning'] == "true" %}
+
+                {% else %}
+                {% if (data['courtFees'] == "in-progress" or data['courtFees'] == "ready" or data['courtFees2'] == "in-progress" or data['courtFees2'] == "ready") %}
+                    {{ mojAlert({
+                        variant: "success",
+                        dismissible: false,
+                        html: 'Success message'
+                    }) }}
+                {% else %}
+                {% endif %}
+
+            {% endif %}
+
+            <h2 class="govuk-heading-m">Court fees report</h2>
+            
+            <div class="govuk-button-group" data-module="edge">
+
+                {% if (data['courtFeesReportCreated'] == "true" and data['courtFeesReportCreated2'] == "true") %}
+                {{ govukButton({
+                    text: "Create report",
+                    classes: "",
+                    href: "#"
+                }) }}
+                {% elseif data['courtFeesReportCreated'] == "true"  %}
+                {{ govukButton({
+                    text: "Create report",
+                    classes: "",
+                    href: "./create-court-fees-report-2.html"
+                }) }}
+                {% else %}
+                {{ govukButton({
+                    text: "Create report",
+                    classes: "",
+                    href: "./create-court-fees-report.html"
+                }) }}
+                {% endif %}
+
+                
+            </div>
+
+            <!-- TABLE -->
+
+            {% if data['courtFeesReportCreated'] == "true" %}
+                <h2 class="govuk-heading-m">Today</h2>
+
+
+                {% if data['courtFees'] == "in-progress" %}
+                {{ govukButton({
+                        text: "Refresh",
+                        classes: "govuk-button--secondary govuk-!-margin-bottom-4",
+                        href: "./court-fees-report.html?courtFees=ready&courtFees2=ready"
+                }) }}
+                {% elseif data['courtFees'] == "ready" %}
+                {{ govukButton({
+                        text: "Refresh",
+                        classes: "govuk-button--secondary govuk-!-margin-bottom-4",
+                        href: "./court-fees-report.html?courtFees=ready&courtFees2=ready"
+                }) }}
+                {% endif %}
+
+
+                <div class="moj-scrollable-pane">
+                <table class="govuk-table" data-module="moj-sortable-table">
+                    <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                        <th class="govuk-table__header" scope="col" aria-sort="none" style="width: 20%;">Date and time</th>
+                        <th class="govuk-table__header" scope="col" aria-sort="none">Title</th>
+                        <th class="govuk-table__header" scope="col" aria-sort="none">Business unit</th>
+                        <th class="govuk-table__header" scope="col" aria-sort="none">Created by</th>
+                        <th class="govuk-table__header" scope="col" aria-sort="none">Status</th>
+                        <th class="govuk-table__header empty" scope="col" aria-sort="none"></th>
+                    </tr>
+                    </thead>
+                    <tbody class="govuk-table__body">
+
+                    {% if (data['courtFeesReportCreated2'] == "true" and data['courtFees2'] == "in-progress") %}
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
+                            <td class="govuk-table__cell">Court fees report – {{data['courtFeesReportType2']}}</td>
+                            <td class="govuk-table__cell">{{data['businessUnit']}}</td>
+                            <td class="govuk-table__cell">jane.smith</td>
+                            <td class="govuk-table__cell">In progress</td>
+                            <td class="govuk-table__cell"></td>
+                        </tr>
+                    {% endif %}
+                    {% if (data['courtFeesReportCreated2'] == "true" and data['courtFees2'] == "ready") %}
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
+                            <td class="govuk-table__cell">Court fees report – {{data['courtFeesReportType2']}}</td>
+                            <td class="govuk-table__cell">{{data['businessUnit']}}</td>
+                            <td class="govuk-table__cell">jane.smith</td>
+                            <td class="govuk-table__cell">Ready</td>
+                            <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state"  href="#" download>Download</a></td>
+                        </tr>
+                    {% endif %}
+                    
+                    {% if data['courtFees'] == "in-progress" %}
+                    <tr class="govuk-table__row">
+                            <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
+                            <td class="govuk-table__cell">Court fees report – {{data['courtFeesReportType']}}</td>
+                            <td class="govuk-table__cell">{{data['businessUnit']}}</td>
+                            <td class="govuk-table__cell">jane.smith</td>
+                            <td class="govuk-table__cell">In progress</td>
+                            <td class="govuk-table__cell"></td>
+                    </tr>
+                    {% endif %}
+                    {% if data['courtFees'] == "ready" %}
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
+                        <td class="govuk-table__cell">Court fees report – {{data['courtFeesReportType']}}</td>
+                        <td class="govuk-table__cell">{{data['businessUnit']}}</td>
+                        <td class="govuk-table__cell">jane.smith</td>
+                        <td class="govuk-table__cell">Ready</td>
+                        <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state"  href="#" download>Download</a></td>
+                    </tr>
+                    {% endif %}
+                    
+                    </tbody>
+
+                </table>
+                </div>
+            
+
+            {% else %}
+            <h2 class="govuk-heading-m">Today</h2>
+            
+
+            <p class="govuk-body">No court fees reports have been created.</p>
+
+    
+            {% endif %}
+
+
+
+               
+
+
+            
+
+    </div>
+  </div>
+
+   <style>
+
+    .govuk-table__header.empty button {
+        display: none;
+        text-align: right;
+    }
+
+    .govuk-table__cell.download {
+        text-align: right;
+    }
+
+  </style>
+
+{% endblock %}
+
+

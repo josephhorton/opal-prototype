@@ -1,0 +1,101 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Automated presented cheques" %}
+
+{% block beforeContent %}
+
+{{ govukBackLink({
+  text: "Back",
+  href: "./task-list.html"
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        <form class="govuk-form-group" action="./process-presented-cheques.html" method="post">
+
+            <span class="govuk-caption-l">{{data['businessUnit']}}</span>
+            <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+            <nav class="moj-sub-navigation" aria-label="Sub navigation">
+            <ul class="moj-sub-navigation__list">
+                <li class="moj-sub-navigation__item">
+                <a class="moj-sub-navigation__link"  href="./process-presented-cheques.html">
+                    To process 
+                </a>
+                </li>
+                <li class="moj-sub-navigation__item">
+                <a class="moj-sub-navigation__link" aria-current="page" href="./processed-presented-cheques.html">
+                    Processed
+                </a>
+                </li>
+            </ul>
+            </nav>
+
+            
+
+            {% if data['chequesProcessed'] == "true" %}
+
+            <h2 class="govuk-heading-m">Processed</h2>
+
+            {{ govukButton({
+                text: "Refresh",
+                href: "#",
+                classes: "govuk-button--secondary govuk-!-margin-bottom-4"
+            }) }}
+
+            <div class="moj-scrollable-pane">
+                <table class="govuk-table" data-module="moj-sortable-table">
+                    <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                        <th class="govuk-table__header" scope="col" aria-sort="none" style="width: 20%;">File name</th>
+                        <th class="govuk-table__header" scope="col" aria-sort="none">Records read</th>
+                        <th class="govuk-table__header" scope="col" aria-sort="none">Errors found</th>
+                        <th class="govuk-table__header" scope="col" aria-sort="none">Cheques presented</th>
+                        <th class="govuk-table__header" scope="col" aria-sort="none" style="text-align: right;">Amount</th>
+                        <th class="govuk-table__header" scope="col" aria-sort="none" style="text-align: right;">Error report</th>
+                    </tr>
+                    </thead>
+                    <tbody class="govuk-table__body">
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell">bacs_0046099_53501.txt</td>
+                        <td class="govuk-table__cell">7</td>
+                        <td class="govuk-table__cell">1</td>
+                        <td class="govuk-table__cell">6</td>
+                        <td class="govuk-table__cell" style="text-align: right;">£1,244.93</td>
+                        <td class="govuk-table__cell" style="text-align: right;"><a href="#" class="govuk-link govuk-link--no-visited-state">Download</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            {% else %}
+
+            <h2 class="govuk-heading-m">Processed</h2>
+
+            <p class="govuk-body">There are no processed files yet.</p>
+
+            {{ govukButton({
+                text: "Refresh",
+                classes: "govuk-button--secondary"
+            }) }}
+
+            {% endif %}
+
+            
+
+            
+
+
+        </form>
+
+           
+
+    </div>
+  </div>
+
+{% endblock %}

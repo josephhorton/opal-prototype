@@ -1,0 +1,290 @@
+{% extends "layouts/main.html" %}
+
+{% set headerCaption = data['businessUnit'] %}
+{% set pageName = "Create report" %}
+
+{% block beforeContent %}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        <span class="govuk-caption-l">{{data['businessUnit']}}</span>
+        <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+        <form class="govuk-form-group" action="suspense?suspenseReport2=in-progress&suspenseCreated2=true" method="post">
+
+        {% set selectedHtml %}
+        {{ govukCheckboxes ({
+          name: "suspense2SelectedParameters",
+          classes: "govuk-checkboxes--small",
+          fieldset: {
+            legend: {
+              text: "Categories",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          values: data['suspense2SelectedParameters'],
+          items: [
+            {
+              value: "Fines",
+              text: "Fines"
+            },
+            {
+              value: "Maintenance",
+              text: "Maintenance"
+            },
+            {
+              value: "Over payments (all)",
+              text: "Over payments (all)"
+            },
+            {
+              value: "Unidentified",
+              text: "Unidentified"
+            },
+            {
+              value: "Court fees",
+              text: "Court fees"
+            },
+            {
+              value: "Miscellaneous",
+              text: "Miscellaneous"
+            }
+          ]
+        }) }}
+        {% endset %}
+
+        {% set outstandingHtml %}
+        {{ govukCheckboxes ({
+          name: "suspense2OutstandingParameters",
+          classes: "govuk-checkboxes--small",
+          fieldset: {
+            legend: {
+              text: "Categories",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          values: data['suspense2OutstandingParameters'],
+          items: [
+            {
+              value: "Fines",
+              text: "Fines"
+            },
+            {
+              value: "Maintenance",
+              text: "Maintenance"
+            },
+            {
+              value: "Over payments (all)",
+              text: "Over payments (all)"
+            },
+            {
+              value: "Unidentified",
+              text: "Unidentified"
+            },
+            {
+              value: "Court fees",
+              text: "Court fees"
+            },
+            {
+              value: "Miscellaneous",
+              text: "Miscellaneous"
+            }
+          ]
+        }) }}
+        {% endset %}
+
+        {% set movementsHtml %}
+        {{ govukCheckboxes ({
+          name: "suspense2MovementsParameters",
+          classes: "govuk-checkboxes--small",
+          formGroup: {
+            classes: "govuk-!-margin-bottom-5"
+          },
+          fieldset: {
+            legend: {
+              text: "Categories",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          values: data['suspense2MovementsParameters'],
+          items: [
+            {
+              value: "Fines",
+              text: "Fines"
+            },
+            {
+              value: "Maintenance",
+              text: "Maintenance"
+            },
+            {
+              value: "Over payments (all)",
+              text: "Over payments (all)"
+            },
+            {
+              value: "Unidentified",
+              text: "Unidentified"
+            },
+            {
+              value: "Court fees",
+              text: "Court fees"
+            },
+            {
+              value: "Miscellaneous",
+              text: "Miscellaneous"
+            }
+          ]
+        }) }}
+
+        {{ mojDatePicker({
+          id: "suspense2DateFrom",
+          name: "suspense2DateFrom",
+          value: data['suspense2DateFrom'],
+          formGroup: {
+            classes: "govuk-!-margin-bottom-5"
+          },
+          label: {
+            text: "Enter date from",
+            classes: "govuk-label--s"
+          },
+          hint: {
+            text: "For example, 31/01/2023"
+          }
+        }) }}
+
+        {{ mojDatePicker({
+          id: "suspense2DateTo",
+          name: "suspense2DateTo",
+          value: data['suspense2DateTo'],
+          label: {
+            text: "Enter date to",
+            classes: "govuk-label--s"
+          },
+          hint: {
+            text: "For example, 31/01/2023"
+          }
+        }) }}
+        {% endset %}
+
+        {% set listDeleteHMTL %}
+        {{ govukCheckboxes ({
+          name: "listDeleteParameters",
+          classes: "govuk-checkboxes--small",
+          fieldset: {
+            legend: {
+              text: "Categories",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          values: data['listDeleteParameters'],
+          items: [
+            {
+              value: "Fines",
+              text: "Fines"
+            },
+            {
+              value: "Maintenance",
+              text: "Maintenance"
+            },
+            {
+              value: "Over payments (all)",
+              text: "Over payments (all)"
+            },
+            {
+              value: "Unidentified",
+              text: "Unidentified"
+            },
+            {
+              value: "Court fees",
+              text: "Court fees"
+            },
+            {
+              value: "Miscellaneous",
+              text: "Miscellaneous"
+            }
+          ]
+        }) }}
+        {% endset %}
+
+        {{ govukRadios({
+          name: "suspense2Category",
+          idPrefix: "suspense2Category",
+          classes: "govuk-radios--conditional",
+          fieldset: {
+            legend: {
+              text: "Report type",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          value: data['suspense2Category'],
+          items: [
+            {
+              value: "All",
+              text: "All"
+            },
+            {
+              value: "Selected",
+              text: "Selected",
+              conditional: {
+                html: selectedHtml
+              }
+            },
+            {
+              value: "Outstanding",
+              text: "Outstanding",
+              conditional: {
+                html: outstandingHtml
+              }
+            },
+            {
+              value: "Movements",
+              text: "Movements",
+              conditional: {
+                html: movementsHtml
+              }
+            },
+            {
+              value: "List and delete",
+              text: "List and delete",
+              conditional: {
+                html: listDeleteHMTL
+              }
+            }
+          ]
+        }) }}
+
+
+
+        <div class="govuk-button-group">
+          <button type="submit" class="govuk-button">
+            Create report
+          </button>
+
+          <p class="govuk-body"><a href="./suspense.html" class="govuk-link govuk-link--no-visited-state">Cancel</a></p>
+        </div>
+        
+      </form>
+
+      
+
+
+
+               
+
+
+            
+
+    </div>
+  </div>
+
+{% endblock %}
+
+

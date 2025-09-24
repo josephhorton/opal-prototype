@@ -1,0 +1,201 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Month end" %}
+
+{% block beforeContent %}
+
+{{ govukBackLink({
+  text: "Back",
+  href: "./select-business-unit.html"
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+            <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+            {{ govukSummaryList({
+                rows: [
+                    {
+                        key: {
+                            text: "Business unit"
+                        },
+                        value: {
+                            text: data['businessUnit']
+                        },
+                        actions: {
+                            items: [
+                                {
+                                    href: "./select-business-unit.html",
+                                    text: "Change",
+                                    classes: "govuk-link--no-visited-state",
+                                    visuallyHiddenText: "business unit"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }) }}
+
+            <h2 class="govuk-heading-m">Checks to do</h2>
+
+            <ul class="govuk-task-list">
+
+                <!-- Suspense report -->
+                <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                    <div class="govuk-task-list__name-and-hint" data-module="edge">
+                    {% if data['suspenseCreated'] == "true" %}
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./suspense.html?suspenseReturning=true" aria-describedby="suspense-report-status">Suspense report</a>
+                    {% else %}
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./suspense.html" aria-describedby="suspense-report-status">Suspense report</a>
+                    {% endif %}
+                    </div>
+                </li>
+
+                <!-- Bank report -->
+                <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                    <div class="govuk-task-list__name-and-hint">
+                    {% if data['bankReportCreated'] == "true" %}
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./bank-list.html?bankReportReturning=true" aria-describedby="bank-list-status">Bank report</a>
+                    {% else %}
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./bank-list.html" aria-describedby="bank-list-status">Bank report</a>
+                    {% endif %}
+                    </div>
+                </li>
+
+                <!-- Court report -->
+                <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                    <div class="govuk-task-list__name-and-hint">
+                    {% if data['courtFeesReportCreated'] == "true" %}
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./court-fees-report.html?courtFeesReportReturning=true" aria-describedby="court-fees-list-status">Court fees</a>
+                    {% else %}
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./court-fees-report.html" aria-describedby="court-fees-list-status">Court fees</a>
+                    {% endif %}
+                    </div>
+                </li>
+
+                <!-- BACS payments report -->
+                <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                    <div class="govuk-task-list__name-and-hint">
+                    {% if data['bacsPaymentReportCreated'] == "true" %}
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./bacs-payments.html?bacsPaymentReportReturning=true" aria-describedby="bacs-payments-status">BACS payments report</a>
+                    {% else %}
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./bacs-payments.html" aria-describedby="bacs-payments-status">BACS payments report</a>
+                    {% endif %}
+                    </div>
+                </li>
+
+                <!-- Payout -->
+                <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                    <div class="govuk-task-list__name-and-hint">
+                    <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./payout.html" aria-describedby="payout-status">
+                        Pay out
+                    </a>
+                    </div>
+                </li>
+
+                <!-- Print cheques -->
+                <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                    <div class="govuk-task-list__name-and-hint">
+                    <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./print-cheques.html" aria-describedby="print-cheques-status">
+                        Print cheques
+                    </a>
+                    </div>
+                </li>
+
+                <!-- BACS file report -->
+                <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                    <div class="govuk-task-list__name-and-hint">
+                    {% if data['bacsFileCreated'] == "true" %}
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./bacs-file.html?bacsFileReportReturning=true" aria-describedby="bacs-file-status">BACS file report</a>
+                    {% else %}
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./bacs-file.html" aria-describedby="bacs-file-status">BACS file report</a>
+                    {% endif %}
+                    </div>
+                </li>
+
+                <!-- Cheques report -->
+                <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                    <div class="govuk-task-list__name-and-hint">
+                    {% if data['chequesReportCreated'] == "true" %}
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./cheques-report.html?chequesReportReturning=true" aria-describedby="bacs-file-status">Cheques report</a>
+                    {% else %}
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./cheques-report.html" aria-describedby="bacs-file-status">Cheques report</a>
+                    {% endif %}
+                    </div>
+                </li>
+
+                <!-- Reversed payments report -->
+                <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                    <div class="govuk-task-list__name-and-hint">
+                    {% if data['reversedPaymentCreated'] == "true" %}
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./outstanding-payment.html?reversedPaymentReturning=true" aria-describedby="outstanding-payment-status">Reversed payments report</a>
+                    {% else %}
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./outstanding-payment.html" aria-describedby="outstanding-payment-status">Reversed payments report</a>
+                    {% endif %}
+                    </div>
+                </li>
+
+                <!-- Dishonoured cheques report -->
+                <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                    <div class="govuk-task-list__name-and-hint">
+                    {% if data['dishonouredChequeCreated'] == "true" %}
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./dishonoured-cheques.html?dishonouredChequesReturning=true" aria-describedby="dishonoured-cheques-status">Dishonoured cheques report</a>
+                    {% else %}
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./dishonoured-cheques.html" aria-describedby="dishonoured-cheques-status">Dishonoured cheques report</a>
+                    {% endif %}
+                    </div>
+                </li>
+
+                <!-- Witness expenses report -->
+                <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                    <div class="govuk-task-list__name-and-hint">
+                    {% if data['witnessCreated'] == "true" %}
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./witnesses.html?witnessReturning=true" aria-describedby="witnesses-status">Witness expenses report</a>
+                    {% else %}
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./witnesses.html" aria-describedby="witnesses-status">Witness expenses report</a>
+                    {% endif %}
+                    </div>
+                </li>
+
+                <!-- Write-off analysis report -->
+                <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                    <div class="govuk-task-list__name-and-hint">
+                    {% if data['writeOffReportCreated'] == "true" %}
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./write-off-report.html?writeOffReportReturning=true" aria-describedby="witnesses-status">Write-off analysis report</a>
+                    {% else %}
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./write-off-report.html" aria-describedby="witnesses-status">Write-off analysis report</a>
+                    {% endif %}
+                    </div>
+                </li>
+
+                <!-- Control totals report -->
+                <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                    <div class="govuk-task-list__name-and-hint">
+                    {% if data['controlTotalsCreated'] == "true" %}
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./control-totals.html?controlTotalsReturning=true" aria-describedby="control-totals-status">Control totals report</a>
+                    {% else %}
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./control-totals.html" aria-describedby="control-totals-status">Control totals report</a>
+                    {% endif %}
+                    </div>
+                </li>
+
+                </ul>
+
+
+            <p class="govuk-body"><a href="../finance.html" class="govuk-link govuk-link--no-visited-state">Return to finance</a></p>
+
+
+
+            
+
+    </div>
+  </div>
+
+{% endblock %}
+
+

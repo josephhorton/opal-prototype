@@ -1,0 +1,129 @@
+{% extends "layouts/main.html" %}
+
+{% set journeyName = "Print cheques" %}
+{% set headerCaption = data['businessUnit'] %}
+{% set pageName = "Confirm next cheque" %}
+
+{% block beforeContent %}
+
+<!-- {{ govukBackLink({
+  text: "Back",
+  href: "./print-cheques.html"
+}) }} -->
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+
+      <span class="govuk-caption-l">{{data['businessUnit']}}</span>
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+    
+
+      <form class="govuk-form-group" action="print-cheques?chequesPrinted=true" method="post">
+
+          <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1">Last cheque number</p>
+          <p class="govuk-!-font-size-27 govuk-!-margin-bottom-4">0000002883</p>
+
+          
+
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-label--s" for="nextChequeNumber">
+            Next cheque number
+          </label>
+
+          <input class="govuk-input govuk-input--width-10" id="nextChequeNumber" name="nextChequeNumber" type="text" autocomplete="off">
+        </div>
+
+        <div id="confirmNextCheque" class="govuk-!-margin-bottom-6 govuk-!-margin-top-6" hidden>
+                <div style="padding: 15px 15px 15px 15px; border-left: 5px solid #1D70B8; background-color: #f3f2f1;">
+                    <p id="confirmNextCheque_Body" class="govuk-body govuk-!-margin-bottom-0">All cheque numbers are in sequence</p>
+                </div>
+        </div>
+        
+
+
+
+        <div class="govuk-button-group">
+          <button type="submit" class="govuk-button">
+            Confirm and print
+          </button>
+
+          <p class="govuk-body"><a href="./print-cheques.html" class="govuk-link govuk-link--no-visited-state">Cancel</a></p>
+        </div>
+        
+      </form>
+           
+
+    </div>
+  </div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const input = document.getElementById('nextChequeNumber');
+    const messageContainer = document.getElementById('confirmNextCheque');
+    const lastChequeNumber = 2883;
+
+    // announce updates for screen readers (WCAG 2.2)
+    messageContainer.setAttribute('role', 'status');
+    messageContainer.setAttribute('aria-live', 'polite');
+
+    input.addEventListener('input', function () {
+      const value = input.value.trim();
+
+      if (/^\d{4,}$/.test(value)) {
+        const chequeNumber = parseInt(value, 10);
+        const diff = chequeNumber - lastChequeNumber;
+
+        if (diff === 1) {
+          // 2884 -> 0 missing
+          messageContainer.innerHTML = `
+            {{ mojAlert({
+              variant: "information",
+              dismissible: false,
+              html: "0 cheques are missing"
+            }) | safe }}
+          `;
+          messageContainer.hidden = false;
+
+        } else if (diff === 2) {
+          // 2885 -> 1 missing
+          messageContainer.innerHTML = `
+            {{ mojAlert({
+              variant: "warning",
+              dismissible: false,
+              html: "1 cheque is missing"
+            }) | safe }}
+          `;
+          messageContainer.hidden = false;
+
+        } else if (diff > 2) {
+          // 2886+ -> diff - 1 missing
+          messageContainer.innerHTML = `
+            {{ mojAlert({
+              variant: "warning",
+              dismissible: false,
+              html: "${diff - 1} cheques are missing"
+            }) | safe }}
+          `;
+          messageContainer.hidden = false;
+
+        } else {
+          // entered <= last -> hide
+          messageContainer.hidden = true;
+          messageContainer.innerHTML = '';
+        }
+      } else {
+        messageContainer.hidden = true;
+        messageContainer.innerHTML = '';
+      }
+    });
+  });
+</script>
+
+
+
+
+{% endblock %}

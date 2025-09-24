@@ -1,0 +1,135 @@
+{% extends "layouts/main.html" %}
+
+{% set headerCaption = data['businessUnit'] %}
+{% set pageName = "Create report" %}
+
+{% block beforeContent %}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        <span class="govuk-caption-l">{{data['businessUnit']}}</span>
+        <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+        <form class="govuk-form-group" action="court-fees-report?courtFees=in-progress&courtFeesReportCreated=true" method="post">
+
+        {% set receivedHTML %}
+        
+          {{ govukSelect({
+            id: "selectCourtFees",
+            name: "selectCourtFees",
+            label: {
+              text: "Court fee code",
+              isPageHeading: false,
+              classes: "govuk-label--s"
+            },
+            value: data['selectCourtFees'],
+            items: [
+              {
+                value: "All court fees",
+                text: "All court fees"
+              },
+              {
+                value: "C01.1",
+                text: "C01.1"
+              },
+              {
+                value: "C02.1",
+                text: "C02.1"
+              },
+              {
+                value: "C03.1",
+                text: "C03.1"
+              },
+              {
+                value: "C04.1",
+                text: "C04.1"
+              }
+            ]
+          }) }}
+
+        {{ mojDatePicker({
+          id: "courtFeeDateFrom",
+          name: "courtFeeDateFrom",
+          formGroup: {
+            classes: "govuk-!-margin-bottom-5"
+          },
+          label: {
+            text: "Enter date from",
+            classes: "govuk-label--s"
+          },
+          hint: {
+            text: "For example, 31/01/2023"
+          }
+        }) }}
+
+        {{ mojDatePicker({
+          id: "courtFeeDateTo",
+          name: "courtFeeDateTo",
+          label: {
+            text: "Enter date to",
+            classes: "govuk-label--s"
+          },
+          hint: {
+            text: "For example, 31/01/2023"
+          }
+        }) }}
+        {% endset %}
+
+        {{ govukRadios({
+          name: "courtFeesReportType",
+          idPrefix: "courtFeesReportType",
+          fieldset: {
+            legend: {
+              text: "Court fees",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          value: data['courtFeesReportType'],
+          items: [
+            {
+              value: "Received",
+              text: "Received",
+              conditional: {
+                html: receivedHTML
+              }
+            },
+            {
+              value: "Transferred",
+              text: "Transferred"
+            }
+          ]
+        }) }}
+
+
+
+        <div class="govuk-button-group">
+          <button type="submit" class="govuk-button">
+            Create report
+          </button>
+
+          <p class="govuk-body"><a href="./court-fees-report.html" class="govuk-link govuk-link--no-visited-state">Cancel</a></p>
+        </div>
+        
+      </form>
+
+      
+
+
+
+               
+
+
+            
+
+    </div>
+  </div>
+
+{% endblock %}
+
+

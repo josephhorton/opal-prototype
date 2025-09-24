@@ -1,0 +1,147 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Presented cheques report" %}
+
+{% block beforeContent %}
+
+{{ govukBackLink({
+  text: "Back",
+  href: "./task-list.html"
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+                {% if data['presentedChequesReturning'] == "true" %}
+
+                {% else %}
+                {% if (data['presentedCheques'] == "in-progress" or data['presentedCheques'] == "ready") %}
+                    {{ mojAlert({
+                        variant: "success",
+                        dismissible: false,
+                        html: 'Report created'
+                    }) }}
+                {% else %}
+                {% endif %}
+
+                {% endif %}
+
+
+            <span class="govuk-caption-l">{{data['businessUnit']}}</span>
+            <h1 class="govuk-heading-l">{{pageName}}</h1>
+            
+            <div class="govuk-button-group">
+                <!-- {{ govukButton({
+                    text: "Refresh",
+                    classes: "govuk-button--secondary",
+                    href: "./presented-cheques.html?presentedCheques=ready"
+                }) }} -->
+                {{ govukButton({
+                    text: "Create report",
+                    classes: "",
+                    href: "./presented-cheques.html?presentedCheques=in-progress&presentedChequesCreated=true"
+                }) }}
+
+                
+            </div>
+
+            <!-- TABLE -->
+
+            {% if data['presentedCheques'] == "ready" %}
+            <h2 class="govuk-heading-m">Today</h2>
+
+            {{ govukButton({
+                    text: "Refresh",
+                    classes: "govuk-button--secondary govuk-!-margin-bottom-4",
+                    href: "./presented-cheques.html?presentedCheques=ready"
+                }) }}
+
+            <div class="moj-scrollable-pane">
+            <table class="govuk-table" data-module="moj-sortable-table">
+                <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th class="govuk-table__header" scope="col" aria-sort="none" style="width: 20%;">Date and time</th>
+                    <th class="govuk-table__header" scope="col" aria-sort="none">Title</th>
+                    <th class="govuk-table__header" scope="col" aria-sort="none">Business unit</th>
+                    <th class="govuk-table__header" scope="col" aria-sort="none">Created by</th>
+                    <th class="govuk-table__header" scope="col" aria-sort="none">Status</th>
+                    <th class="govuk-table__header empty" scope="col" aria-sort="none"></th>
+                </tr>
+                </thead>
+                <tbody class="govuk-table__body">
+                <tr class="govuk-table__row">
+                    <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
+                    <td class="govuk-table__cell">Presented cheques report</td>
+                    <td class="govuk-table__cell">{{data['businessUnit']}}</td>
+                    <td class="govuk-table__cell">jane.smith</td>
+                    <td class="govuk-table__cell">Ready</td>
+                    <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+            {% elseif data['presentedCheques'] == "in-progress" %}
+            <h2 class="govuk-heading-m">Today</h2>
+
+            {{ govukButton({
+                    text: "Refresh",
+                    classes: "govuk-button--secondary govuk-!-margin-bottom-4",
+                    href: "./presented-cheques.html?presentedCheques=ready"
+            }) }}
+
+            <div class="moj-scrollable-pane">
+                <table class="govuk-table" data-module="moj-sortable-table">
+                    <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                        <th class="govuk-table__header" scope="col" aria-sort="none" style="width: 20%;">Date and time</th>
+                        <th class="govuk-table__header" scope="col" aria-sort="none">Title</th>
+                        <th class="govuk-table__header" scope="col" aria-sort="none">Business unit</th>
+                        <th class="govuk-table__header" scope="col" aria-sort="none">Created by</th>
+                        <th class="govuk-table__header" scope="col" aria-sort="none">Status</th>
+                    </tr>
+                    </thead>
+                    <tbody class="govuk-table__body">
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
+                        <td class="govuk-table__cell">Presented cheques report</td>
+                        <td class="govuk-table__cell">{{data['businessUnit']}}</td>
+                        <td class="govuk-table__cell">jane.smith</td>
+                        <td class="govuk-table__cell">In progress</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <h2 class="govuk-heading-m">Today</h2>
+            
+
+            <p class="govuk-body">No presented cheques reports have been created.</p>
+            {% endif %}
+
+
+
+            
+
+    </div>
+  </div>
+
+   <style>
+
+    .govuk-table__header.empty button {
+        display: none;
+        text-align: right;
+    }
+
+    .govuk-table__cell.download {
+        text-align: right;
+    }
+
+  </style>
+
+{% endblock %}
+
+

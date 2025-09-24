@@ -1,0 +1,115 @@
+{% extends "layouts/main.html" %}
+
+{% set journeyName = "Daily checks" %}
+{% set headerCaption = data['businessUnit'] %}
+{% set pageName = "BACS file" %}
+
+{% block beforeContent %}
+
+{{ govukBackLink({
+  text: "Back",
+  href: "./task-list.html"
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+      
+
+
+            <span class="govuk-caption-l">{{headerCaption}}</span>
+            <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+            <nav class="moj-sub-navigation" aria-label="Sub navigation">
+            <ul class="moj-sub-navigation__list">
+                <li class="moj-sub-navigation__item">
+                <a class="moj-sub-navigation__link" href="./bacs-file.html?bacsFileReportReturning=true">
+                    BACS file report
+                </a>
+                </li>
+                <li class="moj-sub-navigation__item">
+                <a class="moj-sub-navigation__link" aria-current="page"  href="./major-c-bacs.html">
+                    Major creditor remittances
+                </a>
+                </li>
+            </ul>
+            </nav>
+        
+            <!-- TABLE -->
+
+            {% if data['bacsFile'] == "ready" %}
+            <h2 class="govuk-heading-m">Today</h2>
+
+            {{ govukButton({
+                    text: "Refresh",
+                    classes: "govuk-button--secondary govuk-!-margin-bottom-4",
+                    href: "./bacs-file.html?bacsFile=ready"
+                }) }}
+
+            <div class="moj-scrollable-pane">
+            <table class="govuk-table" data-module="moj-sortable-table">
+                <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th class="govuk-table__header" scope="col" aria-sort="none" style="width: 20%;">Date and time</th>
+                    <th class="govuk-table__header" scope="col" aria-sort="none">Title</th>
+                    <th class="govuk-table__header" scope="col" aria-sort="none">Business unit</th>
+                    <th class="govuk-table__header" scope="col" aria-sort="none">Created by</th>
+                    <th class="govuk-table__header" scope="col" aria-sort="none">Status</th>
+                    <th class="govuk-table__header empty" scope="col" aria-sort="none"></th>
+                </tr>
+                </thead>
+                <tbody class="govuk-table__body">
+                <tr class="govuk-table__row">
+                    <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
+                    <td class="govuk-table__cell">Major creditor remittances – BACS</td>
+                    <td class="govuk-table__cell">{{data['businessUnit']}}</td>
+                    <td class="govuk-table__cell">jane.smith</td>
+                    <td class="govuk-table__cell">Ready</td>
+                    <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state"  href="/public/files/unpresented-cheques-opal-research-report.csv" download>Download</a></td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+            {% else %}
+            <h2 class="govuk-heading-m">Today</h2>
+            
+
+            <p class="govuk-body">No major creditor remittance reports have been created.</p>
+
+            <!-- {{ govukButton({
+                    text: "Refresh",
+                    classes: "govuk-button--secondary ",
+                    href: "#"
+                }) }} -->
+            {% endif %}
+
+
+
+               
+
+
+            
+
+    </div>
+  </div>
+
+   <style>
+
+    .govuk-table__header.empty button {
+        display: none;
+        text-align: right;
+    }
+
+    .govuk-table__cell.download {
+        text-align: right;
+    }
+
+  </style>
+
+{% endblock %}
+
+
