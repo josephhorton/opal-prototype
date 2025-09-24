@@ -1,0 +1,105 @@
+{% extends "layouts/main.html" %}
+
+{% set headerCaption = data['businessUnit'] %}
+{% set pageName = "Pay minor creditors (normal)" %}
+
+{% block beforeContent %}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        <span class="govuk-caption-l">{{data['businessUnit']}}</span>
+        <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+        <form class="govuk-form-group" action="payout-minor?minorCreditorsPaidOut=true" method="post">
+
+        {% set chequeHtml %}
+        {{ govukInput({
+          id: "cheques-payout",
+          name: "cheques-payout",
+          type: "amount",
+          classes: "govuk-input--width-5",
+          prefix: {
+            text: "£"
+          },
+          label: {
+            text: "Minimum payment",
+            classes: "govuk-label--s"
+          }
+        }) }}
+        {% endset -%}
+
+        {% set bacsHtml %}
+        {{ govukInput({
+          id: "bacs-payout",
+          name: "bacs-payout",
+          type: "amount",
+          classes: "govuk-input--width-5",
+          prefix: {
+            text: "£"
+          },
+          label: {
+            text: "Minimum payment",
+            classes: "govuk-label--s"
+          }
+        }) }}
+        {% endset -%}
+
+        {{ govukCheckboxes({
+          name: "payoutMethod",
+          fieldset: {
+            legend: {
+              text: "Payout method",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "Paid by cheque",
+              text: "Paid by cheque",
+              conditional: {
+                html: chequeHtml
+              }
+            },
+            {
+              value: "Paid by BACS",
+              text: "Paid by BACS",
+              conditional: {
+                html: bacsHtml
+              }
+            }
+          ]
+        }) }}
+
+
+
+        <div class="govuk-button-group">
+          <button type="submit" class="govuk-button">
+            Pay out
+          </button>
+
+          <p class="govuk-body"><a href="./payout-minor.html" class="govuk-link govuk-link--no-visited-state">Cancel</a></p>
+        </div>
+        
+      </form>
+
+      
+
+
+
+               
+
+
+            
+
+    </div>
+  </div>
+
+{% endblock %}
+
+

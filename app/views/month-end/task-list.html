@@ -92,9 +92,24 @@
                 <!-- Payout -->
                 <li class="govuk-task-list__item govuk-task-list__item--with-link">
                     <div class="govuk-task-list__name-and-hint">
-                    <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./payout-minor.html" aria-describedby="payout-status">
+                    {% if (data['minorCreditorsPaidOut'] == "true" and data['majorCreditorsPaidOut'] == "true" and data['hmctsCreditorsPaidOut'] == "true")%}
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./payout-minor.html?hmctsCreditorReturning=true" aria-describedby="payout-status">
+                        Pay out
+                        </a>                    
+                    {% elseif (data['minorCreditorsPaidOut'] == "true" and data['majorCreditorsPaidOut'] == "true") %}
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./payout-minor.html?majorCreditorReturning=true" aria-describedby="payout-status">
+                        Pay out
+                        </a>                    
+                    {% elseif data['minorCreditorsPaidOut'] == "true"  %}
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./payout-minor.html?minorCreditorReturning=true" aria-describedby="payout-status">
+                        Pay out
+                        </a>                    
+                    {% else %}
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state" href="./payout-minor.html" aria-describedby="payout-status">
                         Pay out
                     </a>
+                    {% endif %}
+                    
                     </div>
                 </li>
 

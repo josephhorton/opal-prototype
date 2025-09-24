@@ -1,0 +1,181 @@
+{% extends "layouts/main.html" %}
+
+{% set journeyName = "Daily checks" %}
+{% set headerCaption = data['businessUnit'] %}
+{% set pageName = "Pay out creditors" %}
+
+{% block beforeContent %}
+
+{{ govukBackLink({
+  text: "Back",
+  href: "./task-list.html"
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+      
+
+
+            <span class="govuk-caption-l">{{headerCaption}}</span>
+            <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+            <nav class="moj-sub-navigation" aria-label="Sub navigation">
+            <ul class="moj-sub-navigation__list">
+                <li class="moj-sub-navigation__item">
+                <a class="moj-sub-navigation__link"  href="./payout-minor.html">
+                    Minor creditors
+                </a>
+                </li>
+                <li class="moj-sub-navigation__item">
+                <a class="moj-sub-navigation__link" href="./payout-major.html">
+                    Major creditors
+                </a>
+                </li>
+                <li class="moj-sub-navigation__item">
+                <a class="moj-sub-navigation__link" aria-current="page"  href="./payout-hmcts.html">
+                    HMCTS/Other
+                </a>
+                </li>
+            </ul>
+            </nav>
+
+            {% if data['hmctsCreditorReturning'] == "true" %}
+
+            {% else %}
+
+                {% if data['hmctsCreditorsPaidOut'] == "true" %}
+                    {{ mojAlert({
+                        variant: "success",
+                        dismissible: true,
+                        html: 'Payout made to HMCTS/Other.'
+                    }) }}
+                {% else %}
+                {% endif %}
+
+            {% endif %}
+
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-two-thirds">
+
+                
+
+            <h2 class="govuk-heading-m">Pay HMCTS/Other</h2>
+
+            {% if data['hmctsCreditorsPaidOut'] == "true" %}
+
+            {{ govukSummaryList({
+                rows: [
+                    {
+                        key: {
+                            text: "Current balance"
+                        },
+                        value: {
+                            text: "£0.00"
+                        }
+                    }
+                ]
+            }) }}
+
+            {% else %}
+
+            {{ govukSummaryList({
+                rows: [
+                    {
+                        key: {
+                            text: "Current balance"
+                        },
+                        value: {
+                            text: "£35,000.00"
+                        }
+                    }
+                ]
+            }) }}
+
+            {{ govukButton({
+                text: "Pay out",
+                classes: "",
+                href: "./payout-hmcts.html?hmctsCreditorsPaidOut=true"
+            }) }}
+
+            {% endif %}
+
+            </div>
+            </div>
+            
+
+            
+
+            <!-- TABLE -->
+
+            {% if data['hmctsCreditorsPaidOut'] == "true" %}
+            <h2 class="govuk-heading-m">Payout report</h2>
+
+            {{ govukButton({
+                text: "Refresh",
+                classes: "govuk-button--secondary govuk-!-margin-bottom-4",
+                href: "#"
+            }) }}
+
+            <div class="moj-scrollable-pane">
+                <table class="govuk-table" data-module="moj-sortable-table">
+                <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th class="govuk-table__header" scope="col" aria-sort="none" style="width: 20%;">Date and time</th>
+                    <th class="govuk-table__header" scope="col" aria-sort="none">Title</th>
+                    <th class="govuk-table__header" scope="col" aria-sort="none">Business unit</th>
+                    <th class="govuk-table__header" scope="col" aria-sort="none">Created by</th>
+                    <th class="govuk-table__header" scope="col" aria-sort="none">Status</th>
+                    <th class="govuk-table__header empty" scope="col" aria-sort="none"></th>
+                </tr>
+                </thead>
+                <tbody class="govuk-table__body">
+                <tr class="govuk-table__row">
+                    <td class="govuk-table__cell"><a class="govuk-link govuk-link--no-visited-state" href="#">19 Mar 2025 at 09:10</a></td>
+                    <td class="govuk-table__cell">HMCTS/Other payout report</td>
+                    <td class="govuk-table__cell">{{data['businessUnit']}}</td>
+                    <td class="govuk-table__cell">jane.smith</td>
+                    <td class="govuk-table__cell">Ready</td>
+                    <td class="govuk-table__cell download"><a class="govuk-link govuk-link--no-visited-state" href="#">Download</a></td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+
+            {% else %}
+            <h2 class="govuk-heading-m">Payout report</h2>            
+
+            <p class="govuk-body">No payouts have been made to HMCTS/Other today.</p>
+
+            {% endif %}
+
+
+
+               
+
+
+            
+
+    </div>
+  </div>
+
+   <style>
+
+    .govuk-table__header.empty button {
+        display: none;
+        text-align: right;
+    }
+
+    .govuk-table__cell.download {
+        text-align: right;
+    }
+
+  </style>
+
+{% endblock %}
+
+

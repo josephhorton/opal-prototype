@@ -27,12 +27,12 @@
             <nav class="moj-sub-navigation" aria-label="Sub navigation">
             <ul class="moj-sub-navigation__list">
                 <li class="moj-sub-navigation__item">
-                <a class="moj-sub-navigation__link" aria-current="page" href="./payout-minor.html">
+                <a class="moj-sub-navigation__link"  href="./payout-minor.html">
                     Minor creditors
                 </a>
                 </li>
                 <li class="moj-sub-navigation__item">
-                <a class="moj-sub-navigation__link"  href="./payout-major.html">
+                <a class="moj-sub-navigation__link" aria-current="page" href="./payout-major.html">
                     Major creditors
                 </a>
                 </li>
@@ -44,54 +44,35 @@
             </ul>
             </nav>
 
-            {% if data['minorCreditorReturning'] == "true" %}
+            {% if data['majorCreditorReturning'] == "true" %}
 
             {% else %}
 
-                {% if data['minorCreditorsPaidOut'] == "true" %}
+                {% if data['majorCreditorsPaidOut'] == "true" %}
                     {{ mojAlert({
                         variant: "success",
                         dismissible: true,
-                        html: 'Payout made to minor creditors.'
+                        html: 'Payout made to major creditors.'
                     }) }}
                 {% else %}
                 {% endif %}
 
             {% endif %}
 
-            {{ govukRadios({
-                classes: "govuk-radios--small govuk-radios--inline",
-                name: "payoutMinorCreditor",
-                fieldset: {
-                    legend: {
-                    text: "Pay minor creditors",
-                    isPageHeading: false,
-                    classes: "govuk-fieldset__legend--m"
-                    }
-                },
-                items: [
-                    {
-                    value: "Normal",
-                    text: "Normal"
-                    },
-                    {
-                    value: "Demand",
-                    text: "Demand"
-                    }
-                ]
-            }) }}                
+            <h2 class="govuk-heading-m">Pay major creditors</h2>
+            <p class="govuk-body">Cheque and BACS payouts will be made at the same time.</p>
 
             {{ govukButton({
-                text: "Continue",
+                text: "Pay out",
                 classes: "",
-                href: "./payout-method-normal.html"
+                href: "./payout-major.html?majorCreditorsPaidOut=true"
             }) }}
 
             
 
             <!-- TABLE -->
 
-            {% if data['minorCreditorsPaidOut'] == "true" %}
+            {% if data['majorCreditorsPaidOut'] == "true" %}
             <h2 class="govuk-heading-m">Today</h2>
 
             <div class="moj-scrollable-pane">
