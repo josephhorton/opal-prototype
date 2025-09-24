@@ -1,0 +1,93 @@
+{% extends "layouts/main.html" %}
+
+{% set headerCaption = data['businessUnit'] %}
+{% set pageName = "Witness expenses report" %}
+
+{% block beforeContent %}
+
+{{ govukBackLink({
+  text: "Back",
+  href: "./witnesses.html"
+}) }}
+
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <h1 class="govuk-heading-l">{{pageName}}</h1>
+        
+        <h2 class="govuk-heading-m">General</h2>
+
+        {{ govukSummaryList({
+          rows: [
+            {
+              key: {
+                text: "Status"
+              },
+              value: {
+                text: "No records"
+              }
+            },
+            {
+              key: {
+                text: "Date created"
+              },
+              value: {
+                text: "19 Mar 2025 at 09:10"
+              }
+            },
+            {
+              key: {
+                text: "Business unit"
+              },
+              value: {
+                text: data['businessUnit']
+              }
+            },
+            {
+              key: {
+                text: "Created by"
+              },
+              value: {
+                text: "jane.smith"
+              }
+            }     
+          ]
+        }) }}
+        
+
+       <h2 class="govuk-heading-m">Errors</h2>
+
+       {{ govukSummaryList({
+          rows: [
+            {
+              key: {
+                text: "Error description"
+              },
+              value: {
+                text: "No witness expenses logged since last report"
+              }
+            }
+          ]
+        }) }}
+
+
+      
+
+
+
+               
+
+
+            
+
+    </div>
+  </div>
+
+{% endblock %}
+
+
