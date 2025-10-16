@@ -152,6 +152,11 @@ router.post('/sending-court-question', function(request, response) {
 const reports = require('./data/reports.json');
 let inMemoryReports = [...reports]; // Clone so we can modify it without overwriting the file
 
+router.get('/clear-reports', function (req, res) {
+  inMemoryReports = [...reports]; // Reset just the reports
+  res.redirect('/quarter-year-end/quarter-year-end-report'); // Or wherever you want
+});
+
 // --- GET route: show reports (with optional business unit filter) ---
 router.get('/quarter-year-end/quarter-year-end-report', function (req, res) {
   const selectedBU = req.session.data['businessUnit'] || 'all';
