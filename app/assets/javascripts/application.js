@@ -16,7 +16,13 @@ window.GOVUKPrototypeKit.documentReady(() => {
     const months = ["January", "February", "March", "April", "May", "June",
                     "July", "August", "September", "October", "November", "December"];
     return months[monthNumber - 1]; // Subtract 1 to convert to zero-based index
-  }
+  } 
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const tables = document.querySelectorAll('[data-module="moj-sortable-table"]')
+    tables.forEach(el => new MOJFrontend.SortableTable(el).init())
+  })
+
 
 
   // const express = require('express');

@@ -22,8 +22,8 @@
                 {% if (data['bacsPayment'] == "in-progress" or data['bacsPayment'] == "ready") %}
                     {{ mojAlert({
                         variant: "success",
-                        dismissible: false,
-                        html: 'Report in progress.'
+                        dismissible: true,
+                        html: 'Report initiated.'
                     }) }}
                 {% else %}
                 {% endif %}

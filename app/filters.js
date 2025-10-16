@@ -8,6 +8,17 @@ const addFilter = govukPrototypeKit.views.addFilter
 
 // Add your filters here
 
+addFilter('sortByDate', function (items, key, order = 'asc') {
+  const clonedItems = [...items]; // 🔧 clone to avoid in-place mutation
+  return clonedItems.sort(function (a, b) {
+    const dateA = new Date(a[key]);
+    const dateB = new Date(b[key]);
+    return order === 'desc' ? dateB - dateA : dateA - dateB;
+  });
+});
+
+
+
 addFilter('removeEmpty', function (items) {
     // Directly return undefined if items is falsy (null, undefined, false, 0, '', etc.)
     if (!items) return

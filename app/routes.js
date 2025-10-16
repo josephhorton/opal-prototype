@@ -148,6 +148,61 @@ router.post('/sending-court-question', function(request, response) {
     }
 })
 
+
+const reports = require('./data/reports.json');
+let inMemoryReports = [...reports]; // Clone so we can modify it without overwriting the file
+
+// --- GET route: show reports (with optional business unit filter) ---
+router.get('/quarter-year-end/quarter-year-end-report', function (req, res) {
+  const selectedBU = req.session.data['businessUnit'] || 'all';
+  let filteredReports = inMemoryReports;
+
+  if (selectedBU && selectedBU !== 'all') {
+    filteredReports = inMemoryReports.filter(report => report.unit === selectedBU);
+  }
+
+  // Check for success message flag
+  const showBanner = req.session.data['reportCreated'];
+  // Clear flag so it doesn’t persist after first view
+  req.session.data['reportCreated'] = false;
+
+  res.render('quarter-year-end/quarter-year-end-report', {
+    reports: filteredReports,
+    businessUnit: selectedBU,
+    showBanner
+  });
+});
+
+
+
+// --- POST route: create a new report ---
+router.post('/quarter-year-end/quarter-year-end-report', function (req, res) {
+  const selectedUnit = req.session.data['createReportBusinessUnit'];
+  const selectedType = req.session.data['createReportReportType'];
+
+  if (selectedUnit && selectedType) {
+    const newReport = {
+      date: '2026-04-01T12:30:00Z',
+      displayDate: '01 Apr 2026 at 12:30',
+      title: `${selectedType} report`,
+      unit: selectedUnit,
+      author: 'generic.user',
+      status: 'Ready'
+    };
+
+    inMemoryReports.unshift(newReport);
+
+    // Set flag to show banner after redirect
+    req.session.data['reportCreated'] = true;
+  }
+
+  res.redirect('/quarter-year-end/quarter-year-end-report');
+});
+
+
+
+
+
 module.exports = router
 
 
